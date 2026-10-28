@@ -41,8 +41,9 @@ def normalize(record: dict, index: int, base: Path) -> dict:
         if not 1 <= v <= 5:
             raise ValueError(f'{name}：{key} 必须在 1–5 之间')
         e[out] = v
-    # 稳定 ID：同名不同开始日期可共存；独立于排序顺序。
-    e['id'] = hashlib.sha256(f'{name}\0{e.get("开始日期", e["日期"])}'.encode('utf-8')).hexdigest()[:20]
+    # IDs were recovered from the published page; edits must retain them.
+    if not isinstance(e.get('id'), str) or not __import__('re').fullmatch(r'[A-Za-z0-9_-]{8,80}', e['id']):
+        raise ValueError(f'{name}：必须提供稳定 id；新活动用 uuid.uuid4().hex 分配一次，改名/改期沿用')
     url = str(e.get('官网链接') or '').strip()
     if url and urlsplit(url).scheme not in ('https', 'http'):
         raise ValueError(f'{name}：官网链接只允许 http/https')
@@ -84,7 +85,7 @@ def build(source: Path, template: Path, output: Path) -> int:
     events = [normalize(event, i, source.parent) for i, event in enumerate(records, 1)]
     ids = [event['id'] for event in events]
     if len(ids) != len(set(ids)):
-        raise ValueError('存在同名、同日期的重复活动；请合并或修改开始日期')
+        raise ValueError('存在重复活动 id；请核对身份，不通过改日期绕过')
     template_html = template.read_text(encoding='utf-8')
     marker = '__EVENTS_JSON__'
     if template_html.count(marker) != 1:
