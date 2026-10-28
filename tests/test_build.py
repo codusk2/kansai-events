@@ -23,8 +23,9 @@ class BuildRecovery(unittest.TestCase):
 
     def test_editable_name_and_date_do_not_change_identity(self):
         original = json.loads((ROOT / 'events.json').read_text())[0]
-        changed = {**original, '活动名': '修改名称', '日期': '11/30', '开始日期': '2026-11-30'}
+        changed = {**original, '活动名': '修改名称', '日期': '11/30', '开始日期': '2026-11-30', '结束日': '2026-12-01'}
         self.assertEqual(build.normalize(changed, 1, ROOT)['id'], original['id'])
+        self.assertEqual(build.normalize(changed, 1, ROOT)['开始日'], '2026-11-30')
         changed.pop('id')
         with self.assertRaises(ValueError):
             build.normalize(changed, 1, ROOT)

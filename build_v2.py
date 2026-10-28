@@ -7,6 +7,7 @@ import base64
 import hashlib
 import json
 import mimetypes
+from datetime import date
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -27,6 +28,19 @@ def normalize(record: dict, index: int, base: Path) -> dict:
     if not name:
         raise ValueError(f'第 {index} 条活动缺少有效活动名')
     e['活动名'] = name
+    # Explicit ISO fields drive sorting; the human-readable 日期 is display copy.
+    # Recompute the old derived alias so date edits cannot leave stale sorting.
+    start = str(e.get('开始日期') or '').strip()
+    end = str(e.get('结束日') or '').strip()
+    for value in (start, end):
+        if value:
+            try:
+                date.fromisoformat(value)
+            except ValueError as exc:
+                raise ValueError(f'{name}：开始日期/结束日必须是 YYYY-MM-DD 或留空') from exc
+    if start and end and end < start:
+        raise ValueError(f'{name}：结束日不能早于开始日期')
+    e['开始日'] = start
     typ = e['类型']
     e['类型'] = [str(t).strip() for t in (typ if isinstance(typ, list) else [typ]) if str(t).strip()]
     for key, out in (('推荐指数', '推荐指数'), ('规模/重要度', '规模重要度')):
@@ -102,7 +116,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--events', type=Path, default=Path('events.json'))
     parser.add_argument('--template', type=Path, default=Path(__file__).with_name('template.html'))
-    parser.add_argument('--output', type=Path, default=Path('events.html'))
+    parser.add_argument('--output', type=Path, default=Path('index.html'))
     args = parser.parse_args()
     count = build(args.events.resolve(), args.template.resolve(), args.output.resolve())
     print(f'完成：{count} 项活动 → {args.output.resolve()}')
