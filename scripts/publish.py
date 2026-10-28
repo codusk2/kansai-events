@@ -3,7 +3,6 @@
 import argparse
 import hashlib
 import json
-import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -50,7 +49,12 @@ def main():
                    'htmlSha256': hashlib.sha256((ROOT / 'index.html').read_bytes()).hexdigest(),
                    'checkedAt': datetime.now(timezone.utc).isoformat(), 'pushed': False}
         if args.push:
-            subprocess.run(['git', 'push', 'origin', 'HEAD:refs/heads/' + BRANCH], cwd=ROOT, check=True)
+            # Use the existing gh login in this process only. Never write tokens
+            # or change global Git credential configuration.
+            git = ['git']
+            if shutil.which('gh'):
+                git += ['-c', 'credential.helper=', '-c', 'credential.helper=!gh auth git-credential']
+            subprocess.run(git + ['push', 'origin', 'HEAD:refs/heads/' + BRANCH], cwd=ROOT, check=True)
             if run('git', 'ls-remote', REMOTE, 'refs/heads/' + BRANCH).split()[0] != head:
                 raise SystemExit('Push readback mismatch; inspect before retrying.')
             receipt['pushed'] = True
