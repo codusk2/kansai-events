@@ -1,0 +1,90 @@
+{
+  "about": "绿苹果专区：Mrs. GREEN APPLE 在关西的相关地点和活动。每条必须有来源；活动写起止日期（未公布写 null 并在 dateNote 说明）；没有公开地点的 ll 写 null。维护规则见 docs/旅行点维护.md 的“绿苹果专区”。",
+  "checkedAt": "2026-10-31",
+  "places": [],
+  "placesNote": "2026-10-31 搜索关西的MV取景地和成员到访地，只找到粉丝帖和问答，没有可靠来源，暂不收录。",
+  "events": [
+    {
+      "id": "mga-shadows-kobe",
+      "name": "Ringo Jam Tour『SHADOWS』神户公演",
+      "kind": "演唱会",
+      "venue": "GLION ARENA KOBE",
+      "ll": [135.1937, 34.6838],
+      "from": "2026-12-02",
+      "to": "2026-12-03",
+      "note": "约三年来首次全国体育馆巡演，关西只有神户这一站。购票方式以官网为准。",
+      "sources": [
+        { "url": "https://www.oricon.co.jp/news/2461515/full/", "note": "巡演日程" },
+        { "url": "https://realsound.jp/2026/06/post-2428818.html", "note": "巡演发表" }
+      ]
+    },
+    {
+      "id": "mga-popup-namba",
+      "name": "「SHADOWS」POP-UP STORE 难波丸井",
+      "kind": "快闪店",
+      "venue": "なんばマルイ",
+      "ll": [135.5012, 34.6648],
+      "from": "2026-11-20",
+      "to": "2026-12-06",
+      "note": "全国巡回快闪店的大阪站。入场是否需预约以官方公告为准。",
+      "sources": [
+        { "url": "https://collabo-cafe.com/en/events/collabo/mga-shadows-popup-store-takamatsu-2026/", "note": "全国17个会场日程" }
+      ]
+    },
+    {
+      "id": "mga-popup-lucua",
+      "name": "「SHADOWS」POP-UP STORE LUCUA大阪",
+      "kind": "快闪店",
+      "venue": "LUCUA大阪",
+      "ll": [135.4961, 34.7036],
+      "from": null,
+      "to": "2026-12-06",
+      "dateNote": "11月开始，具体日期待公布",
+      "note": "营业时间和预约开始日期另行公布。",
+      "sources": [
+        { "url": "https://collabo-cafe.com/en/events/collabo/mga-shadows-popup-store-takamatsu-2026/", "note": "全国17个会场日程" }
+      ]
+    },
+    {
+      "id": "mga-popup-kobe",
+      "name": "「SHADOWS」POP-UP STORE 神户丸井",
+      "kind": "快闪店",
+      "venue": "神戸マルイ",
+      "ll": [135.1928, 34.6918],
+      "from": "2026-11-20",
+      "to": "2026-12-06",
+      "note": "和神户公演前后脚，可以排在同一天。",
+      "sources": [
+        { "url": "https://collabo-cafe.com/en/events/collabo/mga-shadows-popup-store-takamatsu-2026/", "note": "全国17个会场日程" }
+      ]
+    },
+    {
+      "id": "mga-cafe-tennoji",
+      "name": "Ringo Jam Café 天王寺MIO店",
+      "kind": "主题咖啡店",
+      "venue": "BOX cafe&space 天王寺MIO店（天王寺MIO本馆11楼）",
+      "ll": [135.5143, 34.647],
+      "from": "2026-10-02",
+      "to": "2026-12-13",
+      "note": "粉丝俱乐部10周年主题咖啡店，优先预约制，预约费550日元可抵餐费；会员抽选已结束，之后有先到先得的预约。",
+      "sources": [
+        { "url": "https://collabo-cafe.com/events/collabo/mrs-green-apple-ringo-jam-cafe-2026/", "note": "会场、日期、预约方式" },
+        { "url": "https://natalie.mu/music/news/687935", "note": "6都市开店消息" }
+      ]
+    },
+    {
+      "id": "mga-fm802-talk",
+      "name": "Mrs. GREEN APPLE × FM802『POPS』TALK SESSION in 大阪",
+      "kind": "公开录音",
+      "venue": "大阪市内（只通知中选者）",
+      "ll": null,
+      "from": "2026-11-12",
+      "to": "2026-11-12",
+      "note": "18:00开始，抽选制，10月21日开始报名。",
+      "sources": [
+        { "url": "https://prtimes.jp/main/html/rd/p/000000006.000152302.html", "note": "活动发表" },
+        { "url": "https://koubo.jp/article/132943", "note": "报名信息" }
+      ]
+    }
+  ]
+}

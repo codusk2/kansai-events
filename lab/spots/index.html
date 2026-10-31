@@ -12,22 +12,30 @@
 <body>
 <div class="app" id="app">
   <header class="top">
-    <div class="top-bar">
-      <div class="brand">
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <rect width="32" height="32" rx="9" class="logo-bg"/>
-          <path class="logo-crab" d="M6.5 14.5a4.5 4.5 0 0 1 9 0z M7 11.5c-1.6-1-1.6-3.2 0-4.2 M15 11.5c1.6-1 1.6-3.2 0-4.2"/>
-          <path class="logo-fish" d="M12 22c2.6-3.4 7.6-3.4 10.2 0-2.6 3.4-7.6 3.4-10.2 0z M22.2 22l3.6-2.6v5.2z"/>
-        </svg>
-        <b>蟹鱼游</b>
+    <div class="head" id="head">
+      <div class="head-row">
+        <div class="brand">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <rect width="32" height="32" rx="9" class="logo-bg"/>
+            <path class="logo-crab" d="M6.5 14.5a4.5 4.5 0 0 1 9 0z M7 11.5c-1.6-1-1.6-3.2 0-4.2 M15 11.5c1.6-1 1.6-3.2 0-4.2"/>
+            <path class="logo-fish" d="M12 22c2.6-3.4 7.6-3.4 10.2 0-2.6 3.4-7.6 3.4-10.2 0z M22.2 22l3.6-2.6v5.2z"/>
+          </svg>
+          <b>蟹鱼游</b>
+        </div>
+        <button type="button" class="filter-btn" id="filter-btn" aria-expanded="false" aria-controls="filter-pop"></button>
       </div>
-      <div class="seg measure" id="measure" role="group" aria-label="口径">
-        <button type="button" data-m="transit" aria-pressed="true">公共交通</button>
-        <button type="button" data-m="car" aria-pressed="false">自驾</button>
-      </div>
+      <div class="tags" id="tags" role="group" aria-label="主题"></div>
     </div>
-    <div class="bands" id="bands" role="group" aria-label="单程时间"></div>
-    <div class="tags" id="tags" role="group" aria-label="主题"></div>
+    <div class="filter-pop" id="filter-pop" hidden>
+      <div class="fp-row"><span>交通</span>
+        <div class="seg" id="measure" role="group" aria-label="交通方式">
+          <button type="button" data-m="transit" aria-pressed="true">🚃 公共交通</button>
+          <button type="button" data-m="car" aria-pressed="false">🚗 自驾</button>
+        </div>
+      </div>
+      <div class="fp-row"><span>单程</span><div class="seg seg-4" id="limit" role="group" aria-label="单程时间"></div></div>
+      <p class="fp-legend"><span>照片外圈表示单程</span><i class="lg30"></i>半小时<i class="lg60"></i>1小时<i class="lg120"></i>2小时<i class="lg180"></i>3小时</p>
+    </div>
   </header>
 
   <main class="views">
@@ -52,13 +60,23 @@
     <button type="button" data-v="book" aria-pressed="false">画册</button>
   </nav>
 
+  <p class="hint" id="hint"><span class="hint-arrow" aria-hidden="true">↑</span>点上方的标签，开始探索</p>
+
   <aside class="sheet" id="sheet" aria-label="旅行点" hidden></aside>
+
+  <section class="hello" id="hello" aria-label="欢迎" hidden>
+    <div class="hello-card">
+      <p class="hello-hi">Halo 天源！</p>
+      <p class="hello-q">想去哪玩？</p>
+      <p class="hello-tip">点击标签开始探索</p>
+      <div class="hello-tags" id="hello-tags"></div>
+      <p class="hello-by">—— by codusk</p>
+    </div>
+  </section>
   <div class="toast" id="toast" role="status" hidden></div>
 </div>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script src="../directions/data.js"></script>
-<script src="../map/geo.js"></script>
 <script src="spots.js"></script>
 </body>
 </html>

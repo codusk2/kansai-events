@@ -83,6 +83,38 @@ def check(seed: dict) -> tuple[list[str], list[str]]:
     return errors, warnings
 
 
+ISO = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+
+
+def check_greenapple(data: dict) -> list[str]:
+    """绿苹果专区：每条要有来源；活动日期是 YYYY-MM-DD 或 null（null 时必须写 dateNote）。"""
+    errors: list[str] = []
+    seen: set[str] = set()
+    for item in (data.get('events') or []) + (data.get('places') or []):
+        iid = item.get('id', '?')
+        err = lambda msg: errors.append(f'绿苹果 {iid}：{msg}')
+        if not ID.match(str(item.get('id', ''))) or iid in seen:
+            err('id 无效或重复')
+        seen.add(iid)
+        for key in ('name', 'venue', 'note'):
+            if not str(item.get(key, '')).strip():
+                err(f'缺少 {key}')
+        if not item.get('sources') or not all(str(s.get('url', '')).startswith('http') for s in item['sources']):
+            err('必须有有效的 sources')
+        ll = item.get('ll')
+        if ll is not None and not (isinstance(ll, list) and len(ll) == 2 and 130 < ll[0] < 140 and 32 < ll[1] < 37):
+            err('ll 应为 [经度, 纬度] 或 null（地点未公开）')
+    for ev in data.get('events') or []:
+        for key in ('from', 'to'):
+            v = ev.get(key)
+            if v is None:
+                if not ev.get('dateNote'):
+                    errors.append(f'绿苹果 {ev.get("id")}：{key} 为 null 时要写 dateNote')
+            elif not ISO.match(str(v)):
+                errors.append(f'绿苹果 {ev.get("id")}：{key} 应为 YYYY-MM-DD')
+    return errors
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument('--seed', default='data/places.seed.json')
@@ -90,6 +122,9 @@ def main() -> None:
     args = ap.parse_args()
     seed = json.loads(Path(args.seed).read_text(encoding='utf-8'))
     errors, warnings = check(seed)
+    ga = Path(args.seed).with_name('greenapple.json')
+    if ga.exists():
+        errors += check_greenapple(json.loads(ga.read_text(encoding='utf-8')))
     if warnings and not args.quiet:
         print(f'提醒 {len(warnings)} 条（不阻止生成），例如：{warnings[0]}')
     for e in errors:

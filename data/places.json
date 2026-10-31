@@ -1,6 +1,6 @@
 {
  "about": "由 scripts/collect_places.py 从 places.seed.json 生成，不要手改。",
- "generatedAt": "2026-10-31T05:10:53Z",
+ "generatedAt": "2026-10-31T08:06:34Z",
  "tags": [
   "风景美",
   "热闹",
@@ -18,7 +18,6 @@
   "安静",
   "拍照",
   "建筑",
-  "亲子",
   "乐园",
   "雨天也行"
  ],
@@ -308,8 +307,7 @@
    "tip": "风车附近的花田按季节换种。",
    "tags": [
     "赏花",
-    "散步",
-    "亲子"
+    "散步"
    ],
    "blurb": "花博留下的大风车和四季花田，草坪开阔得可以随便躺下，带一张野餐垫就能消磨一个下午。",
    "ll": [
@@ -344,7 +342,6 @@
    "tip": "傍晚后入场人少。",
    "tags": [
     "海边",
-    "亲子",
     "雨天也行",
     "热闹"
    ],
@@ -591,7 +588,6 @@
    "tip": "",
    "tags": [
     "乐园",
-    "亲子",
     "热闹",
     "夜景"
    ],
@@ -649,44 +645,6 @@
     "license": "CC BY 2.5"
    },
    "wiki": "https://ja.wikipedia.org/wiki/%E7%9F%B3%E6%B8%85%E6%B0%B4%E5%85%AB%E5%B9%A1%E5%AE%AE"
-  },
-  {
-   "id": "fushimi",
-   "name": "伏见稻荷大社",
-   "area": "京都",
-   "kind": "寺社",
-   "transit": {
-    "mins": 45,
-    "route": "京阪特急到丹波桥，转普通到伏见稻荷",
-    "checked": false
-   },
-   "seasons": [],
-   "why": "千本鸟居一路上山，全年都能去。",
-   "tip": "清晨或傍晚人少；走到四之辻能看京都夜景。",
-   "tags": [
-    "寺社",
-    "拍照",
-    "热闹",
-    "山里",
-    "散步"
-   ],
-   "blurb": "上万座朱红鸟居连成隧道，一路通往稻荷山顶。走得越高越安静，回头能看到京都城在脚下。",
-   "ll": [
-    135.77306,
-    34.96694
-   ],
-   "car": {
-    "mins": 48,
-    "km": 42.5
-   },
-   "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Fushimiinari-taisha%2C_gehaiden-1.jpg/500px-Fushimiinari-taisha%2C_gehaiden-1.jpg",
-    "file": "Fushimiinari-taisha,_gehaiden-1.jpg",
-    "page": "https://commons.wikimedia.org/wiki/File:Fushimiinari-taisha%2C_gehaiden-1.jpg",
-    "artist": "Saigen Jiro",
-    "license": "CC0"
-   },
-   "wiki": "https://ja.wikipedia.org/wiki/%E4%BC%8F%E8%A6%8B%E7%A8%B2%E8%8D%B7%E5%A4%A7%E7%A4%BE"
   },
   {
    "id": "tofukuji",
@@ -768,98 +726,6 @@
     "license": "CC BY-SA 4.0"
    },
    "wiki": "https://ja.wikipedia.org/wiki/%E4%B8%89%E5%8D%81%E4%B8%89%E9%96%93%E5%A0%82"
-  },
-  {
-   "id": "gion",
-   "name": "祇园·八坂神社",
-   "area": "京都",
-   "kind": "街区",
-   "transit": {
-    "mins": 50,
-    "route": "京阪特急到祇园四条",
-    "checked": false
-   },
-   "seasons": [],
-   "why": "花见小路的町家和八坂神社的朱门。",
-   "tip": "傍晚点灯后走白川一带。",
-   "tags": [
-    "人文古迹",
-    "热闹",
-    "好吃",
-    "夜景",
-    "拍照",
-    "散步"
-   ],
-   "blurb": "石板路、格子门和挂着灯笼的茶屋，偶尔有舞伎踩着木屐走过。傍晚的白川边，柳枝垂进水里。",
-   "ll": [
-    135.77861,
-    35.00361
-   ],
-   "car": {
-    "mins": 54,
-    "km": 46.5
-   },
-   "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/JP-Kyoto-yasaka.JPG/500px-JP-Kyoto-yasaka.JPG",
-    "file": "JP-Kyoto-yasaka.JPG",
-    "page": "https://commons.wikimedia.org/wiki/File:JP-Kyoto-yasaka.JPG",
-    "artist": "Bgabel",
-    "license": "CC BY-SA 3.0"
-   },
-   "wiki": "https://ja.wikipedia.org/wiki/%E5%85%AB%E5%9D%82%E7%A5%9E%E7%A4%BE"
-  },
-  {
-   "id": "kiyomizu",
-   "name": "清水寺·二年坂",
-   "area": "京都",
-   "kind": "寺社",
-   "transit": {
-    "mins": 65,
-    "route": "京阪到祇园四条，步行约20分上坡",
-    "checked": false
-   },
-   "seasons": [
-    {
-     "from": "03-28",
-     "to": "04-08",
-     "label": "樱",
-     "tone": "sakura"
-    },
-    {
-     "from": "11-18",
-     "to": "12-05",
-     "label": "红叶",
-     "tone": "koyo"
-    }
-   ],
-   "why": "清水舞台和一路老街，适合慢慢走下坡。",
-   "tip": "上午先上清水寺，再往祇园方向走。",
-   "tags": [
-    "寺社",
-    "人文古迹",
-    "红叶",
-    "赏花",
-    "热闹",
-    "拍照",
-    "风景美"
-   ],
-   "blurb": "悬在山崖上的木造舞台，整座京都在脚下展开。下山的二年坂、三年坂是一路老铺和石阶。",
-   "ll": [
-    135.785,
-    34.99483
-   ],
-   "car": {
-    "mins": 54,
-    "km": 46.3
-   },
-   "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Kiyomizu-dera%2C_Kyoto%2C_November_2016_-02.jpg/500px-Kiyomizu-dera%2C_Kyoto%2C_November_2016_-02.jpg",
-    "file": "Kiyomizu-dera,_Kyoto,_November_2016_-02.jpg",
-    "page": "https://commons.wikimedia.org/wiki/File:Kiyomizu-dera%2C_Kyoto%2C_November_2016_-02.jpg",
-    "artist": "Martin Falbisoner",
-    "license": "CC BY-SA 4.0"
-   },
-   "wiki": "https://ja.wikipedia.org/wiki/%E6%B8%85%E6%B0%B4%E5%AF%BA"
   },
   {
    "id": "byodoin",
@@ -1039,97 +905,6 @@
     "license": "CC BY 2.5"
    },
    "wiki": "https://ja.wikipedia.org/wiki/%E6%85%88%E7%85%A7%E5%AF%BA"
-  },
-  {
-   "id": "kinkakuji",
-   "name": "金阁寺",
-   "area": "京都",
-   "kind": "寺社",
-   "transit": {
-    "mins": 90,
-    "route": "JR到京都站，转公交",
-    "checked": false
-   },
-   "seasons": [],
-   "why": "镜湖池上的金阁，晴天倒影最好。",
-   "tip": "公交拥挤，可在北大路站转车。",
-   "tags": [
-    "寺社",
-    "人文古迹",
-    "拍照",
-    "热闹",
-    "风景美"
-   ],
-   "blurb": "金箔包住的楼阁浮在镜湖池上，晴天无风时，水里还有一座一模一样的金阁。",
-   "ll": [
-    135.72936,
-    35.0394
-   ],
-   "car": {
-    "mins": 59,
-    "km": 50.2
-   },
-   "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Kinkaku-ji_2015.JPG/500px-Kinkaku-ji_2015.JPG",
-    "file": "Kinkaku-ji_2015.JPG",
-    "page": "https://commons.wikimedia.org/wiki/File:Kinkaku-ji_2015.JPG",
-    "artist": "Kakidai",
-    "license": "CC BY-SA 4.0"
-   },
-   "wiki": "https://ja.wikipedia.org/wiki/%E9%B9%BF%E8%8B%91%E5%AF%BA"
-  },
-  {
-   "id": "arashiyama",
-   "ll": [
-    135.6778,
-    35.0129
-   ],
-   "name": "岚山·渡月桥",
-   "area": "京都",
-   "kind": "自然",
-   "transit": {
-    "mins": 75,
-    "route": "JR到大阪站，阪急京都线到桂，转岚山线",
-    "checked": false
-   },
-   "seasons": [
-    {
-     "from": "03-28",
-     "to": "04-10",
-     "label": "樱",
-     "tone": "sakura"
-    },
-    {
-     "from": "11-18",
-     "to": "12-05",
-     "label": "红叶",
-     "tone": "koyo"
-    }
-   ],
-   "why": "竹林、渡月桥和保津川，一天的分量。",
-   "tip": "竹林小径清晨人少。",
-   "tags": [
-    "风景美",
-    "红叶",
-    "赏花",
-    "水边",
-    "山里",
-    "热闹",
-    "拍照"
-   ],
-   "blurb": "竹林小径里的光是绿色的，渡月桥下保津川慢慢流过，背后的岚山一年换四种颜色。",
-   "car": {
-    "mins": 57,
-    "km": 51.1
-   },
-   "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Togetsukyo_in_Kyoto_Arashiyama.jpg/500px-Togetsukyo_in_Kyoto_Arashiyama.jpg",
-    "file": "Togetsukyo_in_Kyoto_Arashiyama.jpg",
-    "page": "https://commons.wikimedia.org/wiki/File:Togetsukyo_in_Kyoto_Arashiyama.jpg",
-    "artist": "Blue Lotus from Arashiyama, Kyoto",
-    "license": "CC BY 2.0"
-   },
-   "wiki": "https://ja.wikipedia.org/wiki/%E6%B8%A1%E6%9C%88%E6%A9%8B"
   },
   {
    "id": "kibune",
@@ -1511,8 +1286,7 @@
     "人文古迹",
     "寺社",
     "热闹",
-    "散步",
-    "亲子"
+    "散步"
    ],
    "blurb": "鹿在草坪上低头吃草，抬头就是巨大的木造大佛殿，十五米高的卢舍那佛在里面安静地坐着。",
    "ll": [
@@ -1629,7 +1403,6 @@
    "tags": [
     "山里",
     "夜景",
-    "亲子",
     "风景美"
    ],
    "blurb": "坐复古的缆车上山，山顶有一座老游乐园。天黑后，整个大阪平原在脚下亮成一片星海。",
@@ -2607,7 +2380,6 @@
    "tip": "忍者博物馆有表演。",
    "tags": [
     "人文古迹",
-    "亲子",
     "散步"
    ],
    "blurb": "忍者屋敷里的墙一推就转，地板下藏着刀。城的石垣高三十米，是日本最高的之一。",
