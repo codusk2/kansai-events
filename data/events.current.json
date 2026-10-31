@@ -1,0 +1,420 @@
+{
+ "about": "由 scripts/collect_events.py 从 events.json 生成，不要手改。",
+ "today": "2026-10-31",
+ "events": [
+  {
+   "id": "5bb929c6b150b824b072",
+   "name": "特別展 源氏物語 王朝のかがやき",
+   "venue": "京都国立博物館",
+   "area": "京都",
+   "kind": "艺术",
+   "date": "～11/29",
+   "from": "2026-10-06",
+   "to": "2026-11-29",
+   "ll": [
+    135.77286,
+    34.9899
+   ],
+   "fee": "大学生 1,200日元",
+   "note": "源氏物语主题绘画、工艺、写本齐聚；京都会场限定「定家本」全5帖首次同场",
+   "link": "https://www.kyohaku.go.jp/jp/exhibitions/special/2026_genji/",
+   "poster": "assets/posters/5bb929c6b150b824b072.jpg"
+  },
+  {
+   "id": "a88513653a9163e9b539",
+   "name": "大英博物館日本美術コレクション 百花繚乱",
+   "venue": "大阪中之島美術館",
+   "area": "大阪",
+   "kind": "艺术",
+   "date": "10/31～2027/1/31",
+   "from": "2026-10-31",
+   "to": "2027-01-31",
+   "ll": [
+    135.49137,
+    34.69238
+   ],
+   "fee": "高大生 1,400日元",
+   "note": "大英博物馆藏歌麿、北斋、写乐、广重等江户名画，含日本首展作品",
+   "link": "https://nakka-art.jp/exhibition-post/daiei-ten2026/",
+   "poster": "assets/posters/a88513653a9163e9b539.jpg"
+  },
+  {
+   "id": "35a52cc2ee0f52d51809",
+   "name": "アンドリュー・ワイエス展",
+   "venue": "あべのハルカス美術館",
+   "area": "大阪",
+   "kind": "艺术",
+   "date": "～12/6（后期11/4起）",
+   "from": "2026-10-03",
+   "to": "2026-12-06",
+   "ll": [
+    135.51317,
+    34.64584
+   ],
+   "fee": "大高生 1,800日元",
+   "note": "没后日本首次回顾展，100件作品含15件日本首展",
+   "link": "https://www.aham.jp/exhibition/future/wyeth/",
+   "poster": "assets/posters/35a52cc2ee0f52d51809.jpg"
+  },
+  {
+   "id": "79f705dea70a3a2b015f",
+   "name": "神戸マラソン2026（去加油）",
+   "venue": "神户市役所前→明石→港区",
+   "area": "神户",
+   "kind": "运动",
+   "date": "11/15",
+   "from": "2026-11-15",
+   "to": "2026-11-15",
+   "ll": [
+    135.1955,
+    34.6901
+   ],
+   "fee": "加油免费",
+   "note": "万人奔跑的城市马拉松，去沿途加油",
+   "link": "https://kobe-marathon.net/2026/race/essentials/",
+   "poster": "assets/posters/79f705dea70a3a2b015f.jpg"
+  },
+  {
+   "id": "f79b211cf73be2afb325",
+   "name": "第68回 京都大学11月祭",
+   "venue": "京都大学 吉田キャンパス",
+   "area": "京都",
+   "kind": "校园、美食、音乐",
+   "date": "11/20～11/23",
+   "from": "2026-11-20",
+   "to": "2026-11-23",
+   "ll": [
+    135.7808,
+    35.0262
+   ],
+   "fee": "免费",
+   "note": "关西最大级校园祭，往年10万人以上",
+   "link": "https://nf.la/",
+   "poster": "assets/posters/f79b211cf73be2afb325.jpg"
+  },
+  {
+   "id": "123c62d1edd5050ef05e",
+   "name": "特別展 躍動する明代の書",
+   "venue": "大阪市立美術館",
+   "area": "大阪",
+   "kind": "艺术",
+   "date": "10/9～12/20",
+   "from": "2026-10-09",
+   "to": "2026-12-20",
+   "ll": [
+    135.51052,
+    34.6501
+   ],
+   "fee": "高大生 1,200日元",
+   "note": "台北何创时基金会藏明代书法名品",
+   "link": "https://www.osaka-art-museum.jp/special_exhibition/mindai",
+   "poster": "assets/posters/123c62d1edd5050ef05e.jpg"
+  },
+  {
+   "id": "063554106226776751ce",
+   "name": "ENLIGHTENMENT JAPAN",
+   "venue": "大阪市立美術館 中央ホール",
+   "area": "大阪",
+   "kind": "艺术、灯光",
+   "date": "第1期 ～11/29",
+   "from": "2026-10-10",
+   "to": "2026-11-29",
+   "ll": [
+    135.5105,
+    34.6501
+   ],
+   "fee": "大人 2,900（平日）/3,200日元",
+   "note": "日本首演：360°投影＋维瓦尔第《四季》，30分钟沉浸式光影",
+   "link": "https://enlightenment-immersive.jp/",
+   "poster": "assets/posters/063554106226776751ce.jpg"
+  },
+  {
+   "id": "13058b5aeb0d67b76888",
+   "name": "御堂筋イルミネーション2026",
+   "venue": "御堂筋（阪神前～難波西口）",
+   "area": "大阪",
+   "kind": "灯光",
+   "date": "11/3～12/31",
+   "from": "2026-11-03",
+   "to": "2026-12-31",
+   "ll": [
+    135.5005,
+    34.68
+   ],
+   "fee": "免费",
+   "note": "梅田到难波约4km行道树点灯，17:00–25:00",
+   "link": "https://www.city.osaka.lg.jp/hodoshiryo/keizaisenryaku/0000687506.html",
+   "poster": "assets/posters/13058b5aeb0d67b76888.png"
+  },
+  {
+   "id": "bf341488af52e4821615",
+   "name": "御堂筋ランウェイ2026",
+   "venue": "御堂筋（淀屋橋～船場中央3）",
+   "area": "大阪",
+   "kind": "祭典",
+   "date": "11/23",
+   "from": "2026-11-23",
+   "to": "2026-11-23",
+   "ll": [
+    135.501,
+    34.688
+   ],
+   "fee": "免费观看",
+   "note": "14:00–16:00，复仇者联盟纪念游行、体育英雄游行和特别live",
+   "link": "https://midosuji-runway.jp/",
+   "poster": "assets/posters/bf341488af52e4821615.jpg"
+  },
+  {
+   "id": "be17d90f74192343885d",
+   "name": "松方幸次郎×山村德太郎 蒐集のパッション",
+   "venue": "兵庫県立美術館",
+   "area": "神户",
+   "kind": "艺术",
+   "date": "～12/27",
+   "from": "2026-10-10",
+   "to": "2026-12-27",
+   "ll": [
+    135.21808,
+    34.69934
+   ],
+   "fee": "见官网",
+   "note": "从罗丹到具体派，国立美术馆藏品对话",
+   "link": "https://www.artm.pref.hyogo.jp/event/",
+   "poster": null
+  },
+  {
+   "id": "919b7c92edb359e7f8cc",
+   "name": "沙流川に生きる ―サルンクㇽの近代（アイヌ工芸品展）",
+   "venue": "国立民族学博物館（万博公园）",
+   "area": "大阪",
+   "kind": "艺术",
+   "date": "9/25～12/15",
+   "from": "2026-09-25",
+   "to": "2026-12-15",
+   "ll": [
+    135.52894,
+    34.81282
+   ],
+   "fee": "大学生 600日元",
+   "note": "约330件阿伊努工艺品，连同照片和后人讲述呈现近代史",
+   "link": "https://www.minpaku.ac.jp/exhibition/special",
+   "poster": "assets/posters/919b7c92edb359e7f8cc.jpg"
+  },
+  {
+   "id": "da9d7db645e729e28680",
+   "name": "ＮＨＫ日曜美術館５０年展",
+   "venue": "大阪中之島美術館 5F",
+   "area": "大阪",
+   "kind": "艺术",
+   "date": "10/10～12/20",
+   "from": "2026-10-10",
+   "to": "2026-12-20",
+   "ll": [
+    135.4914,
+    34.6924
+   ],
+   "fee": "大学生 1,200日元",
+   "note": "NHK名牌美术节目50年，与百花缭乱同馆可连看",
+   "link": "https://nakka-art.jp/exhibition-post/nichibiten50/",
+   "poster": "assets/posters/da9d7db645e729e28680.jpg"
+  },
+  {
+   "id": "d03c2e9dffc73eff4c94",
+   "name": "土佐尚子展「生成されるものたち」",
+   "venue": "京都市京セラ美術館",
+   "area": "京都",
+   "kind": "艺术",
+   "date": "11/7～11/22",
+   "from": "2026-11-07",
+   "to": "2026-11-22",
+   "ll": [
+    135.78329,
+    35.01356
+   ],
+   "fee": "免费",
+   "note": "MoMA收藏艺术家40年「生成」艺术回顾",
+   "link": "https://kyotocity-kyocera.museum/event/20261107-1122tosanaoko",
+   "poster": "assets/posters/d03c2e9dffc73eff4c94.jpg"
+  },
+  {
+   "id": "6f3465ea7d44d50039a5",
+   "name": "『時をかける少女』20周年記念 細田守の原点/展",
+   "venue": "グランフロント大阪 北館",
+   "area": "大阪",
+   "kind": "艺术",
+   "date": "10/28～2027/1/4",
+   "from": "2026-10-28",
+   "to": "2027-01-04",
+   "ll": [
+    135.49477,
+    34.70517
+   ],
+   "fee": "前売 一般・大学生 2,100日元",
+   "note": "细田守动画的创作原点展",
+   "link": "https://www.ytv.co.jp/event/contents/hosodagenten-exhibit.html",
+   "poster": "assets/posters/6f3465ea7d44d50039a5.jpg"
+  },
+  {
+   "id": "bb821ff7aa05d5e17300",
+   "name": "JAPANIMATION ROCKS 2026",
+   "venue": "Zepp Osaka Bayside",
+   "area": "大阪",
+   "kind": "音乐",
+   "date": "11/29",
+   "from": "2026-11-29",
+   "to": "2026-11-29",
+   "ll": [
+    135.4372,
+    34.661
+   ],
+   "fee": "需购票",
+   "note": "16:00开演，FLOW、BURNOUT SYNDROMES等动漫歌摇滚live",
+   "link": "https://japanimation-rocks.com/",
+   "poster": "assets/posters/bb821ff7aa05d5e17300.jpg"
+  },
+  {
+   "id": "a3dce72894ba90498435",
+   "name": "特別展 戦国のきょうだい",
+   "venue": "大阪城天守閣 3・4F",
+   "area": "大阪",
+   "kind": "艺术",
+   "date": "10/10～11/23",
+   "from": "2026-10-10",
+   "to": "2026-11-23",
+   "ll": [
+    135.5259,
+    34.6873
+   ],
+   "fee": "高大生 600日元",
+   "note": "战国武将兄弟姐妹的故事，顺便登大阪城",
+   "link": "https://osaka-castle.jp/event/osaka-castle-tenji",
+   "poster": "assets/posters/a3dce72894ba90498435.jpg"
+  },
+  {
+   "id": "75f7637e6769ec3a401d",
+   "name": "笹本晃 ラボラトリー",
+   "venue": "国立国際美術館",
+   "area": "大阪",
+   "kind": "艺术",
+   "date": "～11/3",
+   "from": "2026-07-19",
+   "to": "2026-11-03",
+   "ll": [
+    135.49215,
+    34.69169
+   ],
+   "fee": "大学生 1,200日元",
+   "note": "纽约艺术家笹本晃的装置与表演",
+   "link": "https://www.nmao.go.jp/exhibition/current_exhibition/",
+   "poster": "assets/posters/75f7637e6769ec3a401d.jpg"
+  },
+  {
+   "id": "0d76b09026876113ca18",
+   "name": "第20回 三国志祭",
+   "venue": "新长田 三国志画廊周边",
+   "area": "神户",
+   "kind": "祭典",
+   "date": "11/7",
+   "from": "2026-11-07",
+   "to": "2026-11-07",
+   "ll": [
+    135.1452,
+    34.6576
+   ],
+   "fee": "基本免费",
+   "note": "11:00–17:00，家门口的全国三国志粉丝节",
+   "link": "https://www.shinnagata-stm.com/event/1107sangokushimaturi20/",
+   "poster": null
+  },
+  {
+   "id": "8c09d8f9632aff4efba3",
+   "name": "新発見！なにわの考古学2026",
+   "venue": "大阪歴史博物館 8F",
+   "area": "大阪",
+   "kind": "艺术",
+   "date": "～11/23",
+   "from": "2026-09-09",
+   "to": "2026-11-23",
+   "ll": [
+    135.5197,
+    34.6823
+   ],
+   "fee": "常设展票（高大生 400日元）",
+   "note": "大阪城金箔瓦、难波宫瓦等最新出土文物",
+   "link": "https://www.osakamushis.jp/news/2026/naniwakoko2026.html",
+   "poster": "assets/posters/8c09d8f9632aff4efba3.jpg"
+  },
+  {
+   "id": "01209cd1993899a6ccf2",
+   "name": "りゅうか祭（流通科学大学）",
+   "venue": "流通科学大学",
+   "area": "神户",
+   "kind": "校园、美食",
+   "date": "11/7～11/8",
+   "from": "2026-11-07",
+   "to": "2026-11-08",
+   "ll": [
+    135.05649,
+    34.68681
+   ],
+   "fee": "免费",
+   "note": "自己学校的校园祭：各国料理和52个模拟店",
+   "link": "https://www.umds.ac.jp/ryuka-sai/kaisaigaiyo/",
+   "poster": "assets/posters/01209cd1993899a6ccf2.jpg"
+  },
+  {
+   "id": "ab5f1c8a168dc0b77776",
+   "name": "からあげVS餃子 全国肉汁対決",
+   "venue": "明石公园",
+   "area": "明石",
+   "kind": "美食",
+   "date": "11/7～11/8",
+   "from": "2026-11-07",
+   "to": "2026-11-08",
+   "ll": [
+    134.99208,
+    34.65446
+   ],
+   "fee": "免费入场",
+   "note": "全国18家炸鸡煎饺名店集结",
+   "link": "https://akashi-journal.com/event/karaage-gyoza202611/",
+   "poster": "assets/posters/ab5f1c8a168dc0b77776.jpg"
+  },
+  {
+   "id": "c43db112892cb743875f",
+   "name": "JUMP FESTIVAL in KOBE 2026",
+   "venue": "新长田 铁人广场",
+   "area": "神户",
+   "kind": "运动",
+   "date": "11/3",
+   "from": "2026-11-03",
+   "to": "2026-11-03",
+   "ll": [
+    135.1446,
+    34.6578
+   ],
+   "fee": "免费",
+   "note": "近距离看高中顶尖选手跳高（图为往届）",
+   "link": "https://jumpfestival.jp/event_p/2345/",
+   "poster": "assets/posters/c43db112892cb743875f.jpg"
+  },
+  {
+   "id": "dcfa7c5599c5a255477c",
+   "name": "第2回 姫路の祭典",
+   "venue": "姫路駅北にぎわい交流広場",
+   "area": "姬路",
+   "kind": "祭典",
+   "date": "11/7",
+   "from": "2026-11-07",
+   "to": "2026-11-07",
+   "ll": [
+    134.6909,
+    34.8275
+   ],
+   "fee": "免费",
+   "note": "11:00–17:00，挂面快吃大赛、书法表演、市集，雨天延期",
+   "link": "https://www.himeji-kanko.jp/event/2016/",
+   "poster": "assets/posters/dcfa7c5599c5a255477c.jpg"
+  }
+ ]
+}

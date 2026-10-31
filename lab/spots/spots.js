@@ -1,5 +1,7 @@
-// 蟹鱼游旅行点原型：以京桥站为中心，按单程时间（公共交通 / 自驾）找旅行点，三种呈现方式（地图、时间圈、画册）。
-// 默认什么都不显示，点顶部标签才开始探索；「🍏 绿苹果」是单独的专区（Mrs. GREEN APPLE 在关西的地点和活动）。
+// 蟹鱼游旅行点原型：以京桥站为中心，按单程时间（公共交通 / 自驾）找旅行点；地图、时间圈、画册、想去的四页。
+// 默认什么都不显示：开屏先选交通和时间，再选至少三个标签。标签是“或”：符合任何一个就显示。
+// 标签的定义（emoji、说明、自动规则）在 data/places.json 的 tags 里，由人或 agent 维护。
+// 「🍏 绿苹果」是单独的专区；地图上的「🎟️ 活动」按钮单独显示还没结束的活动。
 (async () => {
   'use strict';
 
@@ -8,6 +10,23 @@
   const qs = new URLSearchParams(location.search);
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const easeInOut = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const store = {
+    get(key, fallback) {
+      try {
+        const v = localStorage.getItem(key);
+        return v === null ? fallback : JSON.parse(v);
+      } catch {
+        return fallback;
+      }
+    },
+    set(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch {
+        // 原型里记不住也不影响使用
+      }
+    }
+  };
 
   // ---------- 日期与季节 ----------
   const CUM = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
@@ -21,6 +40,7 @@
     const e = doyMD(w.to);
     return s <= e ? d >= s && d <= e : d >= s || d <= e;
   };
+  const daysUntil = w => (doyMD(w.from) - todayDoy + 365) % 365;
 
   function season(p) {
     if (!p.seasons.length) return { hot: false, tone: 'plain', text: '全年可去' };
@@ -29,7 +49,7 @@
     }
     let best = null;
     for (const w of p.seasons) {
-      const days = (doyMD(w.from) - todayDoy + 365) % 365;
+      const days = daysUntil(w);
       if (!best || days < best.days) best = { w, days };
     }
     const text = best.days <= 14 ? `${best.w.label}${best.days === 1 ? '明天' : best.days + '天后'}开始` : `${best.w.label} ${fmtMD(best.w.from)}起`;
@@ -37,9 +57,10 @@
   }
 
   // ---------- 数据 ----------
-  const [DATA, GA_DATA] = await Promise.all([
+  const [DATA, GA_DATA, EV_DATA] = await Promise.all([
     fetch('../../data/places.json').then(r => r.json()),
-    fetch('../../data/greenapple.json').then(r => r.json())
+    fetch('../../data/greenapple.json').then(r => r.json()),
+    fetch('../../data/events.current.json').then(r => r.json())
   ]);
   const ORIGIN = DATA.origin;
   const PLACES = DATA.places;
@@ -58,52 +79,80 @@
     p.season = season(p);
   });
 
-  // 绿苹果专区：只留还没结束的活动
-  const GA_ITEMS = GA_DATA.events.filter(e => !e.to || e.to >= today);
-  const gaById = Object.fromEntries(GA_ITEMS.map(e => [e.id, e]));
-  const gaDate = e => {
-    if (!e.from) return `${e.dateNote}–${fmtISO(e.to)}`;
-    return e.from === e.to ? fmtISO(e.from) : `${fmtISO(e.from)}–${fmtISO(e.to)}`;
+  // 活动：events.json 里还没结束的，加上绿苹果专区的；统一成一种形状
+  const dateText = (from, to, note) => {
+    if (!from) return `${note || '日期待公布'}–${fmtISO(to)}`;
+    return from === to ? fmtISO(from) : `${fmtISO(from)}–${fmtISO(to)}`;
   };
+  const EVENTS = [
+    ...EV_DATA.events.map(e => ({
+      id: 'ev-' + e.id, name: e.name, venue: e.venue, ll: e.ll, from: e.from, to: e.to, kind: e.kind || '活动',
+      when: e.date || dateText(e.from, e.to), note: e.note, fee: e.fee, link: e.link, poster: e.poster ? '../../' + e.poster : null, ga: false, sources: []
+    })),
+    ...GA_DATA.events.map(e => ({
+      id: e.id, name: e.name, venue: e.venue, ll: e.ll, from: e.from, to: e.to, kind: e.kind,
+      when: dateText(e.from, e.to, e.dateNote), note: e.note, fee: '', link: '', poster: null, ga: true, sources: e.sources
+    }))
+  ].filter(e => !e.to || e.to >= today)
+    .map(e => ({ ...e, live: !e.from || e.from <= today }))
+    .sort((a, b) => (b.live - a.live) || String(a.live ? a.to : a.from).localeCompare(String(b.live ? b.to : b.from)));
+  const evById = Object.fromEntries(EVENTS.map(e => [e.id, e]));
+  const evStatus = e => (e.live ? `进行中 · 到${fmtISO(e.to)}` : `${e.from ? fmtISO(e.from) : '近期'}开始`);
 
-  // ---------- 状态 ----------
-  const GA = '绿苹果';
-  const state = {
-    measure: qs.get('m') === 'car' ? 'car' : 'transit',
-    limit: 180,
-    tags: new Set((qs.get('t') || '').split(',').filter(Boolean)),
-    view: ['map', 'rings', 'book'].includes(qs.get('view')) ? qs.get('view') : 'map',
-    sel: null,
-    focus: null
-  };
-  const wish = new Set(['tofukuji', 'arima']);
-  const MEASURE = { transit: '公共交通', car: '自驾' };
-  const BAND_NAME = { 30: '半小时', 60: '1小时', 120: '2小时', 180: '3小时' };
-  const LIMITS = [30, 60, 120, 180];
-  const TAGS = [GA, '风景美', '热闹', '好吃', '山里', '海边', '人文古迹', '最近热门', '水边', '寺社', '赏花', '红叶', '温泉', '夜景', '散步', '安静', '拍照', '建筑', '乐园', '雨天也行'];
-  const EMOJI = {
-    绿苹果: '🍏', 风景美: '🏞️', 热闹: '🎉', 好吃: '🍜', 山里: '⛰️', 海边: '🌊', 人文古迹: '🏯', 最近热门: '🔥', 水边: '🛶', 寺社: '⛩️', 赏花: '🌸',
-    红叶: '🍁', 温泉: '♨️', 夜景: '🌃', 散步: '🚶', 安静: '🍃', 拍照: '📷', 建筑: '🏛️', 乐园: '🎢', 雨天也行: '☔'
-  };
+  // ---------- 标签：定义来自数据 ----------
+  const TAG_DEFS = DATA.tags;
+  const TAG = Object.fromEntries(TAG_DEFS.map(t => [t.name, t]));
+  const GA = TAG_DEFS.find(t => t.rule?.type === 'zone')?.name || '绿苹果';
+  const EMOJI = Object.fromEntries(TAG_DEFS.map(t => [t.name, t.emoji]));
+  function hasTag(p, name) {
+    const rule = TAG[name]?.rule;
+    if (!rule) return p.tags.includes(name);
+    if (rule.type === 'list') return rule.ids.includes(p.id);
+    if (rule.type === 'season') {
+      return p.seasons.some(w => rule.labels.includes(w.label) && (inWin(todayDoy, w) || daysUntil(w) <= (rule.withinDays || 0)));
+    }
+    return false;
+  }
   // 照片针下的emoji：先挑最能说明“是什么地方”的
-  const MAIN_ORDER = ['温泉', '海边', '山里', '寺社', '人文古迹', '红叶', '赏花', '水边', '夜景', '好吃', '建筑', '乐园', '热闹', '风景美', '安静', '散步', '拍照', '雨天也行'];
+  const MAIN_ORDER = ['温泉', '海边', '好吃', '好玩', '山里', '寺社', '人文古迹', '红叶', '赏花', '水边', '夜景', '建筑', '热闹', '风景美', '安静', '散步', '拍照', '雨天也行'];
   const mainEmo = (p, n = 2) => MAIN_ORDER.filter(t => p.tags.includes(t)).slice(0, n).map(t => EMOJI[t]).join('');
   const emojis = (p, n = 4) => p.tags.slice(0, n).map(t => EMOJI[t] || '').join('');
 
-  const gaMode = () => state.tags.has(GA);
-  const exploring = () => state.tags.size > 0;
-  const hasTag = (p, t) => (t === '最近热门' ? p.season.hot : p.tags.includes(t));
-  const tagsOk = (p, set = state.tags) => [...set].every(t => hasTag(p, t));
+  // ---------- 状态 ----------
+  const MEASURE = { transit: '公共交通', car: '自驾' };
+  const BAND_NAME = { 30: '半小时', 60: '1小时', 120: '2小时', 180: '3小时' };
+  const LIMITS = [30, 60, 120, 180];
+  const saved = store.get('kaniyu-prefs-v1', {});
+  const state = {
+    measure: qs.get('m') || saved.measure || 'transit',
+    limit: LIMITS.includes(saved.limit) ? saved.limit : 180,
+    tags: new Set((qs.get('t') || '').split(',').filter(Boolean).concat(qs.get('t') ? [] : saved.tags || [])),
+    events: false,
+    view: ['map', 'rings', 'book', 'wish'].includes(qs.get('view')) ? qs.get('view') : 'map',
+    sel: null,
+    focus: null
+  };
+  const wish = new Set(store.get('kaniyu-wish-v1', []).filter(id => byId[id]));
+  const savePrefs = () => store.set('kaniyu-prefs-v1', { measure: state.measure, limit: state.limit, tags: [...state.tags] });
+  const saveWish = () => store.set('kaniyu-wish-v1', [...wish]);
+
+  const mode = () => (state.events ? 'events' : state.tags.has(GA) ? 'ga' : state.tags.size ? 'places' : 'idle');
   const minsOf = (p, m = state.measure) => p[m].mins;
   const bandOf = (p, m = state.measure) => {
     const v = minsOf(p, m);
     return v <= 30 ? '30' : v <= 60 ? '60' : v <= 120 ? '120' : v <= 180 ? '180' : null;
   };
-  const shown = p => exploring() && !gaMode() && minsOf(p) <= state.limit && tagsOk(p);
+  // 标签是“或”：符合任何一个选中的标签就显示
+  const anyTag = (p, set = state.tags) => [...set].some(t => hasTag(p, t));
+  const shown = p => mode() === 'places' && minsOf(p) <= state.limit && anyTag(p);
+  const eventShown = e => e.ll && (mode() === 'events' || (mode() === 'ga' && e.ga));
   const timeBadge = p => `<span class="tb tb-${bandOf(p) || '180'}">${minsOf(p)}分</span>`;
   const photo = (p, cls = '') => (p.img
     ? `<img${cls ? ` class="${cls}"` : ''} src="${esc(p.img.thumb)}" alt="" loading="lazy" decoding="async">`
     : `<span class="ph${cls ? ' ' + cls : ''}">${esc([...p.name][0])}</span>`);
+  const evFace = (e, cls) => (e.poster
+    ? `<img class="${cls}" src="${esc(e.poster)}" alt="" loading="lazy">`
+    : `<span class="${cls} ev-face${e.ga ? ' ga' : ''}">${e.ga ? '🍏' : '🎟️'}<small>${esc(e.kind)}</small></span>`);
 
   let toastTimer;
   function toast(text) {
@@ -113,38 +162,48 @@
     toastTimer = setTimeout(() => { $('toast').hidden = true; }, 2600);
   }
 
-  // ---------- 顶部：一张卡，上行是站名和“交通·时间”，下行是主题标签 ----------
-  const tagChip = (t, n, on, cls = 'tag') => `<button type="button" class="${cls}${t === GA ? ' ga' : ''}" data-t="${t}" aria-pressed="${on}"${!on && n === 0 ? ' disabled' : ''}>`
+  // ---------- 标签计数与排序：按“在当前时间上限内有几处”从多到少 ----------
+  const countTag = (t, limit = state.limit, m = state.measure) => (t === GA
+    ? EVENTS.filter(e => e.ga).length
+    : PLACES.filter(p => p[m].mins <= limit && hasTag(p, t)).length);
+  const orderedTags = (limit, m) => [GA, ...TAG_DEFS.filter(t => t.name !== GA)
+    .map(t => ({ t: t.name, n: countTag(t.name, limit, m) }))
+    .sort((a, b) => b.n - a.n)
+    .map(x => x.t)];
+  const tagChip = (t, n, on, cls = 'tag') => `<button type="button" class="${cls}${t === GA ? ' ga' : ''}" data-t="${t}" aria-pressed="${on}"${!on && n === 0 ? ' disabled' : ''}${TAG[t]?.desc ? ` title="${esc(TAG[t].desc)}"` : ''}>`
     + `<span class="emo" aria-hidden="true">${EMOJI[t]}</span>${t}${n === null ? '' : `<small>${n}</small>`}</button>`;
 
-  function tagCount(t) {
-    if (t === GA) return GA_ITEMS.length;
-    const base = [...state.tags].filter(x => x !== GA);
-    return PLACES.filter(p => minsOf(p) <= state.limit && tagsOk(p, new Set([...base, t]))).length;
-  }
-
+  // ---------- 顶部 ----------
   function renderHeader() {
     const icon = state.measure === 'car' ? '🚗' : '🚃';
     $('filter-btn').innerHTML = `<span>${icon} ${state.measure === 'car' ? '自驾' : '公交'}</span><span class="fb-sep"></span><span>${BAND_NAME[state.limit]}内</span><span class="fb-caret" aria-hidden="true">▾</span>`;
     $('measure').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.m === state.measure)));
-    const base = gaMode() ? new Set() : state.tags;
     $('limit').innerHTML = LIMITS.map(l => {
-      const n = PLACES.filter(p => minsOf(p) <= l && tagsOk(p, base)).length;
+      const n = PLACES.filter(p => minsOf(p) <= l && (!state.tags.size || state.tags.has(GA) || anyTag(p))).length;
       return `<button type="button" data-l="${l}" aria-pressed="${state.limit === l}">${BAND_NAME[l]}内<small>${n}</small></button>`;
     }).join('');
-    // 选中的标签排在最前面，再点一次取消
-    const order = [...TAGS.filter(t => state.tags.has(t)), ...TAGS.filter(t => !state.tags.has(t))];
-    $('tags').innerHTML = order.map(t => tagChip(t, tagCount(t), state.tags.has(t))).join('');
+    const tags = orderedTags(state.limit, state.measure);
+    // 标签栏：已选的排最前，其余按数量从多到少；展开面板里全部按数量排
+    const bar = [...tags.filter(t => state.tags.has(t)), ...tags.filter(t => !state.tags.has(t))];
+    $('tags').innerHTML = bar.map(t => tagChip(t, countTag(t), state.tags.has(t))).join('');
+    $('tag-grid').innerHTML = tags.map(t => tagChip(t, countTag(t), state.tags.has(t), 'tag big')).join('');
+    const n = state.tags.has(GA) ? 0 : state.tags.size;
+    $('tags-more').innerHTML = `<span aria-hidden="true">▾</span>${n ? `<small>${n}</small>` : ''}`;
+    $('tag-panel-count').textContent = state.tags.has(GA)
+      ? '🍏 绿苹果专区'
+      : `已选 ${n} 个 · 符合任一标签的 ${PLACES.filter(p => minsOf(p) <= state.limit && anyTag(p)).length} 处`;
+    $('ev-btn').innerHTML = `🎟️ 活动<small>${EVENTS.filter(e => e.ll).length}</small>`;
+    $('ev-btn').setAttribute('aria-pressed', String(state.events));
   }
 
   function toggleTag(t) {
+    state.events = false;
     if (t === GA) {
       state.tags = state.tags.has(GA) ? new Set() : new Set([GA]);
     } else {
       state.tags.delete(GA);
       state.tags.has(t) ? state.tags.delete(t) : state.tags.add(t);
     }
-    $('tags').scrollTo({ left: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
     refresh();
   }
 
@@ -153,10 +212,40 @@
     if (b) toggleTag(b.dataset.t);
   });
 
+  // 展开全部标签，可以一键全选或清空
+  function setPanel(open) {
+    $('tag-panel').hidden = !open;
+    $('tags-more').setAttribute('aria-expanded', String(open));
+    if (open) {
+      $('filter-pop').hidden = true;
+      $('filter-btn').setAttribute('aria-expanded', 'false');
+    }
+  }
+  $('tags-more').addEventListener('click', () => setPanel($('tag-panel').hidden));
+  $('tag-panel').addEventListener('click', e => {
+    const b = e.target.closest('[data-t], [data-act]');
+    if (!b) return;
+    if (b.dataset.t !== undefined) {
+      toggleTag(b.dataset.t);
+      return;
+    }
+    if (b.dataset.act === 'all') {
+      state.events = false;
+      state.tags = new Set(TAG_DEFS.filter(t => t.name !== GA).map(t => t.name));
+      refresh();
+    } else if (b.dataset.act === 'none') {
+      state.tags = new Set();
+      refresh();
+    } else if (b.dataset.act === 'done') {
+      setPanel(false);
+    }
+  });
+
   $('filter-btn').addEventListener('click', () => {
     const pop = $('filter-pop');
     pop.hidden = !pop.hidden;
     $('filter-btn').setAttribute('aria-expanded', String(!pop.hidden));
+    if (!pop.hidden) setPanel(false);
   });
   $('filter-pop').addEventListener('click', e => {
     const m = e.target.closest('[data-m]');
@@ -171,43 +260,61 @@
       $('filter-pop').hidden = true;
       $('filter-btn').setAttribute('aria-expanded', 'false');
     }
+    if (!$('tag-panel').hidden && !e.target.closest('#tag-panel, #tags-more, #tags')) setPanel(false);
   });
 
-  // ---------- 开屏问候：第一次打开时显示，点标签就开始 ----------
-  const HELLO_KEY = 'kaniyu-hello-v1';
-  let seen = false;
-  try {
-    seen = localStorage.getItem(HELLO_KEY) === '1';
-  } catch {
-    seen = false;
+  // ---------- 开屏：先选交通和时间，再选至少三个标签 ----------
+  const HELLO_KEY = 'kaniyu-hello-v2';
+  const MIN_TAGS = 3;
+  const hello = { step: 1, measure: state.measure, limit: state.limit, tags: new Set() };
+
+  function renderHello() {
+    $('hello-step1').hidden = hello.step !== 1;
+    $('hello-step2').hidden = hello.step !== 2;
+    $('hello-measure').innerHTML = [['transit', '🚃', '公共交通'], ['car', '🚗', '自驾']]
+      .map(([v, i, t]) => `<button type="button" data-hm="${v}" aria-pressed="${hello.measure === v}"><span>${i}</span>${t}</button>`).join('');
+    $('hello-limit').innerHTML = LIMITS
+      .map(l => `<button type="button" data-hl="${l}" aria-pressed="${hello.limit === l}">${BAND_NAME[l]}内<small>${PLACES.filter(p => p[hello.measure].mins <= l).length}处</small></button>`).join('');
+    const tags = orderedTags(hello.limit, hello.measure).filter(t => t !== GA);
+    $('hello-tags').innerHTML = tags.map(t => tagChip(t, countTag(t, hello.limit, hello.measure), hello.tags.has(t), 'tag big')).join('');
+    const n = hello.tags.size;
+    $('hello-go').disabled = n < MIN_TAGS;
+    $('hello-go').textContent = n < MIN_TAGS ? `再选 ${MIN_TAGS - n} 个` : `开始探索（${n}个标签）`;
   }
-  if (!seen || qs.get('hello') === '1') {
-    $('hello-tags').innerHTML = TAGS.filter(t => t !== '最近热门' || PLACES.some(p => p.season.hot)).map(t => tagChip(t, null, false, 'tag big')).join('');
+
+  if (!store.get(HELLO_KEY, false) || qs.get('hello') === '1') {
+    renderHello();
     $('hello').hidden = false;
   }
-  function closeHello() {
-    $('hello').classList.add('leaving');
-    setTimeout(() => { $('hello').hidden = true; }, reduceMotion ? 0 : 380);
-    try {
-      localStorage.setItem(HELLO_KEY, '1');
-    } catch {
-      // 记不住也只是下次再打一次招呼
-    }
-  }
+
   $('hello').addEventListener('click', e => {
-    const b = e.target.closest('[data-t]');
-    if (b) {
-      closeHello();
-      toggleTag(b.dataset.t);
-    } else if (e.target.closest('[data-close]')) {
-      closeHello();
-    }
+    const m = e.target.closest('[data-hm]');
+    const l = e.target.closest('[data-hl]');
+    const t = e.target.closest('[data-t]');
+    if (m) hello.measure = m.dataset.hm;
+    else if (l) hello.limit = +l.dataset.hl;
+    else if (t) hello.tags.has(t.dataset.t) ? hello.tags.delete(t.dataset.t) : hello.tags.add(t.dataset.t);
+    else if (e.target.closest('#hello-next')) hello.step = 2;
+    else if (e.target.closest('#hello-back')) hello.step = 1;
+    else if (e.target.closest('#hello-go') && hello.tags.size >= MIN_TAGS) {
+      state.measure = hello.measure;
+      state.limit = hello.limit;
+      state.tags = new Set(hello.tags);
+      state.events = false;
+      store.set(HELLO_KEY, true);
+      $('hello').classList.add('leaving');
+      setTimeout(() => { $('hello').hidden = true; }, reduceMotion ? 0 : 380);
+      refresh();
+      return;
+    } else return;
+    renderHello();
   });
 
   // ---------- 视图 ----------
+  const VIEWS = ['map', 'rings', 'book', 'wish'];
   function showView(v) {
     state.view = v;
-    ['map', 'rings', 'book'].forEach(k => { $('view-' + k).hidden = k !== v; });
+    VIEWS.forEach(k => { $('view-' + k).hidden = k !== v; });
     $('tabbar').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
     if (v === 'map') map.resize();
     renderView();
@@ -219,14 +326,17 @@
   });
 
   function renderView() {
-    document.body.classList.toggle('idle', !exploring());
-    document.body.classList.toggle('ga-mode', gaMode());
+    document.body.classList.toggle('idle', mode() === 'idle' && state.view !== 'wish');
+    document.body.dataset.mode = mode();
+    $('wish-tab').textContent = wish.size ? `想去的 ${wish.size}` : '想去的';
     if (state.view === 'map') renderMapView();
     if (state.view === 'rings') renderRings();
     if (state.view === 'book') renderBook();
+    if (state.view === 'wish') renderWish();
   }
 
   function refresh() {
+    savePrefs();
     renderHeader();
     PLACES.forEach(p => { pins.get(p.id).el.dataset.band = bandOf(p) || ''; });
     deckKey = '';
@@ -234,14 +344,33 @@
     renderView();
   }
 
+  function toggleWish(id) {
+    wish.has(id) ? wish.delete(id) : wish.add(id);
+    saveWish();
+    $('wish-tab').textContent = wish.size ? `想去的 ${wish.size}` : '想去的';
+    document.querySelectorAll(`[data-wish="${id}"]`).forEach(b => {
+      b.setAttribute('aria-pressed', String(wish.has(id)));
+      b.textContent = wish.has(id) ? '♥' : '♡';
+    });
+    toast(wish.has(id) ? `已加入想去的：${byId[id].name}` : `已移出想去的：${byId[id].name}`);
+    if (state.view === 'wish') renderWish();
+  }
+  const heart = p => `<span class="heart" role="button" tabindex="0" data-wish="${p.id}" aria-pressed="${wish.has(p.id)}" aria-label="想去">${wish.has(p.id) ? '♥' : '♡'}</span>`;
+  document.addEventListener('click', e => {
+    const h = e.target.closest('[data-wish]');
+    if (!h) return;
+    e.stopPropagation();
+    toggleWish(h.dataset.wish);
+  }, true);
+
   // ---------- 地图 ----------
   const dark = matchMedia('(prefers-color-scheme: dark)').matches;
   const STYLE_URL = dark ? 'https://tiles.openfreemap.org/styles/dark' : 'https://tiles.openfreemap.org/styles/positron';
+  const HOME_VIEW = { center: [135.6, 34.78], zoom: 8.6 };
   const map = new maplibregl.Map({
     container: 'map',
     style: STYLE_URL,
-    center: [135.6, 34.78],
-    zoom: 8.6,
+    ...HOME_VIEW,
     attributionControl: { compact: true },
     dragRotate: false,
     pitchWithRotate: false,
@@ -279,7 +408,7 @@
     }
   }
   map.on('style.load', () => tintMap(map, false));
-  map.on('load', () => document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show'));
+  map.once('idle', () => document.querySelector('#map .maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show'));
 
   // 旅行点：圆形照片针，下面一枚emoji小签说明是什么地方；挤在一起时合并成一叠，标数字
   const pins = new Map();
@@ -304,18 +433,18 @@
     pins.set(p.id, { el, members: [], marker: new maplibregl.Marker({ element: el }).setLngLat(p.ll).addTo(map) });
   });
 
-  // 绿苹果的活动：小圆点，临时性的
-  const gaPins = new Map();
-  GA_ITEMS.filter(e => e.ll).forEach(ev => {
+  // 活动：小圆点，临时性的
+  const evPins = new Map();
+  EVENTS.filter(e => e.ll).forEach(ev => {
     const el = document.createElement('div');
-    el.className = 'gpin';
+    el.className = 'gpin' + (ev.ga ? ' ga' : '');
     el.dataset.hidden = '';
-    el.innerHTML = `<button type="button" class="gpin-in" aria-label="${esc(ev.name)}">🍏</button><span class="pin-label">${esc(ev.venue)}</span>`;
+    el.innerHTML = `<button type="button" class="gpin-in" aria-label="${esc(ev.name)}">${ev.ga ? '🍏' : '🎟️'}</button><span class="pin-label">${esc(ev.name)}</span>`;
     el.querySelector('.gpin-in').addEventListener('click', e => {
       e.stopPropagation();
       focusItem(ev.id, { scroll: true, fly: true });
     });
-    gaPins.set(ev.id, { el, marker: new maplibregl.Marker({ element: el }).setLngLat(ev.ll).addTo(map) });
+    evPins.set(ev.id, { el, marker: new maplibregl.Marker({ element: el }).setLngLat(ev.ll).addTo(map) });
   });
 
   const homeEl = document.createElement('div');
@@ -326,9 +455,26 @@
   function mapPadding(extra = 20) {
     const box = map.getContainer().getBoundingClientRect();
     const top = $('head').getBoundingClientRect().bottom - box.top + extra;
-    const deckTop = exploring() ? $('deck').getBoundingClientRect().top : $('tabbar').getBoundingClientRect().top;
+    const deckTop = mode() === 'idle' ? $('tabbar').getBoundingClientRect().top : $('deck').getBoundingClientRect().top;
     return { top, bottom: box.bottom - deckTop + extra, left: extra, right: extra };
   }
+
+  // 回到京桥：京桥放在中间，保持能看到大阪、京都、神户的范围
+  $('home-btn').addEventListener('click', () => {
+    const opts = { center: ORIGIN.ll, zoom: 9.2, padding: mapPadding(10) };
+    reduceMotion ? map.jumpTo(opts) : map.flyTo({ ...opts, duration: 1100, easing: easeInOut });
+  });
+
+  // 活动按钮：单独显示还没结束的活动，再点一次回到旅行点
+  $('ev-btn').addEventListener('click', () => {
+    state.events = !state.events;
+    refresh();
+    if (state.events) {
+      const b = new maplibregl.LngLatBounds();
+      EVENTS.filter(e => e.ll).forEach(e => b.extend(e.ll));
+      map.fitBounds(b, { padding: mapPadding(50), maxZoom: 11, duration: reduceMotion ? 0 : 900 });
+    }
+  });
 
   // 合并：只在地图停下后算一次，拖动过程中不重排
   const CLUSTER_PX = 50;
@@ -349,16 +495,14 @@
       m.members = members;
       m.el.dataset.state = !shown(p) ? 'out' : members.length ? (members.length > 1 ? 'leader' : 'solo') : 'member';
       m.el.querySelector('.pin-n').textContent = members.length > 1 ? members.length : '';
-      // 一叠照片：列出成员里有哪几类地方
-      const emo = members.length > 1
+      m.el.querySelector('.pin-emo').textContent = members.length > 1
         ? [...new Set(members.map(id => mainEmo(byId[id], 1)))].slice(0, 3).join('')
         : mainEmo(p);
-      m.el.querySelector('.pin-emo').textContent = emo;
       if (p.id === state.focus) m.el.dataset.focus = '';
       else delete m.el.dataset.focus;
     });
-    gaPins.forEach((g, id) => {
-      if (gaMode()) delete g.el.dataset.hidden;
+    evPins.forEach((g, id) => {
+      if (eventShown(evById[id])) delete g.el.dataset.hidden;
       else g.el.dataset.hidden = '';
       if (id === state.focus) g.el.dataset.focus = '';
       else delete g.el.dataset.focus;
@@ -377,41 +521,48 @@
   let deckKey = '';
   let deckTimer;
   let deckProgrammatic = false;
-  const deckItems = () => (gaMode() ? GA_ITEMS : PLACES.filter(shown).sort((a, b) => minsOf(a) - minsOf(b)));
-  const itemOf = id => byId[id] || gaById[id];
+  const deckItems = () => {
+    if (mode() === 'events') return EVENTS;
+    if (mode() === 'ga') return EVENTS.filter(e => e.ga);
+    return PLACES.filter(shown).sort((a, b) => minsOf(a) - minsOf(b));
+  };
+  const itemOf = id => byId[id] || evById[id];
 
-  const gaCard = e => `<button type="button" class="dk dk-ga" data-id="${e.id}"><span class="ga-face">🍏<small>${esc(e.kind)}</small></span><span class="dk-txt">
+  const eventCard = e => `<button type="button" class="dk dk-ev" data-id="${e.id}">${evFace(e, 'dk-img')}<span class="dk-txt">
       <span class="dk-head"><b>${esc(e.name)}</b></span>
-      <span class="dk-meta">${esc(gaDate(e))} · ${esc(e.venue)}</span>
+      <span class="dk-meta">${esc(e.when)} · ${esc(e.venue)}</span>
       <span class="dk-blurb">${esc(e.note)}</span>
+      <span class="st ${e.live ? 'tone-green' : 'tone-plain'}">${esc(evStatus(e))}</span>
     </span></button>`;
 
   const placeCard = p => `<button type="button" class="dk" data-id="${p.id}">${photo(p)}<span class="dk-txt">
       <span class="dk-head"><b>${esc(p.name)}</b>${timeBadge(p)}</span>
       <span class="dk-meta">${esc(p.area)} · <span class="dk-emo">${emojis(p)}</span></span>
       <span class="dk-blurb">${esc(p.blurb)}</span>
-      ${p.season.tone !== 'plain' ? `<span class="st tone-${p.season.tone}">${esc(p.season.text)}</span>` : ''}
+      <span class="dk-foot">${p.season.tone !== 'plain' ? `<span class="st tone-${p.season.tone}">${esc(p.season.text)}</span>` : '<span></span>'}${heart(p)}</span>
     </span></button>`;
 
   function renderDeck() {
-    if (!exploring()) {
+    if (mode() === 'idle') {
       deckKey = '';
       $('deck-list').innerHTML = '';
       return;
     }
     const items = deckItems();
-    const key = state.measure + state.limit + [...state.tags].join() + items.map(p => p.id).join(',');
+    const key = mode() + state.measure + state.limit + [...state.tags].join() + items.map(p => p.id).join(',');
     if (key === deckKey) return;
     deckKey = key;
-    $('deck-count').textContent = gaMode()
-      ? `🍏 绿苹果专区 · ${items.length} 个活动 · 核实于${fmtISO(GA_DATA.checkedAt)}`
-      : `${items.length} 处 · 按${MEASURE[state.measure]}由近到远`;
+    $('deck-count').textContent = mode() === 'events'
+      ? `🎟️ 还没结束的活动 · ${items.length} 个`
+      : mode() === 'ga'
+        ? `🍏 绿苹果专区 · ${items.length} 个活动 · 核实于${fmtISO(GA_DATA.checkedAt)}`
+        : `${items.length} 处 · 符合任一标签 · 按${MEASURE[state.measure]}由近到远`;
     $('deck-list').innerHTML = items.length
-      ? items.map(p => (gaMode() ? gaCard(p) : placeCard(p))).join('')
-      : '<p class="dk-empty">没有同时符合这些标签的地方。少选一个，或者放宽单程时间。</p>';
-    if (!items.some(p => p.id === state.focus)) state.focus = items[0]?.id || null;
+      ? items.map(p => (p.venue ? eventCard(p) : placeCard(p))).join('')
+      : '<p class="dk-empty">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>';
+    if (!items.some(p => p.id === state.focus)) state.focus = items.find(p => p.ll)?.id || null;
     scrollDeckTo(state.focus, false);
-    if (state.focus) focusItem(state.focus, { fly: true });
+    if (state.focus) focusItem(state.focus, { fly: mode() === 'places' || mode() === 'ga' });
   }
 
   function scrollDeckTo(id, smooth) {
@@ -431,7 +582,7 @@
       if (pid === id) m.el.dataset.focus = '';
       else delete m.el.dataset.focus;
     });
-    gaPins.forEach((g, gid) => {
+    evPins.forEach((g, gid) => {
       if (gid === id) g.el.dataset.focus = '';
       else delete g.el.dataset.focus;
     });
@@ -615,9 +766,9 @@
       void host.offsetWidth;
       requestAnimationFrame(() => host.classList.remove('still'));
     }
-    $('rings-note').textContent = gaMode()
-      ? '绿苹果专区是活动，请在地图或画册里看'
-      : `${MEASURE[state.measure]} · 离中心越远单程越久，方向是实际方位`;
+    $('rings-note').textContent = mode() === 'places'
+      ? `${MEASURE[state.measure]} · 离中心越远单程越久，方向是实际方位`
+      : '活动和绿苹果专区请在地图或画册里看';
     $('rings-zoom').querySelectorAll('button').forEach(b => {
       b.disabled = (b.dataset.z === '+' && zoomIdx === ZOOMS.length - 1) || (b.dataset.z === '-' && zoomIdx === 0);
     });
@@ -631,33 +782,88 @@
   });
 
   // ---------- 画册 ----------
+  const eventBook = (title, list) => `<section class="book-sec"><div class="book-head"><h2>${title}</h2><small>${list.length} 个</small></div>
+    <div class="book-row">${list.map(e => `<button type="button" class="bk bk-ev${e.ga ? ' ga' : ''}" data-id="${e.id}">${e.poster ? `<img src="${esc(e.poster)}" alt="" loading="lazy">` : `<span class="bk-ga-face" aria-hidden="true">${e.ga ? '🍏' : '🎟️'}</span>`}
+      <span class="bk-top"><span class="tb tb-ga">${esc(e.kind)}</span></span>
+      <span class="bk-txt"><small class="bk-area">${esc(e.when)} · ${esc(evStatus(e))}</small><h3>${esc(e.name)}</h3><p>${esc(e.venue)} · ${esc(e.note)}</p></span></button>`).join('')}</div></section>`;
+
   function renderBook() {
-    if (!exploring()) {
+    if (mode() === 'idle') {
       $('view-book').innerHTML = '';
       return;
     }
-    if (gaMode()) {
-      $('view-book').innerHTML = `<section class="book-sec"><div class="book-head"><h2>🍏 绿苹果专区</h2><small>核实于${fmtISO(GA_DATA.checkedAt)}</small></div>
-        <div class="book-row">${GA_ITEMS.map(e => `<button type="button" class="bk bk-ga" data-id="${e.id}"><span class="bk-ga-face" aria-hidden="true">🍏</span>
-          <span class="bk-top"><span class="tb tb-ga">${esc(e.kind)}</span></span>
-          <span class="bk-txt"><small class="bk-area">${esc(gaDate(e))}</small><h3>${esc(e.name)}</h3><p>${esc(e.venue)} · ${esc(e.note)}</p></span></button>`).join('')}</div>
-        <p class="book-note">${esc(GA_DATA.placesNote)}</p></section>`;
+    if (mode() === 'events') {
+      $('view-book').innerHTML = eventBook('🎟️ 还没结束的活动', EVENTS);
+      return;
+    }
+    if (mode() === 'ga') {
+      $('view-book').innerHTML = eventBook('🍏 绿苹果专区', EVENTS.filter(e => e.ga)) + `<p class="book-note">${esc(GA_DATA.placesNote)}</p>`;
       return;
     }
     const secs = LIMITS.filter(l => l <= state.limit).map(String).map(b => {
       const list = PLACES.filter(p => bandOf(p) === b && shown(p)).sort((x, y) => (y.season.hot - x.season.hot) || minsOf(x) - minsOf(y));
       if (!list.length) return '';
       const cards = list.map(p => `<button type="button" class="bk" data-id="${p.id}">${photo(p)}
-        <span class="bk-top">${timeBadge(p)}${p.season.tone !== 'plain' ? `<span class="st tone-${p.season.tone}">${esc(p.season.text)}</span>` : ''}</span>
+        <span class="bk-top">${timeBadge(p)}${heart(p)}</span>
         <span class="bk-txt"><small class="bk-area">${esc(p.area)} · ${emojis(p)}</small><h3>${esc(p.name)}</h3><p>${esc(p.blurb)}</p></span></button>`).join('');
       return `<section class="book-sec"><div class="book-head"><h2><span class="tb tb-${b}">${BAND_NAME[b]}</span>${BAND_NAME[b]}圈</h2><small>${MEASURE[state.measure]} · ${list.length} 处</small></div>
         <div class="book-row">${cards}</div></section>`;
     }).join('');
-    $('view-book').innerHTML = secs || '<p class="book-empty book-none">没有同时符合这些标签的地方。少选一个，或者放宽单程时间。</p>';
+    $('view-book').innerHTML = secs || '<p class="book-empty book-none">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>';
   }
   $('view-book').addEventListener('click', e => {
     const b = e.target.closest('[data-id]');
     if (b) select(b.dataset.id);
+  });
+
+  // ---------- 想去的：标记过的地点，带明细 ----------
+  const routeUrl = (ll, m) => `https://www.google.com/maps/dir/?api=1&origin=${ORIGIN.ll[1]},${ORIGIN.ll[0]}&destination=${ll[1]},${ll[0]}&travelmode=${m === 'car' ? 'driving' : 'transit'}`;
+
+  function renderWish() {
+    const list = [...wish].map(id => byId[id]).filter(Boolean).sort((a, b) => minsOf(a) - minsOf(b));
+    if (!list.length) {
+      $('view-wish').innerHTML = `<div class="wish-empty"><p class="wish-big">♡</p><p>还没有想去的地方。</p><p>在卡片右下角或详情里点「想去」，就会收到这里。</p></div>`;
+      return;
+    }
+    $('view-wish').innerHTML = `<h2 class="wish-title">想去的<small>${list.length} 处 · 按${MEASURE[state.measure]}由近到远</small></h2>`
+      + list.map(p => `<article class="wc" data-id="${p.id}">
+        <div class="wc-photo">${photo(p)}<span class="wc-emo">${emojis(p, 5)}</span></div>
+        <div class="wc-body">
+          <div class="wc-head"><h3>${esc(p.name)}</h3>${heart(p)}</div>
+          <p class="wc-meta">${esc(p.area)} · ${esc(p.kind)} · <span class="st tone-${p.season.tone}">${esc(p.season.text)}</span></p>
+          <div class="wc-time">
+            <span><small>🚃 公共交通</small><b>${p.transit.mins}分</b><em>${esc(p.transit.route)}</em></span>
+            <span><small>🚗 自驾</small><b>${p.car.mins}分</b><em>约${p.car.km}公里，不含拥堵</em></span>
+          </div>
+          <p class="wc-blurb">${esc(p.blurb)}</p>
+          ${p.tip ? `<p class="wc-tip">💡 ${esc(p.tip)}</p>` : ''}
+          ${p.seasons.length ? yearStrip(p) : ''}
+          <div class="wc-acts">
+            <a href="${routeUrl(p.ll, 'transit')}" target="_blank" rel="noopener noreferrer">🚃 公交路线</a>
+            <a href="${routeUrl(p.ll, 'car')}" target="_blank" rel="noopener noreferrer">🚗 开车路线</a>
+            <button type="button" data-open="${p.id}">在地图上看</button>
+          </div>
+        </div>
+      </article>`).join('');
+  }
+  $('view-wish').addEventListener('click', e => {
+    const b = e.target.closest('[data-open]');
+    if (!b) return;
+    const id = b.dataset.open;
+    const p = byId[id];
+    // 地图上要能看到它：没被当前标签选中时，临时加上它的第一个标签
+    if (!shown(p)) {
+      state.events = false;
+      state.tags.delete(GA);
+      state.tags.add(p.tags[0]);
+      if (minsOf(p) > state.limit) state.limit = LIMITS.find(l => minsOf(p) <= l) || 180;
+      renderHeader();
+      savePrefs();
+    }
+    showView('map');
+    deckKey = '';
+    renderDeck();
+    focusItem(id, { scroll: true, fly: true });
   });
 
   // ---------- 详情面板 ----------
@@ -675,28 +881,33 @@
       + `<div class="sh-months">${Array.from({ length: 12 }, (_, i) => `<span>${i + 1}</span>`).join('')}</div>`;
   }
 
-  const routeUrl = (ll, mode) => `https://www.google.com/maps/dir/?api=1&origin=${ORIGIN.ll[1]},${ORIGIN.ll[0]}&destination=${ll[1]},${ll[0]}&travelmode=${mode}`;
-
-  function gaSheet(e) {
+  function eventSheet(e) {
+    const src = e.sources.length
+      ? `来源：${e.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.note)}</a>`).join(' · ')}。`
+      : '';
     return `
-      <div class="sh-hero sh-ga"><span class="sh-ga-face" aria-hidden="true">🍏</span>
+      <div class="sh-hero ${e.poster ? '' : 'sh-ga'}">${e.poster ? `<img src="${esc(e.poster)}" alt="">` : `<span class="sh-ga-face" aria-hidden="true">${e.ga ? '🍏' : '🎟️'}</span>`}
         <button type="button" class="sh-close" id="sh-close" aria-label="关闭">×</button>
-        <div class="sh-title"><h2>${esc(e.name)}</h2><p><span>${esc(e.kind)} · ${esc(gaDate(e))}</span></p></div>
+        <div class="sh-title"><h2>${esc(e.name)}</h2><p><span>${esc(e.kind)} · ${esc(e.when)}</span><span>${esc(evStatus(e))}</span></p></div>
       </div>
       <div class="sh-body">
         <h3>在哪里</h3>
         <p>${esc(e.venue)}</p>
+        ${e.fee ? `<h3>门票</h3><p>${esc(e.fee)}</p>` : ''}
         <h3>要知道的</h3>
         <p>${esc(e.note)}</p>
-        ${e.ll ? `<div class="sh-acts"><a href="${routeUrl(e.ll, state.measure === 'car' ? 'driving' : 'transit')}" target="_blank" rel="noopener noreferrer">从${esc(ORIGIN.name)}怎么去</a></div>` : ''}
-        <p class="sh-credit">来源：${e.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.note)}</a>`).join(' · ')}。日期和购票以官方为准。</p>
+        <div class="sh-acts">
+          ${e.ll ? `<a href="${routeUrl(e.ll, state.measure)}" target="_blank" rel="noopener noreferrer">从${esc(ORIGIN.name)}怎么去</a>` : ''}
+          ${e.link ? `<a href="${esc(e.link)}" target="_blank" rel="noopener noreferrer">官方网站</a>` : ''}
+        </div>
+        <p class="sh-credit">${src}日期和购票以官方为准。</p>
       </div>`;
   }
 
   function renderSheet() {
     const id = state.sel;
-    if (gaById[id]) {
-      $('sheet').innerHTML = gaSheet(gaById[id]);
+    if (evById[id]) {
+      $('sheet').innerHTML = eventSheet(evById[id]);
       $('sh-close').addEventListener('click', () => closeSheet());
       return;
     }
@@ -714,22 +925,18 @@
           <div class="${state.measure === 'transit' ? 'on' : ''}"><small>🚃 公共交通 · 估算</small><b>${minsOf(p, 'transit')}<small>分</small></b><p>${esc(p.transit.route)}</p></div>
           <div class="${state.measure === 'car' ? 'on' : ''}"><small>🚗 自驾 · 不含拥堵</small><b>${minsOf(p, 'car')}<small>分</small></b><p>约${p.car.km}公里；高峰和停车另计</p></div>
         </div>
-        <p class="sh-tags">${p.tags.map(t => `<span>${EMOJI[t]} ${t}</span>`).join('')}</p>
+        <p class="sh-tags">${TAG_DEFS.filter(t => t.name !== GA && hasTag(p, t.name)).map(t => `<span>${t.emoji} ${t.name}</span>`).join('')}</p>
         <h3>为什么去</h3>
         <p>${esc(p.why)}</p>
         ${p.tip ? `<p class="sh-tip">${esc(p.tip)}</p>` : ''}
         ${p.seasons.length ? `<h3>一年里什么时候去</h3>${yearStrip(p)}` : ''}
         <div class="sh-acts">
-          <button type="button" id="sh-wish" aria-pressed="${wish.has(p.id)}">${wish.has(p.id) ? '已想去' : '想去'}</button>
-          <a href="${routeUrl(p.ll, state.measure === 'car' ? 'driving' : 'transit')}" target="_blank" rel="noopener noreferrer">${state.measure === 'car' ? '开车路线' : '公交路线'}</a>
+          <button type="button" data-wish="${p.id}" aria-pressed="${wish.has(p.id)}">${wish.has(p.id) ? '♥' : '♡'}</button>
+          <a href="${routeUrl(p.ll, state.measure)}" target="_blank" rel="noopener noreferrer">${state.measure === 'car' ? '开车路线' : '公交路线'}</a>
         </div>
         <p class="sh-credit">${credit}</p>
       </div>`;
     $('sh-close').addEventListener('click', () => closeSheet());
-    $('sh-wish').addEventListener('click', () => {
-      wish.has(p.id) ? wish.delete(p.id) : wish.add(p.id);
-      renderSheet();
-    });
   }
 
   function select(id, fromHash) {
@@ -766,7 +973,10 @@
   }
 
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && state.sel) closeSheet();
+    if (e.key === 'Escape') {
+      if (state.sel) closeSheet();
+      setPanel(false);
+    }
   });
   function fromHash() {
     const m = location.hash.match(/^#p=([\w-]+)/);

@@ -24,7 +24,17 @@
         </div>
         <button type="button" class="filter-btn" id="filter-btn" aria-expanded="false" aria-controls="filter-pop"></button>
       </div>
-      <div class="tags" id="tags" role="group" aria-label="主题"></div>
+      <div class="tags-row">
+        <div class="tags" id="tags" role="group" aria-label="主题"></div>
+        <button type="button" class="tags-more" id="tags-more" aria-expanded="false" aria-controls="tag-panel" aria-label="展开全部标签"></button>
+      </div>
+    </div>
+    <div class="tag-panel" id="tag-panel" hidden>
+      <div class="tp-head"><span id="tag-panel-count"></span>
+        <span class="tp-acts"><button type="button" data-act="all">全选</button><button type="button" data-act="none">清空</button><button type="button" data-act="done" class="tp-done">完成</button></span>
+      </div>
+      <div class="tp-grid" id="tag-grid"></div>
+      <p class="tp-note">标签是“或”：符合任何一个选中的标签都会显示。</p>
     </div>
     <div class="filter-pop" id="filter-pop" hidden>
       <div class="fp-row"><span>交通</span>
@@ -41,6 +51,10 @@
   <main class="views">
     <section class="view view-map" id="view-map" aria-label="地图">
       <div id="map" class="map"></div>
+      <div class="map-ctrl">
+        <button type="button" class="mc-btn" id="ev-btn" aria-pressed="false"></button>
+        <button type="button" class="mc-btn" id="home-btn" aria-label="回到京桥站">📍 京桥</button>
+      </div>
       <section class="deck" id="deck" aria-label="旅行点卡片">
         <div class="deck-head" id="deck-count"></div>
         <div class="deck-list" id="deck-list"></div>
@@ -52,25 +66,35 @@
       <p class="rings-note" id="rings-note"></p>
     </section>
     <section class="view view-book" id="view-book" aria-label="画册" hidden></section>
+    <section class="view view-wish" id="view-wish" aria-label="想去的" hidden></section>
   </main>
 
   <nav class="tabbar" id="tabbar" aria-label="呈现方式">
     <button type="button" data-v="map" aria-pressed="true">地图</button>
     <button type="button" data-v="rings" aria-pressed="false">时间圈</button>
     <button type="button" data-v="book" aria-pressed="false">画册</button>
+    <button type="button" data-v="wish" aria-pressed="false" id="wish-tab">想去的</button>
   </nav>
 
-  <p class="hint" id="hint"><span class="hint-arrow" aria-hidden="true">↑</span>点上方的标签，开始探索</p>
+  <p class="hint" id="hint"><span class="hint-arrow" aria-hidden="true">↑</span>点上方的标签开始探索，或看看🎟️活动</p>
 
   <aside class="sheet" id="sheet" aria-label="旅行点" hidden></aside>
 
   <section class="hello" id="hello" aria-label="欢迎" hidden>
-    <div class="hello-card">
+    <div class="hello-card" id="hello-step1">
       <p class="hello-hi">Halo 天源！</p>
       <p class="hello-q">想去哪玩？</p>
-      <p class="hello-tip">点击标签开始探索</p>
-      <div class="hello-tags" id="hello-tags"></div>
+      <p class="hello-tip">先说说怎么去、最远走多久</p>
+      <div class="hello-seg" id="hello-measure"></div>
+      <div class="hello-seg hello-limit" id="hello-limit"></div>
+      <button type="button" class="hello-btn" id="hello-next">下一步：选标签</button>
       <p class="hello-by">—— by codusk</p>
+    </div>
+    <div class="hello-card" id="hello-step2" hidden>
+      <p class="hello-q">喜欢什么样的地方？</p>
+      <p class="hello-tip">至少选三个，符合任何一个的都会出现</p>
+      <div class="hello-tags" id="hello-tags"></div>
+      <div class="hello-foot"><button type="button" class="hello-back" id="hello-back">上一步</button><button type="button" class="hello-btn" id="hello-go" disabled></button></div>
     </div>
   </section>
   <div class="toast" id="toast" role="status" hidden></div>

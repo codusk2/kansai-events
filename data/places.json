@@ -1,25 +1,126 @@
 {
  "about": "由 scripts/collect_places.py 从 places.seed.json 生成，不要手改。",
- "generatedAt": "2026-10-31T08:06:34Z",
+ "generatedAt": "2026-10-31T13:50:52Z",
  "tags": [
-  "风景美",
-  "热闹",
-  "好吃",
-  "山里",
-  "海边",
-  "水边",
-  "人文古迹",
-  "寺社",
-  "赏花",
-  "红叶",
-  "温泉",
-  "夜景",
-  "散步",
-  "安静",
-  "拍照",
-  "建筑",
-  "乐园",
-  "雨天也行"
+  {
+   "name": "绿苹果",
+   "emoji": "🍏",
+   "desc": "Mrs. GREEN APPLE 在关西的地点和活动",
+   "rule": {
+    "type": "zone",
+    "file": "greenapple.json"
+   }
+  },
+  {
+   "name": "好吃",
+   "emoji": "🍜",
+   "desc": "去那里本身就是为了吃：市场、老街小吃、酒藏、名物"
+  },
+  {
+   "name": "好玩",
+   "emoji": "🎡",
+   "desc": "能动手、能玩一整段时间的地方：游乐园、体验馆、漂流、吊桥、骑车等"
+  },
+  {
+   "name": "风景美",
+   "emoji": "🏞️"
+  },
+  {
+   "name": "热闹",
+   "emoji": "🎉"
+  },
+  {
+   "name": "山里",
+   "emoji": "⛰️"
+  },
+  {
+   "name": "海边",
+   "emoji": "🌊"
+  },
+  {
+   "name": "人文古迹",
+   "emoji": "🏯"
+  },
+  {
+   "name": "水边",
+   "emoji": "🛶"
+  },
+  {
+   "name": "寺社",
+   "emoji": "⛩️"
+  },
+  {
+   "name": "赏花",
+   "emoji": "🌸"
+  },
+  {
+   "name": "红叶",
+   "emoji": "🍁"
+  },
+  {
+   "name": "温泉",
+   "emoji": "♨️"
+  },
+  {
+   "name": "夜景",
+   "emoji": "🌃"
+  },
+  {
+   "name": "散步",
+   "emoji": "🚶"
+  },
+  {
+   "name": "安静",
+   "emoji": "🍃"
+  },
+  {
+   "name": "拍照",
+   "emoji": "📷"
+  },
+  {
+   "name": "建筑",
+   "emoji": "🏛️"
+  },
+  {
+   "name": "雨天也行",
+   "emoji": "☔"
+  },
+  {
+   "name": "秋叶季",
+   "emoji": "🍂",
+   "desc": "红叶正当时，或三周内开始",
+   "rule": {
+    "type": "season",
+    "labels": [
+     "红叶"
+    ],
+    "withinDays": 21
+   }
+  },
+  {
+   "name": "最近网红",
+   "emoji": "🤳",
+   "desc": "最近在网上和社交平台被讨论多的地方，由agent按来源维护名单",
+   "rule": {
+    "type": "list",
+    "ids": [
+     "nara-prison",
+     "eigamura",
+     "nifrel"
+    ],
+    "checkedAt": "2026-10-31",
+    "sources": [
+     {
+      "url": "https://www.timeout.jp/osaka/ja/things-to-do/new-spots-2026",
+      "note": "2026年关西新设施"
+     },
+     {
+      "url": "https://topics.smt.docomo.ne.jp/article/ytv/business/ytv-2026010706851158",
+      "note": "读卖电视台：2026关西新景点"
+     }
+    ]
+   }
+  }
  ],
  "origin": {
   "name": "京桥站",
@@ -307,7 +408,8 @@
    "tip": "风车附近的花田按季节换种。",
    "tags": [
     "赏花",
-    "散步"
+    "散步",
+    "好玩"
    ],
    "blurb": "花博留下的大风车和四季花田，草坪开阔得可以随便躺下，带一张野餐垫就能消磨一个下午。",
    "ll": [
@@ -343,7 +445,8 @@
    "tags": [
     "海边",
     "雨天也行",
-    "热闹"
+    "热闹",
+    "好玩"
    ],
    "blurb": "螺旋走道绕着一个巨大的太平洋水槽，鲸鲨从头顶缓缓游过。出来就是天保山的大摩天轮和港口落日。",
    "ll": [
@@ -465,7 +568,8 @@
     "散步",
     "赏花",
     "红叶",
-    "拍照"
+    "拍照",
+    "好玩"
    ],
    "blurb": "太阳之塔站在草坪中央，三张脸望着三个方向。四周是长了五十年的森林，秋天一片金黄。",
    "ll": [
@@ -587,7 +691,7 @@
    "why": "老牌游乐园，冬天有灯饰。",
    "tip": "",
    "tags": [
-    "乐园",
+    "好玩",
     "热闹",
     "夜景"
    ],
@@ -1115,7 +1219,8 @@
     "散步",
     "拍照",
     "安静",
-    "好吃"
+    "好吃",
+    "好玩"
    ],
    "blurb": "石垣夹着的水道上，手划船慢慢穿过白墙仓库和柳树，像走进时代剧的布景。",
    "car": {
@@ -1403,7 +1508,8 @@
    "tags": [
     "山里",
     "夜景",
-    "风景美"
+    "风景美",
+    "好玩"
    ],
    "blurb": "坐复古的缆车上山，山顶有一座老游乐园。天黑后，整个大阪平原在脚下亮成一片星海。",
    "ll": [
@@ -1503,7 +1609,8 @@
     "山里",
     "安静",
     "散步",
-    "风景美"
+    "风景美",
+    "好玩"
    ],
    "blurb": "骑着自行车穿过稻田和古坟，石舞台的巨石摆在田野中间。秋天的田埂开满红色彼岸花。",
    "car": {
@@ -1746,7 +1853,8 @@
     "热闹",
     "建筑",
     "雨天也行",
-    "散步"
+    "散步",
+    "好玩"
    ],
    "blurb": "全女性的歌剧团在这里演了一百多年。花之道两旁是樱花和欧式小楼，散场时满街都是闪闪发亮的眼睛。",
    "ll": [
@@ -1783,7 +1891,8 @@
     "海边",
     "风景美",
     "夜景",
-    "拍照"
+    "拍照",
+    "好玩"
    ],
    "blurb": "巨大的吊桥横跨海峡，桥下是急流和渔船。傍晚亮灯，桥上的灯像一串珍珠挂在海上。",
    "ll": [
@@ -2201,7 +2310,8 @@
    "tags": [
     "海边",
     "温泉",
-    "风景美"
+    "风景美",
+    "好玩"
    ],
    "blurb": "白得发亮的沙滩对着太平洋，海边的露天温泉就嵌在礁石上，浪花会溅到脚边。",
    "car": {
@@ -2235,7 +2345,8 @@
     "温泉",
     "好吃",
     "散步",
-    "水边"
+    "水边",
+    "好玩"
    ],
    "blurb": "柳树沿着小河垂下来，穿着浴衣和木屐在七个外汤之间走来走去。冬天正是松叶蟹的季节。",
    "ll": [
@@ -2271,7 +2382,8 @@
    "tags": [
     "海边",
     "风景美",
-    "拍照"
+    "拍照",
+    "好玩"
    ],
    "blurb": "翻过一道沙脊，眼前突然是一片金色的沙丘和蓝色的日本海，风在沙面上画出细细的波纹。",
    "ll": [
@@ -2380,7 +2492,8 @@
    "tip": "忍者博物馆有表演。",
    "tags": [
     "人文古迹",
-    "散步"
+    "散步",
+    "好玩"
    ],
    "blurb": "忍者屋敷里的墙一推就转，地板下藏着刀。城的石垣高三十米，是日本最高的之一。",
    "ll": [
@@ -2550,7 +2663,8 @@
     "山里",
     "风景美",
     "红叶",
-    "拍照"
+    "拍照",
+    "好玩"
    ],
    "blurb": "长二百八十米的木板吊桥悬在森林上空，走到中间，脚下是红黄交错的山谷，远处是一整片大阪平原。",
    "sources": [
@@ -2637,6 +2751,473 @@
     "license": "CC BY 2.1 jp"
    },
    "wiki": "https://ja.wikipedia.org/wiki/%E4%B8%89%E5%AE%A4%E6%88%B8%E5%AF%BA"
+  },
+  {
+   "id": "tsuruhashi",
+   "name": "鹤桥·生野韩国城",
+   "ll": [
+    135.5374,
+    34.6593
+   ],
+   "area": "大阪",
+   "kind": "街区",
+   "transit": {
+    "mins": 25,
+    "route": "JR环状线到鹤桥，步行约15分",
+    "checked": false
+   },
+   "seasons": [],
+   "why": "烤肉、泡菜和韩式小吃的一条长街。",
+   "tip": "鹤桥站一出来就是烤肉香；韩国城在东边的御幸通。",
+   "tags": [
+    "好吃",
+    "热闹",
+    "散步"
+   ],
+   "blurb": "出了鹤桥站就闻到烤肉香，往东走进御幸通，泡菜、糖饼和韩国化妆品一家挨一家，边走边吃停不下来。",
+   "sources": [
+    {
+     "url": "https://www.osaka-info.jp/",
+     "note": "大阪观光局"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "car": {
+    "mins": 9,
+    "km": 5.9
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/Osaka_Korea_Town_22.jpg/500px-Osaka_Korea_Town_22.jpg",
+    "file": "Osaka_Korea_Town_22.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Osaka_Korea_Town_22.jpg",
+    "artist": "Makibao1023",
+    "license": "CC BY-SA 3.0"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E5%A4%A7%E9%98%AA%E3%82%B3%E3%83%AA%E3%82%A2%E3%82%BF%E3%82%A6%E3%83%B3"
+  },
+  {
+   "id": "fushimi-sake",
+   "name": "伏见酒藏街",
+   "ll": [
+    135.7605,
+    34.9331
+   ],
+   "area": "京都",
+   "kind": "街区",
+   "transit": {
+    "mins": 40,
+    "route": "京阪特急到丹波桥，转普通到中书岛，步行约5分",
+    "checked": false
+   },
+   "seasons": [
+    {
+     "from": "04-01",
+     "to": "04-10",
+     "label": "樱",
+     "tone": "sakura"
+    }
+   ],
+   "why": "白墙酒藏、十石舟和试饮。",
+   "tip": "月桂冠大仓纪念馆可以试饮；十石舟有季节运航期。",
+   "tags": [
+    "好吃",
+    "水边",
+    "人文古迹",
+    "散步"
+   ],
+   "blurb": "白墙黑板的酒藏沿着濠川排开，十石舟从柳树下慢慢划过，空气里是米和酒的甜香，记念馆里能尝到刚酿好的酒。",
+   "sources": [
+    {
+     "url": "https://www.gekkeikan.co.jp/enjoy/museum/",
+     "note": "月桂冠大仓纪念馆"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "car": {
+    "mins": 41,
+    "km": 37.5
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Gekkeikan_Okura_Sake_Museum01nt3200.jpg/500px-Gekkeikan_Okura_Sake_Museum01nt3200.jpg",
+    "file": "Gekkeikan_Okura_Sake_Museum01nt3200.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Gekkeikan_Okura_Sake_Museum01nt3200.jpg",
+    "artist": "663highland",
+    "license": "CC BY 2.5"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E6%9C%88%E6%A1%82%E5%86%A0%E5%A4%A7%E5%80%89%E8%A8%98%E5%BF%B5%E9%A4%A8"
+  },
+  {
+   "id": "nada-sake",
+   "name": "滩五乡酒藏",
+   "ll": [
+    135.2737,
+    34.714
+   ],
+   "area": "兵库",
+   "kind": "街区",
+   "transit": {
+    "mins": 40,
+    "route": "JR到大阪，转JR神户线到住吉，步行约10分",
+    "checked": false
+   },
+   "seasons": [],
+   "why": "日本最大的清酒产地，酒藏可参观试饮。",
+   "tip": "各酒藏开放时间不同，先查滩五乡官网。",
+   "tags": [
+    "好吃",
+    "人文古迹",
+    "雨天也行"
+   ],
+   "blurb": "海边的老酒藏里，木桶和麹室还保留着酿酒的样子。一家家走过去试饮，最后带一瓶新酒回家。",
+   "sources": [
+    {
+     "url": "https://www.nadagogo.ne.jp/",
+     "note": "滩五乡酒造组合"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "car": {
+    "mins": 38,
+    "km": 31.8
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/KounanzukeMuseum02.jpg/500px-KounanzukeMuseum02.jpg",
+    "file": "KounanzukeMuseum02.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:KounanzukeMuseum02.jpg",
+    "artist": "Aiko99ann",
+    "license": "CC BY-SA 3.0"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E7%81%98%E4%BA%94%E9%83%B7"
+  },
+  {
+   "id": "naramachi",
+   "name": "奈良町",
+   "ll": [
+    135.8302,
+    34.6779
+   ],
+   "area": "奈良",
+   "kind": "街区",
+   "transit": {
+    "mins": 65,
+    "route": "JR环状线到鹤桥，近铁奈良线到近铁奈良，步行约15分",
+    "checked": false
+   },
+   "seasons": [],
+   "why": "町家老街里的甜品、咖啡和小店。",
+   "tip": "可以和奈良公园排在同一天。",
+   "tags": [
+    "好吃",
+    "散步",
+    "人文古迹",
+    "安静"
+   ],
+   "blurb": "格子窗的町家里藏着葛粉甜点、柿叶寿司和小咖啡店，屋檐下挂着红色的替身猴，走累了就进去坐一会儿。",
+   "sources": [
+    {
+     "url": "https://narashikanko.or.jp/",
+     "note": "奈良市观光协会"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "car": {
+    "mins": 40,
+    "km": 30.6
+   },
+   "img": null,
+   "wiki": "https://ja.wikipedia.org/wiki/%E3%81%AA%E3%82%89%E3%81%BE%E3%81%A1"
+  },
+  {
+   "id": "kyoto-railway",
+   "name": "京都铁道博物馆",
+   "area": "京都",
+   "kind": "博物馆",
+   "transit": {
+    "mins": 60,
+    "route": "JR到京都，转嵯峨野线到梅小路京都西，步行约3分",
+    "checked": false
+   },
+   "seasons": [],
+   "why": "几十辆真车和还在使用的扇形车库。",
+   "tip": "蒸汽火车“SL步道”可以搭乘一小段。",
+   "tags": [
+    "好玩",
+    "雨天也行",
+    "建筑"
+   ],
+   "blurb": "新干线、蒸汽火车和老电车停在一个大厅里，还能爬进驾驶室。外面的扇形车库里，蒸汽火车喷着白烟出发。",
+   "sources": [
+    {
+     "url": "https://www.kyotorailwaymuseum.jp/",
+     "note": "京都铁道博物馆官网"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "ll": [
+    135.7425,
+    34.9872
+   ],
+   "car": {
+    "mins": 52,
+    "km": 44.8
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/KYOTO_RAILWAY_MUSEUM_Entrance_20160321.JPG/500px-KYOTO_RAILWAY_MUSEUM_Entrance_20160321.JPG",
+    "file": "KYOTO_RAILWAY_MUSEUM_Entrance_20160321.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:KYOTO_RAILWAY_MUSEUM_Entrance_20160321.JPG",
+    "artist": "Rsa",
+    "license": "CC BY-SA 3.0"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E4%BA%AC%E9%83%BD%E9%89%84%E9%81%93%E5%8D%9A%E7%89%A9%E9%A4%A8"
+  },
+  {
+   "id": "nifrel",
+   "name": "NIFREL 感性水族馆",
+   "area": "大阪",
+   "kind": "水族馆",
+   "transit": {
+    "mins": 45,
+    "route": "京阪到门真市，转大阪单轨到万博纪念公园，步行约5分",
+    "checked": false
+   },
+   "seasons": [],
+   "why": "像美术馆一样的水族馆，2026年3月开了新区。",
+   "tip": "和万博纪念公园、太阳之塔排在同一天。",
+   "tags": [
+    "好玩",
+    "雨天也行",
+    "拍照"
+   ],
+   "blurb": "水槽像画框一样挂在暗处的展厅里，白老虎、水豚和小鸟就在身边走来走去。今年新开的“毒”主题区更奇妙。",
+   "sources": [
+    {
+     "url": "https://www.nifrel.jp/",
+     "note": "NIFREL官网"
+    },
+    {
+     "url": "https://www.timeout.jp/osaka/ja/things-to-do/new-spots-2026",
+     "note": "新区开放"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "ll": [
+    135.53358,
+    34.80642
+   ],
+   "car": {
+    "mins": 26,
+    "km": 17.5
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/NIFREL.jpg/500px-NIFREL.jpg",
+    "file": "NIFREL.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:NIFREL.jpg",
+    "artist": "もんじゃ",
+    "license": "CC BY-SA 4.0"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/NIFREL"
+  },
+  {
+   "id": "biwako-valley",
+   "name": "琵琶湖Valley·琵琶湖露台",
+   "area": "滋贺",
+   "kind": "展望",
+   "transit": {
+    "mins": 110,
+    "route": "JR到京都，湖西线到志贺，转公交和缆车",
+    "checked": false
+   },
+   "seasons": [],
+   "why": "山上的露台正对琵琶湖。",
+   "tip": "冬季是滑雪场；缆车有检修停运期，先查官网。",
+   "tags": [
+    "好玩",
+    "风景美",
+    "山里",
+    "拍照"
+   ],
+   "blurb": "缆车一路爬上山，平台的沙发正对着整片琵琶湖。天气好的时候，湖面和天空几乎是同一种蓝。",
+   "sources": [
+    {
+     "url": "https://www.biwako-valley.com/",
+     "note": "琵琶湖Valley官网"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "ll": [
+    135.90706,
+    35.20294
+   ],
+   "car": {
+    "mins": 92,
+    "km": 80.5
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Biwako_valley23n.jpg/500px-Biwako_valley23n.jpg",
+    "file": "Biwako_valley23n.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Biwako_valley23n.jpg",
+    "artist": "663highland",
+    "license": "CC BY 2.5"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E3%81%B3%E3%82%8F%E6%B9%96%E3%83%90%E3%83%AC%E3%82%A4"
+  },
+  {
+   "id": "hozugawa",
+   "name": "保津川漂流",
+   "ll": [
+    135.5795,
+    35.0122
+   ],
+   "area": "京都",
+   "kind": "自然",
+   "transit": {
+    "mins": 85,
+    "route": "JR到京都，嵯峨野线到龟冈，步行约10分到乘船处",
+    "checked": false
+   },
+   "seasons": [
+    {
+     "from": "11-10",
+     "to": "11-30",
+     "label": "红叶",
+     "tone": "koyo"
+    }
+   ],
+   "why": "坐木船沿峡谷漂约两小时到岚山。",
+   "tip": "秋天红叶季很抢手，提前预约。",
+   "tags": [
+    "好玩",
+    "水边",
+    "风景美",
+    "红叶",
+    "山里"
+   ],
+   "blurb": "船夫撑着竹篙，木船穿过急流和巨石，两岸是陡峭的山谷。两个小时漂到岚山，红叶季整条峡谷都是红的。",
+   "sources": [
+    {
+     "url": "https://www.hozugawakudari.jp/",
+     "note": "保津川下官网"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "car": {
+    "mins": 50,
+    "km": 44.1
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Hozukyo.jpg/500px-Hozukyo.jpg",
+    "file": "Hozukyo.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Hozukyo.jpg",
+    "artist": "Laichuan Yinfu",
+    "license": "CC BY-SA 3.0"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E4%BF%9D%E6%B4%A5%E5%B3%A1"
+  },
+  {
+   "id": "nara-prison",
+   "name": "奈良监狱博物馆",
+   "ll": [
+    135.8344,
+    34.6927
+   ],
+   "area": "奈良",
+   "kind": "建筑",
+   "transit": {
+    "mins": 80,
+    "route": "JR环状线到鹤桥，近铁到近铁奈良，转直通公交约18分",
+    "checked": false
+   },
+   "seasons": [],
+   "why": "明治时代的红砖监狱，2026年4月改建开馆。",
+   "tip": "博物馆事前预约制。",
+   "tags": [
+    "人文古迹",
+    "建筑",
+    "拍照",
+    "好玩"
+   ],
+   "blurb": "红砖砌成的明治监狱，五栋房舍像星星一样放射排开。如今一部分成了酒店，另一部分改成博物馆，走进牢房的长廊格外安静。",
+   "sources": [
+    {
+     "url": "https://hoshinoresorts.com/nara-prison-museum/ja/access/",
+     "note": "官方交通"
+    },
+    {
+     "url": "https://allabout.co.jp/gm/gc/514415/",
+     "note": "开馆介绍"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "car": {
+    "mins": 40,
+    "km": 32.6
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/130316_Nara_Juvenile_Prison_Nara_Japan01s3.jpg/500px-130316_Nara_Juvenile_Prison_Nara_Japan01s3.jpg",
+    "file": "130316_Nara_Juvenile_Prison_Nara_Japan01s3.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:130316_Nara_Juvenile_Prison_Nara_Japan01s3.jpg",
+    "artist": "663highland",
+    "license": "CC BY 2.5"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E5%A5%88%E8%89%AF%E5%B0%91%E5%B9%B4%E5%88%91%E5%8B%99%E6%89%80"
+  },
+  {
+   "id": "eigamura",
+   "name": "太秦映画村",
+   "area": "京都",
+   "kind": "乐园",
+   "transit": {
+    "mins": 70,
+    "route": "JR到京都，嵯峨野线到太秦，步行约5分",
+    "checked": false
+   },
+   "seasons": [],
+   "why": "2026年3月改版成沉浸式江户京都，开始夜间营业。",
+   "tip": "部分夜间内容限18岁以上；入村费以官网为准。",
+   "tags": [
+    "好玩",
+    "热闹",
+    "拍照",
+    "人文古迹"
+   ],
+   "blurb": "走进江户时代的京都街景，眼前忽然上演一场360度的现场剧。天黑以后灯笼亮起，又是另一番热闹。",
+   "sources": [
+    {
+     "url": "https://tabi-mag.jp/uzumasa2026/",
+     "note": "改版开幕"
+    },
+    {
+     "url": "https://www.travelvoice.jp/20260227-159299",
+     "note": "改版内容"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "ll": [
+    135.70833,
+    35.01639
+   ],
+   "car": {
+    "mins": 56,
+    "km": 48.9
+   },
+   "img": {
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/9/96/Toei_Kyoto_Studio_Park.jpg",
+    "file": "Toei_Kyoto_Studio_Park.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Toei_Kyoto_Studio_Park.jpg",
+    "artist": "Kotaro - User: (WT-shared) 耕太郎 at wts wikivoyage",
+    "license": "CC BY-SA 4.0"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E6%9D%B1%E6%98%A0%E5%A4%AA%E7%A7%A6%E6%98%A0%E7%94%BB%E6%9D%91"
   }
  ]
 }

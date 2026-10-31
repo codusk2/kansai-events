@@ -296,10 +296,106 @@ a:focus-visible {
 }
 
 /* 主题标签：多选取交集，数字是再选上它之后剩几处；选中的排最前，再点取消 */
-.tags {
+.tags-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px 10px 10px;
+}
+
+.tags-more {
+  flex: none;
+  position: relative;
+  width: 34px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  font-size: .8rem;
+  color: var(--muted);
+}
+
+.tags-more[aria-expanded="true"] span {
+  display: inline-block;
+  transform: rotate(180deg);
+}
+
+.tags-more small {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: .62rem;
+  line-height: 16px;
+  font-weight: 700;
+}
+
+/* 展开的全部标签：一键全选、清空 */
+.tag-panel {
+  margin-top: 6px;
+  padding: 12px;
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.tag-panel[hidden] {
+  display: none;
+}
+
+.tp-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: .76rem;
+  color: var(--muted);
+}
+
+.tp-acts {
   display: flex;
   gap: 6px;
-  padding: 4px 10px 10px;
+}
+
+.tp-acts button {
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 99px;
+  padding: 4px 10px;
+  font-size: .76rem;
+}
+
+.tp-acts .tp-done {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.tp-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tp-note {
+  margin: 10px 0 0;
+  font-size: .7rem;
+  color: var(--muted);
+}
+
+.tags {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 6px;
+  padding: 0;
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent);
@@ -614,6 +710,8 @@ body:not(.idle) .hint {
 
 .map .maplibregl-ctrl-bottom-right {
   bottom: auto;
+  right: auto;
+  left: 0;
   top: calc(var(--top-h) + 4px + env(safe-area-inset-top));
 }
 
@@ -1646,4 +1744,360 @@ body:not(.idle) .hint {
 
 .sh-credit a {
   color: inherit;
+}
+
+/* 地图右上：活动、回到京桥 */
+.map-ctrl {
+  position: absolute;
+  right: var(--gutter);
+  top: calc(var(--top-h) + 40px + env(safe-area-inset-top));
+  z-index: 4;
+  display: grid;
+  gap: 8px;
+  justify-items: end;
+}
+
+.mc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 0;
+  border-radius: 99px;
+  padding: 7px 12px;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+  font-size: .78rem;
+  font-weight: 600;
+}
+
+.mc-btn small {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.mc-btn[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.mc-btn[aria-pressed="true"] small {
+  color: inherit;
+  opacity: .75;
+}
+
+/* 活动卡与活动针 */
+.dk-img {
+  width: 92px;
+  height: 108px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.ev-face {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 4px;
+  background: linear-gradient(160deg, var(--paper), var(--line));
+  font-size: 2.2rem;
+}
+
+.ev-face.ga {
+  background: linear-gradient(160deg, var(--ga-soft), color-mix(in srgb, var(--ga) 35%, var(--ga-soft)));
+}
+
+.ev-face small {
+  font-size: .66rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.gpin:not(.ga) .gpin-in {
+  background: var(--card);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--event) 30%, transparent), 0 2px 6px rgba(0, 0, 0, .25);
+  font-size: .9rem;
+}
+
+.bk-ev:not(.ga) {
+  background: linear-gradient(170deg, var(--paper), var(--line));
+}
+
+.dk-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  min-width: 0;
+}
+
+.dk-foot .st {
+  margin-top: 0;
+}
+
+/* 想去：心形开关 */
+.heart {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--accent);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.heart[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.bk-top .heart {
+  background: rgba(255, 255, 255, .92);
+}
+
+.bk-top .heart[aria-pressed="true"] {
+  background: var(--accent);
+}
+
+/* 想去的 */
+.view-wish {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: calc(var(--top-h) + 10px + env(safe-area-inset-top)) var(--gutter) calc(var(--tab-h) + 30px + env(safe-area-inset-bottom));
+}
+
+.wish-title {
+  margin: 0 0 12px;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.wish-title small {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: .74rem;
+  color: var(--muted);
+}
+
+.wc {
+  margin-bottom: 14px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.wc-photo {
+  position: relative;
+  height: 150px;
+  background: var(--line);
+}
+
+.wc-photo img,
+.wc-photo .ph {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  font-size: 3rem;
+}
+
+.wc-emo {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, .92);
+  font-size: .8rem;
+}
+
+.wc-body {
+  padding: 12px 14px 14px;
+}
+
+.wc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.wc-head h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.wc-meta {
+  margin: 2px 0 10px;
+  font-size: .74rem;
+  color: var(--muted);
+}
+
+.wc-time {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.wc-time span {
+  display: grid;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: var(--paper);
+}
+
+.wc-time small {
+  font-size: .68rem;
+  color: var(--muted);
+}
+
+.wc-time b {
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.wc-time em {
+  font-style: normal;
+  font-size: .68rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.wc-blurb {
+  margin: 10px 0 0;
+  font-family: var(--serif);
+  font-size: .86rem;
+  line-height: 1.75;
+}
+
+.wc-tip {
+  margin: 6px 0 10px;
+  font-size: .78rem;
+  color: var(--muted);
+}
+
+.wc-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.wc-acts a,
+.wc-acts button {
+  flex: 1;
+  min-width: 96px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  padding: 8px 6px;
+  font-size: .78rem;
+  color: var(--ink);
+  text-align: center;
+  text-decoration: none;
+}
+
+.wish-empty {
+  margin-top: 30vh;
+  text-align: center;
+  color: var(--muted);
+  font-size: .86rem;
+}
+
+.wish-big {
+  font-size: 2.4rem;
+  color: var(--accent);
+  margin: 0;
+}
+
+/* 开屏两步 */
+.hello-card[hidden] {
+  display: none;
+}
+
+.hello-seg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.hello-limit {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.hello-seg button {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  padding: 10px 4px;
+  font-size: .82rem;
+}
+
+.hello-seg button span {
+  font-size: 1.4rem;
+}
+
+.hello-seg button small {
+  font-size: .66rem;
+  color: var(--muted);
+}
+
+.hello-seg button[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--card));
+  font-weight: 600;
+}
+
+.hello-btn {
+  width: 100%;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 14px;
+  padding: 12px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: .92rem;
+  font-weight: 600;
+}
+
+.hello-btn:disabled {
+  background: var(--line);
+  color: var(--muted);
+}
+
+.hello-foot {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  align-items: end;
+}
+
+.hello-back {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: transparent;
+  padding: 12px 14px;
+  font-size: .86rem;
+}
+
+#hello-step2 .hello-tags {
+  max-height: 46vh;
+  overflow-y: auto;
 }

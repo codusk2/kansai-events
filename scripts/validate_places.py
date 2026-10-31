@@ -21,9 +21,31 @@ def check(seed: dict) -> tuple[list[str], list[str]]:
     """返回 (错误, 提醒)。"""
     errors: list[str] = []
     warnings: list[str] = []
-    vocab = set(seed.get('tags') or [])
+    vocab, rule_tags = set(), {}
+    for t in seed.get('tags') or []:
+        if not isinstance(t, dict) or not t.get('name') or not t.get('emoji'):
+            errors.append(f'标签定义需要 name 和 emoji：{t}')
+            continue
+        if t.get('rule'):
+            rule_tags[t['name']] = t['rule']
+        else:
+            vocab.add(t['name'])
     if not vocab:
         errors.append('缺少顶层 tags 词表')
+    place_ids = {p.get('id') for p in seed.get('places') or []}
+    for name, rule in rule_tags.items():
+        kind = rule.get('type')
+        if kind == 'season':
+            if not rule.get('labels') or not isinstance(rule.get('withinDays', 0), int):
+                errors.append(f'标签「{name}」的季节规则需要 labels 和整数 withinDays')
+        elif kind == 'list':
+            missing = [i for i in rule.get('ids') or [] if i not in place_ids]
+            if missing:
+                errors.append(f'标签「{name}」的名单里有不存在的地点：' + '、'.join(missing))
+            if not rule.get('sources') or not rule.get('checkedAt'):
+                errors.append(f'标签「{name}」的名单要写 sources 和 checkedAt')
+        elif kind != 'zone':
+            errors.append(f'标签「{name}」的规则类型只能是 season、list、zone')
     excluded = seed.get('excluded') or []
     ex_ids = {x['id'] for x in excluded}
     ex_names = {x['name'] for x in excluded}
@@ -62,11 +84,12 @@ def check(seed: dict) -> tuple[list[str], list[str]]:
         tags = p.get('tags') or []
         if not tags:
             err('至少要有一个主题标签')
-        bad = [x for x in tags if x not in vocab]
+        bad = [x for x in tags if x not in vocab and x not in rule_tags]
         if bad:
             err('标签不在词表里：' + '、'.join(bad))
-        if '最近热门' in tags:
-            err('「最近热门」由季节自动判断，不要写进 tags')
+        ruled = [x for x in tags if x in rule_tags]
+        if ruled:
+            err('这些标签按规则自动判断，不要写进地点的 tags：' + '、'.join(ruled))
         blurb = str(p.get('blurb', ''))
         if blurb and not 25 <= len(blurb) <= 90:
             err(f'blurb 应为25–90字（现在{len(blurb)}字）')
