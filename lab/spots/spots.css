@@ -1,27 +1,29 @@
 /* 蟹鱼游旅行点原型（手机优先，按 iPhone 15 Pro 393×852 设计）。
    变量 → 基础 → 外壳（顶栏、时间筛选、底部栏）→ 地图视图 → 时间圈 → 画册 → 对比 → 攻略面板。 */
 
+/* 配色：紫色、淡紫、薰衣草。时间档用同一紫色由深到浅；季节色和🍏绿苹果保留各自的意义色。 */
 :root {
   --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans", "Noto Sans CJK SC", sans-serif;
   --serif: "Hiragino Mincho ProN", "Songti SC", "Noto Serif CJK SC", "Yu Mincho", serif;
-  --paper: #F4EFE6;
-  --glass: rgba(251, 248, 242, .88);
-  --card: #FFFDF9;
-  --ink: #23201C;
-  --muted: #776F64;
-  --line: #E2D9CA;
-  --accent: #C8523A;
+  --paper: #F3F0FA;
+  --glass: rgba(250, 248, 255, .86);
+  --card: #FFFFFF;
+  --ink: #2A2340;
+  --muted: #776F8E;
+  --line: #E2DCF0;
+  --accent: #7A57C8;
   --accent-ink: #FFFFFF;
-  /* 单程时间三档：同一色相由深到浅，越近越深 */
-  --b30: #1F5F6E;
-  --b60: #3F8796;
-  --b120: #7FB3BD;
-  --b180: #B7D5DA;
+  --accent-soft: #EEE8FA;
+  /* 单程时间四档：同一紫色由深到浅，越近越深 */
+  --b30: #4A2D8F;
+  --b60: #7A57C8;
+  --b120: #AA94E0;
+  --b180: #D7CDF2;
   --b-ink30: #FFFFFF;
   --b-ink60: #FFFFFF;
-  --b-ink120: #12313A;
-  --b-ink180: #12313A;
-  --event: #6E62A8;
+  --b-ink120: #2A2340;
+  --b-ink180: #2A2340;
+  --event: #C2649C;
   --ga: #4E9B3A;
   --ga-ink: #3C7D2B;
   --ga-soft: #E4F2DC;
@@ -29,34 +31,40 @@
   --sakura: #D9899A;
   --ume: #A8577A;
   --green: #5E8C61;
-  --onsen: #7C6BA0;
-  --plain: #8A8378;
-  --shadow: 0 10px 28px rgba(40, 30, 20, .18), 0 2px 6px rgba(40, 30, 20, .10);
+  --onsen: #8C6BC8;
+  --plain: #8A8399;
+  --veil: rgba(34, 18, 66, .72);
+  --shadow: 0 10px 28px rgba(60, 38, 120, .16), 0 2px 6px rgba(60, 38, 120, .08);
+  --shadow-sm: 0 2px 8px rgba(60, 38, 120, .14);
   --gutter: 16px;
-  --radius: 14px;
+  --radius: 16px;
+  /* 卡片内边距、卡片间距：全站统一 */
+  --pad: 12px;
+  --gap: 12px;
   --top-h: 112px;
   --tab-h: 64px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #17191B;
-    --glass: rgba(30, 32, 34, .86);
-    --card: #222427;
-    --ink: #EEEAE3;
-    --muted: #A6A097;
-    --line: #34373B;
-    --accent: #EA8467;
-    --accent-ink: #1B1210;
-    --b30: #8FD0DC;
-    --b60: #5FA5B2;
-    --b120: #3A7480;
-    --b180: #28494F;
-    --b-ink30: #0F2328;
-    --b-ink60: #0F2328;
-    --b-ink120: #E3F1F3;
-    --b-ink180: #E3F1F3;
-    --event: #A79BE0;
+    --paper: #16131E;
+    --glass: rgba(33, 28, 46, .86);
+    --card: #221D2F;
+    --ink: #EEEAF7;
+    --muted: #A79EBD;
+    --line: #362F48;
+    --accent: #B8A0F2;
+    --accent-ink: #1C1530;
+    --accent-soft: #2D2445;
+    --b30: #CDBDF7;
+    --b60: #9B82DF;
+    --b120: #6A53A8;
+    --b180: #43356D;
+    --b-ink30: #1C1530;
+    --b-ink60: #1C1530;
+    --b-ink120: #EEEAF7;
+    --b-ink180: #EEEAF7;
+    --event: #E39CC6;
     --ga: #6CBF55;
     --ga-ink: #8FD57A;
     --ga-soft: #1F2E1B;
@@ -64,9 +72,11 @@
     --sakura: #E7A4B2;
     --ume: #CF86A6;
     --green: #8DB88F;
-    --onsen: #A797CB;
-    --plain: #9A948A;
+    --onsen: #B39BEA;
+    --plain: #9C94AE;
+    --veil: rgba(16, 10, 30, .78);
     --shadow: 0 10px 28px rgba(0, 0, 0, .45), 0 2px 6px rgba(0, 0, 0, .3);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, .35);
   }
 }
 
@@ -80,7 +90,7 @@ body {
   margin: 0;
   height: 100%;
   overflow: hidden;
-  background: #D9D4CB;
+  background: #DCD5EC;
   color: var(--ink);
   font-family: var(--sans);
   -webkit-text-size-adjust: 100%;
@@ -89,7 +99,7 @@ body {
 @media (prefers-color-scheme: dark) {
   html,
   body {
-    background: #0B0C0D;
+    background: #0C0A11;
   }
 }
 
@@ -116,7 +126,11 @@ a:focus-visible {
   max-width: 430px;
   margin: 0 auto;
   overflow: hidden;
-  background: var(--paper);
+  /* 很淡的薰衣草光晕，地图以外的页面才看得到 */
+  background:
+    radial-gradient(120% 60% at 100% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%),
+    radial-gradient(90% 50% at 0% 100%, color-mix(in srgb, var(--event) 10%, transparent), transparent 60%),
+    var(--paper);
 }
 
 .top {
@@ -148,7 +162,7 @@ a:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 8px 8px 6px 12px;
+  padding: 8px 8px 6px var(--pad);
 }
 
 .brand {
@@ -215,7 +229,7 @@ a:focus-visible {
   margin-top: 6px;
   margin-left: auto;
   width: min(340px, 100%);
-  padding: 12px;
+  padding: var(--pad);
   display: grid;
   gap: 10px;
   background: var(--card);
@@ -300,7 +314,7 @@ a:focus-visible {
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 8px 10px 10px;
+  padding: 4px 8px 10px var(--pad);
 }
 
 .tags-more {
@@ -342,7 +356,7 @@ a:focus-visible {
 /* 展开的全部标签：一键全选、清空 */
 .tag-panel {
   margin-top: 6px;
-  padding: 12px;
+  padding: var(--pad);
   background: var(--card);
   border-radius: 18px;
   box-shadow: var(--shadow);
@@ -473,8 +487,8 @@ a:focus-visible {
   margin: 0;
   padding: 10px 16px;
   border-radius: 99px;
-  background: var(--ink);
-  color: var(--paper);
+  background: linear-gradient(135deg, var(--b30), var(--accent));
+  color: #FFFFFF;
   font-size: .86rem;
   white-space: nowrap;
   box-shadow: var(--shadow);
@@ -633,9 +647,10 @@ body:not(.idle) .hint {
 }
 
 .tabbar button[aria-pressed="true"] {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--accent);
+  color: var(--accent-ink);
   font-weight: 600;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 .toast {
@@ -932,7 +947,7 @@ body:not(.idle) .hint {
 .deck-head {
   display: inline-block;
   margin: 0 var(--gutter) 6px;
-  padding: 3px 10px;
+  padding: 3px var(--pad);
   border-radius: 99px;
   background: var(--glass);
   backdrop-filter: blur(12px);
@@ -943,7 +958,7 @@ body:not(.idle) .hint {
 
 .deck-list {
   display: flex;
-  gap: 10px;
+  gap: var(--gap);
   padding: 4px var(--gutter) 10px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -1315,7 +1330,7 @@ body:not(.idle) .hint {
 
 .book-row {
   display: flex;
-  gap: 12px;
+  gap: var(--gap);
   padding: 0 var(--gutter) 6px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -1359,7 +1374,7 @@ body:not(.idle) .hint {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, .05) 30%, rgba(0, 0, 0, .78));
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, var(--veil));
 }
 
 .bk-top {
@@ -1369,7 +1384,7 @@ body:not(.idle) .hint {
   right: 12px;
   z-index: 1;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 6px;
 }
 
@@ -1503,7 +1518,7 @@ body:not(.idle) .hint {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, .62));
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, var(--veil));
   pointer-events: none;
 }
 
@@ -1672,15 +1687,17 @@ body:not(.idle) .hint {
 }
 
 .sh-acts {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
   gap: 8px;
   margin-top: 20px;
 }
 
 .sh-acts button,
 .sh-acts a {
-  flex: 1;
   display: inline-flex;
+  white-space: nowrap;
   justify-content: center;
   align-items: center;
   border: 1px solid var(--line);
@@ -1718,13 +1735,14 @@ body:not(.idle) .hint {
   z-index: 4;
   display: grid;
   gap: 8px;
-  justify-items: end;
+  justify-items: stretch;
 }
 
 .mc-btn {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  justify-content: space-between;
+  gap: 6px;
   border: 0;
   border-radius: 99px;
   padding: 7px 12px;
@@ -1737,6 +1755,7 @@ body:not(.idle) .hint {
 }
 
 .mc-btn small {
+  margin-left: auto;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
@@ -1887,7 +1906,7 @@ body:not(.idle) .hint {
 }
 
 .wc-body {
-  padding: 12px 14px 14px;
+  padding: var(--pad) var(--pad) 14px;
 }
 
 .wc-head {
@@ -2112,7 +2131,7 @@ body:not(.idle) .hint {
 
 .nope-list {
   margin: 18px 0 6px;
-  padding: 10px 12px;
+  padding: 10px var(--pad);
   border-radius: 14px;
   background: var(--card);
   font-size: .8rem;
@@ -2226,7 +2245,7 @@ body:not(.idle) .hint {
 
 .home span .mini.fish,
 .radar-home .mini.fish {
-  color: #8FD0DC;
+  color: var(--b120);
 }
 
 .home span .mini .eye,
@@ -2272,7 +2291,7 @@ body:not(.idle) .hint {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, .7));
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, var(--veil));
 }
 
 .ga-banner figcaption {

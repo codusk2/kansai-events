@@ -393,7 +393,8 @@
     $('wish-tab').textContent = wish.size ? `想去的 ${wish.size}` : '想去的';
     document.querySelectorAll(`[data-wish="${id}"]`).forEach(b => {
       b.setAttribute('aria-pressed', String(wish.has(id)));
-      b.textContent = wish.has(id) ? '♥' : '♡';
+      // 详情里的按钮带文字，卡片上的只有一颗心
+      b.textContent = b.dataset.label ? (wish.has(id) ? '♥ 已想去' : '♡ 想去') : (wish.has(id) ? '♥' : '♡');
     });
     toast(wish.has(id) ? `已加入想去的：${itemOf(id).name}` : `已移出想去的：${itemOf(id).name}`);
     if (state.view === 'wish') renderWish();
@@ -450,8 +451,8 @@
   map.touchZoomRotate.disableRotation();
 
   const TINT = dark
-    ? { bg: '#191B1D', water: '#1A2833', park: '#1E2820', wood: '#1C271E', resid: 'rgba(48,46,42,.35)', building: '#25272A' }
-    : { bg: '#F3EEE4', water: '#BCD3DE', park: '#DCE5CD', wood: '#D2DEC1', resid: 'rgba(231,222,206,.55)', building: '#E6DDCD' };
+    ? { bg: '#17141F', water: '#231D38', park: '#1C1A26', wood: '#1B1925', resid: 'rgba(54,46,72,.35)', building: '#26212F' }
+    : { bg: '#F2EFF8', water: '#CFC5EC', park: '#E2E2EA', wood: '#DBDAE6', resid: 'rgba(226,219,240,.55)', building: '#E6E0F1' };
   // faint：时间圈的底图只留城市名和水陆轮廓
   function tintMap(m, faint) {
     const set = (id, prop, val) => {
@@ -1064,7 +1065,7 @@
         <p>${esc(e.note)}</p>
         <div class="sh-acts">
           ${e.ll ? `<a href="${routeUrl(e.ll, state.measure)}" target="_blank" rel="noopener noreferrer">从${esc(ORIGIN.name)}怎么去</a>` : ''}
-          <button type="button" data-wish="${e.id}" aria-pressed="${wish.has(e.id)}">${wish.has(e.id) ? '♥' : '♡'}</button>
+          <button type="button" data-wish="${e.id}" data-label="1" aria-pressed="${wish.has(e.id)}">${wish.has(e.id) ? '♥ 已想去' : '♡ 想去'}</button>
           ${e.link ? `<a href="${esc(e.link)}" target="_blank" rel="noopener noreferrer">官方网站</a>` : ''}
           <button type="button" class="sh-nope" data-nope="${e.id}">🚫 不感兴趣</button>
         </div>
@@ -1099,7 +1100,7 @@
         ${p.tip ? `<p class="sh-tip">${esc(p.tip)}</p>` : ''}
         ${p.seasons.length ? `<h3>一年里什么时候去</h3>${yearStrip(p)}` : ''}
         <div class="sh-acts">
-          <button type="button" data-wish="${p.id}" aria-pressed="${wish.has(p.id)}">${wish.has(p.id) ? '♥' : '♡'}</button>
+          <button type="button" data-wish="${p.id}" data-label="1" aria-pressed="${wish.has(p.id)}">${wish.has(p.id) ? '♥ 已想去' : '♡ 想去'}</button>
           <a href="${routeUrl(p.ll, state.measure)}" target="_blank" rel="noopener noreferrer">${state.measure === 'car' ? '开车路线' : '公交路线'}</a>
           <button type="button" class="sh-nope" data-nope="${p.id}">🚫 不感兴趣</button>
         </div>
