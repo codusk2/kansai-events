@@ -305,24 +305,27 @@ a:focus-visible {
 
 .tags-more {
   flex: none;
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 32px;
-  padding: 0;
-  border: 1px solid var(--ink);
-  border-radius: 10px;
-  background: var(--ink);
-  color: var(--paper);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 30px;
+  padding: 0 8px 0 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--accent) 10%, var(--card));
+  color: var(--accent);
+  font-size: .76rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  box-shadow: -8px 0 10px -4px var(--glass);
 }
 
 .tags-more svg {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 2.8;
+  stroke-width: 2.6;
   stroke-linecap: round;
   stroke-linejoin: round;
   transition: transform .25s;
@@ -333,17 +336,7 @@ a:focus-visible {
 }
 
 .tags-more small {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  min-width: 16px;
-  height: 16px;
-  border-radius: 8px;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-size: .62rem;
-  line-height: 16px;
-  font-weight: 700;
+  font-size: .72rem;
 }
 
 /* 展开的全部标签：一键全选、清空 */
@@ -646,8 +639,13 @@ body:not(.idle) .hint {
 .toast {
   position: absolute;
   left: 50%;
-  bottom: calc(var(--tab-h) + 24px + env(safe-area-inset-bottom));
+  top: calc(var(--top-h) + 10px + env(safe-area-inset-top));
   transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 2 * var(--gutter));
+  display: flex;
+  align-items: center;
+  gap: 4px;
   z-index: 7;
   max-width: calc(100% - 2 * var(--gutter));
   padding: 8px 14px;
@@ -1110,17 +1108,37 @@ body:not(.idle) .hint {
 }
 
 /* 时间圈：抽象的时间雷达，一屏看完，下面是比较栏 */
-.view-rings {
-  display: flex;
-  flex-direction: column;
-  padding: calc(var(--top-h) + 6px + env(safe-area-inset-top)) var(--gutter) calc(var(--tab-h) + 22px + env(safe-area-inset-bottom));
+.radar-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  padding: calc(var(--top-h) + 10px + env(safe-area-inset-top)) 0 calc(var(--tab-h) + 30px + env(safe-area-inset-bottom));
 }
 
-.radar-wrap {
-  flex: 1;
-  min-height: 0;
-  display: grid;
-  place-items: center;
+.radar-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.radar.full {
+  margin: 0 auto;
+}
+
+.radar-fit {
+  position: absolute;
+  right: var(--gutter);
+  top: calc(var(--top-h) + 12px + env(safe-area-inset-top));
+  z-index: 6;
+  border: 0;
+  border-radius: 99px;
+  padding: 7px 12px;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+  font-size: .78rem;
+  font-weight: 600;
 }
 
 .radar {
@@ -1199,16 +1217,16 @@ body:not(.idle) .hint {
   left: 0;
   top: 0;
   z-index: 2;
-  width: 20px;
-  height: 20px;
-  margin: -10px 0 0 -10px;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
   padding: 0;
   border: 2px solid var(--b-pin, var(--card));
   border-radius: 50%;
   background: var(--card);
   box-shadow: 0 1px 4px rgba(0, 0, 0, .25);
-  font-size: .62rem;
-  line-height: 16px;
+  font-size: .74rem;
+  line-height: 20px;
   text-align: center;
   transition: transform .8s cubic-bezier(.3, .8, .3, 1), opacity .3s, border-color .2s;
 }
@@ -1234,7 +1252,7 @@ body:not(.idle) .hint {
   left: 0;
   top: 0;
   z-index: 2;
-  font-size: .62rem;
+  font-size: .7rem;
   line-height: 12px;
   white-space: nowrap;
   color: var(--ink);
@@ -2133,4 +2151,38 @@ body:not(.idle) .hint {
   padding: 4px 12px;
   font-size: .74rem;
   color: var(--ink);
+}
+
+/* 开屏跳过 */
+.hello-x {
+  position: absolute;
+  top: calc(16px + env(safe-area-inset-top));
+  right: var(--gutter);
+  z-index: 1;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--muted);
+}
+
+.mc-btn.ga[aria-pressed="true"] {
+  background: var(--ga);
+  color: #FFFFFF;
+}
+
+.wish-sub {
+  margin: 4px 0 10px;
+  font-size: .86rem;
+  color: var(--muted);
+}
+
+.wc-ev .wc-photo .ph {
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
 }

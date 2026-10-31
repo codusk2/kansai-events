@@ -52,6 +52,7 @@
     <section class="view view-map" id="view-map" aria-label="地图">
       <div id="map" class="map"></div>
       <div class="map-ctrl">
+        <button type="button" class="mc-btn ga" id="ga-btn" aria-pressed="false"></button>
         <button type="button" class="mc-btn" id="ev-btn" aria-pressed="false"></button>
         <button type="button" class="mc-btn" id="home-btn" aria-label="回到京桥站">📍 京桥</button>
       </div>
@@ -62,6 +63,7 @@
     </section>
     <section class="view view-rings" id="view-rings" aria-label="时间圈" hidden>
       <div class="radar-wrap" id="radar-wrap"><div class="radar" id="radar"></div></div>
+      <button type="button" class="radar-fit" id="radar-fit">⤢ 全图</button>
     </section>
     <section class="view view-book" id="view-book" aria-label="画册" hidden></section>
     <section class="view view-wish" id="view-wish" aria-label="想去的" hidden></section>
@@ -79,17 +81,18 @@
   <aside class="sheet" id="sheet" aria-label="旅行点" hidden></aside>
 
   <section class="hello" id="hello" aria-label="欢迎" hidden>
+    <button type="button" class="hello-x" id="hello-x" aria-label="跳过">×</button>
     <div class="hello-card" id="hello-step1">
       <p class="hello-hi">Halo 天源！</p>
-      <p class="hello-q">想去哪玩？</p>
-      <p class="hello-tip">先说说怎么去、最远走多久</p>
+      <p class="hello-q">来瞅瞅，有啥得劲嘞地方没！</p>
+      <p class="hello-tip">先说说咋去、最远跑多久</p>
       <div class="hello-seg" id="hello-measure"></div>
       <div class="hello-seg hello-limit" id="hello-limit"></div>
       <button type="button" class="hello-btn" id="hello-next">下一步：选标签</button>
       <p class="hello-by">—— by codusk</p>
     </div>
     <div class="hello-card" id="hello-step2" hidden>
-      <p class="hello-q">喜欢什么样的地方？</p>
+      <p class="hello-q">感兴趣啥样的地方？</p>
       <p class="hello-tip">至少选三个，符合任何一个的都会出现</p>
       <div class="hello-tags" id="hello-tags"></div>
       <div class="hello-foot"><button type="button" class="hello-back" id="hello-back">上一步</button><button type="button" class="hello-btn" id="hello-go" disabled></button></div>

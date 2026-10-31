@@ -127,22 +127,28 @@
     measure: qs.get('m') || saved.measure || 'transit',
     limit: LIMITS.includes(saved.limit) ? saved.limit : 180,
     tags: new Set((qs.get('t') || '').split(',').filter(Boolean).concat(qs.get('t') ? [] : saved.tags || [])),
+    ga: Boolean(saved.ga),
     events: false,
     view: ['map', 'rings', 'book', 'wish'].includes(qs.get('view')) ? qs.get('view') : 'map',
     sel: null,
     focus: null
   };
-  const wish = new Set(store.get('kaniyu-wish-v1', []).filter(id => byId[id]));
-  const savePrefs = () => store.set('kaniyu-prefs-v1', { measure: state.measure, limit: state.limit, tags: [...state.tags] });
+  // 以前绿苹果是标签，现在是单独的按钮：旧的选择迁移过来
+  if (state.tags.has(GA)) {
+    state.tags.delete(GA);
+    state.ga = true;
+  }
+  const wish = new Set(store.get('kaniyu-wish-v1', []).filter(id => byId[id] || evById[id]));
+  const savePrefs = () => store.set('kaniyu-prefs-v1', { measure: state.measure, limit: state.limit, tags: [...state.tags], ga: state.ga });
   const saveWish = () => store.set('kaniyu-wish-v1', [...wish]);
   // 每处标记“想去”的时间
   const wishAt = store.get('kaniyu-wish-at-v1', {});
   const nowText = () => new Intl.DateTimeFormat('ja-JP', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date());
 
   // 绿苹果和其他标签一样可以同时选：选上就把它的活动一起列出来
-  const mode = () => (state.events ? 'events' : state.tags.size ? 'places' : 'idle');
-  const gaOn = () => state.tags.has(GA);
-  const placeTags = () => new Set([...state.tags].filter(t => t !== GA));
+  const mode = () => (state.events ? 'events' : state.tags.size || state.ga ? 'places' : 'idle');
+  const gaOn = () => state.ga;
+  const placeTags = () => state.tags;
   const minsOf = (p, m = state.measure) => p[m].mins;
   const bandOf = (p, m = state.measure) => {
     const v = minsOf(p, m);
@@ -180,7 +186,8 @@
   const countTag = (t, limit = state.limit, m = state.measure) => (t === GA
     ? EVENTS.filter(e => e.ga && live(e)).length
     : PLACES.filter(p => live(p) && p[m].mins <= limit && hasTag(p, t)).length);
-  const orderedTags = (limit, m) => [GA, ...TAG_DEFS.filter(t => t.name !== GA)
+  // 主页标签栏不含绿苹果；开屏里另外放在最前
+  const orderedTags = (limit, m) => [...TAG_DEFS.filter(t => t.name !== GA)
     .map(t => ({ t: t.name, n: countTag(t.name, limit, m) }))
     .sort((a, b) => b.n - a.n)
     .map(x => x.t)];
@@ -202,10 +209,12 @@
     $('tags').innerHTML = bar.map(t => tagChip(t, countTag(t), state.tags.has(t))).join('');
     $('tag-grid').innerHTML = tags.map(t => tagChip(t, countTag(t), state.tags.has(t), 'tag big')).join('');
     const n = state.tags.size;
-    $('tags-more').innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>${n ? `<small>${n}</small>` : ''}`;
+    $('tags-more').innerHTML = `全部${n ? `<small>·${n}</small>` : ''}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>`;
     $('tag-panel-count').textContent = `已选 ${n} 个 · 符合任一标签的 ${PLACES.filter(p => minsOf(p) <= state.limit && anyTag(p, placeTags())).length} 处${gaOn() ? ' ＋🍏活动' : ''}`;
-    $('ev-btn').innerHTML = `🎟️ 活动<small>${EVENTS.filter(e => e.ll).length}</small>`;
+    $('ev-btn').innerHTML = `🎟️ 活动<small>${EVENTS.filter(e => e.ll && live(e)).length}</small>`;
     $('ev-btn').setAttribute('aria-pressed', String(state.events));
+    $('ga-btn').innerHTML = `🍏 绿苹果<small>${EVENTS.filter(e => e.ga && live(e)).length}</small>`;
+    $('ga-btn').setAttribute('aria-pressed', String(state.ga && !state.events));
   }
 
   function toggleTag(t) {
@@ -238,7 +247,7 @@
     }
     if (b.dataset.act === 'all') {
       state.events = false;
-      state.tags = new Set(TAG_DEFS.map(t => t.name));
+      state.tags = new Set(TAG_DEFS.filter(t => t.name !== GA).map(t => t.name));
       refresh();
     } else if (b.dataset.act === 'none') {
       state.tags = new Set();
@@ -282,11 +291,20 @@
       .map(([v, i, t]) => `<button type="button" data-hm="${v}" aria-pressed="${hello.measure === v}"><span>${i}</span>${t}</button>`).join('');
     $('hello-limit').innerHTML = LIMITS
       .map(l => `<button type="button" data-hl="${l}" aria-pressed="${hello.limit === l}">${BAND_NAME[l]}内<small>${PLACES.filter(p => p[hello.measure].mins <= l).length}处</small></button>`).join('');
-    const tags = orderedTags(hello.limit, hello.measure);
+    const tags = [GA, ...orderedTags(hello.limit, hello.measure)];
     $('hello-tags').innerHTML = tags.map(t => tagChip(t, countTag(t, hello.limit, hello.measure), hello.tags.has(t), 'tag big')).join('');
     const n = hello.tags.size;
     $('hello-go').disabled = n < MIN_TAGS;
     $('hello-go').textContent = n < MIN_TAGS ? `再选 ${MIN_TAGS - n} 个` : `开始探索（${n}个标签）`;
+  }
+
+  function closeHello() {
+    store.set(HELLO_KEY, true);
+    $('hello').classList.add('leaving');
+    setTimeout(() => {
+      $('hello').hidden = true;
+      $('hello').classList.remove('leaving');
+    }, reduceMotion ? 0 : 380);
   }
 
   if (!store.get(HELLO_KEY, false) || qs.get('hello') === '1') {
@@ -306,11 +324,15 @@
     else if (e.target.closest('#hello-go') && hello.tags.size >= MIN_TAGS) {
       state.measure = hello.measure;
       state.limit = hello.limit;
-      state.tags = new Set(hello.tags);
+      state.ga = hello.tags.has(GA);
+      state.tags = new Set([...hello.tags].filter(t => t !== GA));
       state.events = false;
-      store.set(HELLO_KEY, true);
-      $('hello').classList.add('leaving');
-      setTimeout(() => { $('hello').hidden = true; }, reduceMotion ? 0 : 380);
+      closeHello();
+      refresh();
+      return;
+    } else if (e.target.closest('#hello-x')) {
+      // 跳过：沿用上次的选择；第一次就跳过的话，停在空白引导
+      closeHello();
       refresh();
       return;
     } else return;
@@ -366,7 +388,7 @@
       b.setAttribute('aria-pressed', String(wish.has(id)));
       b.textContent = wish.has(id) ? '♥' : '♡';
     });
-    toast(wish.has(id) ? `已加入想去的：${byId[id].name}` : `已移出想去的：${byId[id].name}`);
+    toast(wish.has(id) ? `已加入想去的：${itemOf(id).name}` : `已移出想去的：${itemOf(id).name}`);
     if (state.view === 'wish') renderWish();
   }
   function setHidden(id, on) {
@@ -502,20 +524,25 @@
   }
 
   // 回到京桥：京桥放在中间，保持能看到大阪、京都、神户的范围
-  $('home-btn').addEventListener('click', () => {
+  function flyHome() {
     const opts = { center: ORIGIN.ll, zoom: 9.2, padding: mapPadding(10) };
     reduceMotion ? map.jumpTo(opts) : map.flyTo({ ...opts, duration: 1100, easing: easeInOut });
-  });
+  }
+  $('home-btn').addEventListener('click', flyHome);
 
   // 活动按钮：单独显示还没结束的活动，再点一次回到旅行点
   $('ev-btn').addEventListener('click', () => {
     state.events = !state.events;
     refresh();
-    if (state.events) {
-      const b = new maplibregl.LngLatBounds();
-      EVENTS.filter(e => e.ll).forEach(e => b.extend(e.ll));
-      map.fitBounds(b, { padding: mapPadding(50), maxZoom: 11, duration: reduceMotion ? 0 : 900 });
-    }
+    if (state.events) flyHome();
+  });
+
+  // 绿苹果按钮：把 Mrs. GREEN APPLE 的活动叠加到当前的旅行点上
+  $('ga-btn').addEventListener('click', () => {
+    state.ga = state.events ? true : !state.ga;
+    state.events = false;
+    refresh();
+    if (state.ga) flyHome();
   });
 
   // 合并：只在地图停下后算一次，拖动过程中不重排
@@ -556,7 +583,7 @@
   });
   window.addEventListener('resize', () => {
     cluster();
-    if (state.view === 'rings') renderRings('still');
+    if (state.view === 'rings') renderRings('zoom');
   });
 
   // ---------- 卡片带：滑到哪张，地图就飞到哪里 ----------
@@ -573,7 +600,7 @@
       <span class="dk-head"><b>${esc(e.name)}</b></span>
       <span class="dk-meta">${esc(e.when)} · ${esc(e.venue)}</span>
       <span class="dk-blurb">${esc(e.note)}</span>
-      <span class="dk-foot"><span class="st ${e.live ? 'tone-green' : 'tone-plain'}">${esc(evStatus(e))}</span><span class="nope" role="button" tabindex="0" data-nope="${e.id}" aria-label="不感兴趣">🚫</span></span>
+      <span class="dk-foot"><span class="st ${e.live ? 'tone-green' : 'tone-plain'}">${esc(evStatus(e))}</span><span class="dk-acts"><span class="nope" role="button" tabindex="0" data-nope="${e.id}" aria-label="不感兴趣">🚫</span>${heart(e)}</span></span>
     </span></button>`;
 
   const placeCard = p => `<button type="button" class="dk" data-id="${p.id}">${photo(p)}<span class="dk-txt">
@@ -595,7 +622,9 @@
     deckKey = key;
     $('deck-count').textContent = mode() === 'events'
       ? `🎟️ 还没结束的活动 · ${items.length} 个`
-      : `${PLACES.filter(shown).length} 处 · 符合任一标签 · 按${MEASURE[state.measure]}由近到远${gaOn() ? ` · 🍏活动${EVENTS.filter(e => e.ga).length}个在最前` : ''}`;
+      : !state.tags.size
+        ? `🍏 绿苹果的活动 · ${items.length} 个 · 核实于${fmtISO(GA_DATA.checkedAt)}`
+        : `${PLACES.filter(shown).length} 处 · 符合任一标签 · 按${MEASURE[state.measure]}由近到远${gaOn() ? ` · 🍏活动在最前` : ''}`;
     $('deck-list').innerHTML = items.length
       ? items.map(p => (p.venue ? eventCard(p) : placeCard(p))).join('')
       : '<p class="dk-empty">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>';
@@ -667,6 +696,22 @@
   // 半径＝单程时间，方向＝从京桥看的实际方位；不用照片和底图，每处是一个带emoji的小圆点。
   // 点圆点打开详情。
   const DIRS = ['北', '东北', '东', '东南', '南', '西南', '西', '西北'];
+  let radarFull = false;
+  let radarPos = {};
+  // 选中一处时，把它移到画面中间
+  function centerRadar(id) {
+    const pos = radarPos[id];
+    const wrap = $('radar-wrap');
+    if (!pos || radarFull) return;
+    const sheet = $('sheet');
+    const visibleH = sheet.hidden ? wrap.clientHeight : Math.max(120, sheet.getBoundingClientRect().top - wrap.getBoundingClientRect().top);
+    wrap.scrollTo({ left: pos[0] - wrap.clientWidth / 2, top: pos[1] - visibleH / 2, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+  $('radar-fit').addEventListener('click', () => {
+    radarFull = !radarFull;
+    $('radar-fit').textContent = radarFull ? '🔍 放大' : '⤢ 全图';
+    renderRings('zoom');
+  });
   let radarBuilt = false;
 
   function buildRadar() {
@@ -685,9 +730,15 @@
     const first = !radarBuilt;
     if (first) buildRadar();
     const host = $('radar');
-    host.classList.toggle('still', first || keep === 'still');
-    const avail = $('radar-wrap').getBoundingClientRect();
-    const W = Math.floor(Math.min(avail.width, avail.height));
+    host.classList.toggle('still', first || keep === 'still' || keep === 'zoom');
+    // 默认放大到屏幕宽的2.2倍，拖动探索；“全图”时整张放进一屏
+    const wrap = $('radar-wrap');
+    const old = host.clientWidth || 1;
+    const fx = (wrap.scrollLeft + wrap.clientWidth / 2) / old;
+    const fy = (wrap.scrollTop + wrap.clientHeight / 2) / old;
+    const fit = Math.floor(Math.min(wrap.clientWidth, wrap.clientHeight));
+    const W = radarFull ? fit : Math.round(wrap.clientWidth * 2.2);
+    host.classList.toggle('full', radarFull);
     host.style.width = W + 'px';
     host.style.height = W + 'px';
     const C = W / 2;
@@ -716,10 +767,12 @@
       + sectorLines + sectorNames;
     // 小时说明放在最上层（HTML），圆点也会绕开它们
     const LBL_H = 16;
-    const ringLabels = [30, 60, 120, 180].map(m => {
+    // 放大时上下各放一份，拖到哪边都看得到
+    const ringLabels = [30, 60, 120, 180].flatMap(m => {
       const text = `${BAND_NAME[m]}${mode() === 'places' && m <= state.limit ? ` · ${inBand(m)}处` : ''}`;
       const w = text.length * 9 + 14;
-      return { m, text, x: C - w / 2, y: C - rad(m) + 3, w, h: LBL_H };
+      const top = { m, text, x: C - w / 2, y: C - rad(m) + 3, w, h: LBL_H };
+      return radarFull ? [top] : [top, { ...top, y: C + rad(m) - 3 - LBL_H }];
     });
     host.querySelectorAll('.radar-lbl').forEach(el => el.remove());
     host.insertAdjacentHTML('beforeend', ringLabels.map(l => `<span class="radar-lbl" style="left:${l.x}px;top:${l.y}px;width:${l.w}px">${l.text}</span>`).join(''));
@@ -808,7 +861,15 @@
       l.toggleAttribute('data-sel', n.p.id === state.sel);
       if (r) l.style.transform = `translate(${r.x}px, ${r.y}px)`;
     });
-    if (first || keep === 'still') {
+    if (first) {
+      wrap.scrollLeft = C - wrap.clientWidth / 2;
+      wrap.scrollTop = C - wrap.clientHeight / 2;
+    } else if (keep === 'zoom') {
+      wrap.scrollLeft = fx * W - wrap.clientWidth / 2;
+      wrap.scrollTop = fy * W - wrap.clientHeight / 2;
+    }
+    radarPos = Object.fromEntries(live.map(n => [n.p.id, [n.x, n.y]]));
+    if (first || keep === 'still' || keep === 'zoom') {
       void host.offsetWidth;
       requestAnimationFrame(() => host.classList.remove('still'));
     }
@@ -861,12 +922,30 @@
 
   function renderWish() {
     // 新标记的在前
-    const list = [...wish].map(id => byId[id]).filter(Boolean).sort((a, b) => String(wishAt[b.id] || '').localeCompare(String(wishAt[a.id] || '')));
-    if (!list.length) {
+    const all = [...wish].map(itemOf).filter(Boolean).sort((a, b) => String(wishAt[b.id] || '').localeCompare(String(wishAt[a.id] || '')));
+    const list = all.filter(x => !x.venue);
+    const evs = all.filter(x => x.venue);
+    if (!all.length) {
       $('view-wish').innerHTML = `<div class="wish-empty"><p class="wish-big">♡</p><p>还没有想去的地方。</p><p>在卡片右下角或详情里点「想去」，就会收到这里。</p></div>` + hiddenBlock();
       return;
     }
-    $('view-wish').innerHTML = `<h2 class="wish-title">想去的<small>${list.length} 处 · 新标记的在前</small></h2>`
+    const evCards = evs.map(e => `<article class="wc wc-ev" data-id="${e.id}">
+        <div class="wc-photo">${e.poster ? `<img src="${esc(e.poster)}" alt="" loading="lazy">` : `<span class="ph">${e.ga ? '🍏' : '🎟️'}</span>`}<span class="wc-emo">${esc(e.kind)}</span></div>
+        <div class="wc-body">
+          <div class="wc-head"><h3>${esc(e.name)}</h3>${heart(e)}</div>
+          ${wishAt[e.id] ? `<p class="wc-when">♥ 标记于 ${esc(wishAt[e.id])}</p>` : ''}
+          <p class="wc-meta">${esc(e.when)} · ${esc(evStatus(e))}</p>
+          <p class="wc-blurb">${esc(e.venue)}</p>
+          <p class="wc-tip">${esc(e.note)}</p>
+          <div class="wc-acts">
+            ${e.ll ? `<a href="${routeUrl(e.ll, 'transit')}" target="_blank" rel="noopener noreferrer">🚃 公交路线</a>` : ''}
+            ${e.link ? `<a href="${esc(e.link)}" target="_blank" rel="noopener noreferrer">官方网站</a>` : ''}
+            <button type="button" data-detail="${e.id}">详情</button>
+          </div>
+        </div>
+      </article>`).join('');
+    $('view-wish').innerHTML = `<h2 class="wish-title">想去的<small>${list.length} 处地点${evs.length ? ` · ${evs.length} 个活动` : ''} · 新标记的在前</small></h2>`
+      + (evs.length ? `<h3 class="wish-sub">🎟️ 活动</h3>${evCards}${list.length ? '<h3 class="wish-sub">📍 地点</h3>' : ''}` : '')
       + list.map(p => `<article class="wc" data-id="${p.id}">
         <div class="wc-photo">${photo(p)}<span class="wc-emo">${emojis(p, 5)}</span></div>
         <div class="wc-body">
@@ -889,6 +968,11 @@
       </article>`).join('') + hiddenBlock();
   }
   $('view-wish').addEventListener('click', e => {
+    const dt = e.target.closest('[data-detail]');
+    if (dt) {
+      select(dt.dataset.detail);
+      return;
+    }
     const u = e.target.closest('[data-unhide]');
     if (u) {
       setHidden(u.dataset.unhide, false);
@@ -944,6 +1028,7 @@
         <p>${esc(e.note)}</p>
         <div class="sh-acts">
           ${e.ll ? `<a href="${routeUrl(e.ll, state.measure)}" target="_blank" rel="noopener noreferrer">从${esc(ORIGIN.name)}怎么去</a>` : ''}
+          <button type="button" data-wish="${e.id}" aria-pressed="${wish.has(e.id)}">${wish.has(e.id) ? '♥' : '♡'}</button>
           ${e.link ? `<a href="${esc(e.link)}" target="_blank" rel="noopener noreferrer">官方网站</a>` : ''}
           <button type="button" class="sh-nope" data-nope="${e.id}">🚫 不感兴趣</button>
         </div>
@@ -1008,7 +1093,10 @@
       const opts = { center: it.ll, zoom: Math.max(map.getZoom(), 10.5), padding: { top: 140, bottom: sheet.offsetHeight + 20, left: 30, right: 30 } };
       reduceMotion ? map.jumpTo(opts) : map.easeTo({ ...opts, duration: 900, easing: easeInOut });
     }
-    if (state.view === 'rings') renderRings();
+    if (state.view === 'rings') {
+      renderRings();
+      centerRadar(id);
+    }
   }
 
   function closeSheet(fromHash) {
