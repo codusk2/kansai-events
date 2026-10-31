@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-title" content="蟹鱼游">
+<title>蟹鱼游 · 旅行点原型</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="spots.css">
+</head>
+<body data-style="photo">
+<div class="app" id="app">
+  <header class="top">
+    <div class="top-bar">
+      <div class="brand">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="9" class="logo-bg"/>
+          <path class="logo-crab" d="M6.5 14.5a4.5 4.5 0 0 1 9 0z M7 11.5c-1.6-1-1.6-3.2 0-4.2 M15 11.5c1.6-1 1.6-3.2 0-4.2"/>
+          <path class="logo-fish" d="M12 22c2.6-3.4 7.6-3.4 10.2 0-2.6 3.4-7.6 3.4-10.2 0z M22.2 22l3.6-2.6v5.2z"/>
+        </svg>
+        <b>蟹鱼游</b>
+      </div>
+      <div class="seg measure" id="measure" role="group" aria-label="口径">
+        <button type="button" data-m="transit" aria-pressed="true">公共交通</button>
+        <button type="button" data-m="car" aria-pressed="false">自驾</button>
+      </div>
+    </div>
+    <div class="bands" id="bands" role="group" aria-label="单程时间"></div>
+  </header>
+
+  <main class="views">
+    <section class="view view-map" id="view-map" aria-label="地图">
+      <div id="map" class="map"></div>
+      <button type="button" class="style-btn" id="style-btn">卡片：照片卡</button>
+    </section>
+    <section class="view view-rings" id="view-rings" aria-label="时间圈" hidden>
+      <div class="rings" id="rings"></div>
+      <p class="rings-note" id="rings-note"></p>
+    </section>
+    <section class="view view-book" id="view-book" aria-label="画册" hidden></section>
+    <section class="view view-compare" id="view-compare" aria-label="对比" hidden></section>
+  </main>
+
+  <nav class="tabbar" id="tabbar" aria-label="呈现方式">
+    <button type="button" data-v="map" aria-pressed="true">地图</button>
+    <button type="button" data-v="rings" aria-pressed="false">时间圈</button>
+    <button type="button" data-v="book" aria-pressed="false">画册</button>
+    <button type="button" data-v="compare" aria-pressed="false">对比</button>
+  </nav>
+
+  <aside class="sheet" id="sheet" aria-label="旅行点" hidden></aside>
+  <div class="toast" id="toast" role="status" hidden></div>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="../directions/data.js"></script>
+<script src="../map/geo.js"></script>
+<script src="spots.js"></script>
+</body>
+</html>
