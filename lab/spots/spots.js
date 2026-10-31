@@ -28,6 +28,13 @@
     }
   };
 
+  // 站里各处的小螃蟹和小鱼（蟹鱼游），只做点缀
+  const CRAB = '<svg class="mini crab" viewBox="0 0 24 18" aria-hidden="true"><path d="M5 11a7 5 0 0 1 14 0z"/><circle cx="9.5" cy="7.5" r="1.1" class="eye"/><circle cx="14.5" cy="7.5" r="1.1" class="eye"/><path d="M5 9c-2.4-.6-3.6-3-2.2-4.6M2.8 4.4l1.6 1.4M19 9c2.4-.6 3.6-3 2.2-4.6M21.2 4.4l-1.6 1.4M7 12l-2 3M10 12.5l-1 3M14 12.5l1 3M17 12l2 3" class="leg"/></svg>';
+  const FISH = '<svg class="mini fish" viewBox="0 0 24 14" aria-hidden="true"><path d="M3 7c3.6-5 10.4-5 14 0-3.6 5-10.4 5-14 0z"/><path d="M17 7l5-4v8z"/><circle cx="7" cy="6" r="1" class="eye"/></svg>';
+  const CRITTERS = `<span class="critters" aria-hidden="true">${CRAB}${FISH}</span>`;
+
+  document.querySelectorAll('.critters-slot').forEach(el => { el.outerHTML = CRITTERS; });
+
   // ---------- 日期与季节 ----------
   const CUM = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
   const doyMD = s => CUM[+s.slice(0, 2) - 1] + +s.slice(3, 5);
@@ -91,7 +98,7 @@
     })),
     ...GA_DATA.events.map(e => ({
       id: e.id, name: e.name, venue: e.venue, ll: e.ll, from: e.from, to: e.to, kind: e.kind,
-      when: dateText(e.from, e.to, e.dateNote), note: e.note, fee: '', link: '', poster: null, ga: true, sources: e.sources
+      when: dateText(e.from, e.to, e.dateNote), note: e.note, fee: '', link: '', poster: e.img ? e.img.thumb : null, img: e.img || null, ga: true, sources: e.sources
     }))
   ].filter(e => !e.to || e.to >= today)
     .map(e => ({ ...e, live: !e.from || e.from <= today }))
@@ -210,7 +217,7 @@
     $('tag-grid').innerHTML = tags.map(t => tagChip(t, countTag(t), state.tags.has(t), 'tag big')).join('');
     const n = state.tags.size;
     $('tags-more').innerHTML = `全部${n ? `<small>·${n}</small>` : ''}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>`;
-    $('tag-panel-count').textContent = `已选 ${n} 个 · 符合任一标签的 ${PLACES.filter(p => minsOf(p) <= state.limit && anyTag(p, placeTags())).length} 处${gaOn() ? ' ＋🍏活动' : ''}`;
+    $('tag-panel-count').textContent = `已选 ${n} 个 · ${PLACES.filter(p => live(p) && minsOf(p) <= state.limit && anyTag(p, placeTags())).length} 处`;
     $('ev-btn').innerHTML = `🎟️ 活动<small>${EVENTS.filter(e => e.ll && live(e)).length}</small>`;
     $('ev-btn').setAttribute('aria-pressed', String(state.events));
     $('ga-btn').innerHTML = `🍏 绿苹果<small>${EVENTS.filter(e => e.ga && live(e)).length}</small>`;
@@ -513,7 +520,7 @@
 
   const homeEl = document.createElement('div');
   homeEl.className = 'home';
-  homeEl.innerHTML = `<span>${esc(ORIGIN.name)}</span><i></i>`;
+  homeEl.innerHTML = `<span>${CRAB}${esc(ORIGIN.name)}${FISH}</span><i></i>`;
   new maplibregl.Marker({ element: homeEl, anchor: 'bottom' }).setLngLat(ORIGIN.ll).addTo(map);
 
   function mapPadding(extra = 20) {
@@ -716,7 +723,7 @@
 
   function buildRadar() {
     const host = $('radar');
-    host.innerHTML = '<svg aria-hidden="true"></svg><span class="radar-home">' + esc(ORIGIN.name) + '</span>'
+    host.innerHTML = '<svg aria-hidden="true"></svg><span class="radar-home">' + CRAB + esc(ORIGIN.name) + FISH + '</span>'
       + PLACES.map(p => `<button type="button" class="rd" data-id="${p.id}" aria-label="${esc(p.name)}"><span class="rd-emo">${mainEmo(p, 1) || '·'}</span></button><span class="rdl" data-for="${p.id}">${esc(p.name)}</span>`).join('');
     host.addEventListener('click', e => {
       const b = e.target.closest('.rd');
@@ -926,8 +933,10 @@
       return `<section class="book-sec"><div class="book-head"><h2><span class="tb tb-${b}">${BAND_NAME[b]}</span>${BAND_NAME[b]}圈</h2><small>${MEASURE[state.measure]} · ${list.length} 处</small></div>
         <div class="book-row">${cards}</div></section>`;
     }).join('');
-    const ga = gaOn() ? eventBook('🍏 绿苹果专区', EVENTS.filter(e => e.ga && live(e))) + `<p class="book-note">${esc(GA_DATA.placesNote)}</p>` : '';
-    $('view-book').innerHTML = ga + secs || '<p class="book-empty book-none">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>';
+    const banner = GA_DATA.img ? `<figure class="ga-banner"><img src="${esc(GA_DATA.img.thumb)}" alt="Mrs. GREEN APPLE"><figcaption><b>🍏 Mrs. GREEN APPLE 在关西</b><small>图：${esc(GA_DATA.img.artist)} · ${esc(GA_DATA.img.license)} · <a href="${esc(GA_DATA.img.page)}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></small></figcaption></figure>` : '';
+    const ga = gaOn() ? banner + eventBook('🍏 绿苹果专区', EVENTS.filter(e => e.ga && live(e))) + `<p class="book-note">卡片照片是会场照片（Wikimedia Commons），不是官方海报。${esc(GA_DATA.placesNote)}</p>` : '';
+    const end = `<p class="book-end">${CRITTERS}到底啦，往上滑还有</p>`;
+    $('view-book').innerHTML = (ga + secs) ? ga + secs + end : '<p class="book-empty book-none">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>';
   }
   $('view-book').addEventListener('click', e => {
     const b = e.target.closest('[data-id]');
@@ -953,7 +962,7 @@
     const list = all.filter(x => !x.venue);
     const evs = all.filter(x => x.venue);
     if (!all.length) {
-      $('view-wish').innerHTML = `<div class="wish-empty"><p class="wish-big">♡</p><p>还没有想去的地方。</p><p>在卡片右下角或详情里点「想去」，就会收到这里。</p></div>` + hiddenBlock();
+      $('view-wish').innerHTML = `<div class="wish-empty"><p class="wish-big">${CRITTERS}</p><p>还没有想去的地方。</p><p>在卡片右下角或详情里点「想去」，就会收到这里。</p></div>` + hiddenBlock();
       return;
     }
     const evCards = evs.map(e => `<article class="wc wc-ev" data-id="${e.id}">
@@ -1039,9 +1048,9 @@
   }
 
   function eventSheet(e) {
-    const src = e.sources.length
+    const src = (e.sources.length
       ? `来源：${e.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.note)}</a>`).join(' · ')}。`
-      : '';
+      : '') + (e.img ? `图（${esc(e.img.note || '照片')}）：${esc(e.img.artist)} · ${esc(e.img.license)} · <a href="${esc(e.img.page)}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>。` : '');
     return `
       <div class="sh-hero ${e.poster ? '' : 'sh-ga'}">${e.poster ? `<img src="${esc(e.poster)}" alt="">` : `<span class="sh-ga-face" aria-hidden="true">${e.ga ? '🍏' : '🎟️'}</span>`}
         <button type="button" class="sh-close" id="sh-close" aria-label="关闭">×</button>

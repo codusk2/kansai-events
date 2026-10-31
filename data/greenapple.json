@@ -9,68 +9,139 @@
       "name": "Ringo Jam Tour『SHADOWS』神户公演",
       "kind": "演唱会",
       "venue": "GLION ARENA KOBE",
-      "ll": [135.1937, 34.6838],
+      "ll": [
+        135.1937,
+        34.6838
+      ],
       "from": "2026-12-02",
       "to": "2026-12-03",
       "note": "约三年来首次全国体育馆巡演，关西只有神户这一站。购票方式以官网为准。",
       "sources": [
-        { "url": "https://www.oricon.co.jp/news/2461515/full/", "note": "巡演日程" },
-        { "url": "https://realsound.jp/2026/06/post-2428818.html", "note": "巡演发表" }
-      ]
+        {
+          "url": "https://www.oricon.co.jp/news/2461515/full/",
+          "note": "巡演日程"
+        },
+        {
+          "url": "https://realsound.jp/2026/06/post-2428818.html",
+          "note": "巡演发表"
+        }
+      ],
+      "img": {
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/GLION_ARENA_KOBE_20250813.jpg/960px-GLION_ARENA_KOBE_20250813.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "page": "https://commons.wikimedia.org/wiki/File:GLION_ARENA_KOBE_20250813.jpg",
+        "artist": "KishujiRapid",
+        "license": "CC BY-SA 4.0",
+        "note": "会场照片"
+      }
     },
     {
       "id": "mga-popup-namba",
       "name": "「SHADOWS」POP-UP STORE 难波丸井",
       "kind": "快闪店",
       "venue": "なんばマルイ",
-      "ll": [135.5012, 34.6648],
+      "ll": [
+        135.5012,
+        34.6648
+      ],
       "from": "2026-11-20",
       "to": "2026-12-06",
       "note": "全国巡回快闪店的大阪站。入场是否需预约以官方公告为准。",
       "sources": [
-        { "url": "https://collabo-cafe.com/en/events/collabo/mga-shadows-popup-store-takamatsu-2026/", "note": "全国17个会场日程" }
-      ]
+        {
+          "url": "https://collabo-cafe.com/en/events/collabo/mga-shadows-popup-store-takamatsu-2026/",
+          "note": "全国17个会场日程"
+        }
+      ],
+      "img": {
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Namba_Marui_Osaka_Japan02-r.jpg/960px-Namba_Marui_Osaka_Japan02-r.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "page": "https://commons.wikimedia.org/wiki/File:Namba_Marui_Osaka_Japan02-r.jpg",
+        "artist": "Oilstreet",
+        "license": "CC BY 2.5",
+        "note": "会场照片"
+      }
     },
     {
       "id": "mga-popup-lucua",
       "name": "「SHADOWS」POP-UP STORE LUCUA大阪",
       "kind": "快闪店",
       "venue": "LUCUA大阪",
-      "ll": [135.4961, 34.7036],
+      "ll": [
+        135.4961,
+        34.7036
+      ],
       "from": null,
       "to": "2026-12-06",
       "dateNote": "11月开始，具体日期待公布",
       "note": "营业时间和预约开始日期另行公布。",
       "sources": [
-        { "url": "https://collabo-cafe.com/en/events/collabo/mga-shadows-popup-store-takamatsu-2026/", "note": "全国17个会场日程" }
-      ]
+        {
+          "url": "https://collabo-cafe.com/en/events/collabo/mga-shadows-popup-store-takamatsu-2026/",
+          "note": "全国17个会场日程"
+        }
+      ],
+      "img": {
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Lucua.JPG/960px-Lucua.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "page": "https://commons.wikimedia.org/wiki/File:Lucua.JPG",
+        "artist": "Own work",
+        "license": "CC BY-SA 3.0",
+        "note": "会场照片"
+      }
     },
     {
       "id": "mga-popup-kobe",
       "name": "「SHADOWS」POP-UP STORE 神户丸井",
       "kind": "快闪店",
       "venue": "神戸マルイ",
-      "ll": [135.1928, 34.6918],
+      "ll": [
+        135.1928,
+        34.6918
+      ],
       "from": "2026-11-20",
       "to": "2026-12-06",
       "note": "和神户公演前后脚，可以排在同一天。",
       "sources": [
-        { "url": "https://collabo-cafe.com/en/events/collabo/mga-shadows-popup-store-takamatsu-2026/", "note": "全国17个会场日程" }
-      ]
+        {
+          "url": "https://collabo-cafe.com/en/events/collabo/mga-shadows-popup-store-takamatsu-2026/",
+          "note": "全国17个会场日程"
+        }
+      ],
+      "img": {
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Kobe_Marui_Japan01s3.jpg/960px-Kobe_Marui_Japan01s3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "page": "https://commons.wikimedia.org/wiki/File:Kobe_Marui_Japan01s3.jpg",
+        "artist": "663highland",
+        "license": "CC BY 2.5",
+        "note": "会场照片"
+      }
     },
     {
       "id": "mga-cafe-tennoji",
       "name": "Ringo Jam Café 天王寺MIO店",
       "kind": "主题咖啡店",
       "venue": "BOX cafe&space 天王寺MIO店（天王寺MIO本馆11楼）",
-      "ll": [135.5143, 34.647],
+      "ll": [
+        135.5143,
+        34.647
+      ],
       "from": "2026-10-02",
       "to": "2026-12-13",
       "note": "粉丝俱乐部10周年主题咖啡店，优先预约制，预约费550日元可抵餐费；会员抽选已结束，之后有先到先得的预约。",
       "sources": [
-        { "url": "https://collabo-cafe.com/events/collabo/mrs-green-apple-ringo-jam-cafe-2026/", "note": "会场、日期、预约方式" },
-        { "url": "https://natalie.mu/music/news/687935", "note": "6都市开店消息" }
-      ]
+        {
+          "url": "https://collabo-cafe.com/events/collabo/mrs-green-apple-ringo-jam-cafe-2026/",
+          "note": "会场、日期、预约方式"
+        },
+        {
+          "url": "https://natalie.mu/music/news/687935",
+          "note": "6都市开店消息"
+        }
+      ],
+      "img": {
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/TENNOJI_MIO.jpg/960px-TENNOJI_MIO.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "page": "https://commons.wikimedia.org/wiki/File:TENNOJI_MIO.jpg",
+        "artist": "Tokumeigakarinoaoshima",
+        "license": "CC BY-SA 4.0",
+        "note": "会场照片"
+      }
     },
     {
       "id": "mga-fm802-talk",
@@ -82,9 +153,28 @@
       "to": "2026-11-12",
       "note": "18:00开始，抽选制，10月21日开始报名。",
       "sources": [
-        { "url": "https://prtimes.jp/main/html/rd/p/000000006.000152302.html", "note": "活动发表" },
-        { "url": "https://koubo.jp/article/132943", "note": "报名信息" }
-      ]
+        {
+          "url": "https://prtimes.jp/main/html/rd/p/000000006.000152302.html",
+          "note": "活动发表"
+        },
+        {
+          "url": "https://koubo.jp/article/132943",
+          "note": "报名信息"
+        }
+      ],
+      "img": {
+        "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Mrs._Green_Apple_%E3%83%9F%E3%82%BB%E3%82%B9%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E3%83%AB_in_Seoul%2C_Korea_2025_05.jpg/960px-Mrs._Green_Apple_%E3%83%9F%E3%82%BB%E3%82%B9%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E3%83%AB_in_Seoul%2C_Korea_2025_05.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "page": "https://commons.wikimedia.org/wiki/File:Mrs._Green_Apple_%E3%83%9F%E3%82%BB%E3%82%B9%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E3%83%AB_in_Seoul,_Korea_2025_05.jpg",
+        "artist": "K-POPIT 케이팝잇",
+        "license": "CC BY 3.0"
+      }
     }
-  ]
+  ],
+  "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Mrs._Green_Apple_%E3%83%9F%E3%82%BB%E3%82%B9%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E3%83%AB_in_Seoul%2C_Korea_2025_05.jpg/960px-Mrs._Green_Apple_%E3%83%9F%E3%82%BB%E3%82%B9%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E3%83%AB_in_Seoul%2C_Korea_2025_05.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "page": "https://commons.wikimedia.org/wiki/File:Mrs._Green_Apple_%E3%83%9F%E3%82%BB%E3%82%B9%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E3%83%AB_in_Seoul,_Korea_2025_05.jpg",
+    "artist": "K-POPIT 케이팝잇",
+    "license": "CC BY 3.0",
+    "note": "乐队照片"
+  }
 }

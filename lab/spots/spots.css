@@ -124,7 +124,7 @@ a:focus-visible {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 5;
+  z-index: 8;
   padding: calc(10px + env(safe-area-inset-top)) var(--gutter) 0;
   pointer-events: none;
 }
@@ -356,9 +356,10 @@ a:focus-visible {
 
 .tp-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 6px 8px;
   margin-bottom: 10px;
   font-size: .76rem;
   color: var(--muted);
@@ -370,6 +371,7 @@ a:focus-visible {
 }
 
 .tp-acts button {
+  white-space: nowrap;
   border: 1px solid var(--line);
   background: transparent;
   border-radius: 99px;
@@ -511,7 +513,7 @@ body:not(.idle) .hint {
 .hello {
   position: absolute;
   inset: 0;
-  z-index: 9;
+  z-index: 12;
   display: grid;
   place-items: center;
   padding: 24px var(--gutter);
@@ -638,6 +640,7 @@ body:not(.idle) .hint {
 
 .toast {
   position: absolute;
+  z-index: 11;
   left: 50%;
   top: calc(var(--top-h) + 10px + env(safe-area-inset-top));
   transform: translateX(-50%);
@@ -1454,7 +1457,7 @@ body:not(.idle) .hint {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 6;
+  z-index: 9;
   height: 68%;
   overflow-y: auto;
   background: var(--card);
@@ -2185,4 +2188,113 @@ body:not(.idle) .hint {
   display: grid;
   place-items: center;
   font-size: 3rem;
+}
+
+/* 小螃蟹和小鱼：只做点缀 */
+.mini {
+  display: inline-block;
+  vertical-align: -2px;
+  height: 11px;
+  width: auto;
+  fill: currentColor;
+}
+
+.mini .eye {
+  fill: var(--card);
+}
+
+.mini .leg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+.mini.crab {
+  color: var(--accent);
+}
+
+.mini.fish {
+  color: var(--b60);
+}
+
+.home span .mini,
+.radar-home .mini {
+  height: 10px;
+  margin: 0 3px;
+}
+
+.home span .mini.fish,
+.radar-home .mini.fish {
+  color: #8FD0DC;
+}
+
+.home span .mini .eye,
+.radar-home .mini .eye {
+  fill: var(--ink);
+}
+
+.critters {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0 6px;
+  opacity: .85;
+}
+
+.wish-big .critters .mini {
+  height: 26px;
+}
+
+.book-end {
+  margin: 18px var(--gutter) 0;
+  text-align: center;
+  font-size: .74rem;
+  color: var(--muted);
+}
+
+.ga-banner {
+  position: relative;
+  margin: 14px var(--gutter) 0;
+  height: 180px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.ga-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ga-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, .7));
+}
+
+.ga-banner figcaption {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 12px;
+  z-index: 1;
+  color: #FFFFFF;
+}
+
+.ga-banner b {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+}
+
+.ga-banner small {
+  font-size: .64rem;
+  opacity: .85;
+}
+
+.ga-banner a {
+  color: inherit;
 }
