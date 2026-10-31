@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>遛弯改版 · 四个方向</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="directions.css">
+</head>
+<body>
+<header class="lab-head">
+  <div class="lab-bar">
+    <div class="lab-title">
+      <b>遛弯改版 · 四个方向</b>
+      <span class="lab-tag">样例数据</span>
+    </div>
+    <button class="lab-theme" id="lab-theme" type="button">主题：跟随系统</button>
+  </div>
+  <nav class="lab-tabs" aria-label="方向">
+    <button type="button" data-dir="a" aria-pressed="true"><i>A</i>决策台</button>
+    <button type="button" data-dir="b" aria-pressed="false"><i>B</i>时令</button>
+    <button type="button" data-dir="c" aria-pressed="false"><i>C</i>时间圈</button>
+    <button type="button" data-dir="d" aria-pressed="false"><i>D</i>攻略册</button>
+  </nav>
+</header>
+
+<main class="lab-main">
+  <section class="phone" aria-label="手机预览">
+    <div class="screen" id="screen"></div>
+  </section>
+  <aside class="notes" id="notes"></aside>
+</main>
+
+<script src="data.js"></script>
+<script src="directions.js"></script>
+</body>
+</html>
