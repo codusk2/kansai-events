@@ -135,8 +135,14 @@
   const wish = new Set(store.get('kaniyu-wish-v1', []).filter(id => byId[id]));
   const savePrefs = () => store.set('kaniyu-prefs-v1', { measure: state.measure, limit: state.limit, tags: [...state.tags] });
   const saveWish = () => store.set('kaniyu-wish-v1', [...wish]);
+  // 想去的备注：想什么时候去、备注，按地点存
+  const plans = store.get('kaniyu-wish-plans-v1', {});
+  const savePlans = () => store.set('kaniyu-wish-plans-v1', plans);
 
-  const mode = () => (state.events ? 'events' : state.tags.has(GA) ? 'ga' : state.tags.size ? 'places' : 'idle');
+  // 绿苹果和其他标签一样可以同时选：选上就把它的活动一起列出来
+  const mode = () => (state.events ? 'events' : state.tags.size ? 'places' : 'idle');
+  const gaOn = () => state.tags.has(GA);
+  const placeTags = () => new Set([...state.tags].filter(t => t !== GA));
   const minsOf = (p, m = state.measure) => p[m].mins;
   const bandOf = (p, m = state.measure) => {
     const v = minsOf(p, m);
@@ -144,8 +150,8 @@
   };
   // 标签是“或”：符合任何一个选中的标签就显示
   const anyTag = (p, set = state.tags) => [...set].some(t => hasTag(p, t));
-  const shown = p => mode() === 'places' && minsOf(p) <= state.limit && anyTag(p);
-  const eventShown = e => e.ll && (mode() === 'events' || (mode() === 'ga' && e.ga));
+  const shown = p => mode() === 'places' && minsOf(p) <= state.limit && anyTag(p, placeTags());
+  const eventShown = e => e.ll && (mode() === 'events' || (mode() === 'places' && gaOn() && e.ga));
   const timeBadge = p => `<span class="tb tb-${bandOf(p) || '180'}">${minsOf(p)}分</span>`;
   const photo = (p, cls = '') => (p.img
     ? `<img${cls ? ` class="${cls}"` : ''} src="${esc(p.img.thumb)}" alt="" loading="lazy" decoding="async">`
@@ -179,7 +185,7 @@
     $('filter-btn').innerHTML = `<span>${icon} ${state.measure === 'car' ? '自驾' : '公交'}</span><span class="fb-sep"></span><span>${BAND_NAME[state.limit]}内</span><span class="fb-caret" aria-hidden="true">▾</span>`;
     $('measure').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.m === state.measure)));
     $('limit').innerHTML = LIMITS.map(l => {
-      const n = PLACES.filter(p => minsOf(p) <= l && (!state.tags.size || state.tags.has(GA) || anyTag(p))).length;
+      const n = PLACES.filter(p => minsOf(p) <= l && (!placeTags().size || anyTag(p, placeTags()))).length;
       return `<button type="button" data-l="${l}" aria-pressed="${state.limit === l}">${BAND_NAME[l]}内<small>${n}</small></button>`;
     }).join('');
     const tags = orderedTags(state.limit, state.measure);
@@ -187,23 +193,16 @@
     const bar = [...tags.filter(t => state.tags.has(t)), ...tags.filter(t => !state.tags.has(t))];
     $('tags').innerHTML = bar.map(t => tagChip(t, countTag(t), state.tags.has(t))).join('');
     $('tag-grid').innerHTML = tags.map(t => tagChip(t, countTag(t), state.tags.has(t), 'tag big')).join('');
-    const n = state.tags.has(GA) ? 0 : state.tags.size;
+    const n = state.tags.size;
     $('tags-more').innerHTML = `<span aria-hidden="true">▾</span>${n ? `<small>${n}</small>` : ''}`;
-    $('tag-panel-count').textContent = state.tags.has(GA)
-      ? '🍏 绿苹果专区'
-      : `已选 ${n} 个 · 符合任一标签的 ${PLACES.filter(p => minsOf(p) <= state.limit && anyTag(p)).length} 处`;
+    $('tag-panel-count').textContent = `已选 ${n} 个 · 符合任一标签的 ${PLACES.filter(p => minsOf(p) <= state.limit && anyTag(p, placeTags())).length} 处${gaOn() ? ' ＋🍏活动' : ''}`;
     $('ev-btn').innerHTML = `🎟️ 活动<small>${EVENTS.filter(e => e.ll).length}</small>`;
     $('ev-btn').setAttribute('aria-pressed', String(state.events));
   }
 
   function toggleTag(t) {
     state.events = false;
-    if (t === GA) {
-      state.tags = state.tags.has(GA) ? new Set() : new Set([GA]);
-    } else {
-      state.tags.delete(GA);
-      state.tags.has(t) ? state.tags.delete(t) : state.tags.add(t);
-    }
+    state.tags.has(t) ? state.tags.delete(t) : state.tags.add(t);
     refresh();
   }
 
@@ -231,7 +230,7 @@
     }
     if (b.dataset.act === 'all') {
       state.events = false;
-      state.tags = new Set(TAG_DEFS.filter(t => t.name !== GA).map(t => t.name));
+      state.tags = new Set(TAG_DEFS.map(t => t.name));
       refresh();
     } else if (b.dataset.act === 'none') {
       state.tags = new Set();
@@ -275,7 +274,7 @@
       .map(([v, i, t]) => `<button type="button" data-hm="${v}" aria-pressed="${hello.measure === v}"><span>${i}</span>${t}</button>`).join('');
     $('hello-limit').innerHTML = LIMITS
       .map(l => `<button type="button" data-hl="${l}" aria-pressed="${hello.limit === l}">${BAND_NAME[l]}内<small>${PLACES.filter(p => p[hello.measure].mins <= l).length}处</small></button>`).join('');
-    const tags = orderedTags(hello.limit, hello.measure).filter(t => t !== GA);
+    const tags = orderedTags(hello.limit, hello.measure);
     $('hello-tags').innerHTML = tags.map(t => tagChip(t, countTag(t, hello.limit, hello.measure), hello.tags.has(t), 'tag big')).join('');
     const n = hello.tags.size;
     $('hello-go').disabled = n < MIN_TAGS;
@@ -514,7 +513,7 @@
   });
   window.addEventListener('resize', () => {
     cluster();
-    if (state.view === 'rings') renderRings(true);
+    if (state.view === 'rings') renderRings('still');
   });
 
   // ---------- 卡片带：滑到哪张，地图就飞到哪里 ----------
@@ -523,8 +522,7 @@
   let deckProgrammatic = false;
   const deckItems = () => {
     if (mode() === 'events') return EVENTS;
-    if (mode() === 'ga') return EVENTS.filter(e => e.ga);
-    return PLACES.filter(shown).sort((a, b) => minsOf(a) - minsOf(b));
+    return [...(gaOn() ? EVENTS.filter(e => e.ga) : []), ...PLACES.filter(shown).sort((a, b) => minsOf(a) - minsOf(b))];
   };
   const itemOf = id => byId[id] || evById[id];
 
@@ -554,15 +552,13 @@
     deckKey = key;
     $('deck-count').textContent = mode() === 'events'
       ? `🎟️ 还没结束的活动 · ${items.length} 个`
-      : mode() === 'ga'
-        ? `🍏 绿苹果专区 · ${items.length} 个活动 · 核实于${fmtISO(GA_DATA.checkedAt)}`
-        : `${items.length} 处 · 符合任一标签 · 按${MEASURE[state.measure]}由近到远`;
+      : `${PLACES.filter(shown).length} 处 · 符合任一标签 · 按${MEASURE[state.measure]}由近到远${gaOn() ? ` · 🍏活动${EVENTS.filter(e => e.ga).length}个在最前` : ''}`;
     $('deck-list').innerHTML = items.length
       ? items.map(p => (p.venue ? eventCard(p) : placeCard(p))).join('')
       : '<p class="dk-empty">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>';
     if (!items.some(p => p.id === state.focus)) state.focus = items.find(p => p.ll)?.id || null;
     scrollDeckTo(state.focus, false);
-    if (state.focus) focusItem(state.focus, { fly: mode() === 'places' || mode() === 'ga' });
+    if (state.focus) focusItem(state.focus, { fly: mode() === 'places' });
   }
 
   function scrollDeckTo(id, smooth) {
@@ -623,74 +619,70 @@
     renderDeck();
   }
 
-  // ---------- 时间圈：半径＝单程时间，方向＝从京桥看的方位；底下是淡淡的地图，只示意方位 ----------
-  const ZOOMS = [1.5, 2, 2.7];
-  let zoomIdx = 1;
-  let ringsBuilt = false;
-  let ringsMap = null;
+  // ---------- 时间圈：抽象的时间雷达 ----------
+  // 用途和地图不同：一屏扫完所有候选，看清“谁近谁远、在哪个方向”。
+  // 半径＝单程时间，方向＝从京桥看的实际方位；不用照片和底图，每处是一个带emoji的小圆点。
+  // 点圆点放进下面的比较栏（最多4处），两种交通方式在同一把尺子上并排比较。
+  const DIRS = ['北', '东北', '东', '东南', '南', '西南', '西', '西北'];
+  const cmp = [];
+  let radarBuilt = false;
 
-  function buildRings() {
-    const host = $('rings');
-    host.innerHTML = '<div class="rings-map" id="rings-map"></div><svg aria-hidden="true"></svg><span class="home-dot">' + esc(ORIGIN.name) + '</span>'
-      + PLACES.map(p => `<button type="button" class="rb" data-id="${p.id}" aria-label="${esc(p.name)}">${photo(p)}<span class="rb-emo" aria-hidden="true">${mainEmo(p, 1)}</span></button><span class="rl" data-for="${p.id}">${esc(p.name)}</span>`).join('');
+  function buildRadar() {
+    const host = $('radar');
+    host.innerHTML = '<svg aria-hidden="true"></svg><span class="radar-home">' + esc(ORIGIN.name) + '</span>'
+      + PLACES.map(p => `<button type="button" class="rd" data-id="${p.id}" aria-label="${esc(p.name)}，点一下加入比较"><span class="rd-emo">${mainEmo(p, 1) || '·'}</span><span class="rd-no"></span></button><span class="rdl" data-for="${p.id}">${esc(p.name)}</span>`).join('');
     host.addEventListener('click', e => {
-      const b = e.target.closest('.rb');
-      if (b) select(b.dataset.id);
+      const b = e.target.closest('.rd');
+      if (!b) return;
+      const id = b.dataset.id;
+      const i = cmp.indexOf(id);
+      if (i >= 0) cmp.splice(i, 1);
+      else {
+        cmp.push(id);
+        if (cmp.length > 4) cmp.shift();
+      }
+      renderRings(true);
     });
-    ringsMap = new maplibregl.Map({
-      container: 'rings-map',
-      style: STYLE_URL,
-      center: ORIGIN.ll,
-      zoom: 8,
-      interactive: false,
-      attributionControl: { compact: true },
-      localIdeographFontFamily: '"Hiragino Sans", "PingFang SC", "Noto Sans CJK JP", sans-serif'
-    });
-    ringsMap.on('style.load', () => tintMap(ringsMap, true));
-    ringsMap.on('load', () => document.querySelector('#rings-map .maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show'));
-    ringsBuilt = true;
+    radarBuilt = true;
   }
 
-  // 直线距离（公里）
-  const km = ll => {
-    const [lon1, lat1] = ORIGIN.ll.map(toRad);
-    const [lon2, lat2] = ll.map(toRad);
-    const h = Math.sin((lat2 - lat1) / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin((lon2 - lon1) / 2) ** 2;
-    return 12742 * Math.asin(Math.sqrt(h));
-  };
-
-  function renderRings(keepCenter) {
-    const first = !ringsBuilt;
-    if (first) buildRings();
-    const vp = $('rings-vp');
-    const host = $('rings');
-    const still = first || keepCenter;
-    host.classList.toggle('still', still);
-    // 保持当前看着的那一点
-    const old = host.clientWidth || 1;
-    const fx = (vp.scrollLeft + vp.clientWidth / 2) / old;
-    const fy = (vp.scrollTop + vp.clientHeight / 2 - host.offsetTop) / old;
-    const W = Math.round(vp.clientWidth * ZOOMS[zoomIdx]);
+  function renderRings(keep) {
+    const first = !radarBuilt;
+    if (first) buildRadar();
+    const host = $('radar');
+    host.classList.toggle('still', first || keep === 'still');
+    const avail = $('radar-wrap').getBoundingClientRect();
+    const W = Math.floor(Math.min(avail.width, avail.height));
     host.style.width = W + 'px';
     host.style.height = W + 'px';
     const C = W / 2;
-    const R = C - 30;
+    const R = C - 24;
     // 半径按时间的0.6次方：近处拉开，远处不出界；刻度圈照实标注
     const rad = m => R * Math.pow(Math.min(m, 180) / 180, 0.6);
+    const vis = PLACES.filter(shown);
+    const inBand = l => vis.filter(p => minsOf(p) <= l && minsOf(p) > ({ 30: 0, 60: 30, 120: 60, 180: 120 })[l]).length;
+    const sectorLines = DIRS.map((_, i) => {
+      const a = toRad(i * 45 + 22.5);
+      return `<line class="radar-sector" x1="${C}" y1="${C}" x2="${C + R * Math.sin(a)}" y2="${C - R * Math.cos(a)}"/>`;
+    }).join('');
+    // 每个方位写上那个方向主要是哪些地区
+    const sectorNames = DIRS.map((d, i) => {
+      const inSec = PLACES.filter(p => Math.round(p.deg / 45) % 8 === i);
+      const count = {};
+      inSec.forEach(p => { count[p.area] = (count[p.area] || 0) + (p.area === '大阪' ? 0.1 : 1); });
+      const areas = Object.keys(count).sort((a, b) => count[b] - count[a]).slice(0, 2).join('·');
+      const a = toRad(i * 45);
+      const r = R + 12;
+      return areas ? `<text class="radar-dir" x="${C + r * Math.sin(a)}" y="${C - r * Math.cos(a) + 4}" text-anchor="middle">${areas}</text>` : '';
+    }).join('');
     const svg = host.querySelector('svg');
     svg.setAttribute('viewBox', `0 0 ${W} ${W}`);
-    svg.innerHTML = [180, 120, 60, 30].map(m => `<circle class="ring ring-fill-${m}" cx="${C}" cy="${C}" r="${rad(m)}"/>`).join('')
-      + [30, 60, 120, 180].map(m => `<text class="ring-label" x="${C}" y="${C - rad(m) + 14}" text-anchor="middle">${BAND_NAME[m]}</text>`).join('')
-      + `<text class="ring-north" x="${C}" y="14" text-anchor="middle">北</text>`;
+    svg.innerHTML = [180, 120, 60, 30].map(m => `<circle class="radar-ring rr-${m}${m > state.limit ? ' off' : ''}" cx="${C}" cy="${C}" r="${rad(m)}"/>`).join('')
+      + sectorLines + sectorNames
+      + [30, 60, 120, 180].map(m => `<text class="radar-label" x="${C}" y="${C - rad(m) + 13}" text-anchor="middle">${BAND_NAME[m]}${mode() === 'places' && m <= state.limit ? ` · ${inBand(m)}` : ''}</text>`).join('');
 
-    // 底图比例：让各地点在地图上的位置和照片大致落在同一方向、同一远近
-    const ratios = PLACES.filter(p => km(p.ll) > 8 && minsOf(p) <= 180).map(p => rad(minsOf(p)) / km(p.ll)).sort((a, b) => a - b);
-    const mPerPx = 1000 / ratios[Math.floor(ratios.length / 2)];
-    ringsMap.resize();
-    ringsMap.jumpTo({ center: ORIGIN.ll, zoom: Math.log2(78271.517 * Math.cos(toRad(ORIGIN.ll[1])) / mPerPx) });
-
-    // 目标位置，再做几轮碰撞松弛，避免照片叠在一起
-    const S = 40;
+    // 目标位置，再做几轮碰撞松弛，圆点不叠在一起
+    const S = 21;
     const nodes = PLACES.map(p => {
       const r = rad(minsOf(p));
       const a = toRad(p.deg);
@@ -699,7 +691,7 @@
       return { p, tx, ty, x: tx, y: ty, out: !shown(p) };
     });
     const live = nodes.filter(n => !n.out);
-    for (let it = 0; it < 140; it++) {
+    for (let it = 0; it < 120; it++) {
       for (let i = 0; i < live.length; i++) {
         for (let j = i + 1; j < live.length; j++) {
           const a = live[i];
@@ -726,14 +718,15 @@
       }
     }
 
-    // 名字：放得下才显示，先近后远
+    // 名字：比较中的一定显示，其余放得下才显示，先近后远
     const boxes = live.map(n => ({ x: n.x - S / 2, y: n.y - S / 2, w: S, h: S }));
     const hit = r => boxes.some(q => r.x < q.x + q.w && r.x + r.w > q.x && r.y < q.y + q.h && r.y + r.h > q.y);
     const labels = {};
-    [...live].sort((a, b) => minsOf(a.p) - minsOf(b.p)).forEach(n => {
-      const w = n.p.name.length * 11.5 + 6;
-      for (const r of [{ x: n.x + 21, y: n.y - 7, w, h: 15 }, { x: n.x - 21 - w, y: n.y - 7, w, h: 15 }, { x: n.x - w / 2, y: n.y + 21, w, h: 15 }]) {
-        if (r.x >= 0 && r.x + r.w <= W && !hit(r)) {
+    const order = [...live].sort((a, b) => (cmp.includes(b.p.id) - cmp.includes(a.p.id)) || minsOf(a.p) - minsOf(b.p));
+    order.forEach(n => {
+      const w = n.p.name.length * 10 + 4;
+      for (const r of [{ x: n.x + 12, y: n.y - 6, w, h: 12 }, { x: n.x - 12 - w, y: n.y - 6, w, h: 12 }, { x: n.x - w / 2, y: n.y + 12, w, h: 12 }]) {
+        if (r.x >= 0 && r.x + r.w <= W && (cmp.includes(n.p.id) || !hit(r))) {
           boxes.push(r);
           labels[n.p.id] = r;
           break;
@@ -742,43 +735,54 @@
     });
 
     nodes.forEach(n => {
-      const b = host.querySelector(`.rb[data-id="${n.p.id}"]`);
-      const l = host.querySelector(`.rl[data-for="${n.p.id}"]`);
+      const b = host.querySelector(`.rd[data-id="${n.p.id}"]`);
+      const l = host.querySelector(`.rdl[data-for="${n.p.id}"]`);
+      const k = cmp.indexOf(n.p.id);
       b.style.transform = `translate(${n.x}px, ${n.y}px)`;
       b.dataset.band = bandOf(n.p) || '';
-      if (n.out) b.dataset.out = '';
-      else delete b.dataset.out;
-      if (n.p.id === state.sel) b.dataset.sel = '';
-      else delete b.dataset.sel;
+      b.toggleAttribute('data-out', n.out);
+      b.toggleAttribute('data-cmp', k >= 0);
+      b.querySelector('.rd-no').textContent = k >= 0 ? k + 1 : '';
       const r = labels[n.p.id];
       l.hidden = !r || n.out;
-      if (r) l.style.transform = `translate(${r.x}px, ${r.y + 2}px)`;
+      l.toggleAttribute('data-cmp', k >= 0);
+      if (r) l.style.transform = `translate(${r.x}px, ${r.y}px)`;
     });
-
-    if (first) {
-      vp.scrollLeft = C - vp.clientWidth / 2;
-      vp.scrollTop = host.offsetTop + C - vp.clientHeight / 2;
-    } else if (keepCenter) {
-      vp.scrollLeft = fx * W - vp.clientWidth / 2;
-      vp.scrollTop = host.offsetTop + fy * W - vp.clientHeight / 2;
-    }
-    if (still) {
-      void host.offsetWidth;
-      requestAnimationFrame(() => host.classList.remove('still'));
-    }
-    $('rings-note').textContent = mode() === 'places'
-      ? `${MEASURE[state.measure]} · 离中心越远单程越久，方向是实际方位`
-      : '活动和绿苹果专区请在地图或画册里看';
-    $('rings-zoom').querySelectorAll('button').forEach(b => {
-      b.disabled = (b.dataset.z === '+' && zoomIdx === ZOOMS.length - 1) || (b.dataset.z === '-' && zoomIdx === 0);
-    });
+    if (first || keep === 'still') requestAnimationFrame(() => host.classList.remove('still'));
+    renderCompare();
   }
 
-  $('rings-zoom').addEventListener('click', e => {
-    const b = e.target.closest('[data-z]');
-    if (!b) return;
-    zoomIdx = Math.max(0, Math.min(ZOOMS.length - 1, zoomIdx + (b.dataset.z === '+' ? 1 : -1)));
-    renderRings(true);
+  // 比较栏：同一把尺子（0–3小时），公共交通和自驾各一条
+  function renderCompare() {
+    const tray = $('cmp');
+    if (mode() !== 'places') {
+      tray.innerHTML = '<p class="cmp-tip">活动请在地图或画册里看</p>';
+      return;
+    }
+    const list = cmp.map(id => byId[id]).filter(Boolean);
+    if (!list.length) {
+      tray.innerHTML = `<p class="cmp-tip">离中心越远，单程越久。点圆点，把几个地方放到这里比一比。</p>`;
+      return;
+    }
+    const bar = (v, cls) => `<span class="cb ${cls}"><i style="width:${Math.min(v, 180) / 180 * 100}%"></i><em>${v}分</em></span>`;
+    tray.innerHTML = `<div class="cmp-head"><span>比较 ${list.length} 处 · 刻度到3小时</span><button type="button" data-cmp-clear>清空</button></div>`
+      + list.map((p, i) => `<div class="cr"><button type="button" class="cr-name" data-open="${p.id}"><b>${i + 1}</b>${mainEmo(p, 1)} ${esc(p.name)}</button>
+        <span class="cr-bars">${bar(p.transit.mins, 't' + (state.measure === 'transit' ? ' on' : ''))}${bar(p.car.mins, 'c' + (state.measure === 'car' ? ' on' : ''))}</span>
+        <button type="button" class="cr-x" data-cmp-del="${p.id}" aria-label="移出比较">×</button></div>`).join('')
+      + '<p class="cmp-key"><i class="t"></i>🚃 公共交通 <i class="c"></i>🚗 自驾（不含拥堵）</p>';
+  }
+
+  $('cmp').addEventListener('click', e => {
+    const o = e.target.closest('[data-open]');
+    const d = e.target.closest('[data-cmp-del]');
+    if (o) select(o.dataset.open);
+    else if (d) {
+      cmp.splice(cmp.indexOf(d.dataset.cmpDel), 1);
+      renderRings(true);
+    } else if (e.target.closest('[data-cmp-clear]')) {
+      cmp.length = 0;
+      renderRings(true);
+    }
   });
 
   // ---------- 画册 ----------
@@ -796,10 +800,6 @@
       $('view-book').innerHTML = eventBook('🎟️ 还没结束的活动', EVENTS);
       return;
     }
-    if (mode() === 'ga') {
-      $('view-book').innerHTML = eventBook('🍏 绿苹果专区', EVENTS.filter(e => e.ga)) + `<p class="book-note">${esc(GA_DATA.placesNote)}</p>`;
-      return;
-    }
     const secs = LIMITS.filter(l => l <= state.limit).map(String).map(b => {
       const list = PLACES.filter(p => bandOf(p) === b && shown(p)).sort((x, y) => (y.season.hot - x.season.hot) || minsOf(x) - minsOf(y));
       if (!list.length) return '';
@@ -809,7 +809,8 @@
       return `<section class="book-sec"><div class="book-head"><h2><span class="tb tb-${b}">${BAND_NAME[b]}</span>${BAND_NAME[b]}圈</h2><small>${MEASURE[state.measure]} · ${list.length} 处</small></div>
         <div class="book-row">${cards}</div></section>`;
     }).join('');
-    $('view-book').innerHTML = secs || '<p class="book-empty book-none">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>';
+    const ga = gaOn() ? eventBook('🍏 绿苹果专区', EVENTS.filter(e => e.ga)) + `<p class="book-note">${esc(GA_DATA.placesNote)}</p>` : '';
+    $('view-book').innerHTML = ga + secs || '<p class="book-empty book-none">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>';
   }
   $('view-book').addEventListener('click', e => {
     const b = e.target.closest('[data-id]');
@@ -830,6 +831,7 @@
         <div class="wc-photo">${photo(p)}<span class="wc-emo">${emojis(p, 5)}</span></div>
         <div class="wc-body">
           <div class="wc-head"><h3>${esc(p.name)}</h3>${heart(p)}</div>
+          ${plans[p.id]?.when ? `<p class="wc-when" data-when-show="${p.id}">🗓 ${esc(plans[p.id].when)}</p>` : `<p class="wc-when" data-when-show="${p.id}" hidden></p>`}
           <p class="wc-meta">${esc(p.area)} · ${esc(p.kind)} · <span class="st tone-${p.season.tone}">${esc(p.season.text)}</span></p>
           <div class="wc-time">
             <span><small>🚃 公共交通</small><b>${p.transit.mins}分</b><em>${esc(p.transit.route)}</em></span>
@@ -838,6 +840,12 @@
           <p class="wc-blurb">${esc(p.blurb)}</p>
           ${p.tip ? `<p class="wc-tip">💡 ${esc(p.tip)}</p>` : ''}
           ${p.seasons.length ? yearStrip(p) : ''}
+          <div class="wc-plan">
+            <label>🗓 想什么时候去<input type="text" data-plan="when" data-id="${p.id}" value="${esc(plans[p.id]?.when || '')}" placeholder="比如：11月下旬看红叶" enterkeyhint="done"></label>
+            <div class="wc-sugg">${planSuggestions(p).map(t => `<button type="button" data-sugg="${esc(t)}" data-id="${p.id}">${esc(t)}</button>`).join('')}</div>
+            <label>📝 备注<textarea data-plan="note" data-id="${p.id}" rows="2" placeholder="想和谁去、想吃什么、要提前订什么…">${esc(plans[p.id]?.note || '')}</textarea></label>
+            <span class="wc-saved" data-saved="${p.id}" aria-live="polite"></span>
+          </div>
           <div class="wc-acts">
             <a href="${routeUrl(p.ll, 'transit')}" target="_blank" rel="noopener noreferrer">🚃 公交路线</a>
             <a href="${routeUrl(p.ll, 'car')}" target="_blank" rel="noopener noreferrer">🚗 开车路线</a>
@@ -846,7 +854,55 @@
         </div>
       </article>`).join('');
   }
+  // 建议的时间：这个地方的季节窗口，加上最近两个周末和下个月
+  const WEEK = '日一二三四五六';
+  function planSuggestions(p) {
+    const out = p.seasons.map(w => `${w.label} ${fmtMD(w.from)}–${fmtMD(w.to)}`);
+    const d = new Date(today + 'T12:00:00Z');
+    // 周六、周日当天就是“这周末”
+    const day = d.getUTCDay();
+    const toSat = day === 0 ? 0 : 6 - day;
+    for (const [label, add] of [['这周末', toSat], ['下周末', day === 0 ? 6 : toSat + 7]]) {
+      const x = new Date(d);
+      x.setUTCDate(x.getUTCDate() + add);
+      out.push(`${label} ${x.getUTCMonth() + 1}/${x.getUTCDate()}（${WEEK[x.getUTCDay()]}）`);
+    }
+    out.push(`${(d.getUTCMonth() + 1) % 12 + 1}月`);
+    return out;
+  }
+
+  let planTimer;
+  function setPlan(id, key, value) {
+    plans[id] = { ...plans[id], [key]: value.trim() };
+    if (!plans[id].when && !plans[id].note) delete plans[id];
+    clearTimeout(planTimer);
+    planTimer = setTimeout(() => {
+      savePlans();
+      const tag = document.querySelector(`[data-saved="${id}"]`);
+      if (tag) {
+        tag.textContent = '已保存在这台设备';
+        setTimeout(() => { tag.textContent = ''; }, 2000);
+      }
+    }, 400);
+    const show = document.querySelector(`[data-when-show="${id}"]`);
+    if (show && key === 'when') {
+      show.hidden = !value.trim();
+      show.textContent = '🗓 ' + value.trim();
+    }
+  }
+  $('view-wish').addEventListener('input', e => {
+    const f = e.target.closest('[data-plan]');
+    if (f) setPlan(f.dataset.id, f.dataset.plan, f.value);
+  });
+
   $('view-wish').addEventListener('click', e => {
+    const g = e.target.closest('[data-sugg]');
+    if (g) {
+      const input = document.querySelector(`[data-plan="when"][data-id="${g.dataset.id}"]`);
+      input.value = g.dataset.sugg;
+      setPlan(g.dataset.id, 'when', g.dataset.sugg);
+      return;
+    }
     const b = e.target.closest('[data-open]');
     if (!b) return;
     const id = b.dataset.open;
@@ -854,7 +910,6 @@
     // 地图上要能看到它：没被当前标签选中时，临时加上它的第一个标签
     if (!shown(p)) {
       state.events = false;
-      state.tags.delete(GA);
       state.tags.add(p.tags[0]);
       if (minsOf(p) > state.limit) state.limit = LIMITS.find(l => minsOf(p) <= l) || 180;
       renderHeader();
