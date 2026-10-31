@@ -443,7 +443,8 @@
     container: 'map',
     style: STYLE_URL,
     ...HOME_VIEW,
-    attributionControl: { compact: true },
+    // 版权声明不用按钮，改成左上角一行淡淡的小字（OpenStreetMap 许可要求可见）
+    attributionControl: false,
     dragRotate: false,
     pitchWithRotate: false,
     localIdeographFontFamily: '"Hiragino Sans", "PingFang SC", "Noto Sans CJK JP", sans-serif'
@@ -480,7 +481,6 @@
     }
   }
   map.on('style.load', () => tintMap(map, false));
-  map.once('idle', () => document.querySelector('#map .maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show'));
 
   // 旅行点：圆形照片针，下面一枚emoji小签说明是什么地方；挤在一起时合并成一叠，标数字
   const pins = new Map();
@@ -500,6 +500,7 @@
         map.fitBounds(b, { padding: mapPadding(60), maxZoom: 14, duration: reduceMotion ? 0 : 900 });
         return;
       }
+      setDeckMin(false);
       focusItem(p.id, { scroll: true, fly: true });
     });
     pins.set(p.id, { el, members: [], marker: new maplibregl.Marker({ element: el }).setLngLat(p.ll).addTo(map) });
@@ -514,6 +515,7 @@
     el.innerHTML = `<button type="button" class="gpin-in" aria-label="${esc(ev.name)}">${ev.ga ? '🍏' : '🎟️'}</button><span class="pin-label">${esc(ev.name)}</span>`;
     el.querySelector('.gpin-in').addEventListener('click', e => {
       e.stopPropagation();
+      setDeckMin(false);
       focusItem(ev.id, { scroll: true, fly: true });
     });
     evPins.set(ev.id, { el, marker: new maplibregl.Marker({ element: el }).setLngLat(ev.ll).addTo(map) });
@@ -527,7 +529,10 @@
   function mapPadding(extra = 20) {
     const box = map.getContainer().getBoundingClientRect();
     const top = $('head').getBoundingClientRect().bottom - box.top + extra;
-    const deckTop = mode() === 'idle' ? $('tabbar').getBoundingClientRect().top : $('deck').getBoundingClientRect().top;
+    // 卡片带可能正在展开：按展开后的高度留位置
+    const deckTop = mode() === 'idle' ? $('tabbar').getBoundingClientRect().top
+      : $('deck').getBoundingClientRect().bottom - $('deck-toggle').offsetHeight - 6
+        - (document.body.classList.contains('deck-min') ? 0 : $('deck-list').scrollHeight + 14);
     return { top, bottom: box.bottom - deckTop + extra, left: extra, right: extra };
   }
 
@@ -588,6 +593,17 @@
     });
   }
   map.on('moveend', cluster);
+  map.on('zoomend', () => document.body.classList.toggle('map-near', map.getZoom() >= 10.5));
+
+  // 卡片带：手动拖、缩放地图时自动收起；点地点或点标题展开
+  function setDeckMin(min) {
+    document.body.classList.toggle('deck-min', min);
+    $('deck-toggle').setAttribute('aria-expanded', String(!min));
+  }
+  map.on('movestart', e => {
+    if (e.originalEvent && state.view === 'map') setDeckMin(true);
+  });
+  $('deck-toggle').addEventListener('click', () => setDeckMin(!document.body.classList.contains('deck-min')));
   map.on('click', () => {
     if (state.sel) closeSheet();
   });
