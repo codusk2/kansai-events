@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="spots.css">
 </head>
-<body data-style="photo">
+<body>
 <div class="app" id="app">
   <header class="top">
     <div class="top-bar">
@@ -33,7 +33,10 @@
   <main class="views">
     <section class="view view-map" id="view-map" aria-label="地图">
       <div id="map" class="map"></div>
-      <button type="button" class="style-btn" id="style-btn">卡片：照片卡</button>
+      <section class="deck" id="deck" aria-label="旅行点卡片">
+        <div class="deck-head" id="deck-count"></div>
+        <div class="deck-list" id="deck-list"></div>
+      </section>
     </section>
     <section class="view view-rings" id="view-rings" aria-label="时间圈" hidden>
       <div class="rings-vp" id="rings-vp"><div class="rings-pad"><div class="rings" id="rings"></div></div></div>

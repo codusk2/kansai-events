@@ -271,6 +271,10 @@ a:focus-visible {
   white-space: nowrap;
 }
 
+.tag .emo {
+  margin-right: 4px;
+}
+
 .tag small {
   margin-left: 4px;
   color: var(--muted);
@@ -418,8 +422,9 @@ a:focus-visible {
   inset: 0;
 }
 
-.maplibregl-ctrl-bottom-right {
-  bottom: calc(var(--tab-h) + 14px + env(safe-area-inset-bottom));
+.map .maplibregl-ctrl-bottom-right {
+  bottom: auto;
+  top: calc(var(--top-h) + 4px + env(safe-area-inset-top));
 }
 
 .maplibregl-ctrl-attrib.maplibregl-compact {
@@ -427,264 +432,263 @@ a:focus-visible {
   color: var(--muted);
 }
 
-.style-btn {
-  position: absolute;
-  right: var(--gutter);
-  top: calc(var(--top-h) + 4px + env(safe-area-inset-top));
-  z-index: 4;
-  border: 0;
-  border-radius: 99px;
-  padding: 4px 10px;
-  font-size: .72rem;
-  color: var(--muted);
-  background: var(--glass);
-  box-shadow: 0 2px 8px rgba(40, 30, 20, .12);
-}
-
-/* 旅行点卡：.mk 底边中点就是地点 */
-.mk {
+/* 旅行点：圆形照片针；合并时背后叠两层，右上角标数字 */
+.pin {
   display: flex;
   flex-direction: column;
   align-items: center;
   pointer-events: none;
 }
 
-.mk[data-hidden] {
+.pin-in {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 3px solid var(--b-pin, var(--card));
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .28);
+  pointer-events: auto;
+  transition: transform .45s cubic-bezier(.2, .8, .2, 1), opacity .35s ease, border-color .3s;
+}
+
+.pin-in img,
+.pin-in .ph {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  font-size: .9rem;
+}
+
+.pin-stack,
+.pin-stack::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 3px solid var(--b-pin, var(--card));
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+  opacity: 0;
+  transition: transform .45s cubic-bezier(.2, .8, .2, 1), opacity .3s;
+}
+
+.pin[data-state="leader"] .pin-stack {
+  opacity: 1;
+  transform: translate(6px, -4px);
+}
+
+.pin[data-state="leader"] .pin-stack::before {
+  opacity: 1;
+  transform: translate(6px, -4px);
+}
+
+.pin-n {
+  position: absolute;
+  z-index: 2;
+  top: -9px;
+  right: -12px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 10px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: .7rem;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.pin-n:empty {
+  display: none;
+}
+
+.pin[data-band="30"] { --b-pin: var(--b30); }
+.pin[data-band="60"] { --b-pin: var(--b60); }
+.pin[data-band="120"] { --b-pin: var(--b120); }
+.pin[data-band="180"] { --b-pin: var(--b180); }
+
+.pin[data-state="member"] .pin-in,
+.pin[data-state="out"] .pin-in {
+  opacity: 0;
+  transform: scale(.4);
+  pointer-events: none;
+}
+
+.pin[data-state="out"] {
   visibility: hidden;
 }
 
-.mk-card {
+.pin[data-focus] {
+  z-index: 3;
+}
+
+.pin[data-focus] .pin-in {
+  transform: scale(1.35);
+  border-color: var(--accent);
+}
+
+.pin-label {
+  margin-top: 8px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: .72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity .3s, transform .3s;
+}
+
+.pin[data-focus] .pin-label {
+  opacity: 1;
+  transform: translateY(6px);
+}
+
+/* 卡片带：底部横滑，露出下一张的边 */
+.deck {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--tab-h) + 16px + env(safe-area-inset-bottom));
+  z-index: 4;
+  pointer-events: none;
+  transition: transform .35s cubic-bezier(.2, .8, .2, 1), opacity .3s;
+}
+
+.has-sheet .deck {
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+.deck-head {
+  display: inline-block;
+  margin: 0 var(--gutter) 6px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: .72rem;
+  color: var(--muted);
+}
+
+.deck-list {
+  display: flex;
+  gap: 10px;
+  padding: 4px var(--gutter) 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 var(--gutter);
+  scrollbar-width: none;
   pointer-events: auto;
-  position: relative;
+}
+
+.deck-list::-webkit-scrollbar {
+  display: none;
+}
+
+.dk {
+  flex: none;
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 12px;
+  width: calc(100% - 2 * var(--gutter) - 28px);
+  padding: 8px 12px 8px 8px;
   border: 0;
-  padding: 0;
+  border-radius: 18px;
   background: var(--card);
-  color: var(--ink);
-  text-align: left;
   box-shadow: var(--shadow);
-  transform-origin: 50% 100%;
-  transition: transform .3s cubic-bezier(.2, .9, .3, 1.2), opacity .2s;
+  text-align: left;
+  scroll-snap-align: start;
+  transition: transform .3s, box-shadow .3s;
 }
 
-.mk-card img {
-  display: block;
+.dk[data-focus] {
+  box-shadow: 0 0 0 2px var(--accent), var(--shadow);
+}
+
+.dk img,
+.dk .ph {
+  width: 92px;
+  height: 108px;
+  border-radius: 12px;
   object-fit: cover;
+  font-size: 1.6rem;
 }
 
-.mk-txt {
+.dk-txt {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
+  min-width: 0;
+  padding: 2px 0;
+}
+
+.dk-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   min-width: 0;
 }
 
-.mk-txt b {
-  font-size: .84rem;
-  line-height: 1.25;
+.dk-head b {
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  font-weight: 600;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.mk-meta {
-  display: flex;
-  align-items: center;
-  gap: 6px;
   min-width: 0;
 }
 
-.mk-pin {
-  width: 12px;
-  height: 12px;
-  margin-top: 4px;
-  border-radius: 50%;
-  border: 2px solid var(--card);
-  background: var(--b-pin, var(--b60));
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .35);
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-.mk[data-band="30"] { --b-pin: var(--b30); }
-.mk[data-band="60"] { --b-pin: var(--b60); }
-.mk[data-band="120"] { --b-pin: var(--b120); }
-.mk[data-band="180"] { --b-pin: var(--b180); }
-
-/* 照片卡 */
-[data-style="photo"] .mk-card {
-  display: grid;
-  grid-template-columns: 60px minmax(0, 1fr);
-  gap: 9px;
-  align-items: center;
-  width: 184px;
-  padding: 6px 10px 6px 6px;
-  border-radius: 14px;
-}
-
-[data-style="photo"] .mk-card img,
-[data-style="photo"] .mk-card .ph {
-  width: 60px;
-  height: 60px;
-  border-radius: 10px;
-}
-
-[data-style="photo"] .mk-card::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -6px;
-  width: 12px;
-  height: 12px;
-  margin-left: -6px;
-  background: var(--card);
-  transform: rotate(45deg);
-  border-radius: 2px;
-}
-
-/* 明信片 */
-[data-style="postcard"] .mk-card {
-  width: 140px;
-  padding: 6px 6px 8px;
-  border-radius: 4px;
-  transform: rotate(var(--tilt, 0deg));
-}
-
-[data-style="postcard"] .mk-card img,
-[data-style="postcard"] .mk-card .ph {
-  width: 128px;
-  height: 86px;
-  border-radius: 2px;
-  margin-bottom: 6px;
-}
-
-[data-style="postcard"] .mk-txt b {
-  font-family: var(--serif);
-  font-weight: 600;
-}
-
-/* 圆章 */
-[data-style="stamp"] .mk-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 116px;
-  background: transparent;
-  box-shadow: none;
-}
-
-[data-style="stamp"] .mk-card img,
-[data-style="stamp"] .mk-card .ph {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  border: 3px solid var(--b-pin, var(--card));
-  box-shadow: var(--shadow);
-}
-
-[data-style="stamp"] .mk-txt {
-  align-items: center;
-  margin-top: 4px;
-  padding: 3px 9px;
-  background: var(--card);
-  border-radius: 99px;
-  box-shadow: 0 2px 8px rgba(40, 30, 20, .18);
-  max-width: 116px;
-}
-
-[data-style="stamp"] .mk-txt b {
-  font-size: .76rem;
-}
-
-[data-style="stamp"] .mk-meta .st {
-  display: none;
-}
-
-/* 层级：卡 → 小名牌 → 小圆照片 → 点 */
-.mk[data-lv="mini"] .mk-card {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  width: auto;
-  max-width: 140px;
-  height: 40px;
-  padding: 3px 10px 3px 3px;
-  border-radius: 99px;
-  transform: none;
-  background: var(--card);
-  box-shadow: var(--shadow);
-}
-
-.mk[data-lv="mini"] .mk-card::after,
-.mk[data-lv="bubble"] .mk-card::after,
-.mk[data-lv="mini"] .mk-meta {
-  display: none;
-}
-
-.mk[data-lv="mini"] .mk-card img,
-.mk[data-lv="mini"] .mk-card .ph {
+.dk-head .tb {
   flex: none;
-  width: 34px;
-  height: 34px;
-  margin: 0;
-  border: 0;
-  border-radius: 50%;
-  box-shadow: none;
 }
 
-.mk[data-lv="mini"] .mk-txt {
-  margin: 0;
-  padding: 0;
-  background: none;
-  box-shadow: none;
-}
-
-.mk[data-lv="mini"] .mk-txt b {
-  font-family: var(--sans);
-  font-size: .76rem;
-}
-
-.mk[data-lv="bubble"] .mk-card {
-  display: block;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border-radius: 50%;
-  border: 2px solid var(--b-pin, var(--card));
+.dk-meta {
+  font-size: .72rem;
+  color: var(--muted);
+  white-space: nowrap;
   overflow: hidden;
-  transform: none;
-  background: var(--card);
-  box-shadow: var(--shadow);
+  text-overflow: ellipsis;
 }
 
-.mk[data-lv="bubble"] .mk-txt {
-  display: none;
+.dk-blurb {
+  font-size: .76rem;
+  line-height: 1.55;
+  color: var(--ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.mk[data-lv="bubble"] .mk-card img,
-.mk[data-lv="bubble"] .mk-card .ph {
-  width: 100%;
-  height: 100%;
+.dk .st {
+  margin-top: auto;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dk-empty {
   margin: 0;
-  border: 0;
-  border-radius: 50%;
-  box-shadow: none;
-}
-
-.mk[data-lv="dot"] .mk-card {
-  transform: scale(0);
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-}
-
-.mk[data-sel] .mk-card {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.mk[data-lv="card"],
-.mk[data-sel] {
-  z-index: 2;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--card);
+  font-size: .82rem;
+  color: var(--muted);
+  box-shadow: var(--shadow);
 }
 
 /* 活动：小点，临时性的 */
@@ -1149,6 +1153,9 @@ a:focus-visible {
 }
 
 .sh-title p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 6px;
   margin: 4px 0 0;
   font-size: .8rem;
   opacity: .9;
@@ -1212,6 +1219,20 @@ a:focus-visible {
   font-size: .72rem;
   line-height: 1.5;
   color: var(--muted);
+}
+
+.sh-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 14px 0 0;
+}
+
+.sh-tags span {
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: var(--paper);
+  font-size: .76rem;
 }
 
 .sh-body h3 {

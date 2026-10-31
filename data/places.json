@@ -1,6 +1,6 @@
 {
  "about": "由 scripts/collect_places.py 从 places.seed.json 生成，不要手改。",
- "generatedAt": "2026-10-31T04:58:18Z",
+ "generatedAt": "2026-10-31T05:10:53Z",
  "tags": [
   "风景美",
   "热闹",
@@ -250,115 +250,6 @@
    "wiki": "https://ja.wikipedia.org/wiki/%E5%A4%A9%E7%A5%9E%E6%A9%8B%E7%AD%8B%E5%95%86%E5%BA%97%E8%A1%97"
   },
   {
-   "id": "umeda-sky",
-   "ll": [
-    135.4904,
-    34.7053
-   ],
-   "name": "梅田蓝天大厦",
-   "area": "大阪",
-   "kind": "展望",
-   "transit": {
-    "mins": 22,
-    "route": "JR环状线到大阪站，步行约12分",
-    "checked": false
-   },
-   "seasons": [],
-   "why": "空中庭园展望台，看大阪的日落和夜景。",
-   "tip": "日落前半小时上去。",
-   "tags": [
-    "夜景",
-    "拍照",
-    "建筑"
-   ],
-   "blurb": "两栋高楼在空中连成一个圆环。站在露天回廊上，脚下是整片灯海，远处是淀川和大阪湾。",
-   "car": {
-    "mins": 11,
-    "km": 5.8
-   },
-   "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/2018_Umeda_Sky_Building.jpg/500px-2018_Umeda_Sky_Building.jpg",
-    "file": "2018_Umeda_Sky_Building.jpg",
-    "page": "https://commons.wikimedia.org/wiki/File:2018_Umeda_Sky_Building.jpg",
-    "artist": "Kakidai",
-    "license": "CC BY-SA 4.0"
-   },
-   "wiki": "https://ja.wikipedia.org/wiki/%E6%A2%85%E7%94%B0%E3%82%B9%E3%82%AB%E3%82%A4%E3%83%93%E3%83%AB"
-  },
-  {
-   "id": "dotonbori",
-   "ll": [
-    135.5016,
-    34.6687
-   ],
-   "name": "道顿堀",
-   "area": "大阪",
-   "kind": "街区",
-   "transit": {
-    "mins": 20,
-    "route": "长堀鹤见绿地线到心斋桥",
-    "checked": false
-   },
-   "seasons": [],
-   "why": "霓虹招牌和河边步道，大阪最热闹的一段。",
-   "tip": "坐道顿堀观光船能从水面看招牌。",
-   "tags": [
-    "热闹",
-    "好吃",
-    "夜景",
-    "水边"
-   ],
-   "blurb": "霓虹招牌倒映在运河里，章鱼烧的香气从每个转角飘出来。越晚越热闹。",
-   "car": {
-    "mins": 9,
-    "km": 5.8
-   },
-   "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Osaka_Dotonbori_Ebisu_Bridge.jpg/500px-Osaka_Dotonbori_Ebisu_Bridge.jpg",
-    "file": "Osaka_Dotonbori_Ebisu_Bridge.jpg",
-    "page": "https://commons.wikimedia.org/wiki/File:Osaka_Dotonbori_Ebisu_Bridge.jpg",
-    "artist": "Type specimen",
-    "license": "CC BY-SA 3.0"
-   },
-   "wiki": "https://ja.wikipedia.org/wiki/%E9%81%93%E9%A0%93%E5%A0%80"
-  },
-  {
-   "id": "shinsekai",
-   "ll": [
-    135.5063,
-    34.6525
-   ],
-   "name": "新世界·通天阁",
-   "area": "大阪",
-   "kind": "街区",
-   "transit": {
-    "mins": 25,
-    "route": "JR环状线到新今宫",
-    "checked": false
-   },
-   "seasons": [],
-   "why": "串炸和通天阁，最有老大阪味的一片。",
-   "tip": "串炸的酱汁不能二次蘸。",
-   "tags": [
-    "热闹",
-    "好吃",
-    "人文古迹"
-   ],
-   "blurb": "通天阁下是昭和年代的老街，灯笼、巨大的河豚招牌和串炸店一家挨一家，像一部彩色的旧电影。",
-   "car": {
-    "mins": 10,
-    "km": 6.7
-   },
-   "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Tsutenkaku_108m.jpg/500px-Tsutenkaku_108m.jpg",
-    "file": "Tsutenkaku_108m.jpg",
-    "page": "https://commons.wikimedia.org/wiki/File:Tsutenkaku_108m.jpg",
-    "artist": "Sakai Yayoi",
-    "license": "CC0"
-   },
-   "wiki": "https://ja.wikipedia.org/wiki/%E9%80%9A%E5%A4%A9%E9%96%A3"
-  },
-  {
    "id": "shitennoji",
    "name": "四天王寺",
    "area": "大阪",
@@ -394,43 +285,6 @@
     "license": "CC BY 2.5"
    },
    "wiki": "https://ja.wikipedia.org/wiki/%E5%9B%9B%E5%A4%A9%E7%8E%8B%E5%AF%BA"
-  },
-  {
-   "id": "harukas",
-   "ll": [
-    135.5137,
-    34.6459
-   ],
-   "name": "阿倍野HARUKAS 300",
-   "area": "大阪",
-   "kind": "展望",
-   "transit": {
-    "mins": 20,
-    "route": "JR环状线到天王寺",
-    "checked": false
-   },
-   "seasons": [],
-   "why": "300米高的展望台，晴天能看到明石海峡大桥。",
-   "tip": "晴朗的冬日傍晚视野最远。",
-   "tags": [
-    "夜景",
-    "拍照",
-    "雨天也行",
-    "建筑"
-   ],
-   "blurb": "三百米高空的玻璃回廊，整个大阪平原在脚下铺开，晴天能望见明石海峡大桥和生驹山。",
-   "car": {
-    "mins": 11,
-    "km": 6.8
-   },
-   "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Abeno_Harukas_Osaka_Japan01-r.jpg/500px-Abeno_Harukas_Osaka_Japan01-r.jpg",
-    "file": "Abeno_Harukas_Osaka_Japan01-r.jpg",
-    "page": "https://commons.wikimedia.org/wiki/File:Abeno_Harukas_Osaka_Japan01-r.jpg",
-    "artist": "Oilstreet",
-    "license": "CC BY 2.5"
-   },
-   "wiki": "https://ja.wikipedia.org/wiki/%E3%81%82%E3%81%B9%E3%81%AE%E3%83%8F%E3%83%AB%E3%82%AB%E3%82%B9"
   },
   {
    "id": "tsurumi",
@@ -474,42 +328,6 @@
     "license": "CC BY-SA 3.0"
    },
    "wiki": "https://ja.wikipedia.org/wiki/%E8%8A%B1%E5%8D%9A%E8%A8%98%E5%BF%B5%E5%85%AC%E5%9C%92%E9%B6%B4%E8%A6%8B%E7%B7%91%E5%9C%B0"
-  },
-  {
-   "id": "usj",
-   "name": "日本环球影城",
-   "area": "大阪",
-   "kind": "乐园",
-   "transit": {
-    "mins": 30,
-    "route": "JR环状线到西九条，转梦咲线",
-    "checked": false
-   },
-   "seasons": [],
-   "why": "电影主题乐园。",
-   "tip": "工作日人少，热门项目先抢整理券。",
-   "tags": [
-    "乐园",
-    "热闹",
-    "亲子"
-   ],
-   "blurb": "走进电影里的世界：马里奥的蘑菇王国、魔法村的城堡，连排队都像在片场里。",
-   "ll": [
-    135.43306,
-    34.66472
-   ],
-   "car": {
-    "mins": 22,
-    "km": 12.9
-   },
-   "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Universal_Studios_Japan_2019%2C08.jpg/500px-Universal_Studios_Japan_2019%2C08.jpg",
-    "file": "Universal_Studios_Japan_2019,08.jpg",
-    "page": "https://commons.wikimedia.org/wiki/File:Universal_Studios_Japan_2019%2C08.jpg",
-    "artist": "Rebirth10",
-    "license": "CC0"
-   },
-   "wiki": "https://ja.wikipedia.org/wiki/%E3%83%A6%E3%83%8B%E3%83%90%E3%83%BC%E3%82%B5%E3%83%AB%E3%83%BB%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AA%E3%83%BB%E3%82%B8%E3%83%A3%E3%83%91%E3%83%B3"
   },
   {
    "id": "kaiyukan",
@@ -2935,6 +2753,118 @@
     "license": "CC BY 3.0"
    },
    "wiki": "https://ja.wikipedia.org/wiki/%E8%B5%A4%E7%9B%AE%E5%9B%9B%E5%8D%81%E5%85%AB%E6%BB%9D"
+  },
+  {
+   "id": "hoshida",
+   "name": "星田园地·星之秋千",
+   "area": "大阪",
+   "kind": "自然",
+   "transit": {
+    "mins": 75,
+    "route": "京阪到枚方市，转交野线到私市，沿河边步道走约40分",
+    "checked": false
+   },
+   "seasons": [
+    {
+     "from": "11-15",
+     "to": "12-05",
+     "label": "红叶",
+     "tone": "koyo"
+    }
+   ],
+   "why": "架在森林上空的大型木板吊桥。",
+   "tip": "吊桥约16:30关闭，下午早点出发；红叶季周末停车场常满，坐电车去。",
+   "tags": [
+    "山里",
+    "风景美",
+    "红叶",
+    "拍照"
+   ],
+   "blurb": "长二百八十米的木板吊桥悬在森林上空，走到中间，脚下是红黄交错的山谷，远处是一整片大阪平原。",
+   "sources": [
+    {
+     "url": "https://www.walkerplus.com/article/195245/",
+     "note": "交通、开放时间"
+    },
+    {
+     "url": "https://rurubu.jp/andmore/spot/80095178",
+     "note": "基本信息"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "ll": [
+    135.68528,
+    34.75278
+   ],
+   "car": {
+    "mins": 32,
+    "km": 21.6
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/22/Hoshinoburanko.jpg/500px-Hoshinoburanko.jpg",
+    "file": "Hoshinoburanko.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Hoshinoburanko.jpg",
+    "artist": "交野タイムズ",
+    "license": "CC BY-SA 4.0"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E6%98%9F%E3%81%AE%E3%83%96%E3%83%A9%E3%83%B3%E3%82%B3"
+  },
+  {
+   "id": "mimurotoji",
+   "name": "三室户寺",
+   "area": "京都",
+   "kind": "寺社",
+   "transit": {
+    "mins": 60,
+    "route": "京阪到中书岛，转宇治线到三室户，步行约15分",
+    "checked": false
+   },
+   "seasons": [
+    {
+     "from": "06-05",
+     "to": "07-05",
+     "label": "紫阳花",
+     "tone": "ume"
+    }
+   ],
+   "why": "关西有名的紫阳花寺，山谷里约两万株。",
+   "tip": "紫阳花园只在约6月至7月初开放，日期每年公布；周末人多，早上去。",
+   "tags": [
+    "寺社",
+    "赏花",
+    "拍照",
+    "风景美"
+   ],
+   "blurb": "山谷里五千坪的庭园种着两万株紫阳花，梅雨天里蓝、紫、粉、白一层层铺开；到了七月，本堂前的莲花也接着开。",
+   "sources": [
+    {
+     "url": "https://tabi-mag.jp/mimuroto-ajisai/",
+     "note": "2026年开园期间、规模、交通"
+    },
+    {
+     "url": "https://ja.kyoto.travel/flower/ume/single.php?flower_id=1307",
+     "note": "京都观光协会花讯"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "ll": [
+    135.81919,
+    34.90048
+   ],
+   "car": {
+    "mins": 46,
+    "km": 40.4
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Mimurotoji5544.JPG/500px-Mimurotoji5544.JPG",
+    "file": "Mimurotoji5544.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Mimurotoji5544.JPG",
+    "artist": "日:Jnn",
+    "license": "CC BY 2.1 jp"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E4%B8%89%E5%AE%A4%E6%88%B8%E5%AF%BA"
   }
  ]
 }

@@ -1,0 +1,7 @@
+{
+  "about": "旅行点线索收件箱。用户或agent把看到的地方（含小红书、X、Instagram帖子链接）先放这里，核实后再收进 places.seed.json，并把 status 改为“已收录”或“不收”（写原因）。规则见 docs/旅行点维护.md。",
+  "items": [
+    { "name": "星田园地·星之秋千", "link": "https://www.walkerplus.com/article/195245/", "note": "试走agent添加流程", "from": "Claude", "date": "2026-10-31", "status": "已收录", "placeId": "hoshida" },
+    { "name": "三室户寺", "link": "https://tabi-mag.jp/mimuroto-ajisai/", "note": "试走agent添加流程", "from": "Claude", "date": "2026-10-31", "status": "已收录", "placeId": "mimurotoji" }
+  ]
+}

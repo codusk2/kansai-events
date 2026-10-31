@@ -65,8 +65,8 @@
     bands: new Set(['30', '60', '120', '180']),
     tags: new Set(),
     view: ['map', 'rings', 'book'].includes(qs.get('view')) ? qs.get('view') : 'map',
-    style: ['photo', 'postcard', 'stamp'].includes(qs.get('style')) ? qs.get('style') : 'photo',
-    sel: null
+    sel: null,
+    focus: null
   };
   const wish = new Set(['tofukuji', 'arima']);
   const MEASURE = { transit: '公共交通', car: '自驾' };
@@ -75,6 +75,11 @@
   const BAND_TITLE = { 30: '半小时圈', 60: '1小时圈', 120: '2小时圈', 180: '3小时圈' };
   // 主题标签：「最近热门」不存数据，按季节正当时判断
   const TAGS = ['风景美', '热闹', '好吃', '山里', '海边', '人文古迹', '最近热门', '水边', '寺社', '赏花', '红叶', '温泉', '夜景', '散步', '安静', '拍照', '建筑', '亲子', '乐园', '雨天也行'];
+  const EMOJI = {
+    风景美: '🏞️', 热闹: '🎉', 好吃: '🍜', 山里: '⛰️', 海边: '🌊', 人文古迹: '🏯', 最近热门: '🔥', 水边: '🛶', 寺社: '⛩️', 赏花: '🌸',
+    红叶: '🍁', 温泉: '♨️', 夜景: '🌃', 散步: '🚶', 安静: '🍃', 拍照: '📷', 建筑: '🏛️', 亲子: '🧸', 乐园: '🎢', 雨天也行: '☔'
+  };
+  const emojis = (p, n = 4) => p.tags.slice(0, n).map(t => EMOJI[t] || '').join('');
   const hasTag = (p, t) => (t === '最近热门' ? p.season.hot : p.tags.includes(t));
   const tagsOk = (p, set = state.tags) => [...set].every(t => hasTag(p, t));
   const minsOf = (p, m = state.measure) => p[m].mins;
@@ -115,7 +120,7 @@
     const chips = order.map(t => {
       const on = state.tags.has(t);
       const n = inBand.filter(p => tagsOk(p, new Set([...state.tags, t]))).length;
-      return `<button type="button" class="tag" data-t="${t}" aria-pressed="${on}"${!on && !n ? ' disabled' : ''}>${t}<small>${n}</small></button>`;
+      return `<button type="button" class="tag" data-t="${t}" aria-pressed="${on}"${!on && !n ? ' disabled' : ''}><span class="emo" aria-hidden="true">${EMOJI[t]}</span>${t}<small>${n}</small></button>`;
     }).join('');
     $('tags').innerHTML = (state.tags.size ? '<button type="button" class="tag clear" data-t="">清除</button>' : '') + chips;
   }
@@ -155,10 +160,7 @@
     state.view = v;
     ['map', 'rings', 'book'].forEach(k => { $('view-' + k).hidden = k !== v; });
     $('tabbar').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
-    if (v === 'map') {
-      map.resize();
-      queueLayout();
-    }
+    if (v === 'map') map.resize();
     renderView();
   }
 
@@ -168,18 +170,15 @@
   });
 
   function renderView() {
-    if (state.view === 'map') queueLayout();
+    if (state.view === 'map') renderMapView();
     if (state.view === 'rings') renderRings();
     if (state.view === 'book') renderBook();
   }
 
   function refresh() {
     renderBands();
-    PLACES.forEach(p => {
-      const m = markers.get(p.id);
-      m.el.dataset.band = bandOf(p) || '';
-      m.el.querySelector('.tb').outerHTML = timeBadge(p);
-    });
+    PLACES.forEach(p => { pins.get(p.id).el.dataset.band = bandOf(p) || ''; });
+    deckKey = '';
     if (state.sel) renderSheet();
     renderView();
   }
@@ -231,24 +230,27 @@
   map.on('style.load', () => tintMap(map, false));
   map.on('load', () => document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show'));
 
-  const hash = s => [...s].reduce((n, c) => (n * 31 + c.charCodeAt(0)) >>> 0, 7);
-  const markers = new Map();
+  // 旅行点：圆形照片针。挤在一起时合并成一叠照片并标数字，点一下放大展开。
+  const pins = new Map();
   PLACES.forEach(p => {
     const el = document.createElement('div');
-    el.className = 'mk';
-    el.dataset.lv = 'dot';
+    el.className = 'pin';
     el.dataset.band = bandOf(p) || '';
-    el.style.setProperty('--tilt', ((hash(p.id) % 7) - 3) * 0.8 + 'deg');
-    const meta = `<span class="mk-meta">${timeBadge(p)}<span class="st tone-${p.season.tone}">${esc(p.season.text)}</span></span>`;
-    el.innerHTML = `<button type="button" class="mk-card" aria-label="${esc(p.name)}">${photo(p)}<span class="mk-txt"><b>${esc(p.name)}</b>${meta}</span></button>`
-      + '<span class="mk-pin" role="presentation"></span>';
-    const open = e => {
+    el.dataset.state = 'solo';
+    el.innerHTML = `<button type="button" class="pin-in" aria-label="${esc(p.name)}"><span class="pin-stack" aria-hidden="true"></span>${photo(p)}<span class="pin-n"></span></button>`
+      + `<span class="pin-label">${esc(p.name)}</span>`;
+    el.querySelector('.pin-in').addEventListener('click', e => {
       e.stopPropagation();
-      select(p.id);
-    };
-    el.querySelector('.mk-card').addEventListener('click', open);
-    el.querySelector('.mk-pin').addEventListener('click', open);
-    markers.set(p.id, { el, lv: 'dot', marker: new maplibregl.Marker({ element: el, anchor: 'bottom' }).setLngLat(p.ll).addTo(map) });
+      const m = pins.get(p.id);
+      if (m.members && m.members.length > 1) {
+        const b = new maplibregl.LngLatBounds();
+        m.members.forEach(id => b.extend(byId[id].ll));
+        map.fitBounds(b, { padding: mapPadding(60), maxZoom: 14, duration: reduceMotion ? 0 : 900 });
+        return;
+      }
+      focusPlace(p.id, { scroll: true, fly: true });
+    });
+    pins.set(p.id, { el, members: [p.id], marker: new maplibregl.Marker({ element: el }).setLngLat(p.ll).addTo(map) });
   });
 
   EVENTS.forEach(ev => {
@@ -268,87 +270,129 @@
   homeEl.innerHTML = `<span>${esc(ORIGIN.name)}</span><i></i>`;
   new maplibregl.Marker({ element: homeEl, anchor: 'bottom' }).setLngLat(ORIGIN.ll).addTo(map);
 
-  const CARD_SIZE = { photo: [190, 84], postcard: [146, 144], stamp: [120, 108] };
-  const MINI = [144, 44];
-  const BUBBLE = [46, 46];
+  function mapPadding(extra = 20) {
+    const box = map.getContainer().getBoundingClientRect();
+    const top = $('tags').getBoundingClientRect().bottom - box.top + extra;
+    const bottom = box.bottom - $('deck').getBoundingClientRect().top + extra;
+    return { top, bottom, left: extra, right: extra };
+  }
 
-  let queued = false;
-  function queueLayout() {
-    if (queued) return;
-    queued = true;
-    requestAnimationFrame(() => {
-      queued = false;
-      if (state.view === 'map') layoutMap();
+  // 合并：只在地图停下后算一次，拖动过程中不重排
+  const CLUSTER_PX = 46;
+  function cluster() {
+    const list = PLACES.filter(shown)
+      .map(p => ({ p, pt: map.project(p.ll) }))
+      .sort((a, b) => (b.p.id === state.focus) - (a.p.id === state.focus) || (b.p.season.hot - a.p.season.hot) || minsOf(a.p) - minsOf(b.p));
+    const leaders = [];
+    for (const it of list) {
+      const near = leaders.find(l => Math.hypot(l.pt.x - it.pt.x, l.pt.y - it.pt.y) < CLUSTER_PX);
+      if (near) near.members.push(it.p.id);
+      else leaders.push({ ...it, members: [it.p.id] });
+    }
+    const lead = new Map(leaders.map(l => [l.p.id, l.members]));
+    PLACES.forEach(p => {
+      const m = pins.get(p.id);
+      const members = lead.get(p.id);
+      m.members = members || [];
+      m.el.dataset.state = !shown(p) ? 'out' : members ? (members.length > 1 ? 'leader' : 'solo') : 'member';
+      m.el.querySelector('.pin-n').textContent = members && members.length > 1 ? members.length : '';
+      if (p.id === state.focus) m.el.dataset.focus = '';
+      else delete m.el.dataset.focus;
     });
   }
-
-  // 按屏幕空间让位：卡 → 小名牌 → 小圆照片 → 点
-  function layoutMap() {
-    const box = map.getContainer().getBoundingClientRect();
-    const top = $('bands').getBoundingClientRect().bottom - box.top + 30;
-    const bottom = (state.sel ? $('sheet').getBoundingClientRect().top : $('tabbar').getBoundingClientRect().top) - box.top - 6;
-    const area = { left: 0, right: box.width, top, bottom };
-    const cx = box.width / 2;
-    const cy = (top + bottom) / 2;
-    const hp = map.project(ORIGIN.ll);
-    const placed = [{ x: hp.x - 42, y: hp.y - 46, w: 84, h: 46 }];
-    const hits = r => placed.some(q => r.x < q.x + q.w && r.x + r.w > q.x && r.y < q.y + q.h && r.y + r.h > q.y);
-    const inside = r => r.x >= 4 && r.x + r.w <= area.right - 4 && r.y >= area.top && r.y + r.h <= area.bottom;
-    const [cw, ch] = CARD_SIZE[state.style];
-    const list = PLACES.map(p => {
-      const pt = map.project(p.ll);
-      const rank = (p.id === state.sel ? 1e6 : 0) + (p.season.hot ? 400 : 0) + (wish.has(p.id) ? 200 : 0) - Math.hypot(pt.x - cx, pt.y - cy);
-      return { p, pt, rank };
-    }).sort((a, b) => b.rank - a.rank);
-    for (const { p, pt } of list) {
-      const m = markers.get(p.id);
-      if (!shown(p)) {
-        m.el.dataset.hidden = '';
-        continue;
-      }
-      delete m.el.dataset.hidden;
-      let lv = 'dot';
-      const rc = { x: pt.x - cw / 2, y: pt.y - ch - 14, w: cw, h: ch };
-      const rm = { x: pt.x - MINI[0] / 2, y: pt.y - MINI[1] - 14, w: MINI[0], h: MINI[1] };
-      const rb = { x: pt.x - BUBBLE[0] / 2, y: pt.y - BUBBLE[1] - 14, w: BUBBLE[0], h: BUBBLE[1] };
-      if (p.id === state.sel || (inside(rc) && !hits(rc))) {
-        lv = 'card';
-        placed.push(rc);
-      } else if (inside(rm) && !hits(rm)) {
-        lv = 'mini';
-        placed.push(rm);
-      } else if (!hits(rb)) {
-        lv = 'bubble';
-        placed.push(rb);
-      }
-      if (m.lv !== lv) {
-        m.lv = lv;
-        m.el.dataset.lv = lv;
-      }
-      if (p.id === state.sel) m.el.dataset.sel = '';
-      else delete m.el.dataset.sel;
-    }
-  }
-  map.on('move', queueLayout);
+  map.on('moveend', cluster);
   map.on('click', () => {
     if (state.sel) closeSheet();
   });
   window.addEventListener('resize', () => {
-    queueLayout();
+    cluster();
     if (state.view === 'rings') renderRings(true);
   });
 
-  const STYLES = [['photo', '照片卡'], ['postcard', '明信片'], ['stamp', '圆章']];
-  function applyStyle() {
-    document.body.dataset.style = state.style;
-    $('style-btn').textContent = '卡片：' + STYLES.find(s => s[0] === state.style)[1];
-    queueLayout();
+  // ---------- 卡片带：按单程时间由近到远，滑到哪张，地图就飞到哪里 ----------
+  let deckKey = '';
+  const deckItems = () => PLACES.filter(shown).sort((a, b) => minsOf(a) - minsOf(b));
+
+  function renderDeck() {
+    const items = deckItems();
+    const key = state.measure + items.map(p => p.id).join(',');
+    if (key === deckKey) return;
+    deckKey = key;
+    $('deck-count').textContent = `${items.length} 处 · 按${MEASURE[state.measure]}由近到远`;
+    $('deck-list').innerHTML = items.length
+      ? items.map(p => `<button type="button" class="dk" data-id="${p.id}">${photo(p)}<span class="dk-txt">
+          <span class="dk-head"><b>${esc(p.name)}</b>${timeBadge(p)}</span>
+          <span class="dk-meta">${esc(p.area)} · <span class="dk-emo">${emojis(p)}</span></span>
+          <span class="dk-blurb">${esc(p.blurb)}</span>
+          ${p.season.tone !== 'plain' ? `<span class="st tone-${p.season.tone}">${esc(p.season.text)}</span>` : ''}
+        </span></button>`).join('')
+      : '<p class="dk-empty">没有符合的地方。换个标签或时间档试试。</p>';
+    if (!items.some(p => p.id === state.focus)) state.focus = items[0]?.id || null;
+    scrollDeckTo(state.focus, false);
   }
-  $('style-btn').addEventListener('click', () => {
-    const i = STYLES.findIndex(s => s[0] === state.style);
-    state.style = STYLES[(i + 1) % STYLES.length][0];
-    applyStyle();
+
+  function scrollDeckTo(id, smooth) {
+    const card = id && $('deck-list').querySelector(`[data-id="${id}"]`);
+    if (!card) return;
+    deckProgrammatic = true;
+    $('deck-list').scrollTo({ left: card.offsetLeft - parseFloat(getComputedStyle($('deck-list')).paddingLeft), behavior: smooth && !reduceMotion ? 'smooth' : 'auto' });
+    clearTimeout(deckTimer);
+    deckTimer = setTimeout(() => { deckProgrammatic = false; }, smooth ? 600 : 50);
+  }
+
+  const easeInOut = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  function focusPlace(id, { scroll = false, fly = true } = {}) {
+    if (!byId[id]) return;
+    state.focus = id;
+    PLACES.forEach(p => {
+      const el = pins.get(p.id).el;
+      if (p.id === id) el.dataset.focus = '';
+      else delete el.dataset.focus;
+    });
+    $('deck-list').querySelectorAll('.dk').forEach(c => c.toggleAttribute('data-focus', c.dataset.id === id));
+    if (scroll) scrollDeckTo(id, true);
+    if (fly) {
+      const opts = { center: byId[id].ll, zoom: Math.max(map.getZoom(), 10), padding: mapPadding(30) };
+      if (reduceMotion) map.jumpTo(opts);
+      else map.flyTo({ ...opts, duration: 1200, curve: 1.25, easing: easeInOut, essential: true });
+    }
+  }
+
+  // 用户滑动停下后才切换焦点，避免地图跟着手指抖
+  let deckTimer;
+  let deckProgrammatic = false;
+  $('deck-list').addEventListener('scroll', () => {
+    if (deckProgrammatic) return;
+    clearTimeout(deckTimer);
+    deckTimer = setTimeout(() => {
+      const list = $('deck-list');
+      const mid = list.scrollLeft + list.clientWidth * 0.12;
+      let best = null;
+      list.querySelectorAll('.dk').forEach(c => {
+        const d = Math.abs(c.offsetLeft - mid);
+        if (!best || d < best.d) best = { d, id: c.dataset.id };
+      });
+      if (best && best.id !== state.focus) focusPlace(best.id, { fly: true });
+    }, 160);
+  }, { passive: true });
+
+  $('deck-list').addEventListener('click', e => {
+    const c = e.target.closest('.dk');
+    if (!c) return;
+    if (c.dataset.id !== state.focus) focusPlace(c.dataset.id, { scroll: true, fly: true });
+    else select(c.dataset.id);
   });
+
+  function renderMapView() {
+    renderDeck();
+    cluster();
+    PLACES.forEach(p => {
+      const el = pins.get(p.id).el;
+      if (p.id === state.focus) el.dataset.focus = '';
+      else delete el.dataset.focus;
+    });
+    $('deck-list').querySelectorAll('.dk').forEach(c => c.toggleAttribute('data-focus', c.dataset.id === state.focus));
+  }
 
   // ---------- 时间圈：半径＝单程时间，方向＝从京桥看的方位；底下是淡淡的地图，只示意方位 ----------
   const ZOOMS = [1.5, 2, 2.7];
@@ -515,7 +559,7 @@
       if (!list.length) return '';
       const cards = list.map(p => `<button type="button" class="bk" data-id="${p.id}">${photo(p)}
         <span class="bk-top">${timeBadge(p)}${p.season.tone !== 'plain' ? `<span class="st tone-${p.season.tone}">${esc(p.season.text)}</span>` : ''}</span>
-        <span class="bk-txt"><small class="bk-area">${esc(p.area)}</small><h3>${esc(p.name)}</h3><p>${esc(p.blurb)}</p></span></button>`).join('');
+        <span class="bk-txt"><small class="bk-area">${esc(p.area)} · ${emojis(p)}</small><h3>${esc(p.name)}</h3><p>${esc(p.blurb)}</p></span></button>`).join('');
       return `<section class="book-sec"><div class="book-head"><h2><span class="tb tb-${b}">${BAND_NAME[b]}</span>${BAND_TITLE[b]}</h2><small>${MEASURE[state.measure]} · ${list.length} 处</small></div>
         <div class="book-row">${cards || '<p class="book-empty">没有地点。</p>'}</div></section>`;
     }).join('');
@@ -558,6 +602,7 @@
           <div class="${state.measure === 'transit' ? 'on' : ''}"><small>公共交通 · 估算</small><b>${minsOf(p, 'transit')}<small>分</small></b><p>${esc(p.transit.route)}</p></div>
           <div class="${state.measure === 'car' ? 'on' : ''}"><small>自驾 · 不含拥堵</small><b>${minsOf(p, 'car')}<small>分</small></b><p>约${p.car.km}公里；高峰和停车另计</p></div>
         </div>
+        <p class="sh-tags">${p.tags.map(t => `<span>${EMOJI[t]} ${t}</span>`).join('')}</p>
         <h3>为什么去</h3>
         <p>${esc(p.why)}</p>
         ${p.tip ? `<p class="sh-tip">${esc(p.tip)}</p>` : ''}
@@ -589,10 +634,11 @@
       void sheet.offsetWidth;
       sheet.classList.add('open');
     }
+    document.body.classList.add('has-sheet');
     if (state.view === 'map') {
-      const opts = { center: byId[id].ll, zoom: Math.max(map.getZoom(), 11.5), padding: { top: 140, bottom: sheet.offsetHeight + 20, left: 30, right: 30 } };
-      reduceMotion ? map.jumpTo(opts) : map.easeTo({ ...opts, duration: 800 });
-      queueLayout();
+      state.focus = id;
+      const opts = { center: byId[id].ll, zoom: Math.max(map.getZoom(), 10.5), padding: { top: 140, bottom: sheet.offsetHeight + 20, left: 30, right: 30 } };
+      reduceMotion ? map.jumpTo(opts) : map.easeTo({ ...opts, duration: 900, easing: easeInOut });
     }
     if (state.view === 'rings') renderRings();
   }
@@ -601,6 +647,7 @@
     if (!fromHash && location.hash) history.pushState(null, '', location.pathname + location.search);
     state.sel = null;
     $('sheet').hidden = true;
+    document.body.classList.remove('has-sheet');
     map.setPadding({ top: 0, bottom: 0, left: 0, right: 0 });
     renderView();
   }
@@ -617,7 +664,6 @@
 
   // ---------- 启动 ----------
   renderBands();
-  applyStyle();
   showView(state.view);
   fromHash();
 })();

@@ -19,7 +19,11 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from validate_places import check  # noqa: E402
 
 UA = 'kaniyu-places/0.1 (personal travel guide; contact via GitHub codusk2)'
 WIKI = 'https://ja.wikipedia.org/w/api.php'
@@ -121,9 +125,9 @@ def main() -> None:
     args = ap.parse_args()
     seed = json.loads(Path(args.seed).read_text(encoding='utf-8'))
     places = seed['places']
-    ids = [p['id'] for p in places]
-    if len(ids) != len(set(ids)):
-        raise SystemExit('种子里有重复的 id')
+    errors, _ = check(seed)
+    if errors:
+        raise SystemExit('种子没通过检查，先运行 scripts/validate_places.py 修正：\n' + '\n'.join(errors))
 
     origin_title = seed['origin']['wiki']
     pages = wiki_pages([origin_title] + [p['wiki'] for p in places])
