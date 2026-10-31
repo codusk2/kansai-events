@@ -8,6 +8,14 @@ Lite持续内容站 · 2026-10-28 Asia/Tokyo · 本轮owner：Codex。
 - 完整源码权威：此仓库main。Webs/projects/kansai-events为工作副本；box的旧副本不能继续独立改HTML。模板template.html、build_v2.py、events.json和assets/posters为构建输入；index.html为生成物，legacy/events-2026-10-26.html仅历史产物。
 - Python3标准库即可构建当前归档的PNG/JPEG海报；处理无扩展名新图时旧兼容路径需要Pillow，优先预先转换为受支持格式。`python3 build_v2.py --events events.json --template template.html --output index.html`；`python3 -m unittest discover -s tests`、`node --test tests/*.test.cjs`验证。
 
+## 蟹鱼游（2026-11-01上线）
+
+- 线上：https://codusk2.github.io/kansai-events/kaniyu/ ；源码 `kaniyu/`（index.html、spots.js、spots.css、icon.svg），不经 build_v2.py，按原样随main发布。根目录的遛弯活动页和它的本机存档不变。
+- 数据：`data/places.json`（`scripts/collect_places.py` 由 `data/places.seed.json` 生成）、`data/greenapple.json`（手维护）、`data/events.current.json`（`scripts/collect_events.py` 由 events.json 和 `data/events.seed.json` 生成）。维护见 `docs/旅行点维护.md`，设计与历轮修改见 `docs/改版方案-2026-10-31.md`。
+- 想去、不感兴趣、偏好只存本浏览器 localStorage（`kaniyu-*` 键），没有云同步。
+- 外部依赖：MapLibre GL 4.7.1（unpkg，固定版本）、OpenFreeMap 瓦片、Wikimedia Commons 缩略图（直接引用，页面标注作者与许可）。瓦片或图片服务不可用时地图或照片空白，其他功能照常。
+- 活动和绿苹果数据是静态快照，需要有人定期重新生成并发布；目前没有指定维护者或定时任务。
+
 ## 数据与身份
 
 events.json是已审阅发布内容的唯一输入。海报已从原公开HTML解出原字节并改相对路径；23条活动、21张图，不凭空补另外两张。原始采集资料另归内容负责人保管；本轮不抓新活动。

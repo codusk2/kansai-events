@@ -65,9 +65,9 @@
 
   // ---------- 数据 ----------
   const [DATA, GA_DATA, EV_DATA] = await Promise.all([
-    fetch('../../data/places.json').then(r => r.json()),
-    fetch('../../data/greenapple.json').then(r => r.json()),
-    fetch('../../data/events.current.json').then(r => r.json())
+    fetch('../data/places.json').then(r => r.json()),
+    fetch('../data/greenapple.json').then(r => r.json()),
+    fetch('../data/events.current.json').then(r => r.json())
   ]);
   const ORIGIN = DATA.origin;
   const PLACES = DATA.places;
@@ -94,7 +94,7 @@
   const EVENTS = [
     ...EV_DATA.events.map(e => ({
       id: 'ev-' + e.id, name: e.name, venue: e.venue, ll: e.ll, from: e.from, to: e.to, kind: e.kind || '活动',
-      when: e.date || dateText(e.from, e.to), note: e.note, fee: e.fee, link: e.link, poster: e.poster ? '../../' + e.poster : null, ga: false, sources: e.sources || []
+      when: e.date || dateText(e.from, e.to), note: e.note, fee: e.fee, link: e.link, poster: e.poster ? '../' + e.poster : null, ga: false, sources: e.sources || []
     })),
     ...GA_DATA.events.map(e => ({
       id: e.id, name: e.name, venue: e.venue, ll: e.ll, from: e.from, to: e.to, kind: e.kind,

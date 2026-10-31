@@ -1,6 +1,6 @@
 {
  "about": "由 scripts/collect_events.py 从 events.json 和 data/events.seed.json 生成，不要手改。",
- "today": "2026-10-31",
+ "today": "2026-11-01",
  "events": [
   {
    "id": "5bb929c6b150b824b072",
