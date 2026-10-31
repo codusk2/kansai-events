@@ -539,19 +539,21 @@
   $('home-btn').addEventListener('click', flyHome);
 
   // 活动按钮：单独显示还没结束的活动，再点一次回到旅行点
-  $('ev-btn').addEventListener('click', () => {
+  // 地图和画册里的开关共用这两个函数
+  function toggleEvents() {
     state.events = !state.events;
     refresh();
-    if (state.events) flyHome();
-  });
-
-  // 绿苹果按钮：把 Mrs. GREEN APPLE 的活动叠加到当前的旅行点上
-  $('ga-btn').addEventListener('click', () => {
+    if (state.events && state.view === 'map') flyHome();
+  }
+  // 绿苹果：把 Mrs. GREEN APPLE 的活动叠加到当前的旅行点上
+  function toggleGa() {
     state.ga = state.events ? true : !state.ga;
     state.events = false;
     refresh();
-    if (state.ga) flyHome();
-  });
+    if (state.ga && state.view === 'map') flyHome();
+  }
+  $('ev-btn').addEventListener('click', toggleEvents);
+  $('ga-btn').addEventListener('click', toggleGa);
 
   // 合并：只在地图停下后算一次，拖动过程中不重排
   const CLUSTER_PX = 50;
@@ -913,16 +915,22 @@
   // ---------- 画册 ----------
   const eventBook = (title, list) => `<section class="book-sec"><div class="book-head"><h2>${title}</h2><small>${list.length} 个</small></div>
     <div class="book-row">${list.map(e => `<button type="button" class="bk bk-ev${e.ga ? ' ga' : ''}" data-id="${e.id}">${e.poster ? `<img src="${esc(e.poster)}" alt="" loading="lazy">` : `<span class="bk-ga-face" aria-hidden="true">${e.ga ? '🍏' : '🎟️'}</span>`}
-      <span class="bk-top"><span class="tb tb-ga">${esc(e.kind)}</span></span>
+      <span class="bk-top"><span class="ev-tag${e.ga ? ' ga' : ''}">${e.ga ? '🍏 绿苹果 · ' : '🎟️ '}${esc(e.kind)}</span></span>
       <span class="bk-txt"><small class="bk-area">${esc(e.when)} · ${esc(evStatus(e))}</small><h3>${esc(e.name)}</h3><p>${esc(e.venue)} · ${esc(e.note)}</p></span></button>`).join('')}</div></section>`;
+
+  // 画册顶部的两个开关，和地图上的按钮是同一个状态
+  const bookToggles = () => `<div class="book-toggles">
+      <button type="button" class="bt ga" data-bt="ga" aria-pressed="${state.ga && !state.events}">🍏 绿苹果<small>${EVENTS.filter(e => e.ga && live(e)).length}</small></button>
+      <button type="button" class="bt" data-bt="events" aria-pressed="${state.events}">🎟️ 只看活动<small>${EVENTS.filter(live).length}</small></button>
+    </div>`;
 
   function renderBook() {
     if (mode() === 'idle') {
-      $('view-book').innerHTML = '';
+      $('view-book').innerHTML = bookToggles();
       return;
     }
     if (mode() === 'events') {
-      $('view-book').innerHTML = eventBook('🎟️ 还没结束的活动', EVENTS.filter(live));
+      $('view-book').innerHTML = bookToggles() + eventBook('🎟️ 还没结束的活动', EVENTS.filter(live));
       return;
     }
     const secs = LIMITS.filter(l => l <= state.limit).map(String).map(b => {
@@ -937,9 +945,14 @@
     const banner = GA_DATA.img ? `<figure class="ga-banner"><img src="${esc(GA_DATA.img.thumb)}" alt="Mrs. GREEN APPLE"><figcaption><b>🍏 Mrs. GREEN APPLE 在关西</b><small>图：${esc(GA_DATA.img.artist)} · ${esc(GA_DATA.img.license)} · <a href="${esc(GA_DATA.img.page)}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></small></figcaption></figure>` : '';
     const ga = gaOn() ? banner + eventBook('🍏 绿苹果专区', EVENTS.filter(e => e.ga && live(e))) + `<p class="book-note">卡片照片是会场照片（Wikimedia Commons），不是官方海报。${esc(GA_DATA.placesNote)}</p>` : '';
     const end = `<p class="book-end">${CRITTERS}到底啦，往上滑还有</p>`;
-    $('view-book').innerHTML = (ga + secs) ? ga + secs + end : '<p class="book-empty book-none">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>';
+    $('view-book').innerHTML = bookToggles() + ((ga + secs) ? ga + secs + end : '<p class="book-empty book-none">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>');
   }
   $('view-book').addEventListener('click', e => {
+    const t = e.target.closest('[data-bt]');
+    if (t) {
+      t.dataset.bt === 'ga' ? toggleGa() : toggleEvents();
+      return;
+    }
     const b = e.target.closest('[data-id]');
     if (b) select(b.dataset.id);
   });
