@@ -185,6 +185,92 @@
    "date": "2026-10-31",
    "status": "已收录",
    "placeId": "joshokoji"
+  },
+  {
+   "name": "和歌浦渔港 朝市·吻仔鱼节（11月）",
+   "link": "https://www.pref.wakayama.lg.jp/prefg/071000/osakana/matsuri/matsuri.html",
+   "note": "每年5月和11月举办，2026年11月日期未公布；X上和歌山情报局10/28有报道",
+   "from": "Claude（X、和歌山县）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "那智渔港 渔师朝市 11/22",
+   "link": "https://x.com/Nachikatsuura",
+   "note": "那智胜浦町公告；单程可能超过3小时",
+   "from": "Claude（X）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "堺 名物布丁/けし餅",
+   "link": "",
+   "note": "小红书线索，待找可靠来源",
+   "from": "Claude（小红书）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "彦根 美食（近江牛）",
+   "link": "",
+   "note": "小红书“大阪出发1小时，吃倒在彦根”（日本国家旅游局），已收录彦根城，可补美食内容",
+   "from": "Claude（小红书）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "田尻渔港早市",
+   "link": "",
+   "note": "小红书/X线索，已核实收录",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "tajiri-asaichi"
+  },
+  {
+   "name": "木津市场",
+   "link": "",
+   "note": "小红书/X线索，已核实收录",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "kizu-market"
+  },
+  {
+   "name": "白浜Toretore市场",
+   "link": "",
+   "note": "小红书/X线索，已核实收录",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "toretore"
+  },
+  {
+   "name": "和歌山拉面",
+   "link": "",
+   "note": "小红书/X线索，已核实收录",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "wakayama-ramen"
+  },
+  {
+   "name": "明石鱼之棚",
+   "link": "",
+   "note": "小红书/X线索，已核实收录",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "akashi-uonotana"
+  },
+  {
+   "name": "淡路岛道之驿Uzushio",
+   "link": "",
+   "note": "小红书/X线索，已核实收录",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "awaji-uzushio"
   }
  ]
 }

@@ -743,9 +743,22 @@
     host.style.height = W + 'px';
     const C = W / 2;
     const R = C - 24;
-    // 半径按时间的0.6次方：近处拉开，远处不出界；刻度圈照实标注
-    const rad = m => R * Math.pow(Math.min(m, 180) / 180, 0.6);
     const vis = PLACES.filter(shown);
+    // 半径按“有多少处在这个时间以内”分配面积：每处地点占的面积大致相同，
+    // 地点多的时间段圈就宽，少的就窄；仍然越远越往外。刻度圈照实画在30/60/120/180分。
+    // 用当前显示的地点算；太少时用全部地点，避免图形乱跳。
+    const basis = (vis.length >= 8 ? vis : PLACES).map(p => Math.min(minsOf(p), 180)).sort((a, b) => a - b);
+    const cdf = m => {
+      let k = 0;
+      while (k < basis.length && basis[k] <= m) k++;
+      // 在相邻两个地点的时间之间线性插值，曲线连续
+      const lo = k ? basis[k - 1] : 0;
+      const hi = k < basis.length ? basis[k] : 180;
+      const frac = hi > lo ? (m - lo) / (hi - lo) : 0;
+      return Math.min(1, (k + frac) / (basis.length + 1));
+    };
+    const R0 = 26;
+    const rad = m => R0 + (R - R0) * Math.sqrt(0.85 * cdf(Math.min(m, 180)) + 0.15 * Math.min(m, 180) / 180);
     const inBand = l => vis.filter(p => minsOf(p) <= l && minsOf(p) > ({ 30: 0, 60: 30, 120: 60, 180: 120 })[l]).length;
     const sectorLines = DIRS.map((_, i) => {
       const a = toRad(i * 45 + 22.5);
@@ -768,12 +781,26 @@
     // 小时说明放在最上层（HTML），圆点也会绕开它们
     const LBL_H = 16;
     // 放大时上下各放一份，拖到哪边都看得到
-    const ringLabels = [30, 60, 120, 180].flatMap(m => {
-      const text = `${BAND_NAME[m]}${mode() === 'places' && m <= state.limit ? ` · ${inBand(m)}处` : ''}`;
-      const w = text.length * 9 + 14;
-      const top = { m, text, x: C - w / 2, y: C - rad(m) + 3, w, h: LBL_H };
-      return radarFull ? [top] : [top, { ...top, y: C + rad(m) - 3 - LBL_H }];
-    });
+    // 两圈靠得近时，标签沿着自己的圆往旁边挪，不叠在一起
+    const ringLabels = [];
+    const clash = r => ringLabels.some(q => r.x < q.x + q.w + 4 && r.x + r.w + 4 > q.x && r.y < q.y + q.h + 2 && r.y + r.h + 2 > q.y);
+    for (const side of radarFull ? [0] : [0, 180]) {
+      for (const m of [180, 120, 60, 30]) {
+        const text = `${BAND_NAME[m]}${mode() === 'places' && m <= state.limit ? ` · ${inBand(m)}处` : ''}`;
+        const w = text.length * 9 + 14;
+        const r = rad(m);
+        for (const da of [0, 22, -22, 40, -40, 58, -58]) {
+          const a = toRad(side + da);
+          const cx = C + r * Math.sin(a);
+          const cy = C - r * Math.cos(a);
+          const box = { m, text, x: cx - w / 2, y: cy - LBL_H / 2, w, h: LBL_H };
+          if (!clash(box) || da === -58) {
+            ringLabels.push(box);
+            break;
+          }
+        }
+      }
+    }
     host.querySelectorAll('.radar-lbl').forEach(el => el.remove());
     host.insertAdjacentHTML('beforeend', ringLabels.map(l => `<span class="radar-lbl" style="left:${l.x}px;top:${l.y}px;width:${l.w}px">${l.text}</span>`).join(''));
 
