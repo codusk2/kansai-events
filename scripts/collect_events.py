@@ -68,9 +68,21 @@ def main() -> None:
             'll': ll, 'fee': e.get('门票', ''), 'note': e.get('亮点') or e.get('简介', '')[:60],
             'link': e.get('官网链接', ''), 'poster': e.get('海报路径') or None,
         })
-    result = {'about': '由 scripts/collect_events.py 从 events.json 生成，不要手改。', 'today': args.today, 'events': out}
+    # 蟹鱼游自己收集的活动（带来源）
+    seed_path = ROOT / 'data' / 'events.seed.json'
+    if seed_path.exists():
+        for e in json.loads(seed_path.read_text(encoding='utf-8'))['events']:
+            if (e.get('to') or '') < args.today:
+                continue
+            out.append({
+                'id': e['id'], 'name': e['name'], 'venue': e['venue'], 'area': e.get('area', ''),
+                'kind': e.get('kind', ''), 'date': '', 'from': e.get('from'), 'to': e.get('to'),
+                'll': e.get('ll'), 'fee': e.get('fee', ''), 'note': e.get('note', ''),
+                'link': e.get('link', ''), 'poster': None, 'sources': e.get('sources', []),
+            })
+    result = {'about': '由 scripts/collect_events.py 从 events.json 和 data/events.seed.json 生成，不要手改。', 'today': args.today, 'events': out}
     (ROOT / 'data' / 'events.current.json').write_text(json.dumps(result, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
-    print(f'未结束 {len(current)} 个，有坐标 {len(out)} 个；缺坐标：{"、".join(missing) or "无"}')
+    print(f'events.json 未结束 {len(current)} 个；合计输出 {len(out)} 个；缺坐标：{"、".join(missing) or "无"}')
 
 
 if __name__ == '__main__':

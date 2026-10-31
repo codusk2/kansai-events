@@ -1,5 +1,5 @@
 {
- "about": "由 scripts/collect_events.py 从 events.json 生成，不要手改。",
+ "about": "由 scripts/collect_events.py 从 events.json 和 data/events.seed.json 生成，不要手改。",
  "today": "2026-10-31",
  "events": [
   {
@@ -415,6 +415,210 @@
    "note": "11:00–17:00，挂面快吃大赛、书法表演、市集，雨天延期",
    "link": "https://www.himeji-kanko.jp/event/2016/",
    "poster": "assets/posters/dcfa7c5599c5a255477c.jpg"
+  },
+  {
+   "id": "osaka-hikari-2026",
+   "name": "大阪·光之飨宴2026",
+   "venue": "御堂筋、中之岛等大阪市内各处",
+   "area": "",
+   "kind": "灯饰",
+   "date": "",
+   "from": "2026-11-03",
+   "to": "2027-01-31",
+   "ll": [
+    135.5005,
+    34.688
+   ],
+   "fee": "",
+   "note": "御堂筋灯饰和中之岛一带的灯光节目，天王寺公园等26处参加。各会场期间不同。",
+   "link": "",
+   "poster": null,
+   "sources": [
+    {
+     "url": "https://www.city.osaka.lg.jp/hodoshiryo/keizaisenryaku/0000687506.html",
+     "note": "大阪市发表"
+    },
+    {
+     "url": "https://www.pref.osaka.lg.jp/documents/141872/syousaisiryou.pdf",
+     "note": "大阪府资料"
+    }
+   ]
+  },
+  {
+   "id": "kobe-luminarie-2027",
+   "name": "第32回神户Luminarie",
+   "venue": "美利坚公园、东游园地、旧居留地",
+   "area": "",
+   "kind": "灯饰",
+   "date": "",
+   "from": "2027-01-29",
+   "to": "2027-02-07",
+   "ll": [
+    135.1955,
+    34.6895
+   ],
+   "fee": "",
+   "note": "黄昏到21:30点灯；美利坚公园会场部分收费（预售平日500日元、周末750日元）。",
+   "link": "",
+   "poster": null,
+   "sources": [
+    {
+     "url": "https://www.city.kobe.lg.jp/a64051/284690987078.html",
+     "note": "神户市发表"
+    },
+    {
+     "url": "https://animeanime.jp/release/prtimes/20260529/289909.html",
+     "note": "新闻稿"
+    }
+   ]
+  },
+  {
+   "id": "moomin-porttower",
+   "name": "姆明×神户港塔",
+   "venue": "神户港塔及北野、元町、海边22处",
+   "area": "",
+   "kind": "合作活动",
+   "date": "",
+   "from": "2026-10-10",
+   "to": "2026-11-30",
+   "ll": [
+    135.1866,
+    34.6826
+   ],
+   "fee": "",
+   "note": "港塔里布置成姆明的灯塔和家，展望层有光影互动；元町商店街有临时拍照点（到11/16）。",
+   "link": "",
+   "poster": null,
+   "sources": [
+    {
+     "url": "https://resemom.jp/release/prtimes/20261014/219658.html",
+     "note": "活动新闻稿"
+    },
+    {
+     "url": "https://www.inside-games.jp/release/prtimes/20261002/310558.html",
+     "note": "活动介绍"
+    }
+   ]
+  },
+  {
+   "id": "tove-moomin-kobe",
+   "name": "托芙与姆明展",
+   "venue": "神户市立博物馆",
+   "area": "",
+   "kind": "展览",
+   "date": "",
+   "from": "2026-10-10",
+   "to": "2026-12-13",
+   "ll": [
+    135.1924,
+    34.6878
+   ],
+   "fee": "",
+   "note": "和姆明×神户港塔同期举办。",
+   "link": "",
+   "poster": null,
+   "sources": [
+    {
+     "url": "https://www.inside-games.jp/release/prtimes/20261016/312953.html",
+     "note": "活动介绍"
+    }
+   ]
+  },
+  {
+   "id": "shoseien-akari",
+   "name": "涉成园 秋灯",
+   "venue": "涉成园",
+   "area": "",
+   "kind": "红叶点灯",
+   "date": "",
+   "from": "2026-11-15",
+   "to": "2026-11-30",
+   "ll": [
+    135.7613,
+    34.9906
+   ],
+   "fee": "",
+   "note": "秋季夜间特别参观。",
+   "link": "",
+   "poster": null,
+   "sources": [
+    {
+     "url": "https://ja.kyoto.travel/times/night/event/?p=10",
+     "note": "京都观光协会"
+    }
+   ]
+  },
+  {
+   "id": "joshokoji-lightup",
+   "name": "常照皇寺 红叶点灯",
+   "venue": "常照皇寺",
+   "area": "",
+   "kind": "红叶点灯",
+   "date": "",
+   "from": "2026-11-22",
+   "to": "2026-12-07",
+   "ll": [
+    135.6617,
+    35.2186
+   ],
+   "fee": "",
+   "note": "点灯与夜间特别参观。",
+   "link": "",
+   "poster": null,
+   "sources": [
+    {
+     "url": "https://ja.kyoto.travel/times/night/event/?p=10",
+     "note": "京都观光协会"
+    }
+   ]
+  },
+  {
+   "id": "umekoji-suzaku",
+   "name": "梅小路公园 朱雀之庭点灯",
+   "venue": "梅小路公园",
+   "area": "",
+   "kind": "红叶点灯",
+   "date": "",
+   "from": "2026-11-21",
+   "to": "2026-12-07",
+   "ll": [
+    135.7459,
+    34.9875
+   ],
+   "fee": "",
+   "note": "11/25、12/1休园。可和京都铁道博物馆排在同一天。",
+   "link": "",
+   "poster": null,
+   "sources": [
+    {
+     "url": "https://ja.kyoto.travel/times/night/event/?p=10",
+     "note": "京都观光协会"
+    }
+   ]
+  },
+  {
+   "id": "hankyu-xmas-2026",
+   "name": "阪急梅田 圣诞市集2026",
+   "venue": "阪急梅田本店9楼祝祭广场",
+   "area": "",
+   "kind": "圣诞市集",
+   "date": "",
+   "from": "2026-11-18",
+   "to": "2026-12-25",
+   "ll": [
+    135.4995,
+    34.7036
+   ],
+   "fee": "",
+   "note": "结束日期各处说法不一（也有写到12/20的），以官网为准。",
+   "link": "",
+   "poster": null,
+   "sources": [
+    {
+     "url": "https://watabi.org/articles/osaka-christmas-market-2026",
+     "note": "2026大阪圣诞市集整理"
+    }
+   ]
   }
  ]
 }

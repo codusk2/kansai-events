@@ -1,7 +1,190 @@
 {
-  "about": "旅行点线索收件箱。用户或agent把看到的地方（含小红书、X、Instagram帖子链接）先放这里，核实后再收进 places.seed.json，并把 status 改为“已收录”或“不收”（写原因）。规则见 docs/旅行点维护.md。",
-  "items": [
-    { "name": "星田园地·星之秋千", "link": "https://www.walkerplus.com/article/195245/", "note": "试走agent添加流程", "from": "Claude", "date": "2026-10-31", "status": "已收录", "placeId": "hoshida" },
-    { "name": "三室户寺", "link": "https://tabi-mag.jp/mimuroto-ajisai/", "note": "试走agent添加流程", "from": "Claude", "date": "2026-10-31", "status": "已收录", "placeId": "mimurotoji" }
-  ]
+ "about": "旅行点线索收件箱。用户或agent把看到的地方（含小红书、X、Instagram帖子链接）先放这里，核实后再收进 places.seed.json，并把 status 改为“已收录”或“不收”（写原因）。规则见 docs/旅行点维护.md。",
+ "items": [
+  {
+   "name": "星田园地·星之秋千",
+   "link": "https://www.walkerplus.com/article/195245/",
+   "note": "试走agent添加流程",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "hoshida"
+  },
+  {
+   "name": "三室户寺",
+   "link": "https://tabi-mag.jp/mimuroto-ajisai/",
+   "note": "试走agent添加流程",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "mimurotoji"
+  },
+  {
+   "name": "余吴湖",
+   "link": "https://rurubu.jp/andmore/article/18456",
+   "note": "滋贺，安静的湖",
+   "from": "Claude（2026-10-31搜集）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "三岛池",
+   "link": "https://crexgroup.com/ja/travel/transportation/kansai-day-trip-driving-course/",
+   "note": "滋贺米原，倒映伊吹山",
+   "from": "Claude（2026-10-31搜集）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "奥琵琶湖公园道",
+   "link": "https://crexgroup.com/ja/travel/transportation/kansai-day-trip-driving-course/",
+   "note": "滋贺长滨，自驾景观路",
+   "from": "Claude（2026-10-31搜集）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "砥峰高原",
+   "link": "https://matcha-jp.com/jp/22381",
+   "note": "兵库，芒草高原",
+   "from": "Claude（2026-10-31搜集）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "大台原",
+   "link": "https://matcha-jp.com/jp/22381",
+   "note": "奈良三重交界，可能超过3小时",
+   "from": "Claude（2026-10-31搜集）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "三段壁·千叠敷",
+   "link": "https://cn.toursforfun.com/as-jp-osaka-dp/",
+   "note": "和歌山白滨附近",
+   "from": "Claude（2026-10-31搜集）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "熊野本宫大社",
+   "link": "https://cn.toursforfun.com/as-jp-osaka-dp/",
+   "note": "和歌山，可能超过3小时",
+   "from": "Claude（2026-10-31搜集）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "光之游乐园（Flowering Illumination）",
+   "link": "https://report.iko-yo.net/articles/34620",
+   "note": "活动，期间和地点待查",
+   "from": "Claude（2026-10-31搜集）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "草津红叶灯笼节2026",
+   "link": "https://report.iko-yo.net/articles/34620",
+   "note": "活动，期间待查",
+   "from": "Claude（2026-10-31搜集）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "LIGHT CYCLES KYOTO",
+   "link": "https://report.iko-yo.net/articles/34620",
+   "note": "京都府立植物园夜间活动，期间待查",
+   "from": "Claude（2026-10-31搜集）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "大阪城Illuminage 2026",
+   "link": "https://tabi-mag.jp/osakacastle-illuminage/",
+   "note": "活动，2026年期间未公布",
+   "from": "Claude（2026-10-31搜集）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "梅田蓝天大厦圣诞2026",
+   "link": "https://koubo.jp/press-release/prtimes/c63228_r215",
+   "note": "活动，期间待查",
+   "from": "Claude（2026-10-31搜集）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "天王寺圣诞市集2026",
+   "link": "https://report.iko-yo.net/articles/29230",
+   "note": "活动，期间待查",
+   "from": "Claude（2026-10-31搜集）",
+   "date": "2026-10-31",
+   "status": ""
+  },
+  {
+   "name": "武田尾废线步道",
+   "link": "",
+   "note": "2026-10-31搜集",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "takedao"
+  },
+  {
+   "name": "友岛",
+   "link": "",
+   "note": "2026-10-31搜集",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "tomogashima"
+  },
+  {
+   "name": "马基诺水杉林荫道",
+   "link": "",
+   "note": "2026-10-31搜集",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "metasequoia"
+  },
+  {
+   "name": "谷濑吊桥",
+   "link": "",
+   "note": "2026-10-31搜集",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "tanize"
+  },
+  {
+   "name": "伊根舟屋",
+   "link": "",
+   "note": "2026-10-31搜集",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "ine"
+  },
+  {
+   "name": "涉成园",
+   "link": "",
+   "note": "2026-10-31搜集",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "shoseien"
+  },
+  {
+   "name": "常照皇寺",
+   "link": "",
+   "note": "2026-10-31搜集",
+   "from": "Claude",
+   "date": "2026-10-31",
+   "status": "已收录",
+   "placeId": "joshokoji"
+  }
+ ]
 }

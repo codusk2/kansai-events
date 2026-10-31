@@ -109,13 +109,13 @@ def check(seed: dict) -> tuple[list[str], list[str]]:
 ISO = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 
 
-def check_greenapple(data: dict) -> list[str]:
+def check_greenapple(data: dict, label: str = '绿苹果') -> list[str]:
     """绿苹果专区：每条要有来源；活动日期是 YYYY-MM-DD 或 null（null 时必须写 dateNote）。"""
     errors: list[str] = []
     seen: set[str] = set()
     for item in (data.get('events') or []) + (data.get('places') or []):
         iid = item.get('id', '?')
-        err = lambda msg: errors.append(f'绿苹果 {iid}：{msg}')
+        err = lambda msg: errors.append(f'{label} {iid}：{msg}')
         if not ID.match(str(item.get('id', ''))) or iid in seen:
             err('id 无效或重复')
         seen.add(iid)
@@ -132,9 +132,9 @@ def check_greenapple(data: dict) -> list[str]:
             v = ev.get(key)
             if v is None:
                 if not ev.get('dateNote'):
-                    errors.append(f'绿苹果 {ev.get("id")}：{key} 为 null 时要写 dateNote')
+                    errors.append(f'{label} {ev.get("id")}：{key} 为 null 时要写 dateNote')
             elif not ISO.match(str(v)):
-                errors.append(f'绿苹果 {ev.get("id")}：{key} 应为 YYYY-MM-DD')
+                errors.append(f'{label} {ev.get("id")}：{key} 应为 YYYY-MM-DD')
     return errors
 
 
@@ -148,6 +148,9 @@ def main() -> None:
     ga = Path(args.seed).with_name('greenapple.json')
     if ga.exists():
         errors += check_greenapple(json.loads(ga.read_text(encoding='utf-8')))
+    evs = Path(args.seed).with_name('events.seed.json')
+    if evs.exists():
+        errors += check_greenapple(json.loads(evs.read_text(encoding='utf-8')), '活动')
     if warnings and not args.quiet:
         print(f'提醒 {len(warnings)} 条（不阻止生成），例如：{warnings[0]}')
     for e in errors:

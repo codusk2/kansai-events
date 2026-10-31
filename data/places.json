@@ -1,6 +1,6 @@
 {
  "about": "由 scripts/collect_places.py 从 places.seed.json 生成，不要手改。",
- "generatedAt": "2026-10-31T13:50:52Z",
+ "generatedAt": "2026-10-31T14:26:12Z",
  "tags": [
   {
    "name": "绿苹果",
@@ -3218,6 +3218,366 @@
     "license": "CC BY-SA 4.0"
    },
    "wiki": "https://ja.wikipedia.org/wiki/%E6%9D%B1%E6%98%A0%E5%A4%AA%E7%A7%A6%E6%98%A0%E7%94%BB%E6%9D%91"
+  },
+  {
+   "id": "takedao",
+   "name": "武田尾废线步道",
+   "ll": [
+    135.3064,
+    34.8433
+   ],
+   "area": "兵库",
+   "kind": "自然",
+   "transit": {
+    "mins": 60,
+    "route": "JR东西线直通宝冢线（普通）到武田尾，步行约8分到入口",
+    "checked": false
+   },
+   "seasons": [
+    {
+     "from": "11-15",
+     "to": "12-05",
+     "label": "红叶",
+     "tone": "koyo"
+    }
+   ],
+   "why": "旧福知山线的铁轨、隧道和铁桥，沿武库川峡谷走4.7公里。",
+   "tip": "7条隧道很暗，带手电；全程没有厕所和商店，自带水和食物。快速列车不停武田尾。",
+   "tags": [
+    "好玩",
+    "山里",
+    "水边",
+    "风景美",
+    "散步"
+   ],
+   "blurb": "枕木还躺在碎石上，一条黑洞洞的隧道接着一条，出口外是翻着白浪的武库川和满山的树，像走在被遗忘的铁路电影里。",
+   "sources": [
+    {
+     "url": "https://tabi-mag.jp/hg0630/",
+     "note": "路线与开放情况"
+    },
+    {
+     "url": "https://www.mapple.net/original/288238/",
+     "note": "交通与注意事项"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "car": {
+    "mins": 53,
+    "km": 39.3
+   },
+   "img": null,
+   "wiki": null
+  },
+  {
+   "id": "tomogashima",
+   "name": "友岛",
+   "ll": [
+    135.0057,
+    34.2797
+   ],
+   "area": "和歌山",
+   "kind": "自然",
+   "transit": {
+    "mins": 150,
+    "route": "南海到和歌山市，转加太线到加太，步行约15分到港口，乘船约20分",
+    "checked": false
+   },
+   "seasons": [],
+   "why": "无人岛上的明治要塞炮台遗迹，被称作“天空之城岛”。",
+   "tip": "渡船有固定休航日，冬季平日停航，先查友岛汽船官网；岛上路陡，穿运动鞋。",
+   "tags": [
+    "海边",
+    "人文古迹",
+    "好玩",
+    "拍照",
+    "山里"
+   ],
+   "blurb": "砖砌的炮台被藤蔓和青苔吞没，阳光从坍塌的拱顶漏进来；爬上灯塔附近的草坡，脚下就是纪淡海峡的蓝。",
+   "sources": [
+    {
+     "url": "https://rurubu.jp/andmore/spot/80031890",
+     "note": "基本信息"
+    },
+    {
+     "url": "https://happyell.co.jp/tomogashima",
+     "note": "渡船与炮台遗迹"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "car": {
+    "mins": 123,
+    "km": 115.7
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/%E5%8F%8B%E3%81%8C%E5%B3%B6%E3%83%BB%E7%B4%80%E6%B7%A1%E6%B5%B7%E5%B3%A1PA071003.jpg/500px-%E5%8F%8B%E3%81%8C%E5%B3%B6%E3%83%BB%E7%B4%80%E6%B7%A1%E6%B5%B7%E5%B3%A1PA071003.jpg",
+    "file": "友が島・紀淡海峡PA071003.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:%E5%8F%8B%E3%81%8C%E5%B3%B6%E3%83%BB%E7%B4%80%E6%B7%A1%E6%B5%B7%E5%B3%A1PA071003.jpg",
+    "artist": "秋空から蛇が降ってきた",
+    "license": "Public domain"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E5%8F%8B%E3%83%B6%E5%B3%B6"
+  },
+  {
+   "id": "metasequoia",
+   "name": "马基诺水杉林荫道",
+   "ll": [
+    136.0546,
+    35.4486
+   ],
+   "area": "滋贺",
+   "kind": "自然",
+   "transit": {
+    "mins": 130,
+    "route": "JR新快速到近江今津，转湖西线到马基诺，转公交或打车",
+    "checked": false
+   },
+   "seasons": [
+    {
+     "from": "05-01",
+     "to": "06-10",
+     "label": "新绿",
+     "tone": "green"
+    },
+    {
+     "from": "11-15",
+     "to": "12-05",
+     "label": "红叶",
+     "tone": "koyo"
+    }
+   ],
+   "why": "约2.4公里的水杉林荫道，四季都好看。",
+   "tip": "开车可停マキノピックランド的免费停车场。",
+   "tags": [
+    "风景美",
+    "拍照",
+    "散步",
+    "红叶"
+   ],
+   "blurb": "五百棵水杉笔直地排向远处的山，春天一片嫩绿，深秋变成整条砖红色的长廊，冬天则披上白雪。",
+   "sources": [
+    {
+     "url": "https://crexgroup.com/ja/travel/transportation/kansai-day-trip-driving-course/",
+     "note": "关西一日自驾路线"
+    },
+    {
+     "url": "https://www.nta.co.jp/media/tripa/articles/dfqFD",
+     "note": "景点介绍"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "car": {
+    "mins": 129,
+    "km": 110.9
+   },
+   "img": null,
+   "wiki": null
+  },
+  {
+   "id": "tanize",
+   "name": "谷濑吊桥",
+   "area": "奈良",
+   "kind": "自然",
+   "transit": {
+    "mins": 200,
+    "route": "近铁到大和八木，转奈良交通八木新宫线公交约2小时",
+    "checked": false
+   },
+   "seasons": [],
+   "why": "高约54米的生活用吊桥，跨在十津川上。",
+   "tip": "公交一天班次很少，适合自驾；一次上桥人数有限。",
+   "tags": [
+    "好玩",
+    "山里",
+    "水边",
+    "风景美"
+   ],
+   "blurb": "走到桥中央，木板在脚下轻轻晃动，五十多米下是碧绿的十津川，两边都是看不到尽头的山。",
+   "sources": [
+    {
+     "url": "https://www.nta.co.jp/media/tripa/articles/J87PL",
+     "note": "大阪出发日归穴场"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "ll": [
+    135.76278,
+    34.10139
+   ],
+   "car": {
+    "mins": 89,
+    "km": 93.5
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Suspension_bridge_of_Tanize_2010.07.28_-_Merged-1.jpg/500px-Suspension_bridge_of_Tanize_2010.07.28_-_Merged-1.jpg",
+    "file": "Suspension_bridge_of_Tanize_2010.07.28_-_Merged-1.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Suspension_bridge_of_Tanize_2010.07.28_-_Merged-1.jpg",
+    "artist": "Tamago Moffle",
+    "license": "CC BY-SA 2.0"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E8%B0%B7%E7%80%AC%E3%81%AE%E5%90%8A%E3%82%8A%E6%A9%8B"
+  },
+  {
+   "id": "ine",
+   "name": "伊根舟屋",
+   "area": "京都",
+   "kind": "街区",
+   "transit": {
+    "mins": 210,
+    "route": "JR到京都，特急到天桥立，转丹后海陆交通公交约1小时",
+    "checked": false
+   },
+   "seasons": [],
+   "why": "两百多间一楼停船、二楼住人的海边舟屋。",
+   "tip": "公共交通很远，开车更现实；可坐游览船从海上看舟屋。",
+   "tags": [
+    "海边",
+    "风景美",
+    "人文古迹",
+    "好吃",
+    "安静"
+   ],
+   "blurb": "一排排木屋把船直接停进一楼，海水几乎贴着门槛。坐船绕湾一圈，海鸥跟着船飞，整个渔村倒映在水里。",
+   "sources": [
+    {
+     "url": "https://www.nta.co.jp/media/tripa/articles/J87PL",
+     "note": "大阪出发日归穴场"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "ll": [
+    135.28744,
+    35.67572
+   ],
+   "car": {
+    "mins": 150,
+    "km": 152.0
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Funaya_in_Ine_Town%2C_Yosa_District%2C_Kyoto_Prefecture_003.jpg/500px-Funaya_in_Ine_Town%2C_Yosa_District%2C_Kyoto_Prefecture_003.jpg",
+    "file": "Funaya_in_Ine_Town,_Yosa_District,_Kyoto_Prefecture_003.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Funaya_in_Ine_Town%2C_Yosa_District%2C_Kyoto_Prefecture_003.jpg",
+    "artist": "Naokijp",
+    "license": "CC BY-SA 4.0"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E4%BC%8A%E6%A0%B9%E3%81%AE%E8%88%9F%E5%B1%8B"
+  },
+  {
+   "id": "shoseien",
+   "ll": [
+    135.7613,
+    34.9906
+   ],
+   "name": "涉成园",
+   "area": "京都",
+   "kind": "庭园",
+   "transit": {
+    "mins": 50,
+    "route": "JR到京都，步行约10分",
+    "checked": false
+   },
+   "seasons": [
+    {
+     "from": "11-15",
+     "to": "11-30",
+     "label": "红叶",
+     "tone": "koyo"
+    }
+   ],
+   "why": "东本愿寺的别邸庭园，京都站旁难得的安静。",
+   "tip": "秋天有夜间特别参观“秋灯”。",
+   "tags": [
+    "安静",
+    "人文古迹",
+    "水边",
+    "红叶",
+    "散步"
+   ],
+   "blurb": "离京都站走路十分钟，却安静得只听见池水声。石桥、茶室和红叶倒映在印月池里，入夜点灯后更像一幅画。",
+   "sources": [
+    {
+     "url": "https://ja.kyoto.travel/times/night/event/?p=10",
+     "note": "京都观光协会夜间活动"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "car": {
+    "mins": 50,
+    "km": 43.9
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/SyoseienBoukakaku.jpg/500px-SyoseienBoukakaku.jpg",
+    "file": "SyoseienBoukakaku.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:SyoseienBoukakaku.jpg",
+    "artist": "＋－ at Japanese Wikipedia on Japanese Wikipedia",
+    "license": "CC BY-SA 3.0"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E6%B8%89%E6%88%90%E5%9C%92"
+  },
+  {
+   "id": "joshokoji",
+   "name": "常照皇寺",
+   "ll": [
+    135.6617,
+    35.2186
+   ],
+   "area": "京都",
+   "kind": "寺社",
+   "transit": {
+    "mins": 160,
+    "route": "JR到京都，转西日本JR公交约1.5小时",
+    "checked": false
+   },
+   "seasons": [
+    {
+     "from": "04-10",
+     "to": "04-25",
+     "label": "樱",
+     "tone": "sakura"
+    },
+    {
+     "from": "11-10",
+     "to": "12-07",
+     "label": "红叶",
+     "tone": "koyo"
+    }
+   ],
+   "why": "京北深山里的古寺，有名的九重樱和秋天的夜间点灯。",
+   "tip": "公交班次少，自驾更方便。",
+   "tags": [
+    "山里",
+    "寺社",
+    "安静",
+    "红叶",
+    "赏花"
+   ],
+   "blurb": "山路尽头的古寺里，石阶上落满红叶，老樱树的枝干撑满整个庭院。点灯的夜里，只听得见山风。",
+   "sources": [
+    {
+     "url": "https://ja.kyoto.travel/times/night/event/?p=10",
+     "note": "京都观光协会：点灯期间"
+    }
+   ],
+   "addedAt": "2026-10-31",
+   "addedBy": "Claude",
+   "car": {
+    "mins": 96,
+    "km": 82.4
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/%E5%B8%B8%E7%85%A7%E7%9A%87%E5%AF%BA1.jpg/500px-%E5%B8%B8%E7%85%A7%E7%9A%87%E5%AF%BA1.jpg",
+    "file": "常照皇寺1.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:%E5%B8%B8%E7%85%A7%E7%9A%87%E5%AF%BA1.jpg",
+    "artist": "Indiana jo",
+    "license": "CC BY-SA 4.0"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E5%B8%B8%E7%85%A7%E7%9A%87%E5%AF%BA"
   }
  ]
 }
