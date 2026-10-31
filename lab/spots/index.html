@@ -27,6 +27,7 @@
       </div>
     </div>
     <div class="bands" id="bands" role="group" aria-label="单程时间"></div>
+    <div class="tags" id="tags" role="group" aria-label="主题"></div>
   </header>
 
   <main class="views">
@@ -35,18 +36,17 @@
       <button type="button" class="style-btn" id="style-btn">卡片：照片卡</button>
     </section>
     <section class="view view-rings" id="view-rings" aria-label="时间圈" hidden>
-      <div class="rings" id="rings"></div>
+      <div class="rings-vp" id="rings-vp"><div class="rings-pad"><div class="rings" id="rings"></div></div></div>
+      <div class="rings-zoom" id="rings-zoom"><button type="button" data-z="+" aria-label="放大">＋</button><button type="button" data-z="-" aria-label="缩小">−</button></div>
       <p class="rings-note" id="rings-note"></p>
     </section>
     <section class="view view-book" id="view-book" aria-label="画册" hidden></section>
-    <section class="view view-compare" id="view-compare" aria-label="对比" hidden></section>
   </main>
 
   <nav class="tabbar" id="tabbar" aria-label="呈现方式">
     <button type="button" data-v="map" aria-pressed="true">地图</button>
     <button type="button" data-v="rings" aria-pressed="false">时间圈</button>
     <button type="button" data-v="book" aria-pressed="false">画册</button>
-    <button type="button" data-v="compare" aria-pressed="false">对比</button>
   </nav>
 
   <aside class="sheet" id="sheet" aria-label="旅行点" hidden></aside>

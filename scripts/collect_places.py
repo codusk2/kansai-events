@@ -163,6 +163,7 @@ def main() -> None:
     result = {
         'about': '由 scripts/collect_places.py 从 places.seed.json 生成，不要手改。',
         'generatedAt': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+        'tags': seed.get('tags', []),
         'origin': {'name': seed['origin']['name'], 'll': [round(origin_ll[0], 5), round(origin_ll[1], 5)]},
         'sources': {
             'transit': '按常用路线估算（含换乘和步行），未逐条核实',

@@ -62,28 +62,33 @@
   // ---------- 状态 ----------
   const state = {
     measure: qs.get('m') === 'car' ? 'car' : 'transit',
-    bands: new Set(['30', '60', '120']),
-    view: ['map', 'rings', 'book', 'compare'].includes(qs.get('view')) ? qs.get('view') : 'map',
+    bands: new Set(['30', '60', '120', '180']),
+    tags: new Set(),
+    view: ['map', 'rings', 'book'].includes(qs.get('view')) ? qs.get('view') : 'map',
     style: ['photo', 'postcard', 'stamp'].includes(qs.get('style')) ? qs.get('style') : 'photo',
     sel: null
   };
   const wish = new Set(['tofukuji', 'arima']);
   const MEASURE = { transit: '公共交通', car: '自驾' };
-  const BAND_NAME = { 30: '半小时', 60: '1小时', 120: '2小时' };
-  const BAND_TITLE = { 30: '半小时圈', 60: '1小时圈', 120: '2小时圈' };
+  const BANDS = ['30', '60', '120', '180'];
+  const BAND_NAME = { 30: '半小时', 60: '1小时', 120: '2小时', 180: '3小时' };
+  const BAND_TITLE = { 30: '半小时圈', 60: '1小时圈', 120: '2小时圈', 180: '3小时圈' };
+  // 主题标签：「最近热门」不存数据，按季节正当时判断
+  const TAGS = ['风景美', '热闹', '好吃', '山里', '海边', '人文古迹', '最近热门', '水边', '寺社', '赏花', '红叶', '温泉', '夜景', '散步', '安静', '拍照', '建筑', '亲子', '乐园', '雨天也行'];
+  const hasTag = (p, t) => (t === '最近热门' ? p.season.hot : p.tags.includes(t));
+  const tagsOk = (p, set = state.tags) => [...set].every(t => hasTag(p, t));
   const minsOf = (p, m = state.measure) => p[m].mins;
   const bandOf = (p, m = state.measure) => {
     const v = minsOf(p, m);
-    return v <= 30 ? '30' : v <= 60 ? '60' : v <= 120 ? '120' : null;
+    return v <= 30 ? '30' : v <= 60 ? '60' : v <= 120 ? '120' : v <= 180 ? '180' : null;
   };
   const shown = p => {
     const b = bandOf(p);
-    return Boolean(b) && state.bands.has(b);
+    return Boolean(b) && state.bands.has(b) && tagsOk(p);
   };
-  const minsText = v => (v >= 60 ? `${Math.floor(v / 60)}小时${v % 60 ? (v % 60) + '分' : ''}` : `${v}分`);
   const timeBadge = p => {
     const b = bandOf(p);
-    return `<span class="tb tb-${b || '120'}">${minsOf(p)}分</span>`;
+    return `<span class="tb tb-${b || '180'}">${minsOf(p)}分</span>`;
   };
   const photo = (p, cls = '') => (p.img
     ? `<img${cls ? ` class="${cls}"` : ''} src="${esc(p.img.thumb)}" alt="" loading="lazy" decoding="async">`
@@ -99,12 +104,30 @@
 
   // ---------- 顶栏：口径与时间档 ----------
   function renderBands() {
-    $('bands').innerHTML = ['30', '60', '120'].map(b => {
-      const n = PLACES.filter(p => bandOf(p) === b).length;
+    $('bands').innerHTML = BANDS.map(b => {
+      const n = PLACES.filter(p => bandOf(p) === b && tagsOk(p)).length;
       return `<button type="button" class="band" data-b="${b}" aria-pressed="${state.bands.has(b)}"><i></i>${BAND_NAME[b]}<small>${n}</small></button>`;
     }).join('');
     $('measure').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.m === state.measure)));
+    // 每个标签旁的数字：再加上它之后还剩几处
+    const inBand = PLACES.filter(p => state.bands.has(bandOf(p)));
+    const order = [...TAGS.filter(t => state.tags.has(t)), ...TAGS.filter(t => !state.tags.has(t))];
+    const chips = order.map(t => {
+      const on = state.tags.has(t);
+      const n = inBand.filter(p => tagsOk(p, new Set([...state.tags, t]))).length;
+      return `<button type="button" class="tag" data-t="${t}" aria-pressed="${on}"${!on && !n ? ' disabled' : ''}>${t}<small>${n}</small></button>`;
+    }).join('');
+    $('tags').innerHTML = (state.tags.size ? '<button type="button" class="tag clear" data-t="">清除</button>' : '') + chips;
   }
+
+  $('tags').addEventListener('click', e => {
+    const b = e.target.closest('[data-t]');
+    if (!b) return;
+    const t = b.dataset.t;
+    if (!t) state.tags.clear();
+    else state.tags.has(t) ? state.tags.delete(t) : state.tags.add(t);
+    refresh();
+  });
 
   $('measure').addEventListener('click', e => {
     const b = e.target.closest('[data-m]');
@@ -118,8 +141,8 @@
     if (!b) return;
     const k = b.dataset.b;
     if (state.bands.has(k) && state.bands.size === 1) {
-      state.bands = new Set(['30', '60', '120']);
-    } else if (state.bands.size === 3) {
+      state.bands = new Set(BANDS);
+    } else if (state.bands.size === BANDS.length) {
       state.bands = new Set([k]);
     } else {
       state.bands.has(k) ? state.bands.delete(k) : state.bands.add(k);
@@ -130,7 +153,7 @@
   // ---------- 视图切换 ----------
   function showView(v) {
     state.view = v;
-    ['map', 'rings', 'book', 'compare'].forEach(k => { $('view-' + k).hidden = k !== v; });
+    ['map', 'rings', 'book'].forEach(k => { $('view-' + k).hidden = k !== v; });
     $('tabbar').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
     if (v === 'map') {
       map.resize();
@@ -148,7 +171,6 @@
     if (state.view === 'map') queueLayout();
     if (state.view === 'rings') renderRings();
     if (state.view === 'book') renderBook();
-    if (state.view === 'compare') renderCompare();
   }
 
   function refresh() {
@@ -164,9 +186,10 @@
 
   // ---------- 地图 ----------
   const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  const STYLE_URL = dark ? 'https://tiles.openfreemap.org/styles/dark' : 'https://tiles.openfreemap.org/styles/positron';
   const map = new maplibregl.Map({
     container: 'map',
-    style: dark ? 'https://tiles.openfreemap.org/styles/dark' : 'https://tiles.openfreemap.org/styles/positron',
+    style: STYLE_URL,
     center: [135.6, 34.78],
     zoom: 8.6,
     attributionControl: { compact: true },
@@ -179,9 +202,10 @@
   const TINT = dark
     ? { bg: '#191B1D', water: '#1A2833', park: '#1E2820', wood: '#1C271E', resid: 'rgba(48,46,42,.35)', building: '#25272A' }
     : { bg: '#F3EEE4', water: '#BCD3DE', park: '#DCE5CD', wood: '#D2DEC1', resid: 'rgba(231,222,206,.55)', building: '#E6DDCD' };
-  map.on('style.load', () => {
+  // faint：时间圈的底图只留城市名和水陆轮廓
+  function tintMap(m, faint) {
     const set = (id, prop, val) => {
-      if (map.getLayer(id)) map.setPaintProperty(id, prop, val);
+      if (m.getLayer(id)) m.setPaintProperty(id, prop, val);
     };
     set('background', 'background-color', TINT.bg);
     set('water', 'fill-color', TINT.water);
@@ -190,16 +214,21 @@
     set('landuse_residential', 'fill-color', TINT.resid);
     set('building', 'fill-color', TINT.building);
     for (const id of ['label_other', 'label_village', 'highway-name-path', 'highway-name-minor']) {
-      if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', 'none');
+      if (m.getLayer(id)) m.setLayoutProperty(id, 'visibility', 'none');
     }
-    for (const layer of map.getStyle().layers) {
+    for (const layer of m.getStyle().layers) {
+      if (faint && (/^(highway|tunnel|railway|aeroway|road|building|boundary)/.test(layer.id) || (layer.type === 'symbol' && !/^label_(city|town|state)/.test(layer.id)))) {
+        m.setLayoutProperty(layer.id, 'visibility', 'none');
+        continue;
+      }
       if (layer.type !== 'symbol' || /shield/.test(layer.id)) continue;
-      map.setPaintProperty(layer.id, 'text-opacity', 0.65);
-      if (map.getLayoutProperty(layer.id, 'text-field') !== undefined) {
-        map.setLayoutProperty(layer.id, 'text-field', ['coalesce', ['get', 'name:ja'], ['get', 'name']]);
+      m.setPaintProperty(layer.id, 'text-opacity', faint ? 0.8 : 0.65);
+      if (m.getLayoutProperty(layer.id, 'text-field') !== undefined) {
+        m.setLayoutProperty(layer.id, 'text-field', ['coalesce', ['get', 'name:ja'], ['get', 'name']]);
       }
     }
-  });
+  }
+  map.on('style.load', () => tintMap(map, false));
   map.on('load', () => document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show'));
 
   const hash = s => [...s].reduce((n, c) => (n * 31 + c.charCodeAt(0)) >>> 0, 7);
@@ -306,7 +335,7 @@
   });
   window.addEventListener('resize', () => {
     queueLayout();
-    if (state.view === 'rings') renderRings();
+    if (state.view === 'rings') renderRings(true);
   });
 
   const STYLES = [['photo', '照片卡'], ['postcard', '明信片'], ['stamp', '圆章']];
@@ -321,49 +350,84 @@
     applyStyle();
   });
 
-  // ---------- 时间圈：半径＝单程时间，方向＝从京桥看的方位 ----------
-  const AREA_LABEL = ['大阪', '京都', '奈良', '兵库', '滋贺', '和歌山'];
+  // ---------- 时间圈：半径＝单程时间，方向＝从京桥看的方位；底下是淡淡的地图，只示意方位 ----------
+  const ZOOMS = [1.5, 2, 2.7];
+  let zoomIdx = 1;
   let ringsBuilt = false;
+  let ringsMap = null;
 
   function buildRings() {
     const host = $('rings');
-    host.innerHTML = '<svg aria-hidden="true"></svg><span class="home-dot">' + esc(ORIGIN.name) + '</span>'
+    host.innerHTML = '<div class="rings-map" id="rings-map"></div><svg aria-hidden="true"></svg><span class="home-dot">' + esc(ORIGIN.name) + '</span>'
       + PLACES.map(p => `<button type="button" class="rb" data-id="${p.id}" aria-label="${esc(p.name)}">${photo(p)}</button><span class="rl" data-for="${p.id}">${esc(p.name)}</span>`).join('');
     host.addEventListener('click', e => {
       const b = e.target.closest('.rb');
       if (b) select(b.dataset.id);
     });
+    ringsMap = new maplibregl.Map({
+      container: 'rings-map',
+      style: STYLE_URL,
+      center: ORIGIN.ll,
+      zoom: 8,
+      interactive: false,
+      attributionControl: { compact: true },
+      localIdeographFontFamily: '"Hiragino Sans", "PingFang SC", "Noto Sans CJK JP", sans-serif'
+    });
+    ringsMap.on('style.load', () => tintMap(ringsMap, true));
+    ringsMap.on('load', () => document.querySelector('#rings-map .maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show'));
     ringsBuilt = true;
   }
 
-  function renderRings() {
+  // 直线距离（公里）
+  const km = ll => {
+    const [lon1, lat1] = ORIGIN.ll.map(toRad);
+    const [lon2, lat2] = ll.map(toRad);
+    const h = Math.sin((lat2 - lat1) / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin((lon2 - lon1) / 2) ** 2;
+    return 12742 * Math.asin(Math.sqrt(h));
+  };
+
+  function renderRings(keepCenter) {
     const first = !ringsBuilt;
     if (first) buildRings();
+    const vp = $('rings-vp');
     const host = $('rings');
-    // 第一次直接就位，之后切换口径时才移动
-    host.classList.toggle('still', first);
-    const W = host.clientWidth;
+    const still = first || keepCenter;
+    host.classList.toggle('still', still);
+    // 保持当前看着的那一点
+    const old = host.clientWidth || 1;
+    const fx = (vp.scrollLeft + vp.clientWidth / 2) / old;
+    const fy = (vp.scrollTop + vp.clientHeight / 2 - host.offsetTop) / old;
+    const W = Math.round(vp.clientWidth * ZOOMS[zoomIdx]);
+    host.style.width = W + 'px';
+    host.style.height = W + 'px';
     const C = W / 2;
-    const R = C - 34;
-    // 半径按时间的平方根，近处不至于挤成一团；刻度圈照实标注
-    const rad = m => R * Math.sqrt(Math.min(m, 120) / 120);
+    const R = C - 30;
+    // 半径按时间的0.6次方：近处拉开，远处不出界；刻度圈照实标注
+    const rad = m => R * Math.pow(Math.min(m, 180) / 180, 0.6);
     const svg = host.querySelector('svg');
-    const rings = [120, 60, 30].map(m => `<circle class="ring ring-fill-${m}" cx="${C}" cy="${C}" r="${rad(m)}"/>`).join('')
-      + [30, 60, 120].map(m => `<text class="ring-label" x="${C + 4}" y="${C - rad(m) + 12}">${BAND_NAME[m]}</text>`).join('');
     svg.setAttribute('viewBox', `0 0 ${W} ${W}`);
+    svg.innerHTML = [180, 120, 60, 30].map(m => `<circle class="ring ring-fill-${m}" cx="${C}" cy="${C}" r="${rad(m)}"/>`).join('')
+      + [30, 60, 120, 180].map(m => `<text class="ring-label" x="${C}" y="${C - rad(m) + 14}" text-anchor="middle">${BAND_NAME[m]}</text>`).join('')
+      + `<text class="ring-north" x="${C}" y="14" text-anchor="middle">北</text>`;
+
+    // 底图比例：让各地点在地图上的位置和照片大致落在同一方向、同一远近
+    const ratios = PLACES.filter(p => km(p.ll) > 8 && minsOf(p) <= 180).map(p => rad(minsOf(p)) / km(p.ll)).sort((a, b) => a - b);
+    const pxPerKm = ratios[Math.floor(ratios.length / 2)];
+    const mPerPx = 1000 / pxPerKm;
+    ringsMap.resize();
+    ringsMap.jumpTo({ center: ORIGIN.ll, zoom: Math.log2(78271.517 * Math.cos(toRad(ORIGIN.ll[1])) / mPerPx) });
 
     // 目标位置，再做几轮碰撞松弛，避免照片叠在一起
-    const S = 32;
+    const S = 40;
     const nodes = PLACES.map(p => {
-      const m = minsOf(p);
-      const r = rad(m);
+      const r = rad(minsOf(p));
       const a = toRad(p.deg);
       const tx = C + r * Math.sin(a);
       const ty = C - r * Math.cos(a);
       return { p, tx, ty, x: tx, y: ty, out: !shown(p) };
     });
     const live = nodes.filter(n => !n.out);
-    for (let it = 0; it < 120; it++) {
+    for (let it = 0; it < 140; it++) {
       for (let i = 0; i < live.length; i++) {
         for (let j = i + 1; j < live.length; j++) {
           const a = live[i];
@@ -390,27 +454,13 @@
       }
     }
 
-    // 地区名放在该地区各点的平均位置外侧
-    const cities = AREA_LABEL.map(name => {
-      const ns = live.filter(n => n.p.area === name);
-      if (!ns.length) return '';
-      const mx = ns.reduce((s, n) => s + n.x, 0) / ns.length;
-      const my = ns.reduce((s, n) => s + n.y, 0) / ns.length;
-      const far = Math.max(...ns.map(n => Math.hypot(n.x - C, n.y - C)));
-      const ang = Math.atan2(my - C, mx - C);
-      const x = Math.max(24, Math.min(W - 24, C + Math.cos(ang) * (far + 30)));
-      const y = Math.max(12, Math.min(W - 4, C + Math.sin(ang) * (far + 30)));
-      return `<text class="ring-city" x="${x}" y="${y}" text-anchor="middle">${name}</text>`;
-    }).join('');
-    svg.innerHTML = rings + cities;
-
     // 名字：放得下才显示，先近后远
     const boxes = live.map(n => ({ x: n.x - S / 2, y: n.y - S / 2, w: S, h: S }));
     const hit = r => boxes.some(q => r.x < q.x + q.w && r.x + r.w > q.x && r.y < q.y + q.h && r.y + r.h > q.y);
     const labels = {};
     [...live].sort((a, b) => minsOf(a.p) - minsOf(b.p)).forEach(n => {
-      const w = n.p.name.length * 11 + 4;
-      for (const r of [{ x: n.x + 18, y: n.y - 6, w, h: 13 }, { x: n.x - 18 - w, y: n.y - 6, w, h: 13 }, { x: n.x - w / 2, y: n.y + 18, w, h: 13 }]) {
+      const w = n.p.name.length * 11.5 + 6;
+      for (const r of [{ x: n.x + 21, y: n.y - 7, w, h: 15 }, { x: n.x - 21 - w, y: n.y - 7, w, h: 15 }, { x: n.x - w / 2, y: n.y + 21, w, h: 15 }]) {
         if (r.x >= 0 && r.x + r.w <= W && !hit(r)) {
           boxes.push(r);
           labels[n.p.id] = r;
@@ -432,50 +482,46 @@
       l.hidden = !r || n.out;
       if (r) l.style.transform = `translate(${r.x}px, ${r.y + 2}px)`;
     });
+
     if (first) {
+      vp.scrollLeft = C - vp.clientWidth / 2;
+      vp.scrollTop = host.offsetTop + C - vp.clientHeight / 2;
+    } else if (keepCenter) {
+      vp.scrollLeft = fx * W - vp.clientWidth / 2;
+      vp.scrollTop = host.offsetTop + fy * W - vp.clientHeight / 2;
+    }
+    if (still) {
       void host.offsetWidth;
       requestAnimationFrame(() => host.classList.remove('still'));
     }
     const outside = PLACES.filter(p => !bandOf(p)).length;
-    $('rings-note').textContent = `离中心越远，${MEASURE[state.measure]}单程越久（圈半径按时间的平方根）。${outside ? `另有 ${outside} 处超过2小时，未显示。` : ''}`;
+    $('rings-note').textContent = `${MEASURE[state.measure]} · 离中心越远单程越久，方向是实际方位${outside ? ` · ${outside}处超过3小时未显示` : ''}`;
+    $('rings-zoom').querySelectorAll('button').forEach(b => {
+      b.disabled = (b.dataset.z === '+' && zoomIdx === ZOOMS.length - 1) || (b.dataset.z === '-' && zoomIdx === 0);
+    });
   }
+
+  $('rings-zoom').addEventListener('click', e => {
+    const b = e.target.closest('[data-z]');
+    if (!b) return;
+    zoomIdx = Math.max(0, Math.min(ZOOMS.length - 1, zoomIdx + (b.dataset.z === '+' ? 1 : -1)));
+    renderRings(true);
+  });
 
   // ---------- 画册：每档一行大卡 ----------
   function renderBook() {
-    const secs = ['30', '60', '120'].filter(b => state.bands.has(b)).map(b => {
-      const list = PLACES.filter(p => bandOf(p) === b).sort((x, y) => (y.season.hot - x.season.hot) || minsOf(x) - minsOf(y));
+    const secs = BANDS.filter(b => state.bands.has(b)).map(b => {
+      const list = PLACES.filter(p => bandOf(p) === b && tagsOk(p)).sort((x, y) => (y.season.hot - x.season.hot) || minsOf(x) - minsOf(y));
+      if (!list.length) return '';
       const cards = list.map(p => `<button type="button" class="bk" data-id="${p.id}">${photo(p)}
         <span class="bk-top">${timeBadge(p)}${p.season.tone !== 'plain' ? `<span class="st tone-${p.season.tone}">${esc(p.season.text)}</span>` : ''}</span>
-        <span class="bk-txt"><h3>${esc(p.name)}</h3><p>${esc(p.why)}</p><small>${esc(p.area)} · ${MEASURE[state.measure]} ${minsText(minsOf(p))}</small></span></button>`).join('');
+        <span class="bk-txt"><small class="bk-area">${esc(p.area)}</small><h3>${esc(p.name)}</h3><p>${esc(p.blurb)}</p></span></button>`).join('');
       return `<section class="book-sec"><div class="book-head"><h2><span class="tb tb-${b}">${BAND_NAME[b]}</span>${BAND_TITLE[b]}</h2><small>${MEASURE[state.measure]} · ${list.length} 处</small></div>
         <div class="book-row">${cards || '<p class="book-empty">没有地点。</p>'}</div></section>`;
     }).join('');
-    $('view-book').innerHTML = secs;
+    $('view-book').innerHTML = secs.includes('class="bk"') ? secs : '<p class="book-empty book-none">没有符合这些主题的地方。少选一个标签试试。</p>';
   }
   $('view-book').addEventListener('click', e => {
-    const b = e.target.closest('[data-id]');
-    if (b) select(b.dataset.id);
-  });
-
-  // ---------- 对比：两个口径的时间条 ----------
-  const MAXM = 180;
-  function renderCompare() {
-    const other = state.measure === 'transit' ? 'car' : 'transit';
-    const bar = (p, m) => {
-      const v = minsOf(p, m);
-      const cls = (m === 'transit' ? 't' : 'c') + (m === state.measure ? ' on' : ' off');
-      return `<span class="cmp-bar ${cls}"><span><i style="width:${Math.min(v, MAXM) / MAXM * 100}%"></i></span>${m === 'transit' ? '公交' : '自驾'} ${v}分</span>`;
-    };
-    const secs = ['30', '60', '120'].filter(b => state.bands.has(b)).map(b => {
-      const list = PLACES.filter(p => bandOf(p) === b).sort((x, y) => minsOf(x) - minsOf(y));
-      const rows = list.map(p => `<button type="button" class="cmp" data-id="${p.id}">${photo(p)}<span>
-        <span class="cmp-name"><span>${esc(p.name)}</span><small>${esc(p.area)}</small></span>
-        <span class="cmp-bars">${bar(p, state.measure)}${bar(p, other)}</span></span></button>`).join('');
-      return `<section class="cmp-sec"><h2><span class="tb tb-${b}">${BAND_NAME[b]}</span>${BAND_TITLE[b]}<small>${list.length} 处 · 按${MEASURE[state.measure]}</small></h2>${rows}</section>`;
-    }).join('');
-    $('view-compare').innerHTML = `<div class="cmp-key"><span><i style="background:var(--ink)"></i>公共交通</span><span><i style="background:var(--accent)"></i>自驾（不含拥堵）</span><span>刻度每30分</span></div>${secs}`;
-  }
-  $('view-compare').addEventListener('click', e => {
     const b = e.target.closest('[data-id]');
     if (b) select(b.dataset.id);
   });
