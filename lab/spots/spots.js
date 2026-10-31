@@ -451,8 +451,8 @@
   map.touchZoomRotate.disableRotation();
 
   const TINT = dark
-    ? { bg: '#17141F', water: '#231D38', park: '#1C1A26', wood: '#1B1925', resid: 'rgba(54,46,72,.35)', building: '#26212F' }
-    : { bg: '#F2EFF8', water: '#CFC5EC', park: '#E2E2EA', wood: '#DBDAE6', resid: 'rgba(226,219,240,.55)', building: '#E6E0F1' };
+    ? { bg: '#121A24', water: '#1B3048', park: '#16212B', wood: '#15202A', resid: 'rgba(44,62,82,.35)', building: '#1E2A37' }
+    : { bg: '#F1F7FC', water: '#BFE0F6', park: '#E2EEF0', wood: '#D9E8EC', resid: 'rgba(214,232,245,.55)', building: '#E1ECF5' };
   // faint：时间圈的底图只留城市名和水陆轮廓
   function tintMap(m, faint) {
     const set = (id, prop, val) => {
