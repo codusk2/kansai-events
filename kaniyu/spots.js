@@ -436,8 +436,40 @@
   }, true);
 
   // ---------- 地图 ----------
-  const dark = matchMedia('(prefers-color-scheme: dark)').matches;
-  const STYLE_URL = dark ? 'https://tiles.openfreemap.org/styles/dark' : 'https://tiles.openfreemap.org/styles/positron';
+  // 浅色/深色：默认跟随系统（白天黑夜自动切换），也可以手动固定；地图底图跟着换
+  const sysDark = matchMedia('(prefers-color-scheme: dark)');
+  const THEMES = {
+    auto: { label: '跟随系统', icon: '<path d="M10 3a7 7 0 1 0 0 14z" fill="currentColor"/><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/>' },
+    light: { label: '浅色', icon: '<circle cx="10" cy="10" r="3.4" fill="currentColor"/><path d="M10 2.5v2M10 15.5v2M2.5 10h2M15.5 10h2M4.7 4.7l1.4 1.4M13.9 13.9l1.4 1.4M4.7 15.3l1.4-1.4M13.9 6.1l1.4-1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>' },
+    dark: { label: '深色', icon: '<path d="M15.5 12.6A6.5 6.5 0 0 1 7.4 4.5a6.5 6.5 0 1 0 8.1 8.1z" fill="currentColor"/>' }
+  };
+  let themePref = store.get('kaniyu-theme-v1', 'auto');
+  if (!THEMES[themePref]) themePref = 'auto';
+  const isDark = () => themePref === 'dark' || (themePref === 'auto' && sysDark.matches);
+  const styleUrl = d => d ? 'https://tiles.openfreemap.org/styles/dark' : 'https://tiles.openfreemap.org/styles/positron';
+  let mapDark = isDark();
+  function applyTheme() {
+    const root = document.documentElement;
+    if (themePref === 'auto') delete root.dataset.theme;
+    else root.dataset.theme = themePref;
+    const paper = getComputedStyle(root).getPropertyValue('--paper').trim();
+    document.querySelectorAll('meta[name="theme-color"]').forEach(m => { m.content = paper; });
+    const t = THEMES[themePref];
+    $('theme-btn').innerHTML = `<svg viewBox="0 0 20 20" aria-hidden="true">${t.icon}</svg>`;
+    $('theme-btn').setAttribute('aria-label', `颜色：${t.label}，点击切换`);
+    if (isDark() !== mapDark) {
+      mapDark = isDark();
+      map.setStyle(styleUrl(mapDark), { diff: false });
+    }
+  }
+  $('theme-btn').addEventListener('click', () => {
+    themePref = { auto: 'light', light: 'dark', dark: 'auto' }[themePref];
+    store.set('kaniyu-theme-v1', themePref);
+    applyTheme();
+    toast(`颜色：${THEMES[themePref].label}`);
+  });
+  sysDark.addEventListener('change', applyTheme);
+  const STYLE_URL = styleUrl(mapDark);
   const HOME_VIEW = { center: [135.6, 34.78], zoom: 8.6 };
   const map = new maplibregl.Map({
     container: 'map',
@@ -451,11 +483,13 @@
   });
   map.touchZoomRotate.disableRotation();
 
-  const TINT = dark
-    ? { bg: '#121A24', water: '#1B3048', park: '#16212B', wood: '#15202A', resid: 'rgba(44,62,82,.35)', building: '#1E2A37' }
-    : { bg: '#F1F7FC', water: '#BFE0F6', park: '#E2EEF0', wood: '#D9E8EC', resid: 'rgba(214,232,245,.55)', building: '#E1ECF5' };
+  const TINTS = {
+    dark: { bg: '#121A24', water: '#1B3048', park: '#16212B', wood: '#15202A', resid: 'rgba(44,62,82,.35)', building: '#1E2A37' },
+    light: { bg: '#F1F7FC', water: '#BFE0F6', park: '#E2EEF0', wood: '#D9E8EC', resid: 'rgba(214,232,245,.55)', building: '#E1ECF5' }
+  };
   // faint：时间圈的底图只留城市名和水陆轮廓
   function tintMap(m, faint) {
+    const TINT = mapDark ? TINTS.dark : TINTS.light;
     const set = (id, prop, val) => {
       if (m.getLayer(id)) m.setPaintProperty(id, prop, val);
     };
@@ -481,6 +515,7 @@
     }
   }
   map.on('style.load', () => tintMap(map, false));
+  applyTheme();
 
   // 旅行点：圆形照片针，下面一枚emoji小签说明是什么地方；挤在一起时合并成一叠，标数字
   const pins = new Map();

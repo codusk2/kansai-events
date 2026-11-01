@@ -50,8 +50,9 @@
   --tab-h: 64px;
 }
 
+/* 深色：跟随系统；手动选了浅色时不套用。手动选深色时无论系统如何都套用 */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --paper: #101821;
     --glass: rgba(26, 37, 50, .86);
     --card: #1A2533;
@@ -85,6 +86,41 @@
     --shadow: 0 10px 28px rgba(0, 0, 0, .45), 0 2px 6px rgba(0, 0, 0, .3);
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, .35);
   }
+}
+
+:root[data-theme="dark"] {
+  --paper: #101821;
+  --glass: rgba(26, 37, 50, .86);
+  --card: #1A2533;
+  --ink: #E8F2FB;
+  --muted: #9AB0C4;
+  --line: #2B3B4E;
+  --accent: #6FAEDD;
+  --accent-text: #A3CDEE;
+  --accent-ink: #0B1B2B;
+  --accent-soft: #1E3247;
+  --b30: #8FC3EA;
+  --b60: #5E9AC9;
+  --b120: #3E6E98;
+  --b180: #2A4A68;
+  --b-ink30: #0B1B2B;
+  --b-ink60: #0B1B2B;
+  --b-ink120: #E8F2FB;
+  --b-ink180: #E8F2FB;
+  --event: #F2A9C0;
+  --ga: #6CBF55;
+  --ga-on: #0F2A0A;
+  --ga-ink: #8FD57A;
+  --ga-soft: #1F2E1B;
+  --koyo: #E06A4C;
+  --sakura: #E7A4B2;
+  --ume: #CF86A6;
+  --green: #8DB88F;
+  --onsen: #8FC0EA;
+  --plain: #94A2B2;
+  --veil: rgba(6, 16, 30, .78);
+  --shadow: 0 10px 28px rgba(0, 0, 0, .45), 0 2px 6px rgba(0, 0, 0, .3);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, .35);
 }
 
 /* 基础 */
@@ -216,6 +252,30 @@ a:focus-visible {
   font-size: .8rem;
   font-weight: 600;
   white-space: nowrap;
+}
+
+.head-acts {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 浅色/深色/跟随系统切换 */
+.theme-btn {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--muted);
+}
+
+.theme-btn svg {
+  width: 17px;
+  height: 17px;
 }
 
 .fb-sep {

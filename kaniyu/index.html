@@ -11,6 +11,13 @@
 <meta name="theme-color" content="#101821" media="(prefers-color-scheme: dark)">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="spots.css">
+<script>
+  // 尽早套用手动选的浅色/深色，避免先闪一下另一种颜色
+  try {
+    const t = JSON.parse(localStorage.getItem('kaniyu-theme-v1'));
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch {}
+</script>
 </head>
 <body>
 <div class="app" id="app">
@@ -25,7 +32,10 @@
           </svg>
           <b>蟹鱼游</b>
         </div>
-        <button type="button" class="filter-btn" id="filter-btn" aria-expanded="false" aria-controls="filter-pop"></button>
+        <div class="head-acts">
+          <button type="button" class="theme-btn" id="theme-btn"></button>
+          <button type="button" class="filter-btn" id="filter-btn" aria-expanded="false" aria-controls="filter-pop"></button>
+        </div>
       </div>
       <div class="tags-row">
         <div class="tags" id="tags" role="group" aria-label="主题"></div>
