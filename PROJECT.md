@@ -12,6 +12,7 @@ Lite持续内容站 · 2026-10-28 Asia/Tokyo · 本轮owner：Codex。
 
 - 线上：https://codusk2.github.io/kansai-events/kaniyu/ ；源码 `kaniyu/`（index.html、spots.js、spots.css、icon.svg），不经 build_v2.py，按原样随main发布。根目录的遛弯活动页和它的本机存档不变。
 - 数据：`data/places.json`（`scripts/collect_places.py` 由 `data/places.seed.json` 生成）、`data/greenapple.json`（手维护）、`data/events.current.json`（`scripts/collect_events.py` 由 events.json 和 `data/events.seed.json` 生成）。维护见 `docs/旅行点维护.md`，设计与历轮修改见 `docs/改版方案-2026-10-31.md`。
+- 详细攻略：`data/details/<id>.json`（调查模型写入，`scripts/collect_details.py` 检查并生成 `index.json`），提示词由 `scripts/detail_prompt.py` 生成，见 `docs/地点详情调查.md`。页面在打开详情时才读。
 - 想去、不感兴趣、偏好只存本浏览器 localStorage（`kaniyu-*` 键），没有云同步。
 - 外部依赖：MapLibre GL 4.7.1（unpkg，固定版本）、OpenFreeMap 瓦片、Wikimedia Commons 缩略图（直接引用，页面标注作者与许可）。瓦片或图片服务不可用时地图或照片空白，其他功能照常。
 - 活动和绿苹果数据是静态快照，需要有人定期重新生成并发布；目前没有指定维护者或定时任务。

@@ -64,11 +64,16 @@
   }
 
   // ---------- 数据 ----------
-  const [DATA, GA_DATA, EV_DATA] = await Promise.all([
+  // 详细攻略：另放在 data/details/<id>.json，打开详情时才读；?details=sample 读本机合成样例
+  const DETAIL_BASE = qs.get('details') === 'sample' ? '../lab/details-sample/' : '../data/details/';
+  const [DATA, GA_DATA, EV_DATA, DETAIL_INDEX] = await Promise.all([
     fetch('../data/places.json').then(r => r.json()),
-    fetch('../data/greenapple.json').then(r => r.json()),
-    fetch('../data/events.current.json').then(r => r.json())
+    // ?ga=sample 读本机样例（真实活动加合成动态）
+    fetch(qs.get('ga') === 'sample' ? '../lab/greenapple-sample.json' : '../data/greenapple.json').then(r => r.json()),
+    fetch('../data/events.current.json').then(r => r.json()),
+    fetch(DETAIL_BASE + 'index.json').then(r => (r.ok ? r.json() : {})).catch(() => ({}))
   ]);
+  const DETAILS = DETAIL_INDEX.details || {};
   const ORIGIN = DATA.origin;
   const PLACES = DATA.places;
   const byId = Object.fromEntries(PLACES.map(p => [p.id, p]));
@@ -175,6 +180,62 @@
   const evFace = (e, cls) => (e.poster
     ? `<img class="${cls}" src="${esc(e.poster)}" alt="" loading="lazy">`
     : `<span class="${cls} ev-face${e.ga ? ' ga' : ''}">${e.ga ? '🍏' : '🎟️'}<small>${esc(e.kind)}</small></span>`);
+
+  // ---------- 详细攻略与外部搜索 ----------
+  const detailCache = {};
+  function loadDetail(id) {
+    if (!DETAILS[id]) return Promise.resolve(null);
+    detailCache[id] ??= fetch(`${DETAIL_BASE}${id}.json?r=${DETAILS[id].revision}`)
+      .then(r => (r.ok ? r.json() : null)).catch(() => null);
+    return detailCache[id];
+  }
+  // 日文名：详情里写了就用，否则取维基百科条目名
+  const wikiTitle = p => (p.wiki ? decodeURIComponent(p.wiki.split('/').pop()).replace(/_/g, ' ').split(' (')[0] : '');
+  // 多图：places.json 的代表图在前，详情清单里经 Commons 核过许可的图片在后
+  const imagesOf = p => {
+    const list = [...(p.img ? [{ ...p.img, caption: '' }] : []), ...(DETAILS[p.id]?.images || [])];
+    return list.filter((im, i) => list.findIndex(x => x.page === im.page) === i);
+  };
+  const imgCredit = (im, i, n) => `${n > 1 ? `图 ${i + 1}/${n}${im.caption ? ` · ${esc(im.caption)}` : ''} · ` : '图：'}${esc(im.artist || '佚名')} · ${esc(im.license)} · <a href="${esc(im.page)}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>`;
+  const enc = encodeURIComponent;
+  const SEARCH = [
+    ['小红书', 'xhs', k => `https://www.xiaohongshu.com/search_result?keyword=${enc(k.zh)}`],
+    ['Google', 'g', k => `https://www.google.com/search?q=${enc(k.ja)}`],
+    ['谷歌地图', 'gm', k => `https://www.google.com/maps/search/?api=1&query=${enc(k.ja)}`],
+    ['X', 'x', k => `https://x.com/search?q=${enc(k.ja)}&f=live`],
+    ['Instagram', 'ig', k => `https://www.instagram.com/explore/tags/${enc(k.ja.replace(/[\s・·()（）]/g, ''))}/`],
+    ['YouTube', 'yt', k => `https://www.youtube.com/results?search_query=${enc(k.ja)}`]
+  ];
+  function searchKeys(it, d) {
+    if (it.venue) return { zh: it.name, ja: it.name };
+    const zh = d?.search?.zh || it.name.split('·')[0];
+    return { zh, ja: d?.search?.ja || wikiTitle(it) || zh };
+  }
+  const searchRow = (it, d) => {
+    const k = searchKeys(it, d);
+    return `<div class="sh-search" id="sh-search"><span>去网上看看</span><div class="ss-row">${SEARCH.map(([label, cls, url]) => `<a class="ss ss-${cls}" href="${esc(url(k))}" target="_blank" rel="noopener noreferrer">${label}</a>`).join('')}</div></div>`;
+  };
+
+  const li = arr => (arr?.length ? `<ul>${arr.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : '');
+  function detailHtml(d) {
+    const v = d.visit || {};
+    const a = d.access || {};
+    const facts = [['开放时间', v.hours], ['门票', v.fee], ['建议停留', v.stay], ['最佳时段', v.bestTime], ['人流', v.crowd]].filter(x => x[1]);
+    const ways = [['🚃 公共交通', a.transit], ['🚗 自驾停车', a.car], ['🚶 到了怎么逛', a.local]].filter(x => x[1]);
+    const sec = (title, body, open = true) => (body ? `<details class="dt-sec"${open ? ' open' : ''}><summary>${title}</summary>${body}</details>` : '');
+    return `<div class="dt-head"><h3>详细攻略</h3>${d.sample ? '<span class="dt-sample">合成样例</span>' : ''}</div>
+      <p class="dt-sum">${esc(d.summary)}</p>
+      ${sec('看点', d.highlights?.length ? `<ol class="dt-hl">${d.highlights.map(h => `<li><b>${esc(h.title)}</b><span>${esc(h.text)}</span>${h.where ? `<small>${esc(h.where)}</small>` : ''}</li>`).join('')}</ol>` : '')}
+      ${sec('实用信息', facts.length ? `<dl class="dt-facts">${facts.map(([k, x]) => `<dt>${k}</dt><dd>${esc(x)}</dd>`).join('')}</dl>` : '')}
+      ${sec('怎么去', ways.length ? `<dl class="dt-facts dt-ways">${ways.map(([k, x]) => `<dt>${k}</dt><dd>${esc(x)}</dd>`).join('')}</dl>` : '')}
+      ${sec('附近吃什么', d.food?.length ? `<ul class="dt-list">${d.food.map(f => `<li><b>${esc(f.name)}</b>${f.what ? `<span>${esc(f.what)}${f.price ? ` · ${esc(f.price)}` : ''}</span>` : ''}${f.note ? `<small>${esc(f.note)}</small>` : ''}</li>`).join('')}</ul>` : '', false)}
+      ${sec('顺路还能去', d.nearby?.length ? `<ul class="dt-list">${d.nearby.map(n => `<li>${n.placeId && byId[n.placeId] ? `<button type="button" class="dt-goto" data-goto="${esc(n.placeId)}">${esc(n.name)} ›</button>` : `<b>${esc(n.name)}</b>`}${n.how ? `<span>${esc(n.how)}</span>` : ''}${n.note ? `<small>${esc(n.note)}</small>` : ''}</li>`).join('')}</ul>` : '', false)}
+      ${sec('各季节看什么', d.seasonal?.length ? `<dl class="dt-facts">${d.seasonal.map(s => `<dt>${esc(s.when)}</dt><dd>${esc(s.text)}</dd>`).join('')}</dl>` : '', false)}
+      ${sec('小贴士', li(d.tips), false)}
+      ${sec('注意', li(d.cautions), false)}
+      ${d.links?.length ? `<p class="dt-links">${d.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.label)} ↗</a>`).join('')}</p>` : ''}
+      <p class="dt-src">核实于 ${esc(d.checkedAt)} · ${esc(d.researchedBy)} · 来源：${(d.sources || []).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.note)}</a>`).join(' · ')}。营业时间和价格以现场为准。</p>`;
+  }
 
   let toastTimer;
   // action：[按钮文字, 点击后做什么]，比如“撤销”
@@ -517,14 +578,15 @@
   map.on('style.load', () => tintMap(map, false));
   applyTheme();
 
-  // 旅行点：圆形照片针，下面一枚emoji小签说明是什么地方；挤在一起时合并成一叠，标数字
+  // 旅行点：圆形照片针，下面一枚emoji小签说明是什么地方；挤在一起时合并成一叠照片（背后露出另两处的照片），
+  // 小签写“几处”，点一下放大看。不用右上角的数字角标，免得像未读提醒
   const pins = new Map();
   PLACES.forEach(p => {
     const el = document.createElement('div');
     el.className = 'pin';
     el.dataset.band = bandOf(p) || '';
     el.dataset.state = 'out';
-    el.innerHTML = `<button type="button" class="pin-in" aria-label="${esc(p.name)}"><span class="pin-stack" aria-hidden="true"></span>${photo(p)}<span class="pin-n"></span></button>`
+    el.innerHTML = `<button type="button" class="pin-in" aria-label="${esc(p.name)}"><span class="pin-s pin-s2" aria-hidden="true"></span><span class="pin-s pin-s1" aria-hidden="true"></span>${photo(p)}</button>`
       + `<span class="pin-emo" aria-hidden="true"></span><span class="pin-label">${esc(p.name)}</span>`;
     el.querySelector('.pin-in').addEventListener('click', e => {
       e.stopPropagation();
@@ -590,7 +652,11 @@
     state.ga = state.events ? true : !state.ga;
     state.events = false;
     refresh();
-    if (state.ga && state.view === 'map') flyHome();
+    if (state.ga && state.view === 'map') {
+      setDeckMin(false);
+      flyHome();
+      if (deckNews().length) scrollDeckTo(null, false, 0);
+    }
   }
   $('ev-btn').addEventListener('click', toggleEvents);
   $('ga-btn').addEventListener('click', toggleGa);
@@ -612,11 +678,23 @@
       const m = pins.get(p.id);
       const members = lead.get(p.id) || [];
       m.members = members;
+      const was = m.el.dataset.state;
       m.el.dataset.state = !shown(p) ? 'out' : members.length ? (members.length > 1 ? 'leader' : 'solo') : 'member';
-      m.el.querySelector('.pin-n').textContent = members.length > 1 ? members.length : '';
-      m.el.querySelector('.pin-emo').textContent = members.length > 1
-        ? [...new Set(members.map(id => mainEmo(byId[id], 1)))].slice(0, 3).join('')
-        : mainEmo(p);
+      const emo = m.el.querySelector('.pin-emo');
+      const btn = m.el.querySelector('.pin-in');
+      if (members.length > 1) {
+        emo.innerHTML = `${[...new Set(members.map(id => mainEmo(byId[id], 1)))].slice(0, 3).join('')}<b>${members.length}处</b>`;
+        btn.setAttribute('aria-label', `${p.name}等${members.length}处，点击放大`);
+        // 叠在后面的两张用同一叠里另两处的照片
+        const others = members.slice(1, 3).map(id => byId[id].img?.thumb);
+        m.el.querySelectorAll('.pin-s1, .pin-s2').forEach((s, i) => {
+          const src = others[1 - i] || others[0];
+          s.style.backgroundImage = src ? `url("${src}")` : '';
+        });
+      } else {
+        emo.textContent = mainEmo(p);
+        if (was === 'leader') btn.setAttribute('aria-label', p.name);
+      }
       if (p.id === state.focus) m.el.dataset.focus = '';
       else delete m.el.dataset.focus;
     });
@@ -671,6 +749,16 @@
       <span class="dk-foot">${p.season.tone !== 'plain' ? `<span class="st tone-${p.season.tone}">${esc(p.season.text)}</span>` : '<span></span>'}<span class="dk-acts"><span class="nope" role="button" tabindex="0" data-nope="${p.id}" aria-label="不感兴趣">🚫</span>${heart(p)}</span></span>
     </span></button>`;
 
+  // 🍏打开时，卡片带最前面放几条近期动态（不对应地图上的点，点里面的链接看来源）
+  const DECK_NEWS = 4;
+  const deckNews = () => (gaOn() && mode() === 'places' ? (GA_DATA.news || []).slice(0, DECK_NEWS) : []);
+  const newsCard = n => `<div class="dk dk-news"><span class="dkn-face" aria-hidden="true">${NEWS_EMO[n.kind] || '🍏'}<small>${esc(n.kind)}</small></span><span class="dk-txt">
+      <span class="dkn-when">🍏 近期动态 · ${ago(n.date)}${n.sample ? ' · 合成样例' : ''}</span>
+      <span class="dk-head"><b>${esc(n.title)}</b></span>
+      <span class="dk-blurb">${esc(n.summary)}</span>
+      <span class="dk-foot"><a href="${esc(n.sources[0].url)}" target="_blank" rel="noopener noreferrer">${esc(n.sources[0].note)} ↗</a></span>
+    </span></div>`;
+
   function renderDeck() {
     if (mode() === 'idle') {
       deckKey = '';
@@ -678,27 +766,29 @@
       return;
     }
     const items = deckItems();
-    const key = mode() + state.measure + state.limit + [...state.tags].join() + items.map(p => p.id).join(',');
+    const news = deckNews();
+    const key = mode() + state.measure + state.limit + [...state.tags].join() + news.length + items.map(p => p.id).join(',');
     if (key === deckKey) return;
     deckKey = key;
     $('deck-count').textContent = mode() === 'events'
       ? `🎟️ 还没结束的活动 · ${items.length} 个`
       : !state.tags.size
-        ? `🍏 绿苹果的活动 · ${items.length} 个 · 核实于${fmtISO(GA_DATA.checkedAt)}`
-        : `${PLACES.filter(shown).length} 处 · 符合任一标签 · 按${MEASURE[state.measure]}由近到远${gaOn() ? ` · 🍏活动在最前` : ''}`;
-    $('deck-list').innerHTML = items.length
+        ? `🍏 绿苹果 · ${news.length ? `动态 ${news.length} 条 · ` : ''}活动 ${items.length} 个 · 核实于${fmtISO(GA_DATA.checkedAt)}`
+        : `${PLACES.filter(shown).length} 处 · 符合任一标签 · 按${MEASURE[state.measure]}由近到远${gaOn() ? ` · 🍏在最前` : ''}`;
+    $('deck-list').innerHTML = news.map(newsCard).join('') + (items.length
       ? items.map(p => (p.venue ? eventCard(p) : placeCard(p))).join('')
-      : '<p class="dk-empty">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>';
+      : '<p class="dk-empty">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>');
     if (!items.some(p => p.id === state.focus)) state.focus = items.find(p => p.ll)?.id || null;
     scrollDeckTo(state.focus, false);
     if (state.focus) focusItem(state.focus, { fly: mode() === 'places' });
   }
 
-  function scrollDeckTo(id, smooth) {
+  // left：直接给位置（比如回到最前面的动态），不按卡片找
+  function scrollDeckTo(id, smooth, left) {
     const card = id && $('deck-list').querySelector(`[data-id="${id}"]`);
-    if (!card) return;
+    if (!card && left === undefined) return;
     deckProgrammatic = true;
-    $('deck-list').scrollTo({ left: card.offsetLeft - parseFloat(getComputedStyle($('deck-list')).paddingLeft), behavior: smooth && !reduceMotion ? 'smooth' : 'auto' });
+    $('deck-list').scrollTo({ left: card ? card.offsetLeft - parseFloat(getComputedStyle($('deck-list')).paddingLeft) : left, behavior: smooth && !reduceMotion ? 'smooth' : 'auto' });
     clearTimeout(deckTimer);
     deckTimer = setTimeout(() => { deckProgrammatic = false; }, smooth ? 600 : 50);
   }
@@ -742,7 +832,7 @@
 
   $('deck-list').addEventListener('click', e => {
     const c = e.target.closest('.dk');
-    if (!c) return;
+    if (!c || !c.dataset.id) return;
     if (c.dataset.id !== state.focus) focusItem(c.dataset.id, { scroll: true, fly: true });
     else select(c.dataset.id);
   });
@@ -963,11 +1053,120 @@
     }
   }
 
-  // ---------- 画册 ----------
-  const eventBook = (title, list) => `<section class="book-sec"><div class="book-head"><h2>${title}</h2><small>${list.length} 个</small></div>
-    <div class="book-row">${list.map(e => `<button type="button" class="bk bk-ev${e.ga ? ' ga' : ''}" data-id="${e.id}">${e.poster ? `<img src="${esc(e.poster)}" alt="" loading="lazy">` : `<span class="bk-ga-face" aria-hidden="true">${e.ga ? '🍏' : '🎟️'}</span>`}
-      <span class="bk-top"><span class="ev-tag${e.ga ? ' ga' : ''}">${e.ga ? '🍏 绿苹果 · ' : '🎟️ '}${esc(e.kind)}</span></span>
-      <span class="bk-txt"><small class="bk-area">${esc(e.when)} · ${esc(evStatus(e))}</small><h3>${esc(e.name)}</h3><p>${esc(e.venue)} · ${esc(e.note)}</p></span></button>`).join('')}</div></section>`;
+  // ---------- 画册：两列瀑布流，刷到底打乱顺序再来一轮 ----------
+  // 每张卡的照片高宽比按 id 固定（照片本身没有尺寸数据），让两列错落
+  const RATIOS = [1.32, 1, 1.18, 0.82, 1.25, 1.08];
+  const ratioOf = id => RATIOS[[...id].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7) % RATIOS.length];
+  const seeded = seed => () => {
+    seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const shuffled = (list, seed) => {
+    const rnd = seeded(seed);
+    const a = [...list];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(rnd() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+
+  // 第二轮起换用这处的其他图片，同一处每轮看到的照片不同
+  const flowPhoto = (p, round) => {
+    const imgs = imagesOf(p);
+    if (imgs.length < 2) return photo(p);
+    return `<img src="${esc(imgs[round % imgs.length].thumb)}" alt="" loading="lazy" decoding="async"><span class="fc-count">📷 ${imgs.length}</span>`;
+  };
+  const flowPlace = (p, round = 0) => `<button type="button" class="fc" data-id="${p.id}">
+      <span class="fc-photo" style="aspect-ratio:1/${ratioOf(p.id)}">${flowPhoto(p, round)}<span class="fc-top">${timeBadge(p)}${heart(p)}</span>
+        ${p.season.hot ? `<span class="fc-season tone-${p.season.tone}">${esc(p.season.text)}</span>` : ''}</span>
+      <span class="fc-txt"><b>${esc(p.name)}</b><small>${esc(p.area)} · ${emojis(p, 3)}</small><span class="fc-blurb">${esc(p.blurb)}</span>
+        ${DETAILS[p.id] ? '<span class="fc-more">📖 有详细攻略</span>' : ''}</span></button>`;
+  const flowEvent = e => `<button type="button" class="fc fc-ev${e.ga ? ' ga' : ''}" data-id="${e.id}">
+      <span class="fc-photo" style="aspect-ratio:1/${e.poster ? 1.3 : 0.9}">${e.poster ? `<img src="${esc(e.poster)}" alt="" loading="lazy">` : `<span class="fc-face" aria-hidden="true">${e.ga ? '🍏' : '🎟️'}</span>`}
+        <span class="fc-top"><span class="ev-tag${e.ga ? ' ga' : ''}">${e.ga ? '🍏 ' : '🎟️ '}${esc(e.kind)}</span>${heart(e)}</span></span>
+      <span class="fc-txt"><b>${esc(e.name)}</b><small>${esc(e.when)} · ${esc(evStatus(e))}</small><span class="fc-blurb">${esc(e.venue)}</span></span></button>`;
+
+  const FLOW_BATCH = 10;
+  const LOOP_MIN = 6;
+  const flow = { key: '', items: [], order: [], pos: 0, round: 0, count: 0, heights: [0, 0], block: null };
+  // 地点卡大约多高：照片按列宽和比例，文字部分按固定高度估
+  function estHeight(it) {
+    const colW = ($('view-book').clientWidth - 32 - 10) / 2;
+    return colW * (it.venue ? (it.poster ? 1.3 : 0.9) : ratioOf(it.id)) + 104;
+  }
+  function newRound() {
+    const rounds = $('flow-rounds');
+    if (flow.round > 0) {
+      rounds.insertAdjacentHTML('beforeend', `<p class="flow-loop">${CRITTERS}这 ${flow.items.length} 个都刷过一遍了 · 换个顺序，第 ${flow.round + 1} 轮</p>`);
+    }
+    rounds.insertAdjacentHTML('beforeend', '<div class="flow"><div class="flow-col"></div><div class="flow-col"></div></div>');
+    flow.block = rounds.lastElementChild;
+    flow.heights = [0, 0];
+    flow.order = flow.round === 0 ? flow.items : shuffled(flow.items, flow.round * 7919 + todayDoy);
+    flow.pos = 0;
+  }
+  function appendFlow(n) {
+    const cols = () => flow.block.querySelectorAll('.flow-col');
+    for (let i = 0; i < n; i++) {
+      if (flow.pos >= flow.order.length) {
+        if (flow.items.length < LOOP_MIN) {
+          $('flow-more').innerHTML = `<p class="book-end">${CRITTERS}到底啦，放宽单程时间或多选几个标签能看到更多</p>`;
+          return;
+        }
+        flow.round++;
+        newRound();
+      }
+      const it = flow.order[flow.pos++];
+      const c = flow.heights[0] <= flow.heights[1] ? 0 : 1;
+      cols()[c].insertAdjacentHTML('beforeend', it.venue ? flowEvent(it) : flowPlace(it, flow.round));
+      flow.heights[c] += estHeight(it);
+      flow.count++;
+    }
+  }
+  // 底部哨兵进入视野就再加一批；加完还在视野里就继续
+  const flowObserver = new IntersectionObserver(entries => {
+    if (!entries.some(e => e.isIntersecting)) return;
+    const fill = () => {
+      if (!$('flow-more') || $('flow-more').textContent) return;
+      appendFlow(FLOW_BATCH);
+      const view = $('view-book').getBoundingClientRect();
+      if ($('flow-more').getBoundingClientRect().top < view.bottom + 400) requestAnimationFrame(fill);
+    };
+    fill();
+  }, { root: $('view-book'), rootMargin: '0px 0px 600px 0px' });
+
+  // 绿苹果的活动放在画册顶部的专区里，瀑布流只放地点
+  const flowItems = () => (mode() === 'events'
+    ? EVENTS.filter(live)
+    : PLACES.filter(shown).sort((x, y) => (y.season.hot - x.season.hot) || minsOf(x) - minsOf(y)));
+
+  // ---------- 🍏 绿苹果专区：横幅、近期动态、关西活动 ----------
+  const NEWS_EMO = { 新歌: '🎵', 专辑: '💿', MV: '🎬', 巡演: '🎤', 演出: '🎤', 节目: '📺', 合作: '🤝', 媒体: '📰', 其他: '🍏' };
+  const NEWS_FOLD = 4;
+  let gaNewsAll = false;
+  const ago = iso => {
+    const d = Math.round((Date.parse(today) - Date.parse(iso)) / 864e5);
+    return d <= 0 ? '今天' : d === 1 ? '昨天' : d <= 14 ? `${d}天前` : fmtISO(iso);
+  };
+  function gaZone() {
+    const evs = EVENTS.filter(e => e.ga && live(e));
+    const news = GA_DATA.news || [];
+    const list = gaNewsAll ? news : news.slice(0, NEWS_FOLD);
+    const banner = GA_DATA.img ? `<figure class="ga-banner"><img src="${esc(GA_DATA.img.thumb)}" alt="Mrs. GREEN APPLE"><figcaption><b>🍏 Mrs. GREEN APPLE</b><small>图：${esc(GA_DATA.img.artist)} · ${esc(GA_DATA.img.license)} · <a href="${esc(GA_DATA.img.page)}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></small></figcaption></figure>` : '';
+    return `<section class="ga-zone" id="ga-zone">${banner}
+      <p class="ga-stats"><span><b>${evs.length}</b>个关西活动</span><span><b>${news.length}</b>条动态</span><span>核实于 ${fmtISO(GA_DATA.checkedAt)}</span></p>
+      ${news.length ? `<h3 class="ga-h">近期动态</h3><ol class="ga-news">${list.map(n => `<li>
+          <span class="gn-date">${ago(n.date)}</span>
+          <div><span class="gn-kind">${NEWS_EMO[n.kind] || '🍏'} ${esc(n.kind)}${n.sample ? ' · <em>合成样例</em>' : ''}</span><b>${esc(n.title)}</b><p>${esc(n.summary)}</p>
+            <small>${n.sources.map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.note)} ↗</a>`).join(' · ')}</small></div></li>`).join('')}</ol>
+        ${news.length > NEWS_FOLD ? `<button type="button" class="ga-more" data-ga-more>${gaNewsAll ? '收起' : `展开全部 ${news.length} 条`}</button>` : ''}` : ''}
+      ${evs.length ? `<h3 class="ga-h">关西活动 <small>进行中的在前</small></h3><div class="ga-row">${evs.map(flowEvent).join('')}</div>` : ''}
+      <p class="ga-note">活动卡是会场照片，不是官方海报。${esc(GA_DATA.placesNote || '')}</p>
+    </section>`;
+  }
 
   // 画册顶部的两个开关，和地图上的按钮是同一个状态
   const bookToggles = () => `<div class="book-toggles">
@@ -976,29 +1175,41 @@
     </div>`;
 
   function renderBook() {
+    const view = $('view-book');
+    flowObserver.disconnect();
     if (mode() === 'idle') {
-      $('view-book').innerHTML = bookToggles();
+      flow.key = '';
+      view.innerHTML = bookToggles();
       return;
     }
-    if (mode() === 'events') {
-      $('view-book').innerHTML = bookToggles() + eventBook('🎟️ 还没结束的活动', EVENTS.filter(live));
+    const items = flowItems();
+    const key = [mode(), state.measure, state.limit, [...state.tags].join(), state.ga].join('|');
+    // 条件没变（比如隐藏了一处）时保留已经刷到的位置
+    const keep = key === flow.key ? Math.max(flow.count, FLOW_BATCH) : FLOW_BATCH;
+    const top = key === flow.key ? view.scrollTop : 0;
+    Object.assign(flow, { key, items, round: 0, count: 0 });
+    const zone = gaOn() && mode() === 'places' ? gaZone() : '';
+    if (!items.length) {
+      view.innerHTML = bookToggles() + zone + (state.tags.size || !zone ? '<p class="book-empty book-none">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>' : '');
+      if (top) view.scrollTop = top;
       return;
     }
-    const secs = LIMITS.filter(l => l <= state.limit).map(String).map(b => {
-      const list = PLACES.filter(p => bandOf(p) === b && shown(p)).sort((x, y) => (y.season.hot - x.season.hot) || minsOf(x) - minsOf(y));
-      if (!list.length) return '';
-      const cards = list.map(p => `<button type="button" class="bk" data-id="${p.id}">${photo(p)}
-        <span class="bk-top">${timeBadge(p)}${heart(p)}</span>
-        <span class="bk-txt"><small class="bk-area">${esc(p.area)} · ${emojis(p)}</small><h3>${esc(p.name)}</h3><p>${esc(p.blurb)}</p></span></button>`).join('');
-      return `<section class="book-sec"><div class="book-head"><h2><span class="tb tb-${b}">${BAND_NAME[b]}</span>${BAND_NAME[b]}圈</h2><small>${MEASURE[state.measure]} · ${list.length} 处</small></div>
-        <div class="book-row">${cards}</div></section>`;
-    }).join('');
-    const banner = GA_DATA.img ? `<figure class="ga-banner"><img src="${esc(GA_DATA.img.thumb)}" alt="Mrs. GREEN APPLE"><figcaption><b>🍏 Mrs. GREEN APPLE 在关西</b><small>图：${esc(GA_DATA.img.artist)} · ${esc(GA_DATA.img.license)} · <a href="${esc(GA_DATA.img.page)}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></small></figcaption></figure>` : '';
-    const ga = gaOn() ? banner + eventBook('🍏 绿苹果专区', EVENTS.filter(e => e.ga && live(e))) + `<p class="book-note">卡片照片是会场照片（Wikimedia Commons），不是官方海报。${esc(GA_DATA.placesNote)}</p>` : '';
-    const end = `<p class="book-end">${CRITTERS}到底啦，往上滑还有</p>`;
-    $('view-book').innerHTML = bookToggles() + ((ga + secs) ? ga + secs + end : '<p class="book-empty book-none">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>');
+    const meta = mode() === 'events'
+      ? `${items.length} 个还没结束的活动 · 进行中的在前`
+      : `${items.length} 处 · 正当季的在前，其余按${MEASURE[state.measure]}由近到远`;
+    view.innerHTML = bookToggles() + zone + `<p class="flow-meta">${meta}${items.length >= LOOP_MIN ? ' · 刷到底换个顺序再来一轮' : ''}</p>`
+      + '<div id="flow-rounds"></div><div class="flow-more" id="flow-more"></div>';
+    newRound();
+    appendFlow(keep);
+    view.scrollTop = top;
+    flowObserver.observe($('flow-more'));
   }
   $('view-book').addEventListener('click', e => {
+    if (e.target.closest('[data-ga-more]')) {
+      gaNewsAll = !gaNewsAll;
+      $('ga-zone').outerHTML = gaZone();
+      return;
+    }
     const t = e.target.closest('[data-bt]');
     if (t) {
       t.dataset.bt === 'ga' ? toggleGa() : toggleEvents();
@@ -1063,6 +1274,8 @@
           <div class="wc-acts">
             <a href="${routeUrl(p.ll, 'transit')}" target="_blank" rel="noopener noreferrer">🚃 公交路线</a>
             <a href="${routeUrl(p.ll, 'car')}" target="_blank" rel="noopener noreferrer">🚗 开车路线</a>
+            <a href="${esc(SEARCH[0][2](searchKeys(p)))}" target="_blank" rel="noopener noreferrer">📕 小红书</a>
+            <button type="button" data-detail="${p.id}">详情</button>
             <button type="button" data-open="${p.id}">在地图上看</button>
           </div>
         </div>
@@ -1133,6 +1346,7 @@
           ${e.link ? `<a href="${esc(e.link)}" target="_blank" rel="noopener noreferrer">官方网站</a>` : ''}
           <button type="button" class="sh-nope" data-nope="${e.id}">🚫 不感兴趣</button>
         </div>
+        ${searchRow(e)}
         <p class="sh-credit">${src}日期和购票以官方为准。</p>
       </div>`;
   }
@@ -1145,33 +1359,57 @@
       return;
     }
     const p = byId[id];
-    const credit = p.img
-      ? `图：${esc(p.img.artist || '佚名')} · ${esc(p.img.license)} · <a href="${esc(p.img.page)}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>`
-      : '暂无配图';
+    const imgs = imagesOf(p);
+    const credit = imgs.length ? imgCredit(imgs[0], 0, imgs.length) : '暂无配图';
+    // 有多张图时顶部可以左右滑
+    const hero = imgs.length > 1
+      ? `<div class="sh-gal" id="sh-gal">${imgs.map((im, i) => `<img src="${esc(im.thumb)}" alt="${esc(im.caption)}"${i ? ' loading="lazy"' : ''} decoding="async">`).join('')}</div>
+        <span class="sh-gal-dots" id="sh-gal-dots" aria-hidden="true">${imgs.map((_, i) => `<i${i ? '' : ' class="on"'}></i>`).join('')}</span>`
+      : photo(p);
     $('sheet').innerHTML = `
-      <div class="sh-hero">${photo(p)}
+      <div class="sh-hero">${hero}
         <button type="button" class="sh-close" id="sh-close" aria-label="关闭">×</button>
         <div class="sh-title"><h2>${esc(p.name)}</h2><p><span>${esc(p.area)} · ${esc(p.kind)}</span><span class="st tone-${p.season.tone}" style="color:#fff">${esc(p.season.text)}</span></p></div>
       </div>
       <div class="sh-body">
+        <p class="sh-tags">${TAG_DEFS.filter(t => t.name !== GA && hasTag(p, t.name)).map(t => `<span>${t.emoji} ${t.name}</span>`).join('')}</p>
+        <h3>亮点概览</h3>
+        <p>${esc(p.why)}</p>
+        <p class="sh-blurb">${esc(p.blurb)}</p>
+        ${p.tip ? `<p class="sh-tip">${esc(p.tip)}</p>` : ''}
         <div class="sh-time">
           <div class="${state.measure === 'transit' ? 'on' : ''}"><small>🚃 公共交通 · 估算</small><b>${minsOf(p, 'transit')}<small>分</small></b><p>${esc(p.transit.route)}</p></div>
           <div class="${state.measure === 'car' ? 'on' : ''}"><small>🚗 自驾 · 不含拥堵</small><b>${minsOf(p, 'car')}<small>分</small></b><p>约${p.car.km}公里；高峰和停车另计</p></div>
         </div>
-        <p class="sh-tags">${TAG_DEFS.filter(t => t.name !== GA && hasTag(p, t.name)).map(t => `<span>${t.emoji} ${t.name}</span>`).join('')}</p>
-        <h3>为什么去</h3>
-        <p>${esc(p.why)}</p>
-        ${p.tip ? `<p class="sh-tip">${esc(p.tip)}</p>` : ''}
-        ${p.seasons.length ? `<h3>一年里什么时候去</h3>${yearStrip(p)}` : ''}
         <div class="sh-acts">
           <button type="button" data-wish="${p.id}" data-label="1" aria-pressed="${wish.has(p.id)}">${wish.has(p.id) ? '♥ 已想去' : '♡ 想去'}</button>
           <a href="${routeUrl(p.ll, state.measure)}" target="_blank" rel="noopener noreferrer">${state.measure === 'car' ? '开车路线' : '公交路线'}</a>
           <button type="button" class="sh-nope" data-nope="${p.id}">🚫 不感兴趣</button>
         </div>
-        <p class="sh-credit">${credit}</p>
+        ${searchRow(p)}
+        ${p.seasons.length ? `<h3>一年里什么时候去</h3>${yearStrip(p)}` : ''}
+        <div class="sh-detail" id="sh-detail">${DETAILS[id] ? '<p class="dt-loading">正在读取详细攻略…</p>' : ''}</div>
+        <p class="sh-credit" id="sh-img-credit">${credit}</p>
       </div>`;
     $('sh-close').addEventListener('click', () => closeSheet());
+    if (imgs.length > 1) {
+      $('sh-gal').addEventListener('scroll', e => {
+        const i = Math.round(e.target.scrollLeft / e.target.clientWidth);
+        $('sh-gal-dots').querySelectorAll('i').forEach((d, k) => d.classList.toggle('on', k === i));
+        $('sh-img-credit').innerHTML = imgCredit(imgs[i], i, imgs.length);
+      }, { passive: true });
+    }
+    loadDetail(id).then(d => {
+      if (state.sel !== id || !$('sh-detail')) return;
+      $('sh-detail').innerHTML = d ? detailHtml(d) : '';
+      if (d?.search) $('sh-search').outerHTML = searchRow(p, d);
+    });
   }
+  // 详细攻略里“顺路还能去”的站内地点
+  $('sheet').addEventListener('click', e => {
+    const g = e.target.closest('[data-goto]');
+    if (g) select(g.dataset.goto);
+  });
 
   function select(id, fromHash) {
     const it = itemOf(id);

@@ -135,7 +135,28 @@ def check_greenapple(data: dict, label: str = '绿苹果') -> list[str]:
                     errors.append(f'{label} {ev.get("id")}：{key} 为 null 时要写 dateNote')
             elif not ISO.match(str(v)):
                 errors.append(f'{label} {ev.get("id")}：{key} 应为 YYYY-MM-DD')
+    # 动态（只有绿苹果专区有）：发布、巡演公布、节目、媒体报道等，全国范围
+    news_seen: set[str] = set()
+    for n in data.get('news') or []:
+        nid = n.get('id', '?')
+        err = lambda msg: errors.append(f'{label}动态 {nid}：{msg}')
+        if not ID.match(str(n.get('id', ''))) or nid in news_seen:
+            err('id 无效或重复')
+        news_seen.add(nid)
+        if not ISO.match(str(n.get('date', ''))):
+            err('date 应为 YYYY-MM-DD')
+        if n.get('kind') not in NEWS_KINDS:
+            err('kind 应为 ' + '、'.join(NEWS_KINDS) + ' 之一')
+        if not str(n.get('title', '')).strip() or not 10 <= len(str(n.get('summary', ''))) <= 160:
+            err('要有 title，summary 为10–160字')
+        if set(n) - {'id', 'date', 'kind', 'title', 'summary', 'sources', 'sample'}:
+            err('多出字段：' + '、'.join(sorted(set(n) - {'id', 'date', 'kind', 'title', 'summary', 'sources', 'sample'})))
+        if not n.get('sources') or not all(str(s.get('url', '')).startswith('http') for s in n['sources']):
+            err('必须有有效的 sources')
     return errors
+
+
+NEWS_KINDS = ('新歌', '专辑', 'MV', '巡演', '演出', '节目', '合作', '媒体', '其他')
 
 
 def main() -> None:

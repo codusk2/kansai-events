@@ -1,0 +1,40 @@
+{
+ "about": "蟹鱼游地点详情清单，由 scripts/collect_details.py 生成，不要手改",
+ "schema": 1,
+ "details": {
+  "osakajo": {
+   "revision": 1,
+   "checkedAt": "2026-11-02",
+   "images": [
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Castillo_de_Osaka_2023.jpg/960px-Castillo_de_Osaka_2023.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Castillo_de_Osaka_2023.jpg",
+     "artist": "Omar David Sandoval Sida",
+     "license": "CC BY-SA 4.0",
+     "caption": "样例说明：天守全景"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/View_to_the_south_from_the_Osaka_Castle_Keep_Tower.jpg/960px-View_to_the_south_from_the_Osaka_Castle_Keep_Tower.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:View_to_the_south_from_the_Osaka_Castle_Keep_Tower.jpg",
+     "artist": "Christophe95",
+     "license": "CC BY-SA 4.0",
+     "caption": "样例说明：从天守往南看"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Osaka_Castle%2C_Japan_2019-5_3.jpg/960px-Osaka_Castle%2C_Japan_2019-5_3.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Osaka_Castle,_Japan_2019-5_3.jpg",
+     "artist": "dconvertini",
+     "license": "CC BY-SA 2.0",
+     "caption": "样例说明：石垣与护城河"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Signal_Gun_in_front_of_Tenshu_of_Osaka_Castle.JPG/960px-Signal_Gun_in_front_of_Tenshu_of_Osaka_Castle.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Signal_Gun_in_front_of_Tenshu_of_Osaka_Castle.JPG",
+     "artist": "そらみみ",
+     "license": "CC BY-SA 3.0",
+     "caption": "样例说明：天守前的号炮"
+    }
+   ]
+  }
+ }
+}

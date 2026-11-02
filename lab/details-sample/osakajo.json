@@ -1,0 +1,120 @@
+{
+ "id": "osakajo",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "合成样例（Claude）",
+ "sample": true,
+ "summary": "【合成样例，内容为编写，仅用于本机预览版式】离京桥最近的大片绿地，天守、石垣和护城河一圈走下来约两小时，春季梅林和樱花最热闹。",
+ "highlights": [
+  {
+   "title": "样例看点一：天守阁",
+   "text": "示意文字：登顶看城市全景，馆内是历史展示。",
+   "where": "公园中央，另购票"
+  },
+  {
+   "title": "样例看点二：梅林",
+   "text": "示意文字：早春约百种梅花依次开放。",
+   "where": "公园东侧"
+  },
+  {
+   "title": "样例看点三：内濠游船",
+   "text": "示意文字：从水面看石垣，约二十分钟。"
+  }
+ ],
+ "visit": {
+  "hours": "示意：9:00–17:00",
+  "fee": "示意：天守阁收费，公园免费",
+  "stay": "示意：2–3小时",
+  "bestTime": "示意：上午人少，傍晚有亮灯",
+  "crowd": "示意：周末和花季人多"
+ },
+ "access": {
+  "transit": "示意：JR环状线京桥站→大阪城公园站，步行约10分钟到天守。",
+  "car": "示意：公园周边有收费停车场，花季易满。",
+  "local": "示意：园内坡道不多，有观光小火车。"
+ },
+ "food": [
+  {
+   "name": "样例店A",
+   "what": "示意：乌冬",
+   "price": "示意：约1000日元",
+   "note": "示意：午间排队"
+  },
+  {
+   "name": "样例店B",
+   "what": "示意：咖啡与甜点",
+   "price": "示意：约800日元"
+  }
+ ],
+ "nearby": [
+  {
+   "name": "造币局樱花通道",
+   "placeId": "zoheikyoku",
+   "how": "示意：步行约20分钟",
+   "note": "示意：樱花季可以连着去"
+  },
+  {
+   "name": "中之岛",
+   "placeId": "nakanoshima",
+   "how": "示意：电车约10分钟"
+  }
+ ],
+ "seasonal": [
+  {
+   "when": "2月中旬–3月上旬",
+   "text": "示意：梅林"
+  },
+  {
+   "when": "3月下旬–4月上旬",
+   "text": "示意：樱花与夜樱"
+  }
+ ],
+ "tips": [
+  "示意：从森之宫站进梅林最近。",
+  "示意：天守阁下午排队较长。"
+ ],
+ "cautions": [
+  "示意：部分区域施工时会封闭。"
+ ],
+ "search": {
+  "zh": "大阪城公园",
+  "ja": "大阪城公園"
+ },
+ "links": [
+  {
+   "label": "示例链接",
+   "url": "https://example.com/"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://example.com/a",
+   "note": "示意来源一",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://example.com/b",
+   "note": "示意来源二",
+   "accessed": "2026-11-02"
+  }
+ ],
+ "images": [
+  {
+   "file": "Castillo de Osaka 2023.jpg",
+   "caption": "样例说明：天守全景"
+  },
+  {
+   "file": "View to the south from the Osaka Castle Keep Tower.jpg",
+   "caption": "样例说明：从天守往南看"
+  },
+  {
+   "file": "Osaka Castle, Japan 2019-5 3.jpg",
+   "caption": "样例说明：石垣与护城河"
+  },
+  {
+   "file": "Signal Gun in front of Tenshu of Osaka Castle.JPG",
+   "caption": "样例说明：天守前的号炮"
+  }
+ ]
+}
