@@ -1,0 +1,58 @@
+{
+ "id": "amanohashidate",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "Claude（简写，核对来源原文）",
+ "summary": "京都府北部宫津湾里一条长约3.6公里、宽约20–170米的沙洲，长着约5,400棵松树，是日本三景之一。可以在沙洲上步行或骑车穿过，也可以从南北两端的展望台俯瞰全景。",
+ "highlights": [
+  {
+   "title": "南侧天桥立View Land",
+   "text": "从南端山上看沙洲，坐吊椅或单轨上山。"
+  },
+  {
+   "title": "北侧傘松公园",
+   "text": "从北端看沙洲，坐缆车或吊椅上山。"
+  },
+  {
+   "title": "沙洲松林",
+   "text": "约5,400棵松树沿沙洲排开，可步行或骑车穿过。"
+  }
+ ],
+ "visit": {
+  "hours": "沙洲随时可走；南侧天桥立View Land 9:00–17:30（2月16日–6月30日，其他时期不同）；北侧傘松公园缆车3–10月9:00–18:00，12–1月至17:00，2月和11月至17:30",
+  "fee": "沙洲免费；View Land 往返吊椅/单轨含入园 大人1,000日元、小学生500日元；傘松公园缆车/吊椅往返 大人800日元、小孩400日元",
+  "stay": "步行穿过沙洲单程约50分钟，骑车约20分钟（观光协会参考时间）"
+ },
+ "tips": [
+  "沙洲属于国定公园，汽车不能通行。",
+  "View Land 不能步行或开车上山，只能坐吊椅或单轨。"
+ ],
+ "search": {
+  "zh": "天桥立",
+  "ja": "天橋立"
+ },
+ "links": [
+  {
+   "label": "天桥立观光协会",
+   "url": "https://www.amanohashidate.jp/spot/amanohashidate/"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.amanohashidate.jp/spot/amanohashidate/",
+   "note": "沙洲长宽、松树数量、步行和骑车时间、车辆不能通行",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.viewland.jp/eigyou/",
+   "note": "View Land 分时期营业时间、往返票价、只能乘吊椅或单轨上山",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.tankai.jp/trip/cable",
+   "note": "傘松公园缆车运行时间和往返票价",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

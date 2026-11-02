@@ -1,0 +1,39 @@
+{
+ "id": "asuka",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "Claude（简写，核对来源原文）",
+ "summary": "奈良县明日香村是飞鸟时代的都城所在地，村里散布着古坟和寺院遗迹。代表是石舞台古坟：7世纪初的巨石横穴式石室，被认为是苏我马子的墓，是国家特别史迹。",
+ "highlights": [
+  {
+   "title": "石舞台古坟",
+   "text": "封土已经流失，巨大的石室直接露在外面。"
+  }
+ ],
+ "tips": [
+  "石舞台古坟附近有土产店“明日香の夢市”和农村餐厅“夢市茶屋”，可以顺便吃饭。"
+ ],
+ "search": {
+  "zh": "明日香村 石舞台",
+  "ja": "明日香村 石舞台古墳"
+ },
+ "links": [
+  {
+   "label": "明日香村观光网站",
+   "url": "https://asukamura.com/sightseeing/area/ishibutai/"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://ja.wikipedia.org/wiki/%E7%9F%B3%E8%88%9E%E5%8F%B0%E5%8F%A4%E5%A2%B3",
+   "note": "石舞台古坟建于7世纪初、推定墓主苏我马子、国特别史迹、露出的横穴式石室",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://asukamura.com/sightseeing/area/ishibutai/",
+   "note": "石舞台周边的明日香の夢市、夢市茶屋",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

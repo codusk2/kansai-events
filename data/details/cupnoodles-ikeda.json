@@ -1,0 +1,43 @@
+{
+ "id": "cupnoodles-ikeda",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "Claude（简写，核对来源原文）",
+ "summary": "日清食品在池田市办的方便面博物馆，纪念世界第一款方便面在池田诞生。入馆免费，可以付费做一杯自己设计的杯面。",
+ "visit": {
+  "hours": "9:30–16:30（15:30停止入馆）；周二休馆（遇节假日改为次日），年末年初休馆",
+  "fee": "入馆免费；“我的杯面工坊”每杯500日元（含税）"
+ },
+ "tips": [
+  "馆内另有设备检修休馆日，出发前看官网日历。",
+  "停车场只有普通车23个车位，收费，尽量坐电车去。"
+ ],
+ "search": {
+  "zh": "池田杯面博物馆",
+  "ja": "カップヌードルミュージアム 大阪池田"
+ },
+ "links": [
+  {
+   "label": "官方网站（英文）",
+   "url": "https://www.cupnoodles-museum.jp/en/osaka_ikeda/"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.cupnoodles-museum.jp/en/osaka_ikeda/",
+   "note": "开馆时间、周二和年末年初休馆、入馆免费",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.cupnoodles-museum.jp/en/osaka_ikeda/attractions/mc-factory/",
+   "note": "我的杯面工坊每杯500日元",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.ikedashi-kanko.jp/spot/recommend-spot03",
+   "note": "池田市观光协会：营业时间、休馆日、免费、23个收费车位",
+   "accessed": "2026-11-02"
+  }
+ ]
+}
