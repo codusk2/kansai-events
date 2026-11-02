@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- 方案B 细线：纯色蓝底，统一线宽的白色线条，第一版的随笔气质做规整 -->
+  <rect width="64" height="64" rx="14" fill="#4A84BE"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20.5 35.2a11.5 11.5 0 0 1 23 0z"/>
+    <path d="M23.4 28.6l-3.6-3.6M40.6 28.6l3.6-3.6"/>
+    <path d="M18.2 20.5L19.8 16.2A4.6 4.6 0 1 1 16.6 16.2Z"/>
+    <path d="M45.8 20.5L47.4 16.2A4.6 4.6 0 1 1 44.2 16.2Z"/>
+    <path d="M28.6 23.9v-3.6M35.4 23.9v-3.6"/>
+    <path d="M22.4 47.4c4-4.6 11-4.6 15 0-4 4.6-11 4.6-15 0z"/>
+    <path d="M37.4 47.4l5.4-3.8v7.6z"/>
+  </g>
+  <g fill="#FFFFFF"><circle cx="28.6" cy="18.8" r="1.7"/><circle cx="35.4" cy="18.8" r="1.7"/><circle cx="26.8" cy="46.8" r="1.1"/></g>
+</svg>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>蟹鱼游图标方案</title>
+<style>
+  :root {
+    --paper: #F3F9FE;
+    --card: #FFFFFF;
+    --ink: #1F3347;
+    --muted: #56697C;
+    --line: #D6E8F5;
+    --serif: "Hiragino Mincho ProN", "Songti SC", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+  main { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; margin: 0 0 4px; }
+  .lead { color: var(--muted); font-size: .86rem; margin: 0 0 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .opt { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px; }
+  .opt h2 { margin: 0; font-size: 1.05rem; display: flex; gap: 8px; align-items: baseline; }
+  .opt h2 b { font-size: 1.3rem; color: #3B74B0; }
+  .opt p { margin: 4px 0 14px; color: var(--muted); font-size: .8rem; line-height: 1.6; }
+  .hero { display: flex; align-items: flex-end; gap: 16px; }
+  .hero img { display: block; }
+  .big { width: 132px; height: 132px; border-radius: 30px; box-shadow: 0 8px 24px rgba(40, 100, 160, .18); }
+  .home { display: grid; justify-items: center; gap: 4px; font-size: .66rem; color: var(--muted); }
+  .home img { width: 60px; height: 60px; border-radius: 14px; box-shadow: 0 2px 6px rgba(0, 0, 0, .12); }
+  .rows { display: grid; gap: 8px; margin-top: 14px; }
+  .bar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 14px; font-family: var(--serif); font-weight: 600; letter-spacing: .06em; }
+  .bar img { width: 30px; height: 30px; border-radius: 8px; }
+  .bar.light { background: rgba(250, 253, 255, .9); border: 1px solid var(--line); }
+  .bar.dark { background: #1A2533; color: #E8F2FB; }
+  .tab { display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 8px 8px 0 0; background: #E3E8EE; font-size: .72rem; width: max-content; }
+  .tab img { width: 16px; height: 16px; border-radius: 3px; }
+  .note { margin-top: 20px; font-size: .78rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>蟹鱼游图标 · 四个方案</h1>
+  <p class="lead">同一枚螃蟹加小鱼的字形，换底色和画法。每个方案依次看：大图、手机桌面、站内顶栏（浅色和深色）、浏览器标签页。</p>
+  <div class="grid">
+    <section class="opt">
+      <h2><b>A</b>扁平字形</h2>
+      <p>蓝色竖向渐变底，白色实心字形。最像系统自带的 App 图标，和现在站里的天空蓝最搭。</p>
+      <div class="hero"><img class="big" src="a.svg" alt="方案A"><span class="home"><img src="a.svg" alt="">蟹鱼游</span></div>
+      <div class="rows">
+        <div class="bar light"><img src="a.svg" alt="">蟹鱼游</div>
+        <div class="bar dark"><img src="a.svg" alt="">蟹鱼游</div>
+        <span class="tab"><img src="a.svg" alt="">蟹鱼游</span>
+      </div>
+    </section>
+    <section class="opt">
+      <h2><b>B</b>细线</h2>
+      <p>纯色蓝底，统一线宽的白色线条，留白多。保留第一版随笔、素雅的气质，但线条规整。</p>
+      <div class="hero"><img class="big" src="b.svg" alt="方案B"><span class="home"><img src="b.svg" alt="">蟹鱼游</span></div>
+      <div class="rows">
+        <div class="bar light"><img src="b.svg" alt="">蟹鱼游</div>
+        <div class="bar dark"><img src="b.svg" alt="">蟹鱼游</div>
+        <span class="tab"><img src="b.svg" alt="">蟹鱼游</span>
+      </div>
+    </section>
+    <section class="opt">
+      <h2><b>C</b>浅色</h2>
+      <p>白底加一圈淡蓝细边，蓝色螃蟹，小鱼用脸颊粉点一下。清爽、轻，像工具类大厂应用。</p>
+      <div class="hero"><img class="big" src="c.svg" alt="方案C"><span class="home"><img src="c.svg" alt="">蟹鱼游</span></div>
+      <div class="rows">
+        <div class="bar light"><img src="c.svg" alt="">蟹鱼游</div>
+        <div class="bar dark"><img src="c.svg" alt="">蟹鱼游</div>
+        <span class="tab"><img src="c.svg" alt="">蟹鱼游</span>
+      </div>
+    </section>
+    <section class="opt">
+      <h2><b>D</b>夜色双色</h2>
+      <p>深海军蓝底，天空蓝螃蟹配粉色小鱼。更沉稳、有辨识度，在浅色背景上最醒目。</p>
+      <div class="hero"><img class="big" src="d.svg" alt="方案D"><span class="home"><img src="d.svg" alt="">蟹鱼游</span></div>
+      <div class="rows">
+        <div class="bar light"><img src="d.svg" alt="">蟹鱼游</div>
+        <div class="bar dark"><img src="d.svg" alt="">蟹鱼游</div>
+        <span class="tab"><img src="d.svg" alt="">蟹鱼游</span>
+      </div>
+    </section>
+  </div>
+  <p class="note">选定后替换 kaniyu/icon.svg 和顶栏，和其他三项改动（京桥螃蟹图钉、地图🍏提示、详情去掉“怎么去”）一起发布。</p>
+</main>
+</body>
+</html>

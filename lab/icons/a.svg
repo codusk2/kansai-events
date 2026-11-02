@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- 方案A 扁平字形：蓝色渐变底，白色螃蟹和小鱼 -->
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6EA7DB"/><stop offset="1" stop-color="#3B74B0"/></linearGradient></defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <g transform="translate(0 -1)">
+    <g fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round">
+      <path d="M22.6 29.2l-3.4-4.6M41.4 29.2l3.4-4.6"/>
+      <path d="M28.6 25.6v-3.8M35.4 25.6v-3.8"/>
+    </g>
+    <g fill="#FFFFFF">
+      <path d="M18.2 23L20.5 17.3A6 6 0 1 1 15.9 17.3Z"/>
+      <path d="M45.8 23L48.1 17.3A6 6 0 1 1 43.5 17.3Z"/>
+      <path d="M20 35.5a12 12 0 0 1 24 0c0 .9-.7 1.5-1.5 1.5h-21c-.8 0-1.5-.6-1.5-1.5z"/>
+      <circle cx="28.6" cy="20.4" r="2.2"/>
+      <circle cx="35.4" cy="20.4" r="2.2"/>
+    </g>
+    <g fill="#FFFFFF">
+      <path d="M21.8 47.6c4.1-5 11.6-5 15.7 0-4.1 5-11.6 5-15.7 0z"/>
+      <path d="M37 47.6l5.6-4.1c.5-.4 1.2 0 1.2.6v7c0 .6-.7 1-1.2.6z"/>
+    </g>
+    <circle cx="26.6" cy="46.9" r="1.3" fill="#4A82BC"/>
+  </g>
+</svg>
