@@ -6,6 +6,9 @@
 
 多图：详情里的 images 只写 Wikimedia Commons 文件名和说明；本脚本向 Commons 查缩略图地址、作者和许可，
 文件不存在或不是自由许可的报错，通过的写进清单 index.json 的 images（页面的图集和瀑布流读这里）。
+
+来源：不带 --check 时还会逐条请求 sources 和 links（scripts/check_links.py），打不开、跳回首页、
+落到 404 的报错；只写到首页的给提醒。--skip-links 可以跳过这一步（只在网络不通时用）。
 """
 from __future__ import annotations
 
@@ -16,6 +19,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from check_links import check_links  # noqa: E402
 from collect_places import COMMONS, chunks, get_json, strip_html  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -136,6 +140,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--dir', default='data/details')
     ap.add_argument('--check', action='store_true')
+    ap.add_argument('--skip-links', action='store_true', help='不请求来源链接')
     args = ap.parse_args()
     folder = ROOT / args.dir
     sample_dir = folder.resolve() != (ROOT / 'data/details').resolve()
@@ -156,6 +161,11 @@ def main() -> None:
         if not errs:
             index[f.stem] = {'revision': d['revision'], 'checkedAt': d['checkedAt']}
             docs[f.stem] = d
+    link_warnings: list[str] = []
+    if not args.check and not args.skip_links and not errors:
+        link_errors, link_warnings = check_links([
+            (stem, x['url']) for stem, d in docs.items() for x in (d.get('sources') or []) + (d.get('links') or [])])
+        errors += link_errors
     if not args.check and not errors:
         wanted = {stem: d.get('images') or [] for stem, d in docs.items()}
         found = commons_images([im['file'] for ims in wanted.values() for im in ims])
@@ -171,9 +181,11 @@ def main() -> None:
                     out.append({**meta, 'caption': im.get('caption') or ''})
             if out:
                 index[stem]['images'] = out
+    for w in link_warnings:
+        print('提醒', w)
     for e in errors:
         print('错误', e)
-    print(f'{len(index)} 份详情通过检查，{len(errors)} 个错误')
+    print(f'{len(index)} 份详情通过格式检查，{len(errors)} 个错误，{len(link_warnings)} 个提醒')
     if errors:
         sys.exit(1)
     if not args.check:

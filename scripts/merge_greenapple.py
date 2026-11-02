@@ -4,7 +4,8 @@
 用法：python3 scripts/merge_greenapple.py result.json [--dry-run]
 - news、events 按 id 合并：同 id 整条替换，新 id 追加；结束超过60天的活动和最多40条以外的旧动态移除；
 - events 里的 imgFile 向 Wikimedia Commons 查缩略图、作者和许可，转成 img（找不到或非自由许可时去掉并提示）；
-- 合并后用 validate_places.check_greenapple 检查，有错误时不写文件、退出码为 1。
+- 新来的条目逐条请求来源（scripts/check_links.py）：打不开、跳回首页、落到 404 的报错；只写到首页的给提醒；
+- 合并后用 validate_places.check_greenapple 检查，有错误时不写文件、退出码为 1。--skip-links 跳过来源请求（只在网络不通时用）。
 """
 from __future__ import annotations
 
@@ -15,6 +16,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from check_links import check_links  # noqa: E402
 from collect_details import FREE, commons_images  # noqa: E402
 from validate_places import check_greenapple  # noqa: E402
 
@@ -28,6 +30,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('result')
     ap.add_argument('--dry-run', action='store_true')
+    ap.add_argument('--skip-links', action='store_true', help='不请求来源链接')
     args = ap.parse_args()
     data = json.loads(TARGET.read_text(encoding='utf-8'))
     res = json.loads(Path(args.result).read_text(encoding='utf-8'))
@@ -64,6 +67,13 @@ def main() -> None:
         data['placesNote'] = res['placesNote']
 
     errors = check_greenapple(data)
+    link_warnings: list[str] = []
+    if not args.skip_links:
+        link_errors, link_warnings = check_links([
+            (x['id'], s['url']) for x in (res.get('news') or []) + (res.get('events') or []) for s in x.get('sources') or []])
+        errors += link_errors
+    for w in link_warnings:
+        print('提醒', w)
     for n in notes:
         print(n)
     for e in errors:
