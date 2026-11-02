@@ -1217,7 +1217,7 @@ body.idle .map-credit {
 
 .home-name {
   display: none;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   padding: 3px 9px;
   border-radius: 99px;
   background: var(--ink);
@@ -1232,28 +1232,12 @@ body.idle .map-credit {
   display: block;
 }
 
-/* 方块去掉左下圆角再转-45°，尖角朝下；转过之后尖角比盒子低约6px，用下边距补齐，让尖角正好落在京桥站 */
+/* 水滴图钉：尖角在盒子最下边，正好落在京桥站 */
 .home-pin {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  margin-bottom: 6px;
-  border: 2.5px solid #FFFFFF;
-  border-radius: 50% 50% 50% 0;
-  background: #F28CA8;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
-  transform: rotate(-45deg);
-}
-
-.home-pin .mini {
-  height: 13px;
-  color: #FFFFFF;
-  transform: rotate(45deg);
-}
-
-.home-pin .mini .eye {
-  fill: #F28CA8;
+  display: block;
+  width: 24px;
+  height: 29px;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .28));
 }
 
 /* 时间圈：抽象的时间雷达，一屏看完，下面是比较栏 */

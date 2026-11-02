@@ -619,7 +619,16 @@
   const homeEl = document.createElement('div');
   homeEl.className = 'home';
   // 京桥站是检索中心：远看只有一枚螃蟹图钉，放大后才在上方写站名；永远压在旅行点上面
-  homeEl.innerHTML = `<span class="home-name">${esc(ORIGIN.name)} · 出发点</span><span class="home-pin">${CRAB}</span>`;
+  // 图钉里的螃蟹和站点图标（icon.svg）是同一个字形，白色；底色用图标的蓝色渐变
+  const HOME_PIN = `<svg class="home-pin" viewBox="0 0 28 34" aria-hidden="true">
+      <defs><linearGradient id="home-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6EA7DB"/><stop offset="1" stop-color="#3B74B0"/></linearGradient></defs>
+      <path d="M14 32.6c-1.3-3.4-4.4-6.6-7.5-9.3A12 12 0 1 1 21.5 23.3C18.4 26 15.3 29.2 14 32.6z" fill="url(#home-bg)" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+      <svg x="4.6" y="6.4" width="18.8" height="12.4" viewBox="12 10.6 40 26.4">
+        <g fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round"><path d="M22.6 29.2l-3.4-4.6M41.4 29.2l3.4-4.6M28.6 25.6v-3.8M35.4 25.6v-3.8"/></g>
+        <g fill="#FFFFFF"><path d="M18.2 23L20.5 17.3A6 6 0 1 1 15.9 17.3Z"/><path d="M45.8 23L48.1 17.3A6 6 0 1 1 43.5 17.3Z"/><path d="M20 35.5a12 12 0 0 1 24 0c0 .9-.7 1.5-1.5 1.5h-21c-.8 0-1.5-.6-1.5-1.5z"/><circle cx="28.6" cy="20.4" r="2.2"/><circle cx="35.4" cy="20.4" r="2.2"/></g>
+      </svg>
+    </svg>`;
+  homeEl.innerHTML = `<span class="home-name">${esc(ORIGIN.name)} · 出发点</span>${HOME_PIN}`;
   homeEl.setAttribute('aria-label', `${ORIGIN.name}（出发点）`);
   new maplibregl.Marker({ element: homeEl, anchor: 'bottom' }).setLngLat(ORIGIN.ll).addTo(map);
 
