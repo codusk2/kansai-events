@@ -1,0 +1,154 @@
+{
+ "id": "yoshino",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "吉野山是奈良县南部绵延约8公里的山地与寺社文化景观，以山樱和修验道圣地闻名。适合喜欢季节景色、登山散步与历史寺院的游客；春季从下千本到奥千本依次绽放的山樱最具代表性。",
+ "highlights": [
+  {
+   "title": "下千本至奥千本的山樱",
+   "text": "约3万株、约200种樱花沿山势由低处向高处依次开花，观赏期因此逐段推进。",
+   "where": "吉野山各千本区域；山地步行免费"
+  },
+  {
+   "title": "金峯山寺蔵王堂",
+   "text": "吉野山的标志性寺院建筑，也是修验道的重要圣地；堂内供奉蔵王権現像。",
+   "where": "中千本；参拜收费，特别公开期间票价可能不同"
+  },
+  {
+   "title": "花矢倉展望台",
+   "text": "可从上千本一带俯瞰山谷与层叠山坡，樱花季尤其能看出花色沿山势铺展。",
+   "where": "上千本"
+  },
+  {
+   "title": "七曲り的紫阳花",
+   "text": "初夏沿弯曲山道可看紫阳花与新绿，是吉野山春樱以外的季节景色。",
+   "where": "七曲り周边"
+  }
+ ],
+ "visit": {
+  "hours": "吉野山是开放式山地景观，没有统一的开闭园时间；寺社各自有参拜时间，出发前应查看目标寺社公告。",
+  "fee": "山地步行免费；金峯山寺蔵王堂通常参拜费800日元，特别公开期间可能调整。",
+  "stay": "半日至一日；若走访多个千本区域并参观寺社，建议安排一整天。",
+  "bestTime": "樱花季清晨较适合步行和观景，光线柔和且较能避开日间高峰；花期从山麓向山上推进，出发前查看当年开花信息。",
+  "crowd": "樱花季是热门时段，周末与盛开期人多；平日清晨通常较从容。"
+ },
+ "food": [
+  {
+   "name": "やっこ",
+   "what": "柿の葉ずし等吉野名物。",
+   "note": "吉野山观光协会餐饮名录介绍该店位于蔵王堂附近；营业安排可能随季节变化，出发前向店家确认。"
+  },
+  {
+   "name": "矢的庵",
+   "what": "手打荞麦面。",
+   "note": "观光协会介绍其使用吉野山名水与手工制面；具体营业日和价格请事先确认。"
+  }
+ ],
+ "seasonal": [
+  {
+   "when": "春（4月上旬至下旬）",
+   "text": "山樱由下千本、中千本、上千本逐渐开至奥千本，夜间部分区域会有赏樱灯光活动。"
+  },
+  {
+   "when": "初夏（6月中旬至7月上旬）",
+   "text": "七曲り一带可看紫阳花，山中也进入新绿季节。"
+  },
+  {
+   "when": "秋（11月至12月上旬）",
+   "text": "山中可看红叶，寺社与山道适合结合散步；部分地点会举办夜间点灯。"
+  },
+  {
+   "when": "冬",
+   "text": "有机会看到雪景，山中氛围较为静谧，需留意寒冷和路面状况。"
+  }
+ ],
+ "tips": [
+  "吉野山范围较广且有坡道，穿舒适、防滑的鞋并预留步行时间。",
+  "樱花与红叶进度会因年份和天气变化，出发前查看观光协会的当季信息。",
+  "寺社参拜时间、收费及特别公开安排各不相同，请逐处确认。"
+ ],
+ "cautions": [
+  "山路有坡度，雨后可能湿滑；按体力安排路线并携带饮水。",
+  "樱花季人流集中，观景时请遵守现场管理与步行秩序。"
+ ],
+ "search": {
+  "zh": "吉野山",
+  "ja": "吉野山（よしのやま）"
+ },
+ "links": [
+  {
+   "label": "吉野山观光协会：四季景色",
+   "url": "https://yoshinoyama-kankou.com/about/"
+  },
+  {
+   "label": "吉野山观光协会：餐饮店名录",
+   "url": "https://yoshinoyama-kankou.com/gourmet/"
+  },
+  {
+   "label": "奈良县观光官网：吉野山",
+   "url": "https://yamatoji.nara-kankou.or.jp/02nature/01mountain/04south_area/yoshinoyama/"
+  }
+ ],
+ "images": [
+  {
+   "file": "吉野山 上千本 Kami-sembon in Yoshinoyama 2013.4.09 - panoramio.jpg",
+   "caption": "春季上千本山樱与山坡景观"
+  },
+  {
+   "file": "蔵王堂 (zaoudou) - panoramio - ys1979.jpg",
+   "caption": "吉野山的金峯山寺蔵王堂"
+  },
+  {
+   "file": "Yoshinoyama (6988361768).jpg",
+   "caption": "吉野山山体与林地景观"
+  },
+  {
+   "file": "吉野山 花矢倉展望台 Hana-yagura observatory in Yoshinoyama 2014.4.12 - panoramio.jpg",
+   "caption": "花矢倉展望台所见的春日吉野山"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://yamatoji.nara-kankou.or.jp/02nature/01mountain/04south_area/yoshinoyama/",
+   "note": "核实吉野山约8公里山脊、约3万株樱花、由下千本至奥千本的开花顺序，以及紫阳花季节。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://yoshinoyama-kankou.com/about/",
+   "note": "核实春季山樱、夏季紫阳花与行事、秋季红叶和冬季雪景等四季看点。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://yoshinoyama-kankou.com/gourmet/",
+   "note": "核实やっこ、矢的庵等吉野山餐饮店及其特色介绍。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://yoshinoyama-kankou.com/sakura/",
+   "note": "核实吉野山以约200种、约3万株樱花闻名及当季赏樱信息。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:%E5%90%89%E9%87%8E%E5%B1%B1_%E4%B8%8A%E5%8D%83%E6%9C%AC_Kami-sembon_in_Yoshinoyama_2013.4.09_-_panoramio.jpg",
+   "note": "核实该上千本照片文件存在、图像内容及CC BY-SA 3.0许可。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:%E8%94%B5%E7%8E%8B%E5%A0%82_(zaoudou)_-_panoramio_-_ys1979.jpg",
+   "note": "核实蔵王堂照片文件存在、所示地点及CC BY 3.0许可。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Yoshinoyama_(6988361768).jpg",
+   "note": "核实吉野山照片文件存在、图像内容及CC BY-SA 2.0许可。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:%E5%90%89%E9%87%8E%E5%B1%B1_%E8%8A%B1%E7%9F%A2%E5%80%89%E5%B1%95%E6%9C%9B%E5%8F%B0_Hana-yagura_observatory_in_Yoshinoyama_2014.4.12_-_panoramio.jpg",
+   "note": "核实花矢倉展望台照片文件存在、所示地点及CC BY-SA 3.0许可。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

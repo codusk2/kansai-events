@@ -1,0 +1,151 @@
+{
+ "id": "horyuji",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "法隆寺是奈良斑鳩的世界文化遗产，以飞鸟时代以来的木造伽蓝和佛教珍宝闻名。适合对日本古建筑、佛教美术和历史感兴趣的游客；西院伽蓝的金堂与五重塔，以及东院伽蓝的梦殿最值得细看。",
+ "highlights": [
+  {
+   "title": "西院伽蓝",
+   "text": "金堂与五重塔等古建筑集中展现法隆寺的木构建筑传统，也是寺内最具代表性的景观。",
+   "where": "西院伽蓝，需购通票"
+  },
+  {
+   "title": "大宝藏院",
+   "text": "可集中欣赏法隆寺所藏的佛教美术与寺宝。",
+   "where": "需购通票"
+  },
+  {
+   "title": "梦殿与救世观音",
+   "text": "八角形梦殿位于东院伽蓝；救世观音为期间限定公开的秘佛，出发前应确认当期开放安排。",
+   "where": "东院伽蓝，需购通票"
+  },
+  {
+   "title": "中宫寺菩萨半跏像",
+   "text": "中宫寺本尊菩萨半跏思惟像以含蓄微笑著称，适合与法隆寺连同参观。",
+   "where": "法隆寺东院伽蓝旁，另行收费"
+  }
+ ],
+ "visit": {
+  "hours": "2月22日—11月3日 8:00–17:00；11月4日—2月21日 8:00–16:30。全年开放，闭门前30分钟停止受理。",
+  "fee": "西院伽蓝、大宝藏院、东院伽蓝通票：成人（15岁及以上）2,000日元，初中生1,700日元，小学生1,000日元；现场仅收现金。",
+  "stay": "建议预留约2–3小时参观两处伽蓝和大宝藏院。",
+  "bestTime": "上午较方便从容地依次参观两处伽蓝和宝藏院；梦殿秘佛有春秋公开期，可按公开日期安排。"
+ },
+ "food": [
+  {
+   "name": "和CAFE 布穀薗",
+   "what": "斑鸠名物竜田揚げ午餐与甜点",
+   "note": "10:00–16:00，午餐11:00–14:00；周三休息（遇节假日营业），距法隆寺步行约3分钟。"
+  },
+  {
+   "name": "和食さと 法隆寺店",
+   "what": "天妇罗盖饭、日式套餐等",
+   "note": "每日11:00–24:00，全年无休；店内最后点餐23:30。"
+  }
+ ],
+ "nearby": [
+  {
+   "name": "中宫寺",
+   "how": "毗邻法隆寺东院伽蓝",
+   "note": "参观国宝菩萨半跏思惟像，可与法隆寺安排在同一行程。"
+  }
+ ],
+ "seasonal": [
+  {
+   "when": "10月中旬至11月初",
+   "text": "法起寺及中宫寺遗址周边可赏斑鸠之里的波斯菊田园景色。"
+  },
+  {
+   "when": "11月下旬至12月上旬",
+   "text": "竜田川周边进入红叶观赏期，可搭配斑鸠古寺参观。"
+  }
+ ],
+ "tips": [
+  "法隆寺通票需现金支付，准备好日元现金。",
+  "参观梦殿秘佛前先核对春秋特别公开日期。"
+ ],
+ "cautions": [
+  "闭门前30分钟停止受理，冬季闭门时间较早。"
+ ],
+ "search": {
+  "zh": "法隆寺、斑鸠寺",
+  "ja": "法隆寺（ほうりゅうじ）"
+ },
+ "links": [
+  {
+   "label": "奈良官方旅游指南：法隆寺",
+   "url": "https://www.visitnara.jp/venues/A00506/"
+  },
+  {
+   "label": "斑鳩观光：斑鳩之里四季·秋",
+   "url": "https://www.ikaruga-kanko.com/season/details.php?mode=3"
+  },
+  {
+   "label": "奈良县观光官网：中宫寺",
+   "url": "https://yamatoji.nara-kankou.or.jp/01shaji/02tera/02west_area/chuguji/"
+  }
+ ],
+ "images": [
+  {
+   "file": "Horyu-ji46n3990.jpg",
+   "caption": "西院伽蓝内门与五重塔"
+  },
+  {
+   "file": "Horyu-ji08s3200.jpg",
+   "caption": "西院伽蓝金堂与五重塔"
+  },
+  {
+   "file": "Horyu-ji02s3200.jpg",
+   "caption": "法隆寺南大门"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.visitnara.jp/venues/A00506/",
+   "note": "确认开放时间、成人及学生门票、法隆寺的具体地点与景点信息。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.the-kansai-guide.com/en/directory/item/10039/",
+   "note": "确认全年开放、冬季营业时间、现金支付限制及木造建筑群介绍。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.ikaruga-kanko.com/season/details.php?mode=3",
+   "note": "确认波斯菊、竜田川红叶的观赏地点与季节。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://yamatoji.nara-kankou.or.jp/01shaji/02tera/02west_area/chuguji/",
+   "note": "确认中宫寺国宝菩萨半跏思惟像及其特色。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.ikaruga-kanko.com/navi/details.php?mode=1&pid=1455011925",
+   "note": "确认和CAFE 布穀薗的竜田揚げ菜单、营业时间、休息日及距法隆寺步行时间。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://store.srsholdings.com/detail/0745750552/",
+   "note": "确认和食さと法隆寺店地址、营业时间、菜单类型与全年营业。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Horyu-ji46n3990.jpg",
+   "note": "curl确认文件页和图片存在，页面标注 CC BY 2.5，图为内门与五重塔。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Horyu-ji08s3200.jpg",
+   "note": "curl确认文件页和图片存在，页面标注 CC BY 2.5，图为金堂与五重塔。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Horyu-ji02s3200.jpg",
+   "note": "curl确认文件页和图片存在，页面标注 CC BY 2.5，图为南大门。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

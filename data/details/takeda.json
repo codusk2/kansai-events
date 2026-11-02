@@ -1,0 +1,138 @@
+{
+ "id": "takeda",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "竹田城迹是兵库县朝来市古城山山顶的山城遗址，以保存良好的石垣和秋季清晨云海闻名。适合喜欢山城遗迹与晨间景色的游客；若想看云海，需接受天气不确定性，并留意季节开放时间及登山道临时管制。",
+ "highlights": [
+  {
+   "title": "山顶石垣遗构",
+   "text": "城内没有建筑留存，主要看沿山势铺展的石垣和城郭布局。",
+   "where": "城迹内"
+  },
+  {
+   "title": "云海中的城迹",
+   "text": "秋季冷晴且风弱的清晨较容易出现云海；从城迹看云海，或从对岸立云峡远望城迹。",
+   "where": "城迹及对岸立云峡"
+  },
+  {
+   "title": "山顶眺望",
+   "text": "登上古城山可俯瞰山麓与周边山地，晴天适合观察城址所处的地形。",
+   "where": "城迹内"
+  }
+ ],
+ "visit": {
+  "hours": "2026年6月1日至12月6日为5:00–17:00；12月7日起为10:00–15:00。1月4日至2月底冬季闭山，其他季节时间另按官方公告。",
+  "fee": "成人（高中生以上）500日元；中学生及以下免费。",
+  "stay": "城迹内约30–60分钟，不含登山往返时间。",
+  "bestTime": "看云海以秋季清晨为目标；云海无法保证，普通游览可按当日开放时间安排。",
+  "crowd": "云海季周末及节假日早晨较拥挤，官方建议平日分散来访。"
+ },
+ "food": [],
+ "nearby": [],
+ "seasonal": [
+  {
+   "when": "春季",
+   "text": "石垣与樱花相映；对岸立云峡一带也以山樱闻名。"
+  },
+  {
+   "when": "秋季（约9月至11月）",
+   "text": "晩秋清晨较有机会出现云海，云海发生与否取决于天气。"
+  },
+  {
+   "when": "冬季",
+   "text": "雪景会改变石垣山城的观感，但竹田城迹1月4日至2月底闭山，不能入城参观。"
+  }
+ ],
+ "tips": [
+  "城迹内参观约需30–60分钟，另须为登山路程预留时间。",
+  "山道和城迹内有未铺装路面及石阶，穿适合步行的鞋。",
+  "想看云海可参考官方天气提示，但不要把云海出现视为确定。"
+ ],
+ "cautions": [
+  "截至2026年10月16日，駅裏登山道与表米神社登山道因熊目击信息关闭；出发前确认官方最新公告。",
+  "闭道期间官方指示使用西登山道或南登山道；留意现场告示，不进入封闭路线。",
+  "遭遇恶劣天气时可能限制入城，山顶及登山道请按管理方指示行动。"
+ ],
+ "search": {
+  "zh": "竹田城迹、天空之城竹田城",
+  "ja": "竹田城跡、竹田城"
+ },
+ "links": [
+  {
+   "label": "竹田城迹官方（朝来市）",
+   "url": "https://www.city.asago.hyogo.jp/site/takeda/25623.html"
+  },
+  {
+   "label": "兵库县观光导航：竹田城迹",
+   "url": "https://www.hyogo-tourism.jp/spot/detail_1058.html"
+  }
+ ],
+ "images": [
+  {
+   "file": "Takeda castle.jpg",
+   "caption": "从近处拍摄的竹田城迹石垣与山顶遗址"
+  },
+  {
+   "file": "雪の竹田城址と雲海 (Takeda Castle Site in winter) 24 Dec, 2011 - panoramio.jpg",
+   "caption": "冬季积雪与云海中的竹田城址"
+  },
+  {
+   "file": "春の竹田城 - panoramio.jpg",
+   "caption": "春季的竹田城与山顶石垣"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.city.asago.hyogo.jp/site/takeda/25623.html",
+   "note": "核实2026年6月1日至12月6日的5:00–17:00开放时间及登城管理信息。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.city.asago.hyogo.jp/site/takeda/3095.html",
+   "note": "核实城迹保留石垣、无建筑留存，以及城内参观约30–60分钟。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.city.asago.hyogo.jp/site/takeda/3102.html",
+   "note": "核实成人观览费500日元、中学生及以下免费。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.city.asago.hyogo.jp/site/takeda/27510.html",
+   "note": "核实2026年10月16日公告中駅裏与表米神社登山道持续关闭及熊出没注意事项。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.city.asago.hyogo.jp/site/takeda/17618.html",
+   "note": "核实晩秋为云海高发期、2026年早朝开城至12月6日及云海受天气影响。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.hyogo-tourism.jp/spot/detail_1058.html",
+   "note": "核实云海观赏时节、对岸立云峡观景建议及春季樱花等季节景色。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.ritsuunkyo.com/highlight/",
+   "note": "核实立云峡可望竹田城迹与云海，并有山樱景观。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Takeda_castle.jpg",
+   "note": "用curl确认文件页与原图存在；页面描述为竹田城址，许可为CC0。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:%E9%9B%AA%E3%81%AE%E7%AB%B9%E7%94%B0%E5%9F%8E%E5%9D%80%E3%81%A8%E9%9B%B2%E6%B5%B7_(Takeda_Castle_Site_in_winter)_24_Dec,_2011_-_panoramio.jpg",
+   "note": "用curl确认文件页与原图存在；文件名及描述确认是冬季竹田城址和云海，页面标注CC0。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:%E6%98%A5%E3%81%AE%E7%AB%B9%E7%94%B0%E5%9F%8E_-_panoramio.jpg",
+   "note": "用curl确认文件页与原图存在；文件描述为春季竹田城，页面标注CC BY 3.0。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

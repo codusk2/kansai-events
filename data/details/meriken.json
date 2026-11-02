@@ -1,0 +1,131 @@
+{
+ "id": "meriken",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "美利坚公园是神户港边的开放式海滨公园，适合散步、看港景和拍摄城市地标。港塔、神户海洋博物馆与海边步道集中在园区一带，傍晚至夜间可欣赏港口灯光；园地免费，塔内展望设施另收费。",
+ "highlights": [
+  {
+   "title": "神户港塔与海洋博物馆",
+   "text": "红色港塔与白色帆形屋顶的海洋博物馆构成港区代表性天际线，可在草坪和海边步道取景。",
+   "where": "园区内及相邻区域；公园免费，登塔另收费"
+  },
+  {
+   "title": "BE KOBE纪念标志",
+   "text": "面向港湾的标志适合合影，也能将海面和港区景色一并纳入画面。",
+   "where": "园内海边"
+  },
+  {
+   "title": "神户港震灾纪念公园",
+   "text": "保留部分阪神淡路大震灾后受损的岸壁，可了解港口震灾遗迹。",
+   "where": "园区海岸一侧；户外参观"
+  }
+ ],
+ "visit": {
+  "hours": "公园为户外开放空间，可随时散步；园内设施各有营业时间，需分别确认。",
+  "fee": "公园免费；神户港塔展望区需购票，票种与费用见官网。",
+  "stay": "约1–2小时；若登塔或参观周边设施可延长。",
+  "bestTime": "傍晚到入夜可先看海港与建筑，再看港区灯光；白天适合观察建筑和海岸遗迹。",
+  "crowd": "周末、节假日及夜景时段较热闹；平日白天通常更适合安静散步。"
+ },
+ "nearby": [
+  {
+   "name": "南京町（神户中华街）",
+   "how": "步行约10分钟",
+   "note": "可顺路逛中华街并安排小吃或用餐。"
+  },
+  {
+   "name": "神户港塔",
+   "how": "园区内",
+   "note": "登上展望层可从高处看神户港与市区。"
+  }
+ ],
+ "seasonal": [
+  {
+   "when": "春季",
+   "text": "海滨散步气候较舒适，可结合园内绿地和港景游览。"
+  },
+  {
+   "when": "夏季",
+   "text": "日照强且海边遮阴有限，建议避开正午并注意补水。"
+  },
+  {
+   "when": "秋冬",
+   "text": "空气清透时适合看港区远景；日落较早，可较早衔接夜景。"
+  }
+ ],
+ "tips": [
+  "想登神户港塔，请出发前查看官网当日营业时间和票价。",
+  "可把公园、南京町和港塔安排在同一段步行行程中。"
+ ],
+ "cautions": [
+  "海边风力可能较强，夜间或冬季建议带外套。",
+  "公园户外开放不代表园内设施全天营业，入馆前请核对各设施公告。"
+ ],
+ "search": {
+  "zh": "神户美利坚公园、神户港美利坚公园",
+  "ja": "メリケンパーク"
+ },
+ "links": [
+  {
+   "label": "神户港塔官方网站",
+   "url": "https://www.kobe-port-tower.com/"
+  },
+  {
+   "label": "神户港塔门票与费用",
+   "url": "https://www.kobe-port-tower.com/ticket/"
+  }
+ ],
+ "images": [
+  {
+   "file": "Kobe Meriken Park (daytime).JPG",
+   "caption": "白天的美利坚公园与神户港塔"
+  },
+  {
+   "file": "Kobe Meriken Park (night).JPG",
+   "caption": "夜间灯光下的美利坚公园港区"
+  },
+  {
+   "file": "Meriken Park with Maritime Museum Tower, September 2024.jpg",
+   "caption": "海洋博物馆与港塔并列的园区景观"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://ja.wikipedia.org/wiki/%E3%83%A1%E3%83%AA%E3%82%B1%E3%83%B3%E3%83%91%E3%83%BC%E3%82%AF",
+   "note": "核实公园位于神户港、园区构成及港塔、海洋博物馆等地标关系。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.kobe-port-tower.com/ticket/",
+   "note": "核实神户港塔提供展望设施且需按官网票种购票。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://ja.wikipedia.org/wiki/%E7%A5%9E%E6%88%B8%E6%B8%AF%E9%9C%87%E7%81%BD%E3%83%A1%E3%83%A2%E3%83%AA%E3%82%A2%E3%83%AB%E3%83%91%E3%83%BC%E3%82%AF",
+   "note": "核实港边震灾纪念公园保留震灾受损岸壁遗迹。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://ja.wikipedia.org/wiki/%E5%8D%97%E4%BA%AC%E7%94%BA_(%E7%A5%9E%E6%88%B8%E5%B8%82)",
+   "note": "核实南京町为神户市中心的中华街区，作为附近顺路地点。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Kobe_Meriken_Park_(daytime).JPG",
+   "note": "确认公园白天照片文件页存在并标注自由许可。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Kobe_Meriken_Park_(night).JPG",
+   "note": "确认公园夜景照片文件页存在并标注自由许可。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Meriken_Park_with_Maritime_Museum_Tower,_September_2024.jpg",
+   "note": "确认海洋博物馆与港塔景观照片文件页存在并标注自由许可。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

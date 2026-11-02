@@ -1,0 +1,153 @@
+{
+ "id": "metasequoia",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "马基诺水杉林荫道位于滋贺县高岛市，从マキノピックランド通往マキノ高原，全长约2.4公里、种有约500棵水杉。适合散步和拍摄林荫景色；春季新绿、夏季浓绿、秋季砖红色叶景和冬季雪景各有不同。",
+ "highlights": [
+  {
+   "title": "约2.4公里水杉林荫道",
+   "text": "约500棵水杉沿道路排列，是马基诺地区标志性的景观。",
+   "where": "マキノピックランド至マキノ高原方向"
+  },
+  {
+   "title": "四季林景",
+   "text": "春有新绿，夏季树荫浓密，秋叶呈砖色至褐色，冬季积雪时可见雪中林木。",
+   "where": "林荫道沿线"
+  },
+  {
+   "title": "并木咖啡馆观景",
+   "text": "可在店内或天气适宜时于露台眺望水杉林，并享用时令水果甜点。",
+   "where": "並木カフェ メタセコイア"
+  }
+ ],
+ "visit": {
+  "hours": null,
+  "fee": null,
+  "stay": "沿林荫道散步、拍照并在园区休息约需1–2小时。",
+  "bestTime": "可按想看的季节景色选择；拍摄前后可留意光线与天气变化。",
+  "crowd": "红叶季人气较高；マキノピックランド提示红叶期间周边会开设临时停车场。"
+ },
+ "food": [
+  {
+   "name": "なみ木食堂 ツバメ",
+   "what": "使用近江米和时令农产品的高岛当地料理与近江乡土料理。",
+   "price": null,
+   "note": "位于マキノピックランド；近期园区页面展示其营业信息，营业时段与休园日可能随季节调整，出发前请确认。"
+  },
+  {
+   "name": "並木カフェ メタセコイア",
+   "what": "使用当地食材和水果的餐食与甜点。",
+   "price": null,
+   "note": "可在室内或天气适宜时在露台眺望林荫道；公开信息列出周三休息，季节营业时间可能变化。"
+  }
+ ],
+ "nearby": [
+  {
+   "name": "マキノピックランド",
+   "how": "位于林荫道起点一带",
+   "note": "有观光果园、餐饮和农产品相关设施，可作为散步前后的休憩点。"
+  },
+  {
+   "name": "マキノ高原",
+   "how": "沿林荫道继续向北",
+   "note": "这条林荫道是通往高原的道路，可与林景散步安排在同一行程。"
+  }
+ ],
+ "seasonal": [
+  {
+   "when": "春季（4月下旬至5月）",
+   "text": "水杉萌芽并进入新绿时节，林道呈清新的黄绿色。"
+  },
+  {
+   "when": "夏季（6月至10月）",
+   "text": "树叶转为浓绿，沿林道可在树荫下散步。"
+  },
+  {
+   "when": "秋季（11月下旬至12月上旬）",
+   "text": "林木转为砖色或褐色调，观光协会介绍此时为常见红叶观赏期。"
+  },
+  {
+   "when": "冬季",
+   "text": "遇到合适天气时，枝头积雪与白色田野构成冬日景观。"
+  }
+ ],
+ "tips": [
+  "红叶季周边会设置临时停车场，抵达后按现场指引停放。",
+  "可先查看高岛市发布的林荫道近况，了解近期景色。"
+ ],
+ "cautions": [
+  "林荫道周边道路也是生活道路，请注意行人并控制车速。",
+  "积雪景观取决于天气条件，不能保证每年都能看到。"
+ ],
+ "search": {
+  "zh": "马基诺水杉林荫道",
+  "ja": "メタセコイア並木"
+ },
+ "links": [
+  {
+   "label": "びわ湖高島観光ガイド：四季景色与游览提示",
+   "url": "https://takashima-kanko.jp/spot/metasequoia.html"
+  },
+  {
+   "label": "マキノピックランド：园区与餐饮设施",
+   "url": "https://pic-land.com/"
+  },
+  {
+   "label": "高岛市：水杉林荫道近况",
+   "url": "https://www.city.takashima.lg.jp/topics/8228.html"
+  }
+ ],
+ "images": [
+  {
+   "file": "Metasequoia Road in Makino, Takashima - Jul 9, 2017.jpg",
+   "caption": "夏季马基诺水杉林荫道的绿色树列景观"
+  },
+  {
+   "file": "Metasequoia Namiki in 2019.jpg",
+   "caption": "马基诺水杉林荫道的秋季景色"
+  },
+  {
+   "file": "A row of Metasequoia trees Makino 20200919.jpg",
+   "caption": "马基诺水杉林荫道的树列"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://takashima-kanko.jp/spot/metasequoia.html",
+   "note": "确认林荫道位于通往マキノ高原的道路、约2.4公里约500棵水杉；核实四季看点、常见红叶期、道路安全提示及红叶季临时停车信息。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.biwako-visitors.jp/spot/detail/8069/?active=hana&categories=3",
+   "note": "确认水杉林荫道名称、地点、约2.4公里规模及红叶常见观赏期。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.city.takashima.lg.jp/topics/8228.html",
+   "note": "高岛市发布的水杉林荫道近期情况页面，可用于查看官方现场近况。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://pic-land.com/",
+   "note": "确认マキノピックランド运营果园及餐饮设施，并核实园区近期公告和餐饮信息。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Metasequoia_Road_in_Makino,_Takashima_-_Jul_9,_2017.jpg",
+   "note": "curl 确认文件页可打开，页面描述为滋贺县高岛市马基诺水杉林荫道，许可为 CC0。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Metasequoia_Namiki_in_2019.jpg",
+   "note": "curl 确认文件页可打开，页面描述为メタセコイア並木，许可为 CC0。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:A_row_of_Metasequoia_trees_Makino_20200919.jpg",
+   "note": "curl 确认文件页可打开，文件名指明马基诺水杉树列，许可为 CC0。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

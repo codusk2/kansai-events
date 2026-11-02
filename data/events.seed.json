@@ -188,6 +188,80 @@
    "from": "2026-11-18",
    "addedAt": "2026-10-31",
    "addedBy": "Claude"
+  },
+  {
+   "id": "ninnaji-unkai-2026",
+   "name": "仁和寺 红叶云海点灯",
+   "kind": "点灯",
+   "venue": "总本山仁和寺境内（京都）",
+   "ll": [
+    135.7135,
+    35.0314
+   ],
+   "to": "2026-12-13",
+   "note": "仅限周五、六、日和节假日；11/8、11/28休止。18:30–21:00（受付18:00–20:30），夜间拝观2,800日元（高中生以下免费）。",
+   "link": "",
+   "sources": [
+    {
+     "url": "https://ninnaji.jp/news/event-34-2/",
+     "note": "仁和寺官网：期间、休止日、时间、费用"
+    },
+    {
+     "url": "https://ja.kyoto.travel/event/single.php?event_id=8795",
+     "note": "京都观光协会：期间、休止日、费用"
+    }
+   ],
+   "from": "2026-10-24",
+   "addedAt": "2026-11-02",
+   "addedBy": "Claude"
+  },
+  {
+   "id": "kyoto-botanical-night-2026",
+   "name": "京都府立植物园 秋之夜间花园（红叶点灯）",
+   "kind": "点灯",
+   "venue": "京都府立植物园",
+   "ll": [
+    135.7625,
+    35.0507
+   ],
+   "to": "2026-12-13",
+   "note": "18:00–21:30（最终入场20:30，页面对结束时间有出入）；平日大人1,100日元、周末节假日1,500日元，中小学生600日元。",
+   "link": "",
+   "sources": [
+    {
+     "url": "https://ja.kyoto.travel/event/single.php?event_id=5558",
+     "note": "京都观光协会：期间、时间、费用"
+    },
+    {
+     "url": "https://koyo.walkerplus.com/detail/ar0726e154666/data.html",
+     "note": "Walker+：2026年期间和费用"
+    }
+   ],
+   "from": "2026-11-14",
+   "addedAt": "2026-11-02",
+   "addedBy": "Claude"
+  },
+  {
+   "id": "umeda-sky-xmas-2026",
+   "name": "梅田蓝天大厦圣诞2026",
+   "kind": "圣诞市集",
+   "venue": "梅田蓝天大厦 1F广场、40F空中庭园展望台",
+   "ll": [
+    135.49,
+    34.7053
+   ],
+   "to": "2026-12-25",
+   "note": "主题“THE STARLIGHT TOWN”；25米圣诞树LED投影、圣诞市集（限定马克杯）。时间和费用新闻稿正文未写，以特设站为准。",
+   "link": "",
+   "sources": [
+    {
+     "url": "https://koubo.jp/press-release/prtimes/c63228_r215",
+     "note": "新闻稿：会期2026-11-13至12-25、会场、内容"
+    }
+   ],
+   "from": "2026-11-13",
+   "addedAt": "2026-11-02",
+   "addedBy": "Claude"
   }
  ]
 }

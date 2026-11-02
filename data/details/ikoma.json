@@ -1,0 +1,102 @@
+{
+ "id": "ikoma",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "生驹山顶的生驹山上游园地位于大阪、奈良之间的山顶，适合亲子游和喜欢眺望城市景色的游客。这里以游乐设施和大阪平原、奈良盆地的视野为主；2026年营业至12月6日，之后冬季休园。",
+ "highlights": [
+  {
+   "title": "俯瞰大阪平原",
+   "text": "从山顶可眺望大阪平原，天气清晰时视野可延伸至大阪湾方向。",
+   "where": "生驹山上游园地及山顶一带"
+  },
+  {
+   "title": "飞行塔",
+   "text": "园内的标志性高塔游乐设施，可从高处欣赏周边景色；游乐设施需另购票。",
+   "where": "生驹山上游园地"
+  },
+  {
+   "title": "山顶游乐园",
+   "text": "园内有适合儿童与家庭的游乐设施，游园也可同时眺望大阪和奈良方向。",
+   "where": "入园免费，游乐设施另收费"
+  }
+ ],
+ "visit": {
+  "hours": "2026年营业期为3月7日至12月6日；11月通常10:00–17:00，按日历营业，冬季休园。",
+  "fee": "入园免费；游乐设施另收费，单项约300–1000日元。",
+  "stay": "建议安排半天；仅看景可缩短。",
+  "bestTime": "晴朗的白天适合远眺；想看夜景需挑选有夜间营业的日期，11月通常不延长营业。",
+  "crowd": "周末和节假日较容易遇到家庭客；工作日通常更清静。"
+ },
+ "food": [],
+ "nearby": [],
+ "tips": [
+  "出发当天先查生驹山上游园地营业日历，营业时间会随季节和日期变化。",
+  "山顶气温和风感可能比市区低，带一件外套更稳妥。"
+ ],
+ "cautions": [
+  "游乐园有冬季休园期，且可能因天气等原因临时调整开放安排。",
+  "不要把日常营业时间当作缆车末班时间；缆车时刻需另行确认。"
+ ],
+ "search": {
+  "zh": "生驹山、生驹山上游乐园",
+  "ja": "生駒山、生駒山上遊園地"
+ },
+ "links": [
+  {
+   "label": "奈良县观光公式：生驹山上游园地",
+   "url": "https://yamatoji.nara-kankou.or.jp/05leisure/01leisure/02west_area/ikomasanjoyuenchi/access/"
+  },
+  {
+   "label": "生驹山上游园地 2026年数据",
+   "url": "https://summer.walkerplus.com/odekake/detail/ar0729s14610/data.html"
+  }
+ ],
+ "images": [
+  {
+   "file": "Ikoma Hikoutou01.jpg",
+   "caption": "生驹山上游园地的飞行塔"
+  },
+  {
+   "file": "Ikoma Sanjo Amusement Park Slopecar.jpg",
+   "caption": "生驹山上游园地的斜坡车"
+  },
+  {
+   "file": "Mount Ikoma.JPG",
+   "caption": "奈良县生驹山"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://summer.walkerplus.com/odekake/detail/ar0729s14610/data.html",
+   "note": "核对2026年营业期间、开放时间、休园日、入园和游乐设施收费。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.city.higashiosaka.lg.jp/0000007185.html",
+   "note": "核对生驹山顶海拔、游园地夜景及登山步道信息。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.japan47go.travel/ja/detail/50b28f3f-e26e-4908-a9c2-7a08e7782ab0",
+   "note": "核对园区眺望大阪平原、大阪湾、夜景及入园免费信息。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Ikoma_Hikoutou01.jpg",
+   "note": "确认图片为生驹山上游园地飞行塔，文件存在并标注CC BY-SA 4.0自由许可。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Ikoma_Sanjo_Amusement_Park_Slopecar.jpg",
+   "note": "确认图片为生驹山上游园地斜坡车，文件存在并标注CC BY-SA 4.0自由许可。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Mount_Ikoma.JPG",
+   "note": "确认图片描述为日本奈良的生驹山，文件存在并标注CC BY-SA 3.0及GFDL自由许可。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

@@ -1,0 +1,138 @@
+{
+ "id": "osakajo",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "大阪城公园是大阪市中心的历史公园，核心看点包括天守阁、护城河与石垣，也适合在大园林里散步。喜欢城郭历史和季节花景的游客可以安排半天；早春梅林和春季樱花尤其有名。",
+ "highlights": [
+  {
+   "title": "大阪城天守阁",
+   "text": "现天守阁于1931年由市民捐款复兴，内部为历史博物馆，顶层可俯瞰大阪市区。",
+   "where": "公园中心，入馆需购票"
+  },
+  {
+   "title": "护城河与石垣",
+   "text": "沿护城河步行可观察城郭遗构和高大的石垣，是了解城防布局的好路线。",
+   "where": "公园各处，免费"
+  },
+  {
+   "title": "大阪城梅林",
+   "text": "内堀东侧约1.7公顷，约有1,245株、105个品种，早春可看不同品种陆续开花。",
+   "where": "公园东侧，免费"
+  },
+  {
+   "title": "西之丸庭园与樱花",
+   "text": "庭园内约300株樱花，能以天守阁为背景赏花；入园需另购庭园门票。",
+   "where": "公园西侧，另收费"
+  }
+ ],
+ "visit": {
+  "hours": "公园为开放式园地；天守阁9:00–18:00（17:30截止入馆），12月28日–1月1日休馆。",
+  "fee": "公园散步免费；天守阁成人1,200日元，学生及儿童优惠或免费，按官网适用条件办理。",
+  "stay": "参观天守阁并游览主要园区约需2小时；想细逛梅林或庭园可留半天。",
+  "bestTime": "建议上午开馆后先参观天守阁，再散步游园；春季花景则可按梅、樱花期安排。",
+  "crowd": "樱花和梅花盛开时较热闹；旺季及周末人流较多，平日上午通常更适合慢逛。"
+ },
+ "food": [],
+ "nearby": [
+  {
+   "name": "JO-TERRACE OSAKA",
+   "how": "位于大阪城公园内",
+   "note": "园内有咖啡馆与餐饮店，适合散步后用餐或休息；各店营业时间不同。"
+  }
+ ],
+ "seasonal": [
+  {
+   "when": "早春（约1–3月）",
+   "text": "梅林有早开、中开和晚开品种，花期错开，可赏不同品种的梅花。"
+  },
+  {
+   "when": "春季（约3月下旬–4月）",
+   "text": "西之丸庭园等处樱花盛开，可拍摄樱花与天守阁同框。"
+  }
+ ],
+ "tips": [
+  "公园范围很大，进园前先选好要去的区域，避免只在入口附近折返。",
+  "天守阁截止入馆时间为17:30，下午到访请预留购票与入馆时间。",
+  "梅林各品种花期不一，出发前查看大阪城公园的当季开花信息。"
+ ],
+ "cautions": [
+  "天守阁闭馆日与公园内各设施的开放安排不同，节假日前后请分别确认。",
+  "樱花季及梅花盛开时园内较拥挤，请留意步道上的人流。"
+ ],
+ "search": {
+  "zh": "大阪城公园、大阪城",
+  "ja": "大阪城公園、大阪城"
+ },
+ "links": [
+  {
+   "label": "大阪城天守阁使用指南",
+   "url": "https://www.osakacastle.net/guide/?lang=ja"
+  },
+  {
+   "label": "大阪城公园梅林",
+   "url": "https://www.osakacastlepark.jp/flower/plum_grove.html"
+  },
+  {
+   "label": "大阪观光局：大阪城公园",
+   "url": "https://osaka-info.jp/spot/osaka-castle-park/"
+  }
+ ],
+ "images": [
+  {
+   "file": "Castillo de Osaka 2023.jpg",
+   "caption": "大阪城天守阁与城郭景观"
+  },
+  {
+   "file": "Osaka Castle, Japan 2019-5 3.jpg",
+   "caption": "大阪城景观"
+  },
+  {
+   "file": "Signal Gun in front of Tenshu of Osaka Castle.JPG",
+   "caption": "大阪城天守阁前的报时炮"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.osakacastle.net/guide/?lang=ja",
+   "note": "确认天守阁开馆时间、截止入馆时间、休馆日与成人入馆费。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.osakacastlepark.jp/flower/plum_grove.html",
+   "note": "确认梅林位于内堀东侧、面积约1.7公顷及梅树品种和数量。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://osaka-info.jp/spot/osaka-castle-park/",
+   "note": "确认公园主要设施、西之丸庭园樱花与梅林季节花景。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.tour.ne.jp/j_spot/128899/",
+   "note": "确认城郭的历史概况、园区花季人流及全园游览时长参考。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://jo-terrace.jp/floorguide",
+   "note": "确认JO-TERRACE OSAKA内餐饮店及营业时间信息。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Castillo_de_Osaka_2023.jpg",
+   "note": "确认图片为大阪城并标注CC BY-SA 4.0自由许可；curl验证原图可访问。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Osaka_Castle,_Japan_2019-5_3.jpg",
+   "note": "确认图片为大阪城并标注CC BY-SA 2.0自由许可；curl验证原图可访问。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Signal_Gun_in_front_of_Tenshu_of_Osaka_Castle.JPG",
+   "note": "确认图片为大阪城天守阁前报时炮并标注CC BY-SA 3.0自由许可；curl验证原图可访问。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

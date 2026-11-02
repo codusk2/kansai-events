@@ -1,6 +1,6 @@
 {
  "about": "由 scripts/collect_places.py 从 places.seed.json 生成，不要手改。",
- "generatedAt": "2026-10-31T14:55:09Z",
+ "generatedAt": "2026-11-02T13:29:17Z",
  "tags": [
   {
    "name": "绿苹果",
@@ -577,8 +577,8 @@
     34.80952
    ],
    "car": {
-    "mins": 31,
-    "km": 18.6
+    "mins": 32,
+    "km": 19.0
    },
    "img": {
     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/131116_Expo_Commemoration_Park_Suita_Osaka_pref_Japan01s3.jpg/500px-131116_Expo_Commemoration_Park_Suita_Osaka_pref_Japan01s3.jpg",
@@ -3011,8 +3011,8 @@
     34.80642
    ],
    "car": {
-    "mins": 26,
-    "km": 17.5
+    "mins": 27,
+    "km": 19.2
    },
    "img": {
     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/NIFREL.jpg/500px-NIFREL.jpg",
@@ -4477,6 +4477,169 @@
     "license": "CC BY-SA 4.0"
    },
    "wiki": "https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E3%81%86%E3%81%9A%E3%81%97%E3%81%8A"
+  },
+  {
+   "id": "yogoko",
+   "name": "余吴湖",
+   "area": "滋贺",
+   "kind": "自然",
+   "transit": {
+    "mins": 150,
+    "route": "JR新快速到长滨，换北陆线到余吴站，步行约5分（时间按时刻表估算，未用换乘工具核对）",
+    "checked": false
+   },
+   "seasons": [
+    {
+     "from": "04-01",
+     "to": "04-10",
+     "label": "樱",
+     "tone": "sakura"
+    },
+    {
+     "from": "11-05",
+     "to": "11-25",
+     "label": "红叶",
+     "tone": "koyo"
+    }
+   ],
+   "why": "周长约6.4公里的小湖，风小时湖面像镜子一样映着四周的山。",
+   "tip": "湖畔有环湖步道，散策免费；冬天有人来钓公鱼。",
+   "tags": [
+    "风景美",
+    "水边",
+    "安静",
+    "散步"
+   ],
+   "blurb": "湖不大，走一圈却不赶时间。风停的时候，山、天和木栈桥都倒在水面上，周围几乎没有人声。",
+   "sources": [
+    {
+     "url": "https://rurubu.jp/andmore/spot/80025535",
+     "note": "周长约6.4km、羽衣传说、JR余吴站步行5分、散策自由、停车场约100台"
+    },
+    {
+     "url": "https://www.nap-camp.com/mag/15875",
+     "note": "湖面映山、环湖步道、春樱秋叶、JR余吴站步行约5分"
+    }
+   ],
+   "addedAt": "2026-11-02",
+   "addedBy": "Claude",
+   "ll": [
+    136.19389,
+    35.52222
+   ],
+   "car": {
+    "mins": 135,
+    "km": 146.6
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Lake_Yogo01s3200.jpg/500px-Lake_Yogo01s3200.jpg",
+    "file": "Lake_Yogo01s3200.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Lake_Yogo01s3200.jpg",
+    "artist": "663highland",
+    "license": "CC BY 2.5"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E4%BD%99%E5%91%89%E6%B9%96"
+  },
+  {
+   "id": "mishimaike",
+   "name": "三岛池",
+   "area": "滋贺",
+   "kind": "自然",
+   "transit": {
+    "mins": 135,
+    "route": "JR新快速到米原，换北陆线到近江长冈，再乘湖国巴士约5–10分（时间为估算，未用换乘工具核对）",
+    "checked": false
+   },
+   "seasons": [
+    {
+     "from": "04-01",
+     "to": "04-12",
+     "label": "樱",
+     "tone": "sakura"
+    }
+   ],
+   "why": "伊吹山倒映在池里的“倒伊吹”，秋冬还能看水鸟。",
+   "tip": "禁止喂食水鸟和鲤鱼；风小的早晨倒影最清楚。",
+   "tags": [
+    "风景美",
+    "水边",
+    "安静",
+    "拍照"
+   ],
+   "blurb": "一个周长不到一公里的小池，镶在伊吹山脚下。早晨水面平静，整座山连雪线一起翻在池里，野鸭轻轻划过。",
+   "sources": [
+    {
+     "url": "https://tabi-mag.jp/sg0180/",
+     "note": "镰仓时代农业用池、倒伊吹、周长约780m、10月上旬至4月水鸟飞来、县天然纪念物、停车场72台免费"
+    },
+    {
+     "url": "https://rurubu.jp/andmore/spot/80025913",
+     "note": "JR近江长冈站转湖国巴士到三岛池站、散策自由、停车场72台"
+    }
+   ],
+   "addedAt": "2026-11-02",
+   "addedBy": "Claude",
+   "ll": [
+    136.35833,
+    35.37556
+   ],
+   "car": {
+    "mins": 122,
+    "km": 125.8
+   },
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Pond_Mishima_and_Mount_Ibuki.jpg/500px-Pond_Mishima_and_Mount_Ibuki.jpg",
+    "file": "Pond_Mishima_and_Mount_Ibuki.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Pond_Mishima_and_Mount_Ibuki.jpg",
+    "artist": "Kazu2011",
+    "license": "CC BY-SA 3.0"
+   },
+   "wiki": "https://ja.wikipedia.org/wiki/%E4%B8%89%E5%B3%B6%E6%B1%A0"
+  },
+  {
+   "id": "kojimaya-keshimochi",
+   "name": "堺·小岛屋 罂粟饼",
+   "ll": [
+    135.4745,
+    34.5735
+   ],
+   "area": "大阪",
+   "kind": "美食",
+   "transit": {
+    "mins": 55,
+    "route": "JR环状线到天王寺，换阪堺电车到宿院，步行约1分（时间为估算，未用换乘工具核对）",
+    "checked": false
+   },
+   "seasons": [],
+   "why": "延宝年间创业的老铺，只卖堺名物“けし餅”：豆沙裹年糕皮，再滚满罂粟籽。",
+   "tip": "1楼店头8:30–18:00；2楼茶房12:00–17:00，只在周二、周三、周六和隔周周日营业（官网2025年6月起），去前最好电话确认。",
+   "tags": [
+    "好吃",
+    "散步"
+   ],
+   "blurb": "一口咬下去，细豆沙外面是软软的年糕，罂粟籽在齿间轻轻作响。吃完沿着堺的老街慢慢走回去。",
+   "sources": [
+    {
+     "url": "https://tabelog.com/osaka/A2705/A270501/27015518/",
+     "note": "住所、宿院电停步行1分、1楼营业时间、延宝年间创业"
+    },
+    {
+     "url": "https://www.keshimochi.com/store",
+     "note": "官网：本店8:30–18:00，茶房12:00–17:00且仅周二/三/六和隔周周日营业"
+    },
+    {
+     "url": "https://www.nap-camp.com/mag/45443",
+     "note": "宿院站附近和菓子老铺、けし餅本铺"
+    }
+   ],
+   "addedAt": "2026-11-02",
+   "addedBy": "Claude",
+   "car": {
+    "mins": 24,
+    "km": 16.1
+   },
+   "img": null,
+   "wiki": null
   }
  ]
 }

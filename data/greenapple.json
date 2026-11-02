@@ -2,33 +2,38 @@
  "about": "绿苹果专区：Mrs. GREEN APPLE 在关西的相关地点和活动。每条必须有来源；活动写起止日期（未公布写 null 并在 dateNote 说明）；没有公开地点的 ll 写 null。维护规则见 docs/旅行点维护.md 的“绿苹果专区”。",
  "checkedAt": "2026-11-02",
  "places": [],
- "placesNote": "2026-11-02 远望试跑：没有找到MV取景地或成员公开提到的店的可靠来源。「旅のしおり」确有按巡演城市发放，但神户场的内容未核实，暂不收。",
+ "placesNote": "没有找到经可靠公开页面核实的关西MV取景地或成员到访店。本轮确认的神户《旅のしおり》与CITY QUEST是歌迷推荐的街游企划，兵库详情页尚未开放，不能据此认定成员去过具体店铺。",
  "events": [
   {
    "id": "mga-cafe-tennoji",
    "name": "Ringo Jam Café 天王寺MIO店",
-   "kind": "主题咖啡店",
-   "venue": "BOX cafe&space 天王寺MIO店（天王寺MIO本馆11楼）",
-   "ll": [
-    135.5143,
-    34.647
-   ],
+   "kind": "咖啡店",
+   "venue": "BOX cafe&space 天王寺MIO店",
+   "ll": null,
    "from": "2026-10-02",
    "to": "2026-12-13",
-   "note": "粉丝俱乐部10周年主题咖啡店，优先预约制，预约费550日元可抵餐费；会员抽选已结束，之后有先到先得的预约。",
+   "note": "事前预约优先，每人预付550日元，到店抵扣餐饮。一般销售已改为抽选；10月5–8日一般抽选和10月19–22日会员再抽选均已结束，再抽选结果自10月29日通知。后续空位以咖啡店预约页公告为准。",
    "sources": [
     {
-     "url": "https://collabo-cafe.com/events/collabo/mrs-green-apple-ringo-jam-cafe-2026/",
-     "note": "会场、日期、预约方式"
+     "url": "https://mrsgreenapple.com/news/detail/22953?lang=zh-CHS",
+     "note": "官网具体公告：天王寺会期、会场及550日元预付抵扣规则。"
     },
     {
-     "url": "https://natalie.mu/music/news/687935",
-     "note": "6都市开店消息"
+     "url": "https://mrsgreenapple.com/news/detail/23158",
+     "note": "官网10月2日公告：一般销售由先到先得改为抽选及受理、结果时间。"
+    },
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23246",
+     "note": "官网10月16日公告：会员再抽选受理期和10月29日结果通知。"
+    },
+    {
+     "url": "https://commons.wikimedia.org/wiki/File%3ATENNOJI_MIO_Main_building.jpg",
+     "note": "会场照片许可核实：Tokumeigakarinoaoshima，CC BY-SA 4.0；文件名为 TENNOJI MIO Main building.jpg。"
     }
    ],
    "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/TENNOJI_MIO.jpg/960px-TENNOJI_MIO.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "page": "https://commons.wikimedia.org/wiki/File:TENNOJI_MIO.jpg",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/TENNOJI_MIO_Main_building.jpg/960px-TENNOJI_MIO_Main_building.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:TENNOJI_MIO_Main_building.jpg",
     "artist": "Tokumeigakarinoaoshima",
     "license": "CC BY-SA 4.0",
     "note": "会场照片"
@@ -36,47 +41,44 @@
   },
   {
    "id": "mga-besthit-2026",
-   "name": "『ベストヒット歌謡祭2026』生出演（大阪城ホール）",
+   "name": "《ベストヒット歌謡祭2026》现场出演",
    "kind": "其他",
    "venue": "大阪城ホール",
-   "ll": [
-    135.5297,
-    34.6894
-   ],
+   "ll": null,
    "from": "2026-11-11",
    "to": "2026-11-11",
-   "note": "读卖电视台3小时直播，大阪城ホール举行，19:00起；现场观览方式以官方为准。",
+   "note": "17:30开场、19:00开演并直播3小时。Ringo Jam现场观览抽选于10月31日23:59截止，中选邮件定于11月2日19:00左右发送；须年满18岁，携观览票及带照片身份证件，并于18:30前就座。",
    "sources": [
     {
-     "url": "https://realsound.jp/2026/10/post-2567588.html",
-     "note": "11月11日19:00、大阪城ホール3小时直播、出演名单含Mrs. GREEN APPLE"
+     "url": "https://mrsgreenapple.com/news/detail/23266",
+     "note": "官网10月28日公开观览公告：日期、会场、开场开演、抽选截止、中选通知与入场要求。"
+    },
+    {
+     "url": "https://commons.wikimedia.org/wiki/File%3AOSAKA-JO_HALL.jpg",
+     "note": "会场照片许可核实：Tokumeigakarinoaoshima，CC BY-SA 4.0；文件名为 OSAKA-JO HALL.jpg。"
     }
    ],
    "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Osaka-jo_Hall_in_202502.jpg/960px-Osaka-jo_Hall_in_202502.jpg",
-    "page": "https://commons.wikimedia.org/wiki/File:Osaka-jo_Hall_in_202502.jpg",
-    "artist": "Mc681",
-    "license": "CC0",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/43/OSAKA-JO_HALL.jpg/960px-OSAKA-JO_HALL.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:OSAKA-JO_HALL.jpg",
+    "artist": "Tokumeigakarinoaoshima",
+    "license": "CC BY-SA 4.0",
     "note": "会场照片"
    }
   },
   {
    "id": "mga-fm802-talk",
-   "name": "Mrs. GREEN APPLE × FM802『POPS』TALK SESSION in 大阪",
-   "kind": "公开录音",
-   "venue": "大阪市内（只通知中选者）",
+   "name": "Mrs. GREEN APPLE×FM802《POPS》TALK SESSION in大阪 supported by Pontaパス",
+   "kind": "其他",
+   "venue": "大阪市内某所（详情仅通知中选者）",
    "ll": null,
    "from": "2026-11-12",
    "to": "2026-11-12",
-   "note": "18:00开始，抽选制，10月21日开始报名。",
+   "note": "18:00开始，三名成员出演，大抜卓人主持，共招待1000人。各渠道抽选已于10月26日23:59截止，11月5日15:00起仅通知中选者；现场须凭LivePocket电子票，未入学儿童不得入场。",
    "sources": [
     {
-     "url": "https://prtimes.jp/main/html/rd/p/000000006.000152302.html",
-     "note": "活动发表"
-    },
-    {
-     "url": "https://koubo.jp/article/132943",
-     "note": "报名信息"
+     "url": "https://mrsgreenapple.com/news/detail/23256",
+     "note": "官网10月20日公告：大阪活动、1000人招待、抽选期限、通知日期及电子票要求。"
     }
    ],
    "img": {
@@ -88,50 +90,56 @@
   },
   {
    "id": "mga-popup-namba",
-   "name": "「SHADOWS」POP-UP STORE 难波丸井",
+   "name": "「SHADOWS」POP-UP STORE なんばマルイ",
    "kind": "快闪店",
-   "venue": "なんばマルイ",
-   "ll": [
-    135.5012,
-    34.6648
-   ],
+   "venue": "なんばマルイ 5F イベントスペース",
+   "ll": null,
    "from": "2026-11-20",
    "to": "2026-12-06",
-   "note": "全国巡回快闪店的大阪站。入场是否需预约以官方公告为准。",
+   "note": "11:00–19:30，最晚19:00入场。11月6日18:00起先到先得预约，实行事前预约制；无演唱会门票也可入场购物，具体入场说明待后续公告。",
    "sources": [
     {
-     "url": "https://collabo-cafe.com/en/events/collabo/mga-shadows-popup-store-takamatsu-2026/",
-     "note": "全国17个会场日程"
+     "url": "https://mrsgreenapple.com/feature/ringojamtour_shadows_goods",
+     "note": "官方周边专题当前正文：会期、楼层、营业时间、11月6日18:00预约及无演唱会门票可购物。"
+    },
+    {
+     "url": "https://www.0101.co.jp/085/event/detail.html?article_seq=144270&article_type=sto&hashtag=animeent",
+     "note": "なんばマルイ具体活动页：活动名称及会场身份；参加方式以乐队专题正文为准。"
+    },
+    {
+     "url": "https://commons.wikimedia.org/wiki/File%3ANamba_Marui_2025-02.jpg",
+     "note": "会场照片许可核实：Mr.ちゅらさん，CC BY-SA 4.0；文件名为 Namba Marui 2025-02.jpg。"
     }
    ],
    "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Namba_Marui_Osaka_Japan02-r.jpg/960px-Namba_Marui_Osaka_Japan02-r.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "page": "https://commons.wikimedia.org/wiki/File:Namba_Marui_Osaka_Japan02-r.jpg",
-    "artist": "Oilstreet",
-    "license": "CC BY 2.5",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Namba_Marui_2025-02.jpg/960px-Namba_Marui_2025-02.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Namba_Marui_2025-02.jpg",
+    "artist": "Mr.ちゅらさん",
+    "license": "CC BY-SA 4.0",
     "note": "会场照片"
    }
   },
   {
    "id": "mga-popup-kobe",
-   "name": "「SHADOWS」POP-UP STORE 神户丸井",
+   "name": "「SHADOWS」POP-UP STORE 神戸マルイ",
    "kind": "快闪店",
-   "venue": "神戸マルイ",
-   "ll": [
-    135.1928,
-    34.6918
-   ],
+   "venue": "神戸マルイ 4F カレンダリウム",
+   "ll": null,
    "from": "2026-11-20",
    "to": "2026-12-06",
-   "note": "和神户公演前后脚，可以排在同一天。",
+   "note": "平日与周六11:00–19:30，周日及节假日10:30–19:30，最晚19:00入场。11月6日18:00起先到先得预约；无演唱会门票也可购物，具体入场说明待公告。",
    "sources": [
     {
-     "url": "https://collabo-cafe.com/en/events/collabo/mga-shadows-popup-store-takamatsu-2026/",
-     "note": "全国17个会场日程"
+     "url": "https://mrsgreenapple.com/feature/ringojamtour_shadows_goods",
+     "note": "官方周边专题当前正文：会期、4F会场、分日营业时间及11月6日18:00预约。"
+    },
+    {
+     "url": "https://commons.wikimedia.org/wiki/File%3AKobe_Marui_Japan01s3.jpg",
+     "note": "会场照片许可核实：663highland，CC BY 2.5／CC BY-SA 3.0等自由许可；文件名为 Kobe Marui Japan01s3.jpg。"
     }
    ],
    "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Kobe_Marui_Japan01s3.jpg/960px-Kobe_Marui_Japan01s3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Kobe_Marui_Japan01s3.jpg/960px-Kobe_Marui_Japan01s3.jpg",
     "page": "https://commons.wikimedia.org/wiki/File:Kobe_Marui_Japan01s3.jpg",
     "artist": "663highland",
     "license": "CC BY 2.5",
@@ -139,52 +147,18 @@
    }
   },
   {
-   "id": "mga-shadows-kobe",
-   "name": "Ringo Jam Tour『SHADOWS』神户公演",
-   "kind": "演唱会",
-   "venue": "GLION ARENA KOBE",
-   "ll": [
-    135.1937,
-    34.6838
-   ],
-   "from": "2026-12-02",
-   "to": "2026-12-03",
-   "note": "约三年来首次全国体育馆巡演，关西只有神户这一站。购票方式以官网为准。",
-   "sources": [
-    {
-     "url": "https://www.oricon.co.jp/news/2461515/full/",
-     "note": "巡演日程"
-    },
-    {
-     "url": "https://realsound.jp/2026/06/post-2428818.html",
-     "note": "巡演发表"
-    }
-   ],
-   "img": {
-    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/GLION_ARENA_KOBE_20250813.jpg/960px-GLION_ARENA_KOBE_20250813.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "page": "https://commons.wikimedia.org/wiki/File:GLION_ARENA_KOBE_20250813.jpg",
-    "artist": "KishujiRapid",
-    "license": "CC BY-SA 4.0",
-    "note": "会场照片"
-   }
-  },
-  {
    "id": "mga-popup-lucua",
-   "name": "「SHADOWS」POP-UP STORE LUCUA大阪",
+   "name": "「SHADOWS」POP-UP STORE ルクア サウス",
    "kind": "快闪店",
-   "venue": "LUCUA大阪",
-   "ll": [
-    135.4961,
-    34.7036
-   ],
-   "from": null,
+   "venue": "ルクア サウス 11F SUKI PLACE",
+   "ll": null,
+   "from": "2026-11-20",
    "to": "2026-12-06",
-   "dateNote": "11月开始，具体日期待公布",
-   "note": "营业时间和预约开始日期另行公布。",
+   "note": "官方周边专题当前正文已列明11月20日开幕，11:00–19:30营业、最晚19:00入场，11月6日18:00起先到先得预约。无演唱会门票也可购物；较早公告与搜索摘要中的「11月某日」为旧信息。",
    "sources": [
     {
-     "url": "https://collabo-cafe.com/en/events/collabo/mga-shadows-popup-store-takamatsu-2026/",
-     "note": "全国17个会场日程"
+     "url": "https://mrsgreenapple.com/feature/ringojamtour_shadows_goods",
+     "note": "实际curl打开的官方周边专题：会场11F SUKI PLACE、明确11月20日开幕及11月6日18:00预约；修正旧日期。"
     }
    ],
    "img": {
@@ -192,6 +166,88 @@
     "page": "https://commons.wikimedia.org/wiki/File:Lucua.JPG",
     "artist": "Own work",
     "license": "CC BY-SA 3.0",
+    "note": "会场照片"
+   }
+  },
+  {
+   "id": "mga-shadows-kobe-cityquest",
+   "name": "「SHADOWS」神户《旅のしおり》与CITY QUEST街游企划",
+   "kind": "其他",
+   "venue": "神戸市内（具体配布及集章点尚待公布）",
+   "ll": null,
+   "from": "2026-11-27",
+   "to": "2026-12-06",
+   "note": "官方列明兵库实施期为11月27日至12月6日，指南在各城市免费配布；CITY QUEST需Ringo Jam年费或月费会员，巡游指定点收集黄、红、蓝三色章。神户具体配布点与地图尚未开放，不把歌迷推荐点视为成员到访地点。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/feature/shadows_guidebook",
+     "note": "官方指南专题：兵库实施期已公布，兵库详情链接仍未开放。"
+    },
+    {
+     "url": "https://mrsgreenapple.com/feature/ringojamtour_shadows_special",
+     "note": "官方特别企划：指南免费配布、CITY QUEST资格及三色章规则。"
+    },
+    {
+     "url": "https://natalie.mu/music/news/694979",
+     "note": "音楽ナタリー10月23日报道：神户市指南配布期及街游企划。"
+    }
+   ]
+  },
+  {
+   "id": "mga-shadows-kobe",
+   "name": "Mrs. GREEN APPLE Ringo Jam Tour “SHADOWS” 神户公演",
+   "kind": "演唱会",
+   "venue": "GLION ARENA KOBE",
+   "ll": null,
+   "from": "2026-12-02",
+   "to": "2026-12-03",
+   "note": "两日均17:00开场、18:00开演。全体会员先行抽选已于10月27日5:00截止，11月7日14:00公布结果，入金至11月10日23:59。该轮席种均15000日元；申请者与同行者均须为会员并预先登记脸照，后续售票以官方公告为准。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23250",
+     "note": "官网10月20日公告：兵库两场、抽选截止、11月7日结果、票价和会员脸照条件。"
+    },
+    {
+     "url": "https://mrsgreenapple.com/feature/ringojamtour_shadows?_normalbrowse_=1#ticket",
+     "note": "官方巡演专题：神户两日日期、场馆及17:00开场、18:00开演。"
+    },
+    {
+     "url": "https://commons.wikimedia.org/wiki/File%3AGLION_ARENA_KOBE_on_25th_June_2025.jpg",
+     "note": "会场照片许可核实：Tokumeigakarinoaoshima，CC0 1.0；文件名为 GLION ARENA KOBE on 25th June 2025.jpg。"
+    }
+   ],
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/GLION_ARENA_KOBE_on_25th_June_2025.jpg/960px-GLION_ARENA_KOBE_on_25th_June_2025.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:GLION_ARENA_KOBE_on_25th_June_2025.jpg",
+    "artist": "Tokumeigakarinoaoshima",
+    "license": "CC0",
+    "note": "会场照片"
+   }
+  },
+  {
+   "id": "mga-cafe-koshien-truck",
+   "name": "Ringo Jam Café キッチンカー ららぽーと甲子園",
+   "kind": "咖啡店",
+   "venue": "ららぽーと甲子園",
+   "ll": null,
+   "from": "2026-12-04",
+   "to": "2026-12-07",
+   "note": "官方预告12月4–7日出店，提供由成员挑选风味的原创碳酸饮料。此为商场餐车场次；具体出店位置、营业时间和该场购买规则尚待进一步公告，勿套用固定咖啡店的座位预约规则。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/22953?lang=zh-CHS",
+     "note": "官网咖啡店公告的商场餐车巡回表：甲子园12月4–7日，以及餐车饮品说明。"
+    },
+    {
+     "url": "https://commons.wikimedia.org/wiki/File%3A%E3%82%89%E3%82%89%E3%81%BD%E3%83%BC%E3%81%A8%E7%94%B2%E5%AD%90%E5%9C%92_%E6%AD%A3%E9%9D%A2%E5%85%A5%E5%8F%A3.jpg",
+     "note": "会场照片许可核实：茶家川，CC BY-SA 4.0；文件名为 ららぽーと甲子園 正面入口.jpg。"
+    }
+   ],
+   "img": {
+    "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/%E3%82%89%E3%82%89%E3%81%BD%E3%83%BC%E3%81%A8%E7%94%B2%E5%AD%90%E5%9C%92_%E6%AD%A3%E9%9D%A2%E5%85%A5%E5%8F%A3.jpg/960px-%E3%82%89%E3%82%89%E3%81%BD%E3%83%BC%E3%81%A8%E7%94%B2%E5%AD%90%E5%9C%92_%E6%AD%A3%E9%9D%A2%E5%85%A5%E5%8F%A3.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:%E3%82%89%E3%82%89%E3%81%BD%E3%83%BC%E3%81%A8%E7%94%B2%E5%AD%90%E5%9C%92_%E6%AD%A3%E9%9D%A2%E5%85%A5%E5%8F%A3.jpg",
+    "artist": "茶家川",
+    "license": "CC BY-SA 4.0",
     "note": "会场照片"
    }
   }
@@ -235,6 +291,97 @@
    ]
   },
   {
+   "id": "mga-n-20261102-shadows-saga-extra-seats",
+   "date": "2026-11-02",
+   "kind": "演出",
+   "title": "「SHADOWS」佐贺公演追加席分两阶段销售",
+   "summary": "11月4、5日SAGAアリーナ公演，11月2日14:00起向国内外Ringo Jam会员追加销售注释席；若设备调整后仍有余席，11月4日14:00再售当日兑换票。购买者及同行者均须为会员并预先登记照片。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23316",
+     "note": "官网11月2日公告：两场公演、销售时间、设备开放票条件与会员要求。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261102-cdtv-200th",
+   "date": "2026-11-02",
+   "kind": "节目",
+   "title": "出演《CDTVライブ！ライブ！》200回纪念，《ア・ポステリオリ》电视首演",
+   "summary": "TBS《CDTVライブ！ライブ！》200回纪念企划中，11月连续两周登场；11月2日完整演出《Brand New》和电视首演的《ア・ポステリオリ》。",
+   "sources": [
+    {
+     "url": "https://x.com/AORINGOHUZIN/status/2117179919079714825",
+     "note": "官方X 11月2日出演预告"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261102-joysound-campaign",
+   "date": "2026-11-02",
+   "kind": "其他",
+   "title": "《POPS》发行纪念JOYSOUND卡拉OK活动开始",
+   "summary": "与JOYSOUND合作，11月2日11:00起用JOYSOUND唱指定曲目参加活动，可抽选原创周边。",
+   "sources": [
+    {
+     "url": "https://x.com/AORINGOHUZIN/status/2117077987522695309",
+     "note": "官方X 11月2日活动公告"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261101-shadows-miyagi-kanagawa-presale",
+   "date": "2026-11-01",
+   "kind": "巡演",
+   "title": "「SHADOWS」宫城与神奈川公演公布全体会员先行",
+   "summary": "宫城12月15、16日及神奈川12月19、20日公演的Ringo Jam全体会员抽选，于11月2日12:00至11月11日5:00受理。申请者与同行者均须为年费或月费会员，11月21日14:00起公布结果。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23312",
+     "note": "官网11月1日公告：四场公演、抽选期、结果公布及会员资格。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261030-playlist-maker",
+   "date": "2026-10-30",
+   "kind": "其他",
+   "title": "「POPSプレイリストメーカー」特设网页公开",
+   "summary": "官方上线「POPSプレイリストメーカー」特设网页。歌迷可从专辑《POPS》及乐队过往全部作品中精选曲目定制专属歌单，并生成印有歌迷昵称的专辑封面风格图片进行分享。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23330",
+     "note": "官网10月30日公告：歌单制作、昵称封面与参与入口。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261030-cafe-final-online-orders",
+   "date": "2026-10-30",
+   "kind": "其他",
+   "title": "Ringo Jam Café周边公布最后一轮线上预订",
+   "summary": "第三轮线上预订期为11月2日11:00至2027年1月11日23:59，非会员也可购买，预计2027年4月下旬起陆续发货。官方说明此轮为最后一次线上销售，首轮部分订单则延至2027年1月中旬送达。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23322",
+     "note": "官网10月30日公告：最后一轮预订、购买资格、发货计划与首轮延期。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261030-cinderella-10m",
+   "date": "2026-10-30",
+   "kind": "MV",
+   "title": "《シンデレラ》MV播放破1000万",
+   "summary": "官方宣布《シンデレラ》MV在YouTube播放量突破1000万次。",
+   "sources": [
+    {
+     "url": "https://x.com/AORINGOHUZIN/status/2115974149743268253",
+     "note": "官方X 10月30日公告"
+    }
+   ]
+  },
+  {
    "id": "mga-n-20261029-vmaj-3years",
    "date": "2026-10-29",
    "kind": "媒体",
@@ -244,6 +391,114 @@
     {
      "url": "https://koubo.jp/article/136294",
      "note": "10月29日东京巨蛋，《Brand New》获Video of the Year，3年连续"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261029-pops-hot-albums-repeat",
+   "date": "2026-10-29",
+   "kind": "专辑",
+   "title": "《POPS》连续两周登顶Billboard JAPAN综合专辑榜",
+   "summary": "Billboard JAPAN于10月29日报道，《POPS》在10月28日公布的Hot Albums综合专辑榜获得冠军，连续两周位列榜首；该期统计区间为10月19日至25日。",
+   "sources": [
+    {
+     "url": "https://www.billboard-japan.com/d_news/detail/166899",
+     "note": "Billboard JAPAN10月29日榜单报道：连续两周冠军及统计区间。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261029-vmaj-2026",
+   "date": "2026-10-29",
+   "kind": "其他",
+   "title": "MTV VMAJ 2026获5项大奖，《Brand New》获年度最佳MV",
+   "summary": "《Brand New》MV获「Video of the Year」，连续3年获得该奖；乐队共拿5项，是最多纪录，也是史上首次。东京巡演后临时赶到东京巨蛋授奖礼现场。",
+   "sources": [
+    {
+     "url": "https://x.com/AORINGOHUZIN/status/2115786994731372993",
+     "note": "官方X 10月29日获奖公告"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261028-nikkei-omori-cover",
+   "date": "2026-10-28",
+   "kind": "媒体",
+   "title": "大森元贵登上《日経エンタテインメント！》12月号单人封面",
+   "summary": "11月4日发售的《日経エンタテインメント！》12月号以大森元贵为单人封面，刊载20页、超过2.5万字的卷首访谈，并采访支撑乐队的Project MGA团队，附四面海报。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23318",
+     "note": "官网10月28日公告：发售日、单人封面、访谈篇幅及附录。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261028-drama-koitoki",
+   "date": "2026-10-28",
+   "kind": "节目",
+   "title": "大森元贵在《いろはの恋は時代をかける》中一人分饰两角",
+   "summary": "10月27日第3集揭示大森元贵除饰演江户和算家・関孝和外，还饰演现代单亲父亲・佐野蓮司；11月3日22:00播出的第4集将展开蓮司与教师彩葉相遇的故事。",
+   "sources": [
+    {
+     "url": "https://natalie.mu/music/news/695522",
+     "note": "音楽ナタリー10月28日报道：两名角色、第三集揭示及第4集播出安排。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261027-harmony2-tour",
+   "date": "2026-10-27",
+   "kind": "演出",
+   "title": "2027年定期公演《Harmony2》开启全体会员与CD购买者限定抽选",
+   "summary": "《Mrs. GREEN APPLE on “Harmony2”》将于2027年2月20日至6月2日在Kアリーナ横浜举办20场。10月27日20:00至11月5日23:59受理抽选，申请者与同行者均须为Ringo Jam会员并持有未中选的Harmony CODE。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23310",
+     "note": "官网10月27日公告：完整20场日程、抽选期限、会员及Harmony CODE条件；修正原16场记录。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261026-tv-mrs-magic-live",
+   "date": "2026-10-26",
+   "kind": "节目",
+   "title": "《テレビ×ミセス》播出国立竞技场《Magic》完整现场影像",
+   "summary": "10月26日20:55播出的TBS《テレビ×ミセス》邀请中条あやみ等参与游戏，并安排《ゼンジン未到とイ/ミュータブル～間奏編～》巡演《Magic》完整现场影像首次地面电视公开。",
+   "sources": [
+    {
+     "url": "https://realsound.jp/2026/10/post-2564565.html",
+     "note": "Real Sound10月26日节目报道：播出时间、嘉宾及《Magic》现场影像。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261025-fancl-service-presentation",
+   "date": "2026-10-25",
+   "kind": "合作",
+   "title": "乐队获邀出席FANCL新服务发布会并直播",
+   "summary": "官方宣布三位成员将于10月27日10:35左右出席FANCL新服务发布会，并通过公告所附YouTube直播页公开活动。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23303",
+     "note": "官网10月25日公告：FANCL发布会登台、时间与YouTube直播入口。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261025-cinderella-behind-scenes",
+   "date": "2026-10-25",
+   "kind": "MV",
+   "title": "《シンデレラ》公开约30分钟制作幕后",
+   "summary": "官方于10月25日公开《シンデレラ》MV幕后影像。BARKS随后报道大森元贵首次担任MV导演，并负责企划与剧本；约30分钟影片介绍选角、现场指导及动画制作过程，可从官方MV幕后入口观看。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23305",
+     "note": "官网10月25日公告：MV幕后影像公开。"
+    },
+    {
+     "url": "https://barks.jp/news/1100625/",
+     "note": "BARKS10月26日报道：约30分钟时长及大森元贵的导演、企划、编剧职责。"
     }
    ]
   },
@@ -265,6 +520,75 @@
    ]
   },
   {
+   "id": "mga-n-20261024-pops-line-stickers",
+   "date": "2026-10-24",
+   "kind": "其他",
+   "title": "《POPS》发行纪念LINE贴图开始销售",
+   "summary": "官方为第六张原创专辑《POPS》推出纪念LINE贴图，10月24日宣布开售；公告附有LINE贴图商店的具体商品入口。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23293",
+     "note": "官网10月24日公告：纪念贴图开售及LINE商品入口。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261024-mzine-november-issue",
+   "date": "2026-10-24",
+   "kind": "节目",
+   "title": "若井滉斗主持的《M:ZINE》11月聚焦IS:SUE",
+   "summary": "电视朝日《M:ZINE》公布11月节目内容，常驻主持若井滉斗将与相席スタート・山添一起介绍四人女子组合IS:SUE。节目详情可从官网公告中的电视台链接查看。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23295",
+     "note": "官网10月24日公告：11月主题艺人、主持和节目安排。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261023-tabinoshiori-guide",
+   "date": "2026-10-23",
+   "kind": "巡演",
+   "title": "巡演限定城市指南《旅のしおり》展开全国巡回免费发放",
+   "summary": "配合「SHADOWS」巡演制作的免费指南《旅のしおり》东京版于10月23日开始发放，收录歌迷推荐的观光与美食信息，并配套会员限定CITY QUEST集章活动；神户实施期为11月27日至12月6日。",
+   "sources": [
+    {
+     "url": "https://natalie.mu/music/news/694979",
+     "note": "音楽ナタリー10月23日报道：东京版发放、歌迷推荐内容与各城市日程。"
+    },
+    {
+     "url": "https://mrsgreenapple.com/feature/shadows_guidebook",
+     "note": "官方指南专题：兵库实施期为11月27日至12月6日。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261023-pops-magazine-third-wave",
+   "date": "2026-10-23",
+   "kind": "媒体",
+   "title": "《POPS》杂志封面企划公布第三批阵容",
+   "summary": "第三批包括11月28日发售、以《本と彗星》为主题的大森元贵《ELLE JAPON 特別版》单人封面，同日藤澤涼架《Numéro TOKYO》单人封面，以及12月1日发售的《家庭画報 プレミアムライト 特別表紙版》。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23287",
+     "note": "官网10月23日公告：第三批三本杂志、发售日期与主题。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261023-pokapoka-wakai-fujisawa",
+   "date": "2026-10-23",
+   "kind": "节目",
+   "title": "若井滉斗与藤澤涼架获邀出演《ぽかぽか》",
+   "summary": "官网公布若井滉斗与藤澤涼架将出演10月26日11:47播出的富士电视台《ぽかぽか》，并提供节目官网入口。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23285",
+     "note": "官网10月23日公告：两名出演成员、节目及播出时间。"
+    }
+   ]
+  },
+  {
    "id": "mga-n-20261022-gusto-collab",
    "date": "2026-10-22",
    "kind": "合作",
@@ -274,6 +598,209 @@
     {
      "url": "https://www.crank-in.net/trend/gourmet/192979/1",
      "note": "期间10/22–12/2、6道菜"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261022-paypay-collab",
+   "date": "2026-10-22",
+   "kind": "合作",
+   "title": "PayPay推出《POPS》专辑发售纪念期间限定联名卡面",
+   "summary": "纪念《POPS》发行，PayPay于2026年10月22日至2027年4月19日提供乐队苹果标志主题卡面。可在App的「ホーム→すべて→きせかえ」中设置。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23275",
+     "note": "官网10月22日公告：限定卡面、提供期间和设置方法。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261021-nhk-songs-special",
+   "date": "2026-10-21",
+   "kind": "节目",
+   "title": "NHK《SONGSスペシャル》公布新曲电视首演及东京爱乐合作",
+   "summary": "10月29日22:00播出的NHK総合《SONGSスペシャル Mrs. GREEN APPLE》安排《共犯》《シンデレラ》电视首演，并与東京フィルハーモニー交響楽団合作《シンデレラ》《lulu.》。NHK ONE提供同步及播后1周回看。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23268",
+     "note": "官网10月21日公告：节目名称、播出时间、电视首演曲目、管弦乐合作及回看期限。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261021-bonbon-sticker-second-lottery",
+   "date": "2026-10-21",
+   "kind": "合作",
+   "title": "ボンボンドロップシール联名公布第二轮抽选及Lawson销售",
+   "summary": "联名贴纸公布クーリア网店第二轮四款套装抽选，以及Lawson店头单款销售和@Loppi套装抽选。网店抽选于10月26日至29日受理，Lawson自10月24日7:00起陆续销售，数量有限。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23267",
+     "note": "官网10月21日公告：第二轮抽选、Lawson与@Loppi不同渠道的期限及规则。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261019-pops-review-series",
+   "date": "2026-10-19",
+   "kind": "媒体",
+   "title": "Real Sound《POPS》连续乐评从创作与三人合奏解读专辑",
+   "summary": "Real Sound于10月13日推出《POPS》连续乐评，首篇由石角友香执笔；10月19日蜂須賀ちなみ的第四篇围绕复杂编曲、管弦乐与三人演奏的关系展开评论，可在各篇文章中阅读。",
+   "sources": [
+    {
+     "url": "https://realsound.jp/2026/10/post-2551516.html",
+     "note": "Real Sound10月13日系列首篇：作者、系列启动及评论方向。"
+    },
+    {
+     "url": "https://realsound.jp/2026/10/post-2557944.html",
+     "note": "Real Sound10月19日第四篇：作者及围绕三人合奏、编曲的专辑评论。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261014-wakai-guitar-magazine",
+   "date": "2026-10-14",
+   "kind": "媒体",
+   "title": "若井滉斗第二次登上《ギター・マガジン》单人封面",
+   "summary": "10月13日发售的《ギター・マガジン》11月号刊载若井滉斗长篇访谈，聚焦《POPS》的吉他理念、爱用器材及乐句解析，并收录《Brand New》吉他谱；ORICON于10月14日报道。",
+   "sources": [
+    {
+     "url": "https://www.oricon.co.jp/news/2486156/full/",
+     "note": "ORICON10月14日报道：杂志发售日、第二次单人封面与采访、器材、谱面内容。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261014-soranji-nine-hundred-million",
+   "date": "2026-10-14",
+   "kind": "媒体",
+   "title": "《Soranji》Billboard JAPAN累计流媒体播放突破9亿",
+   "summary": "Billboard JAPAN于10月14日宣布《Soranji》在其榜单统计中的累计流媒体播放量突破9亿次。该曲是电影《ラーゲリより愛を込めて》的主题曲。",
+   "sources": [
+    {
+     "url": "https://www.billboard-japan.com/d_news/detail/166443",
+     "note": "Billboard JAPAN10月14日报道：9亿次里程碑及电影主题曲身份。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261014-kyohan-behind-scenes",
+   "date": "2026-10-14",
+   "kind": "MV",
+   "title": "《共犯》MV幕后影像公开",
+   "summary": "官网于10月14日发布《POPS》收录曲《共犯》的MV幕后影像公告。歌迷可从官方公告中的视频入口了解该MV的制作。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23245",
+     "note": "官网10月14日公告：明确宣布《共犯》MV幕后影像公开。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261013-skream-special-issue",
+   "date": "2026-10-13",
+   "kind": "媒体",
+   "title": "Skream!免费特别号以《Really Really》为核心展开访谈",
+   "summary": "Skream!于10月13日宣布24页Mrs. GREEN APPLE特别号开始陆续配布，含《Really Really》创作访谈、成员10问及乐评。预计10月13日至18日前后到达全国唱片店、Live House和排练室，实际到货因店而异。",
+   "sources": [
+    {
+     "url": "https://skream.jp/news/2026/10/mrs_green_apple_special_issue.php",
+     "note": "Skream!10月13日具体报道：24页、配布日程、收录内容及到货差异。"
+    },
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23223",
+     "note": "官网10月10日预告：明确说明特别号为免费刊物。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261013-musica-track-interview",
+   "date": "2026-10-13",
+   "kind": "媒体",
+   "title": "《MUSICA》11月号以40页特集解析《POPS》",
+   "summary": "10月15日发售的《MUSICA》11月号刊载大森元贵单独访谈和三位成员的全曲解说访谈，合计40页、超过6万字；10月13日官网公开封面及购买入口。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23235",
+     "note": "官网10月13日公告：发售日、两组访谈、40页与6万字篇幅。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261013-imasara-shiro-appearance",
+   "date": "2026-10-13",
+   "kind": "节目",
+   "title": "乐队获邀出演《岡田准一とロバート秋山の今さらシロー！》",
+   "summary": "官网宣布Mrs. GREEN APPLE出演10月19日21:54播出的TBS《岡田准一とロバート秋山の今さらシロー！》，内容包括冈田准一与秋山前往乐队休息室的企划。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23236",
+     "note": "官网10月13日公告：节目名、播出时间与休息室企划。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261012-movie-theme-song",
+   "date": "2026-10-12",
+   "kind": "新歌",
+   "title": "《本と彗星》确定为电影《君の話》主题曲",
+   "summary": "官方宣布《POPS》收录曲《本と彗星》成为电影《君の話》主题曲。影片定于2026年11月27日在日本全国上映。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23231",
+     "note": "官网10月12日公告：电影主题曲及11月27日上映日期。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261011-omori-hatsumimigaku",
+   "date": "2026-10-11",
+   "kind": "节目",
+   "title": "大森元贵获邀参加《日曜日の初耳学》林修访谈",
+   "summary": "官方宣布大森元贵参加10月25日22:00播出的MBS・TBS《日曜日の初耳学》，出演「インタビュアー林修」访谈单元。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23229",
+     "note": "官网10月11日公告：大森出演、访谈单元及播出时间。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261011-kyohan-ten-million-views",
+   "date": "2026-10-11",
+   "kind": "媒体",
+   "title": "《共犯》MV以乐队最快速度突破1000万次播放",
+   "summary": "ORICON于10月11日报道，10月3日20:00公开的《共犯》MV在6天21小时之前突破YouTube 1000万次播放，刷新乐队自身纪录，超过此前《Brand New》的速度。",
+   "sources": [
+    {
+     "url": "https://www.oricon.co.jp/news/2485878/",
+     "note": "ORICON10月11日报道：MV公开时间、1000万次里程碑及乐队最快纪录。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261010-tokyo-calendar-cover",
+   "date": "2026-10-10",
+   "kind": "媒体",
+   "title": "《東京カレンダー》12月号特别增刊以《シンデレラ》拍摄封面",
+   "summary": "10月21日发售的《東京カレンダー》12月号特别增刊由乐队登上封面，以《シンデレラ》为主题、手持玻璃鞋拍摄。10月10日官网预告并附摄影幕后文章入口。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23222",
+     "note": "官网10月10日公告：发售日、封面主题及摄影幕后链接。"
+    }
+   ]
+  },
+  {
+   "id": "mga-n-20261008-wakai-ytn-interview",
+   "date": "2026-10-08",
+   "kind": "媒体",
+   "title": "若井滉斗的YTN《Knowledge Interview》公开",
+   "summary": "官方宣布若井滉斗接受YTN《Knowledge Interview》的影片公开，包含首尔塔特别点灯活动画面及围绕《POPS》的访谈，可从公告所附YouTube视频入口观看。",
+   "sources": [
+    {
+     "url": "https://mrsgreenapple.com/news/detail/23195",
+     "note": "官网10月8日公告：YTN访谈公开、首尔塔点灯画面及《POPS》访谈内容。"
     }
    ]
   }

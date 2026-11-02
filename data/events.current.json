@@ -1,6 +1,6 @@
 {
  "about": "由 scripts/collect_events.py 从 events.json 和 data/events.seed.json 生成，不要手改。",
- "today": "2026-11-01",
+ "today": "2026-11-02",
  "events": [
   {
    "id": "5bb929c6b150b824b072",
@@ -617,6 +617,86 @@
     {
      "url": "https://watabi.org/articles/osaka-christmas-market-2026",
      "note": "2026大阪圣诞市集整理"
+    }
+   ]
+  },
+  {
+   "id": "ninnaji-unkai-2026",
+   "name": "仁和寺 红叶云海点灯",
+   "venue": "总本山仁和寺境内（京都）",
+   "area": "",
+   "kind": "点灯",
+   "date": "",
+   "from": "2026-10-24",
+   "to": "2026-12-13",
+   "ll": [
+    135.7135,
+    35.0314
+   ],
+   "fee": "",
+   "note": "仅限周五、六、日和节假日；11/8、11/28休止。18:30–21:00（受付18:00–20:30），夜间拝观2,800日元（高中生以下免费）。",
+   "link": "",
+   "poster": null,
+   "sources": [
+    {
+     "url": "https://ninnaji.jp/news/event-34-2/",
+     "note": "仁和寺官网：期间、休止日、时间、费用"
+    },
+    {
+     "url": "https://ja.kyoto.travel/event/single.php?event_id=8795",
+     "note": "京都观光协会：期间、休止日、费用"
+    }
+   ]
+  },
+  {
+   "id": "kyoto-botanical-night-2026",
+   "name": "京都府立植物园 秋之夜间花园（红叶点灯）",
+   "venue": "京都府立植物园",
+   "area": "",
+   "kind": "点灯",
+   "date": "",
+   "from": "2026-11-14",
+   "to": "2026-12-13",
+   "ll": [
+    135.7625,
+    35.0507
+   ],
+   "fee": "",
+   "note": "18:00–21:30（最终入场20:30，页面对结束时间有出入）；平日大人1,100日元、周末节假日1,500日元，中小学生600日元。",
+   "link": "",
+   "poster": null,
+   "sources": [
+    {
+     "url": "https://ja.kyoto.travel/event/single.php?event_id=5558",
+     "note": "京都观光协会：期间、时间、费用"
+    },
+    {
+     "url": "https://koyo.walkerplus.com/detail/ar0726e154666/data.html",
+     "note": "Walker+：2026年期间和费用"
+    }
+   ]
+  },
+  {
+   "id": "umeda-sky-xmas-2026",
+   "name": "梅田蓝天大厦圣诞2026",
+   "venue": "梅田蓝天大厦 1F广场、40F空中庭园展望台",
+   "area": "",
+   "kind": "圣诞市集",
+   "date": "",
+   "from": "2026-11-13",
+   "to": "2026-12-25",
+   "ll": [
+    135.49,
+    34.7053
+   ],
+   "fee": "",
+   "note": "主题“THE STARLIGHT TOWN”；25米圣诞树LED投影、圣诞市集（限定马克杯）。时间和费用新闻稿正文未写，以特设站为准。",
+   "link": "",
+   "poster": null,
+   "sources": [
+    {
+     "url": "https://koubo.jp/press-release/prtimes/c63228_r215",
+     "note": "新闻稿：会期2026-11-13至12-25、会场、内容"
     }
    ]
   }

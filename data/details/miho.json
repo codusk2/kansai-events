@@ -1,0 +1,141 @@
+{
+ "id": "miho",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "MIHO MUSEUM 是坐落于信乐山中的美术馆，由贝聿铭设计，适合喜欢建筑、山林景观与古代艺术的人。沿枝垂樱步道穿过隧道和吊桥进入馆舍，是参观中很有辨识度的一段；馆藏展览也值得预留数小时慢慢看。",
+ "highlights": [
+  {
+   "title": "隧道与吊桥的入馆路径",
+   "text": "从接待栋沿枝垂樱步道进入隧道，再经过吊桥抵达山中的美术馆，建筑与自然连成一体。",
+   "where": "接待栋至美术馆栋之间"
+  },
+  {
+   "title": "贝聿铭设计的山中馆舍",
+   "text": "馆舍约八成埋入地下以保护环境，入口一带可看到屋顶与山势相融的设计。",
+   "where": "美术馆栋"
+  },
+  {
+   "title": "南北馆藏展览",
+   "text": "北馆与南馆展出古代美术及特别展，展览内容会随季节更替。",
+   "where": "入馆门票包含两馆展示"
+  }
+ ],
+ "visit": {
+  "hours": "10:00–17:00，最晚入馆16:00；春、夏、秋季分期开馆，开馆期内周一休馆，周一逢节假日则顺延至下一个工作日。2026年秋季开馆期为9月26日–12月6日；11月2日休馆。",
+  "fee": "成人1,300日元，高中及大学生1,000日元，中小学生免费。",
+  "stay": "建议预留数小时；细看展览并用餐、休息时更要留足时间。",
+  "bestTime": "建议上午到馆，给步道、两馆展览和休息留出完整时段；最晚入馆为16:00。",
+  "crowd": "官方日历会标注预计拥挤日，拥挤时餐厅和咖啡厅可能无法按希望时间使用；出发前查看当季日历。"
+ },
+ "food": [
+  {
+   "name": "レストラン ピーチバレイ（Peach Valley）",
+   "what": "使用秀明自然农法食材的当季餐食，也有自制面包和MIHO豆腐等外带品。",
+   "note": "位于接待栋，11:30–14:30；仅在美术馆开馆期间营业。"
+  }
+ ],
+ "seasonal": [
+  {
+   "when": "春季",
+   "text": "枝垂樱步道与隧道入口一带可赏樱；具体花期随年份变化。"
+  },
+  {
+   "when": "秋季",
+   "text": "山林树木转色，馆舍周边可看秋色；美术馆也在秋季分期开馆。"
+  },
+  {
+   "when": "夏季",
+   "text": "可在夏季开馆期参观展览，山林环境构成入馆步道的背景。"
+  }
+ ],
+ "tips": [
+  "先确认官网当季开馆日历；美术馆并非全年开放。",
+  "最晚入馆时间为16:00，建议把展览和用餐安排在此之前。",
+  "餐厅只在开馆期营业，午餐时段为11:30–14:30。"
+ ],
+ "cautions": [
+  "2026年11月2日为周一休馆日；秋季开馆期于12月6日结束。",
+  "官方标注的预计拥挤日可能影响餐厅与咖啡厅的使用时间。"
+ ],
+ "search": {
+  "zh": "美秀美术馆",
+  "ja": "MIHO MUSEUM"
+ },
+ "links": [
+  {
+   "label": "官方网站·来馆信息",
+   "url": "https://www.miho.jp/information/"
+  },
+  {
+   "label": "官方网站·开馆日历",
+   "url": "https://www.miho.jp/calendar/"
+  },
+  {
+   "label": "官方网站·建筑路径",
+   "url": "https://www.miho.jp/architecture/approach/"
+  }
+ ],
+ "images": [
+  {
+   "file": "241119 MIHO MUSEUM Koga Shiga pref Japan06s3.jpg",
+   "caption": "美秀美术馆建筑与入口步道景观"
+  },
+  {
+   "file": "Cherry Blossoms Framed, Mijo Museum Tunnel 2016 (32176230205).jpg",
+   "caption": "春樱映衬的美秀美术馆隧道"
+  },
+  {
+   "file": "Beautiful colored tree at MIHO MUSEUM.jpg",
+   "caption": "秋色树木与美秀美术馆周边景观"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.miho.jp/information/",
+   "note": "确认开放时间、最晚入馆、休馆规则、票价及官方拥挤日提示。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.miho.jp/calendar/",
+   "note": "确认2026年开馆日历，11月2日休馆、11月3日开放。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.miho.jp/architecture/approach/",
+   "note": "确认贝聿铭设计、枝垂樱步道、隧道、吊桥及馆舍融入山体的设计。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.miho.jp/floormap/",
+   "note": "确认接待栋至美术馆栋的参观路径、南北馆布局及餐厅位置。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.miho.jp/faq/",
+   "note": "确认参观、用餐及购物建议预留数小时。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.miho.jp/restaurant/",
+   "note": "确认Peach Valley餐厅的营业时间、开馆期营业安排及食材说明。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:241119_MIHO_MUSEUM_Koga_Shiga_pref_Japan06s3.jpg",
+   "note": "确认美术馆建筑照片、CC BY-SA 4.0许可及原图可访问。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Cherry_Blossoms_Framed,_Mijo_Museum_Tunnel_2016_(32176230205).jpg",
+   "note": "确认美秀美术馆隧道樱花照片、CC BY 2.0许可及原图可访问。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Beautiful_colored_tree_at_MIHO_MUSEUM.jpg",
+   "note": "确认美术馆秋色照片、CC BY-SA 4.0许可及原图可访问。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

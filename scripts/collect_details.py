@@ -141,6 +141,7 @@ def main() -> None:
     ap.add_argument('--dir', default='data/details')
     ap.add_argument('--check', action='store_true')
     ap.add_argument('--skip-links', action='store_true', help='不请求来源链接')
+    ap.add_argument('--only', help='只请求这些地点的来源链接（逗号分隔 id），格式和图片仍全部检查')
     args = ap.parse_args()
     folder = ROOT / args.dir
     sample_dir = folder.resolve() != (ROOT / 'data/details').resolve()
@@ -163,8 +164,11 @@ def main() -> None:
             docs[f.stem] = d
     link_warnings: list[str] = []
     if not args.check and not args.skip_links and not errors:
+        # 新增或修改了几处时用 --only 只查自己的，别人遗留的失效链接不会挡住；发布前 owner 仍跑一次完整检查
+        only = set(args.only.split(',')) if args.only else None
         link_errors, link_warnings = check_links([
-            (stem, x['url']) for stem, d in docs.items() for x in (d.get('sources') or []) + (d.get('links') or [])])
+            (stem, x['url']) for stem, d in docs.items() if only is None or stem in only
+            for x in (d.get('sources') or []) + (d.get('links') or [])])
         errors += link_errors
     if not args.check and not errors:
         wanted = {stem: d.get('images') or [] for stem, d in docs.items()}

@@ -1,0 +1,132 @@
+{
+ "id": "kasuga",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "春日大社是奈良的古社，768年由称德天皇敕命在现址营建。社殿、朱红回廊与沿参道排列的灯笼是主要看点；适合对神社建筑、历史和林间步行感兴趣的游客，也可与奈良公园、东大寺安排在同一天。",
+ "highlights": [
+  {
+   "title": "御本殿与中门",
+   "text": "国宝御本殿为春日造代表建筑，朱红色中门和社殿构成春日大社最具代表性的景观。",
+   "where": "御本社；御本殿特别参拜可进入回廊参观"
+  },
+  {
+   "title": "回廊与钓灯笼",
+   "text": "回廊上悬挂着奉纳的钓灯笼，适合留意建筑细节与灯笼的排列。",
+   "where": "御本社回廊；特别参拜收费"
+  },
+  {
+   "title": "石灯笼参道",
+   "text": "从一之鸟居通往社内的参道两侧排列着春日灯笼，可沿路步行感受社境与周边林木。",
+   "where": "一之鸟居至御本社的参道"
+  },
+  {
+   "title": "春日山原始林",
+   "text": "作为春日大社社丛受到保护的原始林保留了古老林相，并被列为特别天然纪念物。",
+   "where": "春日大社后方山林"
+  }
+ ],
+ "visit": {
+  "hours": "御本社参拜所：3月至10月6:30–17:30，11月至2月7:00–17:00。御本殿特别参拜9:00–16:00；部分祭典时段及特定日期暂停，出发前查看官网公告。",
+  "fee": "境内自由参拜；御本殿特别参拜700日元。国宝殿成人700日元，万叶植物园成人700日元。",
+  "stay": "预留约1.5–2小时可参拜御本社并步行参道；加上国宝殿或万叶植物园需更久。",
+  "bestTime": "上午较适合慢慢步行参道并参观社殿；若要进行御本殿特别参拜，安排在9:00–16:00开放时段。",
+  "crowd": "观光协会提示春日大社是奈良热门景点；页面未提供具体客流时段，避开周末及节假日通常更利于从容参拜。"
+ },
+ "food": [
+  {
+   "name": "春日荷茶屋",
+   "what": "万叶粥等餐食。",
+   "note": "位于万叶植物园正门旁；官网列出的营业时间为10:30–16:30，最后点单16:00。休业日按当月公告确认。"
+  }
+ ],
+ "nearby": [
+  {
+   "name": "奈良公园·东大寺",
+   "placeId": "nara-park",
+   "how": "步行可串联游览",
+   "note": "同属奈良公园一带，适合与春日大社安排在同一天。"
+  }
+ ],
+ "seasonal": [
+  {
+   "when": "4月中旬至5月初",
+   "text": "春日大社及万叶植物园可看藤花；观光协会介绍约有20个品种、200株，砂ずりの藤约在4月底观赏。"
+  }
+ ],
+ "tips": [
+  "御本殿特别参拜会因祭典及日期暂停，计划入内时先查官网当天安排。",
+  "若想用餐，春日荷茶屋官网列出的最后点单时间为16:00。"
+ ],
+ "cautions": [],
+ "search": {
+  "zh": "春日大社",
+  "ja": "春日大社"
+ },
+ "links": [
+  {
+   "label": "春日大社基本信息",
+   "url": "https://www.kasugataisha.or.jp/about/basic/"
+  },
+  {
+   "label": "奈良市观光协会：春日大社",
+   "url": "https://narashikanko.or.jp/spot/detail_10058.html"
+  },
+  {
+   "label": "奈良县观光：春日大社",
+   "url": "https://yamatoji.nara-kankou.or.jp/01shaji/01jinja/01north_area/kasugataisha/"
+  }
+ ],
+ "images": [
+  {
+   "file": "Chumon gate of Kasuga-taisha.jpg",
+   "caption": "御本殿前的朱红中门与回廊"
+  },
+  {
+   "file": "Lanterns Kasuga-taisha Nara.jpg",
+   "caption": "春日大社回廊上的钓灯笼"
+  },
+  {
+   "file": "Sacred Sugi inside Kasuga Taisha shrine.jpg",
+   "caption": "春日大社境内的御神木杉树"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.kasugataisha.or.jp/about/basic/",
+   "note": "核对御本社开门时间、御本殿特别参拜时段、暂停日期及特别参拜费用。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://narashikanko.or.jp/spot/detail_10058.html",
+   "note": "核对春日大社768年建社记载、开门时间、设施开放与收费，以及藤花时段和观赏信息。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://yamatoji.nara-kankou.or.jp/01shaji/01jinja/01north_area/kasugataisha/",
+   "note": "核对春日大社朱红社殿、灯笼参道、万叶植物园和春日山原始林的介绍。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.kasugataisha.or.jp/ninaijyaya/",
+   "note": "核对春日荷茶屋位置、营业时间及最后点单时间。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Chumon_gate_of_Kasuga-taisha.jpg",
+   "note": "确认文件页可打开、图片为春日大社中门且标示自由许可。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Lanterns_Kasuga-taisha_Nara.jpg",
+   "note": "确认文件页可打开、图片为春日大社灯笼且标示自由许可。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Sacred_Sugi_inside_Kasuga_Taisha_shrine.jpg",
+   "note": "确认文件页可打开、图片为春日大社境内杉树且标示自由许可。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

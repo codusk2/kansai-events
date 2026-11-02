@@ -15,6 +15,7 @@ import html
 import json
 import re
 import subprocess
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -36,8 +37,15 @@ def get_json(url: str, params: dict | None = None) -> dict:
         url += '?' + urllib.parse.urlencode(params)
     req = urllib.request.Request(url, headers={'User-Agent': UA})
     try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            return json.load(resp)
+        for wait in (5, 15, 45, 0):
+            try:
+                with urllib.request.urlopen(req, timeout=60) as resp:
+                    return json.load(resp)
+            except urllib.error.HTTPError as exc:
+                # Wikimedia 限流（429）时按 Retry-After 或递增间隔重试
+                if exc.code != 429 or not wait:
+                    raise
+                time.sleep(int(exc.headers.get('Retry-After') or wait))
     except urllib.error.URLError as exc:
         # macOS 自带的旧版 Python 与部分服务握手失败时，改用系统 curl
         if 'SSL' not in str(exc):
@@ -130,13 +138,14 @@ def main() -> None:
         raise SystemExit('种子没通过检查，先运行 scripts/validate_places.py 修正：\n' + '\n'.join(errors))
 
     origin_title = seed['origin']['wiki']
-    pages = wiki_pages([origin_title] + [p['wiki'] for p in places])
+    # 没有维基条目的地点可以省略 wiki 或写空字符串，坐标用种子里的 ll
+    pages = wiki_pages([origin_title] + [p['wiki'] for p in places if p.get('wiki')])
     o = pages.get(origin_title) or {}
     origin_ll = seed['origin'].get('ll') or [o.get('lon'), o.get('lat')]
 
     missing = []
     for p in places:
-        w = pages.get(p['wiki'], {})
+        w = pages.get(p.get('wiki'), {})
         p['ll'] = p.get('ll') or ([round(w['lon'], 5), round(w['lat'], 5)] if w.get('lat') is not None else None)
         if not p['ll']:
             missing.append(p['id'])
@@ -148,7 +157,7 @@ def main() -> None:
 
     out = []
     for p, (mins, km) in zip(places, cars):
-        w = pages.get(p['wiki'], {})
+        w = pages.get(p.get('wiki'), {})
         img = None
         if w.get('thumb') and w.get('file'):
             c = credits.get(w['file'], {})
@@ -158,7 +167,7 @@ def main() -> None:
                 'artist': c.get('artist', ''), 'license': c.get('license', ''),
             }
         record = {k: v for k, v in p.items() if k != 'wiki'}
-        record['transit'] = {**p['transit'], 'checked': False}
+        record['transit'] = {'checked': False, **p['transit']}  # 种子里核实过的 checked 日期保留
         record['car'] = {'mins': mins, 'km': km}
         record['img'] = img
         record['wiki'] = w.get('page')

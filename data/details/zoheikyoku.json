@@ -1,0 +1,118 @@
+{
+ "id": "zoheikyoku",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "造幣局桜の通り抜け是大阪造币局每年春季限时开放的赏樱活动，沿旧淀川边约560米单向步行。约140种樱花以晚开的八重樱为主，适合想比较少见品种、愿意提前预约并配合人流游览的人；目前本年度活动已结束。",
+ "highlights": [
+  {
+   "title": "多品种八重樱",
+   "text": "沿途可看约140种樱花，包括关山、普贤象、松月、杨贵妃等晚开品种。",
+   "where": "局内通行道"
+  },
+  {
+   "title": "大手毬与小手毬",
+   "text": "这两种花型独特的品种较少在其他地方见到，可留意成团如球的花序。",
+   "where": "局内通行道"
+  },
+  {
+   "title": "年度代表花",
+   "text": "每年会从众多品种中选出“今年の花”；2026年为黄绿色花朵的御衣黄。",
+   "where": "局内通行道"
+  }
+ ],
+ "visit": {
+  "hours": "仅活动期间开放；2026年为4月9日至15日，平日10:00–19:15、周末9:00–19:15。当前已闭幕，下一年度日期需等官方公布。",
+  "fee": "免费；2026年实行网络事前申请制，按预约名额入场。",
+  "stay": "约30–60分钟，视人流和赏花停留而定。",
+  "bestTime": "开门后较早时段可避开部分晚间人流；若想看夜间氛围，可选傍晚时段并以当年安排为准。",
+  "crowd": "活动期间平日和周末都拥挤，花期周末尤其应预留排队时间。"
+ },
+ "food": [],
+ "nearby": [
+  {
+   "name": "毛马樱之宫公园",
+   "placeId": "kema-sakuranomiya",
+   "how": "紧邻",
+   "note": "可沿大川河岸继续散步，春季也能赏河畔樱花。"
+  },
+  {
+   "name": "天神桥筋商店街",
+   "placeId": "tenjinbashi",
+   "how": "约1公里",
+   "note": "适合游览后逛街、找餐饮。"
+  }
+ ],
+ "seasonal": [
+  {
+   "when": "春季（通常4月上中旬）",
+   "text": "通道开放约一周，集中观赏晚开的八重樱；具体日期随当年花期公布。"
+  }
+ ],
+ "tips": [
+  "开放日期每年另行公布，出发前查看造幣局当年公告。",
+  "活动需按当年规则提前网上申请，确认预约时段和入场方式。",
+  "通道约560米且只能从南门向北门单向通行，入场后不能折返。"
+ ],
+ "cautions": [
+  "除桜の通り抜け等特别活动外，樱花通道并非全年对公众开放。",
+  "活动期间人流较大，请勿停在通道中妨碍通行。"
+ ],
+ "search": {
+  "zh": "大阪造币局樱花通道、造币局樱花通り抜け",
+  "ja": "造幣局 桜の通り抜け"
+ },
+ "links": [],
+ "images": [
+  {
+   "file": "Japan Mint April Osaka 2023.jpg",
+   "caption": "造币局樱花通道及春日景色"
+  },
+  {
+   "file": "八重紅虎之尾櫻 Cerasus serrulata Yae-benitoranowo -日本大阪造幣局 Japan Mint, Osaka- (27685518568).jpg",
+   "caption": "造币局内八重红虎之尾樱花"
+  },
+  {
+   "file": "大沢櫻 Cerasus serrulata Ohsawazakura -日本大阪造幣局 Japan Mint, Osaka- (40054004880).jpg",
+   "caption": "造币局内大泽樱花朵细节"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://weathernews.jp/sakura/spot/318",
+   "note": "确认2026年活动日期、平日与周末开放时段、免费入场、预约制及活动期间拥挤情况。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.keihan.co.jp/sakura/osaka/spot/zoheikyoku.html",
+   "note": "确认约140种樱花、约560米单向通道及大手毬、小手毬等少见品种。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.gltjp.com/ja/directory/item/14244/",
+   "note": "确认活动为每年春季限时开放、沿旧淀川约560米及免费入场。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.osaka-city-callcenter.jp/faq/detail.aspx?id=435",
+   "note": "确认由造币局南门至北门单向通行、约560米，以及活动历史背景。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Japan_Mint_April_Osaka_2023.jpg",
+   "note": "curl确认Commons文件页存在，页面标示CC BY-SA 4.0自由许可。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:%E5%85%AB%E9%87%8D%E7%B4%85%E8%99%8E%E4%B9%8B%E5%B0%BE%E6%AB%BB_Cerasus_serrulata_Yae-benitoranowo_-%E6%97%A5%E6%9C%AC%E5%A4%A7%E9%98%AA%E9%80%A0%E5%B9%A3%E5%B1%80_Japan_Mint,_Osaka-_(27685518568).jpg",
+   "note": "curl确认Commons文件页存在，页面标示CC BY-SA 2.0自由许可，标题注明拍摄于大阪造币局。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E6%B2%A2%E6%AB%BB_Cerasus_serrulata_Ohsawazakura_-%E6%97%A5%E6%9C%AC%E5%A4%A7%E9%98%AA%E9%80%A0%E5%B9%A3%E5%B1%80_Japan_Mint,_Osaka-_(40054004880).jpg",
+   "note": "curl确认Commons文件页存在，页面标示CC BY-SA 2.0自由许可，标题注明拍摄于大阪造币局。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

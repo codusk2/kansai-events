@@ -1,0 +1,98 @@
+{
+ "id": "sanjusangendo",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "蓮華王院的本堂因内陣柱间三十三而得名三十三间堂，是京都东山的天台宗寺院。适合对佛教造像与日本建筑感兴趣的游客；堂内最重要的看点是成列的千手观音立像及中央本尊。",
+ "highlights": [
+  {
+   "title": "千手观音立像群",
+   "text": "本堂内有1001尊千手观音立像，沿长堂成列安置，可近距离观察造像群的规模与细节。",
+   "where": "本堂内，需购票"
+  },
+  {
+   "title": "国宝本堂",
+   "text": "全长约120米，内阵有三十三个柱间，寺名由此而来。",
+   "where": "境内"
+  },
+  {
+   "title": "风神雷神与护法神像",
+   "text": "本堂还安置二十八部众像、风神像、雷神像及千手观音坐像。",
+   "where": "本堂内，需购票"
+  }
+ ],
+ "visit": {
+  "hours": "4月1日—11月15日 8:30–17:00；11月16日—3月31日 9:00–16:00；闭门前30分钟停止受理，全年无休。",
+  "fee": "成人600日元；中学生、高中生400日元；小学生300日元。",
+  "stay": "约45–60分钟",
+  "bestTime": "上午开门后参观，留出安静观看堂内造像的时间。",
+  "crowd": "未找到可靠来源提供分时客流数据；大型法会与通矢活动日会吸引额外参拜者。"
+ },
+ "nearby": [
+  {
+   "name": "京都国立博物馆",
+   "how": "就在三十三间堂对面",
+   "note": "可接着参观京都的佛教美术与历史展览。"
+  }
+ ],
+ "seasonal": [
+  {
+   "when": "1月中旬",
+   "text": "举行楊枝のお加持法要及大的全国大会，现场有传统射箭活动。"
+  },
+  {
+   "when": "3月3日",
+   "text": "举行春桃会，京都观光连盟页面注明当日免费开放。"
+  }
+ ],
+ "tips": [
+  "本堂内需脱鞋，入口处设有鞋柜。",
+  "开放时间按季节调整，入堂需在闭门前30分钟完成受理。"
+ ],
+ "cautions": [
+  "堂内禁止拍照。",
+  "请在本堂内保持安静，并遵从现场参拜指引。"
+ ],
+ "search": {
+  "zh": "三十三间堂",
+  "ja": "三十三間堂（蓮華王院）"
+ },
+ "links": [
+  {
+   "label": "京都市官方观光介绍",
+   "url": "https://ja.kyoto.travel/tourism/single01.php?category_id=7&tourism_id=488"
+  }
+ ],
+ "images": [
+  {
+   "file": "Sanjûsangen-dô Buddhist Temple - Taikô-bei.jpg",
+   "caption": "三十三间堂太阁塀"
+  },
+  {
+   "file": "Sanjûsangen-dô Buddhist Temple - Bell tower.jpg",
+   "caption": "境内钟楼"
+  },
+  {
+   "file": "Sanjûsangen-dô Buddhist Temple - Chôzuya.jpg",
+   "caption": "境内手水舍"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.kyoto-kankou.or.jp/info_search/132",
+   "note": "京都府观光连盟：本堂长度、千手观音与诸像数量、收费及年度活动。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://ja.kyoto.travel/tourism/single01.php?category_id=7&tourism_id=488",
+   "note": "京都市观光Navi：季节开放时间、停止受理时间、全年开放、门票与周边地点。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://ja.wikipedia.org/wiki/%E4%B8%89%E5%8D%81%E4%B8%89%E9%96%93%E5%A0%82",
+   "note": "日文维基百科：本堂结构、千手观音像及法会与射箭活动。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

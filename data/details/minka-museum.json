@@ -1,0 +1,139 @@
+{
+ "id": "minka-museum",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "日本民家集落博物館是位于服部绿地内的露天民俗博物馆，将日本各地的古民家迁建复原，并展示相关生活器具。适合喜欢传统建筑、乡土生活与公园散步的游客；亮点是能在同一园区比较不同地区的屋顶结构和生活空间。",
+ "highlights": [
+  {
+   "title": "飞驒白川合掌造民家",
+   "text": "茅草大屋顶呈双手合掌形，建筑还展示了适应强风的屋顶构造，以及昔日楼上养蚕的用途。",
+   "where": "馆内；入馆需购票"
+  },
+  {
+   "title": "各地迁建的古民家",
+   "text": "园内展出来自日本各地的民家，可对照不同地域的建筑样式与生活环境。",
+   "where": "馆内；入馆需购票"
+  },
+  {
+   "title": "民具与传统体验活动",
+   "text": "古民家内陈列与生活相关的器具，部分活动期间还会举办茶道或动手体验，内容依当期安排。",
+   "where": "馆内；活动可能另有安排"
+  }
+ ],
+ "visit": {
+  "hours": "9:30–17:00（最晚入馆16:30）；周一休馆，若周一为节假日或补休日则次一工作日休馆；12月27日–1月4日休馆，另可能临时休馆。",
+  "fee": "成人800日元，高中生300日元，中小学生200日元，学龄前儿童免费。",
+  "stay": "建议预留约1.5–2小时（按逐栋参观的行程估算）。",
+  "bestTime": "建议上午或午后较早时段入园，留足参观时间；入馆截止为16:30。",
+  "crowd": "未查到可靠来源提供常态人流数据；避开节庆和特别活动日，通常更便于安静逐栋参观。"
+ },
+ "food": [
+  {
+   "name": "balder coffee 服部绿地店",
+   "what": "咖啡饮品与轻食",
+   "note": "位于服部绿地公园休憩屋；营业时间8:00–18:30，最后点单18:00。"
+  }
+ ],
+ "nearby": [
+  {
+   "name": "服部绿地都市绿化植物园",
+   "how": "同在服部绿地园区内",
+   "note": "可接着看园内四季植物与当期花况。"
+  },
+  {
+   "name": "服部绿地大草坪与公园空间",
+   "how": "同在服部绿地园区内",
+   "note": "可把古民家参观与户外散步、草坪休息安排在同一天。"
+  }
+ ],
+ "seasonal": [
+  {
+   "when": "春",
+   "text": "官方以春季樱花与古民家景色为季节看点。"
+  },
+  {
+   "when": "夏",
+   "text": "绿意浓盛，可在树荫与古民家之间散步；户外参观需留意天气。"
+  },
+  {
+   "when": "秋",
+   "text": "园区秋色衬托茅草屋顶，馆方也会举办秋季民家活动。"
+  },
+  {
+   "when": "冬",
+   "text": "冬季可欣赏古民家与雪景主题的园景；是否有积雪取决于天气。"
+  }
+ ],
+ "tips": [
+  "馆内允许个人拍照；涉及营利目的的拍摄需事先确认规定。",
+  "入馆券或盖有日期印的宣传册可用于当天再次入馆。",
+  "出发前查看官网的临时休馆通知与当月活动安排。"
+ ],
+ "cautions": [
+  "这是户外型博物馆，参观体验会受降雨、高温等天气影响。",
+  "请勿触摸古民家及展品，也不要进入未开放区域。"
+ ],
+ "search": {
+  "zh": "日本民家集落博物馆、大阪民家博物馆",
+  "ja": "日本民家集落博物館"
+ },
+ "links": [
+  {
+   "label": "官方网站",
+   "url": "https://www.minshuhaku.jp/"
+  }
+ ],
+ "images": [
+  {
+   "file": "Old Japanese houses Museum Shirakawa.JPG",
+   "caption": "馆内飞驒白川合掌造民家"
+  },
+  {
+   "file": "H Hyuga Shiiba.jpg",
+   "caption": "馆内日向椎叶民家"
+  },
+  {
+   "file": "Tsuruga house (2303060975).jpg",
+   "caption": "馆内越前敦贺民家"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.minshuhaku.jp/%E3%81%94%E5%88%A9%E7%94%A8%E6%A1%88%E5%86%85/",
+   "note": "确认开放时间、休馆日、票价、拍摄与再入馆规定，以及飞驒白川合掌造民家的建筑说明。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.pref.osaka.lg.jp/o180150/bunkazaihogo/jouhou/minshu.html",
+   "note": "确认博物馆位于服部绿地、迁建日本各地民家及展出12栋民家等基本信息。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://osaka-info.jp/en/spot/open-air-museum-old-japanese-houses/",
+   "note": "确认民家生活展示及部分茶道、体验活动等介绍。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://hattori-ryokuchi.com/resthouse/",
+   "note": "确认公园休憩屋内有 balder coffee，提供饮品与轻食及其营业时间。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Old_Japanese_houses_Museum_Shirakawa.JPG",
+   "note": "核对文件页确为馆内白川民家照片，标注 CC BY 3.0。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:H_Hyuga_Shiiba.jpg",
+   "note": "核对文件页确为馆内日向椎叶民家照片，标注 CC BY-SA 3.0。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Tsuruga_house_(2303060975).jpg",
+   "note": "核对文件页确为馆内越前敦贺民家照片，标注 CC BY 2.0。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

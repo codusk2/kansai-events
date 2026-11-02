@@ -1,0 +1,113 @@
+{
+ "id": "kada",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "淡嶋神社是和歌山市加太的一座神社，以境内供奉的人偶和人形供养闻名，也供奉少彦名命。适合对日本民俗、神社与海边小镇感兴趣的游客；可与加太港一带安排在同一天游览。",
+ "highlights": [
+  {
+   "title": "境内供奉的人偶",
+   "text": "参道与社殿周边陈列着各地奉纳的人偶、招财猫等，呈现人形供养信仰。",
+   "where": "神社境内"
+  },
+  {
+   "title": "雛流し神事",
+   "text": "每年3月3日举行，将奉纳的雛人形送入海中，神事期间参拜者较多。",
+   "where": "加太海边；当日活动安排以神社公告为准"
+  },
+  {
+   "title": "女性守护神信仰",
+   "text": "神社供奉少彦名命，长期受到祈求安产与女性健康的信众参拜。",
+   "where": "本殿"
+  }
+ ],
+ "visit": {
+  "hours": "参拜及授与品受理 9:00–17:00；目前官方及观光资料均列出此开放时间，未列固定休息日。",
+  "fee": "境内参拜免费；宝物殿成人300日元、儿童200日元，需团体预约。",
+  "stay": "约30–60分钟",
+  "bestTime": "上午前往较便于避开神事日及午间用餐时段的人流；未找到官方公布的分时拥挤数据。",
+  "crowd": "境内空间不大；3月3日雛流し神事会吸引较多参拜者，平日通常更从容。"
+ },
+ "nearby": [
+  {
+   "name": "友岛（友ヶ島）",
+   "placeId": "tomogashima",
+   "note": "与淡嶋神社的起源传说相关；若安排岛上行程，可作为加太一日游的延伸。"
+  }
+ ],
+ "seasonal": [
+  {
+   "when": "3月3日",
+   "text": "举行雛流し神事，奉纳的人偶乘船送往海上；现场会比平日拥挤。"
+  }
+ ],
+ "tips": [
+  "宝物殿并非随到随进，参观前需确认团体预约条件。",
+  "神社境内陈列的人偶属于供奉物，请勿触摸或移动。"
+ ],
+ "cautions": [
+  "神事安排和宝物殿开放可能变动，出发前查看神社公告或致电确认。"
+ ],
+ "search": {
+  "zh": "淡嶋神社、加太淡岛神社",
+  "ja": "淡嶋神社、加太淡嶋神社"
+ },
+ "links": [
+  {
+   "label": "官方网站",
+   "url": "https://www.kada.jp/awashima/"
+  }
+ ],
+ "images": [
+  {
+   "file": "淡嶋神社 - panoramio.jpg",
+   "caption": "淡嶋神社拜殿全景"
+  },
+  {
+   "file": "Awashima-jinja, torii.jpg",
+   "caption": "加太淡嶋神社鸟居"
+  },
+  {
+   "file": "Awashima-jinja hariduka.jpg",
+   "caption": "淡嶋神社境内的针塚"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.wakayama-kanko.or.jp/spots/detail_217.html",
+   "note": "和歌山县观光网站确认神社位置、境内人偶、开放时间9:00–17:00及宝物殿收费与预约限制。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://wakayamakanko.jp/ja/spot/detail/351",
+   "note": "和歌山观光信息确认神社信仰背景、地址、授与品受理及宝物殿开放时段。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://ticwakayama.jp/sightseeing/%E6%B7%A1%E5%B6%8B%E7%A5%9E%E7%A4%BE/",
+   "note": "和歌山旅游信息中心页面确认雛流し、人形供养及境内陈列人偶等看点。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://ja.wikipedia.org/wiki/%E6%B7%A1%E5%B6%8B%E7%A5%9E%E7%A4%BE",
+   "note": "日文维基百科页面用于交叉核对神社名称、位置和信仰背景。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:%E6%B7%A1%E5%B6%8B%E7%A5%9E%E7%A4%BE_-_panoramio.jpg",
+   "note": "Commons文件页确认照片描绘淡嶋神社且采用CC BY 3.0自由许可；curl确认文件可访问。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Awashima-jinja,_torii.jpg",
+   "note": "Commons文件页确认照片为加太淡嶋神社鸟居且采用CC0许可；curl确认文件可访问。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Awashima-jinja_hariduka.jpg",
+   "note": "Commons文件页确认照片为淡嶋神社针塚且采用CC BY-SA 3.0许可；curl确认文件可访问。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

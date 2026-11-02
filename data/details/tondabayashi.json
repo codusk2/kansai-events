@@ -1,0 +1,130 @@
+{
+ "id": "tondabayashi",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "富田林寺内町是大阪府唯一的国家重要传统建筑群保存地区，街巷仍留有江户至昭和初期的町家风貌。适合喜欢历史街区和慢步拍照的游客；最值得看的是城之门筋一带的木格子、虫笼窗与旧杉山家住宅。",
+ "highlights": [
+  {
+   "title": "城之门筋与传统町家",
+   "text": "沿街可观察虫笼窗、格子与白墙等传统町家细节，街区整体保留江户至昭和初期的景观。",
+   "where": "城之门筋及街区各巷；街区散步免费"
+  },
+  {
+   "title": "旧杉山家住宅",
+   "text": "寺内町现存最古老的町家之一，作为国家重要文化财对外开放参观。",
+   "where": "富田林町14-31；成人400日元、中学生以下200日元"
+  },
+  {
+   "title": "富田林兴正寺别院",
+   "text": "寺内町形成的中心寺院，可从寺院与周边街巷理解这座宗教自治城镇的历史。",
+   "where": "寺内町内"
+  }
+ ],
+ "visit": {
+  "hours": "街区可步行游览；旧杉山家住宅10:00–17:00，周一（遇国定假日则顺延至下一个平日）及12月29日–1月3日休馆。",
+  "fee": "街区散步免费；旧杉山家住宅成人400日元、中学生及以下200日元，未满6岁免费。",
+  "stay": "街区约1–2小时；若细看旧杉山家住宅可预留更多时间。",
+  "bestTime": "白天较适合看町家细节；若想体验节庆布置，可关注春季雏巡及夏季灯路活动。",
+  "crowd": "春季雏巡、夏季灯路等活动期间较热闹；平日可悠闲步行。"
+ },
+ "nearby": [
+  {
+   "name": "富田林兴正寺别院",
+   "how": "寺内町内步行",
+   "note": "寺内町起源相关寺院，可与町家街巷一并参观。"
+  }
+ ],
+ "seasonal": [
+  {
+   "when": "春季（通常3月）",
+   "text": "雏巡活动期间，民家和商店等会展示雏人形与春花；2026年活动为3月7日至8日。"
+  },
+  {
+   "when": "夏季（通常8月）",
+   "text": "寺内町灯路以行灯点亮历史街巷。"
+  },
+  {
+   "when": "秋季（通常10月）",
+   "text": "后之雏祭重现雏人形与菊花装饰；2026年活动日为10月10日。"
+  },
+  {
+   "when": "冬季（通常1月）",
+   "text": "新春初锅巡活动可体验当地节庆与街区氛围。"
+  }
+ ],
+ "tips": [
+  "旧杉山家住宅只收现金，入内参观时请准备现金。",
+  "旧杉山家住宅院内禁止饮食。",
+  "游览时请记得这是居民生活街区，拍摄和交谈应避免打扰住户。"
+ ],
+ "cautions": [
+  "寺内町大多数街巷是开放街区，住宅内部并非都能进入；请遵守现场标识。",
+  "旧杉山家住宅的开馆安排与费用可能调整，出发前请查看设施官网。"
+ ],
+ "search": {
+  "zh": "富田林寺内町",
+  "ja": "富田林寺内町（とんだばやしじないまち）"
+ },
+ "links": [
+  {
+   "label": "旧杉山家住宅及寺内町4设施官网",
+   "url": "https://jinaimachi.net/facility_information/sugiyamake/"
+  },
+  {
+   "label": "大阪观光局：富田林寺内町",
+   "url": "https://discover.osaka-info.jp/jp/spots/tondabayashi-jinaimachi"
+  },
+  {
+   "label": "富田林市：季节活动",
+   "url": "https://www.city.tondabayashi.lg.jp/soshiki/36/142425.html"
+  }
+ ],
+ "images": [
+  {
+   "file": "富田林 寺内町 2022.jpg",
+   "caption": "寺内町街景与传统町家"
+  },
+  {
+   "file": "富田林 旧杉山家住宅 2022.jpg",
+   "caption": "国家重要文化财旧杉山家住宅"
+  },
+  {
+   "file": "富田林寺内町（夜）.jpg",
+   "caption": "夜间灯光下的寺内町街景"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://jinaimachi.net/facility_information/sugiyamake/",
+   "note": "确认旧杉山家住宅开放时间、休馆日、门票、现金支付及院内注意事项。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://discover.osaka-info.jp/jp/spots/tondabayashi-jinaimachi",
+   "note": "确认町家街景看点及建议游览约1–2小时。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.osaka-museum.com/spot/search/?act=detail&id=472&type=near",
+   "note": "确认街区历史、城之门筋等町家细节，以及春季雏巡和夏季灯路活动。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.city.tondabayashi.lg.jp/soshiki/36/16015.html",
+   "note": "确认2026年春季雏巡日期、活动内容及会场范围。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.city.tondabayashi.lg.jp/soshiki/36/16016.html",
+   "note": "确认后之雏祭的由来、展示方式及2026年活动日期。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.city.tondabayashi.lg.jp/site/bunkazai/2501.html",
+   "note": "确认寺内町历史街区及旧杉山家住宅的文化财背景。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

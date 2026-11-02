@@ -1,0 +1,126 @@
+{
+ "id": "nara-prison",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "奈良监狱博物馆利用重要文化财旧奈良监狱改建，2026年4月开馆，适合对近代建筑、监狱史和社会议题感兴趣的游客。红砖建筑、保存区域和围绕历史、生活与艺术设置的展馆是主要看点；参观需提前确认票额。",
+ "highlights": [
+  {
+   "title": "明治红砖建筑",
+   "text": "旧奈良监狱是重要文化财，保存区保留了历史建筑的空间与细节。",
+   "where": "园区保存区域"
+  },
+  {
+   "title": "三座主题展馆",
+   "text": "A栋讲历史与建筑，B栋呈现规训与生活，C栋以监狱与艺术为主题。",
+   "where": "A、B、C展馆"
+  },
+  {
+   "title": "中央看守所",
+   "text": "可另行预约参观中央看守所，名额和时段有限。",
+   "where": "需另预约"
+  },
+  {
+   "title": "馆内咖啡与商店",
+   "text": "咖啡区有原创咖喱面包、芝士蛋糕和奈良当地汽水，商店设有刑务所作业产品展示。",
+   "where": "园区内"
+  }
+ ],
+ "visit": {
+  "hours": "每日9:00–17:00，最晚入馆16:00；无固定休馆日，维护时可能临时休馆。",
+  "fee": "成人：日本居住者2,500日元、海外居住者3,500日元、奈良县居民2,000日元；大学生及高中生1,500日元，中小学生700日元，学龄前儿童免费。",
+  "stay": "约1.5–2小时。",
+  "bestTime": "尽量预约上午或较早时段，留足时间参观各展馆和保存区域；官方未提供时段优劣建议。",
+  "crowd": "热门日期可能提前售罄，线上售罄时不售当日票；平日人流情况未见可靠公开数据。"
+ },
+ "food": [
+  {
+   "name": "馆内咖啡",
+   "what": "原创咖喱面包、芝士蛋糕、奈良当地汽水。",
+   "note": "位于园区内；入馆预约和可用票额请先确认。"
+  }
+ ],
+ "nearby": [],
+ "seasonal": [],
+ "tips": [
+  "先在线查看可预约日期和票额；中央看守所参观需另行预约。",
+  "馆内不宜饮食，带盖饮料只能在室外饮用。",
+  "馆内不可带大型行李或婴儿车，室内展示区不能带伞。",
+  "咖啡和商店也位于馆内；FAQ说明可在展示区室内及咖啡商店处取用饮水。"
+ ],
+ "cautions": [
+  "各时段名额有限，门票售罄时现场不保证能入馆。",
+  "历史建筑部分楼梯和通道较窄，且有露天区域；雨天请准备雨具。",
+  "不可携带宠物入馆，辅助犬除外。"
+ ],
+ "search": {
+  "zh": "奈良监狱博物馆",
+  "ja": "奈良監獄ミュージアム（旧奈良少年刑務所）"
+ },
+ "links": [
+  {
+   "label": "官方网站｜利用指南",
+   "url": "https://hoshinoresorts.com/nara-prison-museum/ja/visit/"
+  },
+  {
+   "label": "奈良市观光协会｜景点介绍",
+   "url": "https://narashikanko.or.jp/spot/detail_10470.html"
+  },
+  {
+   "label": "官方网站｜常见问题",
+   "url": "https://hoshinoresorts.com/nara-prison-museum/ja/faq/"
+  }
+ ],
+ "images": [
+  {
+   "file": "130316 Nara Juvenile Prison Nara Japan01s3.jpg",
+   "caption": "旧奈良监狱红砖正门与双塔"
+  },
+  {
+   "file": "130316 Nara Juvenile Prison Nara Japan05s3.jpg",
+   "caption": "旧奈良监狱红砖建筑正面与庭院"
+  },
+  {
+   "file": "Nara prison-20050430.jpg",
+   "caption": "旧奈良监狱保存建筑及庭院"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://hoshinoresorts.com/nara-prison-museum/ja/visit/",
+   "note": "确认开放时间、最晚入馆、休馆安排、票价及中央看守所另行预约说明。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://hoshinoresorts.com/nara-prison-museum/ja/faq/",
+   "note": "确认建议参观时长、热门时段可能无票、建筑通道与室外区域及入馆注意事项。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://hoshinoresorts.com/nara-prison-museum/ja/news/260620-2/",
+   "note": "确认官方提醒提前预约、线上售罄时没有当日票。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://narashikanko.or.jp/spot/detail_10470.html",
+   "note": "确认2026年4月开馆、重要文化财及A/B/C展馆主题、馆内咖啡和菜单。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:130316_Nara_Juvenile_Prison_Nara_Japan01s3.jpg",
+   "note": "核对文件页所示地点和CC BY 2.5许可，并用curl确认原图可下载。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:130316_Nara_Juvenile_Prison_Nara_Japan05s3.jpg",
+   "note": "核对文件页所示地点和CC BY 2.5许可，并用curl确认原图可下载。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://commons.wikimedia.org/wiki/File:Nara_prison-20050430.jpg",
+   "note": "核对文件页所示地点和CC BY-SA 3.0许可，并用curl确认原图可下载。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}

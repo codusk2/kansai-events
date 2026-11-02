@@ -1,0 +1,101 @@
+{
+ "id": "kaiyukan",
+ "schema": 1,
+ "revision": 1,
+ "checkedAt": "2026-11-02",
+ "researchedBy": "gpt-6-luna（远望调度）",
+ "summary": "海遊館是大阪天保山的大型水族馆，以环绕太平洋的大水槽和多层参观路线呈现不同海域的生物。适合亲子、海洋生物爱好者及雨天室内游；最有代表性的是鲸鲨在太平洋水槽中悠游的景象。",
+ "highlights": [
+  {
+   "title": "太平洋大水槽与鲸鲨",
+   "text": "大水槽中可看鲸鲨、鳐鱼和鱼群游动；沿参观路线从不同高度观看同一水槽，观感会变化。",
+   "where": "太平洋展示区"
+  },
+  {
+   "title": "环太平洋展区",
+   "text": "路线从日本之森延伸至多个太平洋沿岸海域，并展示陆地、水面、水中和海底环境。",
+   "where": "馆内常设展示"
+  },
+  {
+   "title": "特设水槽",
+   "text": "按时期展示季节性或限定生物，适合留意当期的特别展出。",
+   "where": "馆内；展出内容随时期变化"
+  }
+ ],
+ "visit": {
+  "hours": null,
+  "fee": "采用浮动票价；官网按日期公布当日营业时间与成人票价，入馆前请查看对应日期的日历。",
+  "stay": "约2–3小时",
+  "bestTime": null,
+  "crowd": null
+ },
+ "food": [],
+ "nearby": [
+  {
+   "name": "天保山マーケットプレース（天保山市场广场）",
+   "how": "海游馆旁",
+   "note": "有餐厅、约80家店铺及汇集大阪料理的なにわ食いしんぼ横丁，可安排用餐或购物。"
+  }
+ ],
+ "tips": [
+  "门票采用浮动价格，出发前在官网按参观日期确认票价和营业时间。",
+  "馆内「アリューシャン列島」展区页面标注因翻新工程暂时关闭，请以现场及官网更新为准。"
+ ],
+ "cautions": [
+  "部分展区可能因施工关闭；行前查看官方展示介绍页的临时公告。"
+ ],
+ "search": {
+  "zh": "大阪海游馆",
+  "ja": "海遊館"
+ },
+ "links": [
+  {
+   "label": "官方网站",
+   "url": "https://www.kaiyukan.com/"
+  },
+  {
+   "label": "开放时间与休馆日",
+   "url": "https://www.kaiyukan.com/info/hours/"
+  },
+  {
+   "label": "入馆票价",
+   "url": "https://www.kaiyukan.com/info/ticket/kaiyukan/"
+  }
+ ],
+ "images": [
+  {
+   "file": "The spectacular Whale shark (6453177275).jpg",
+   "caption": "海游馆太平洋大水槽中的鲸鲨"
+  },
+  {
+   "file": "Jellyfish at Kaiyukan (29608602441).jpg",
+   "caption": "海游馆水母展示"
+  },
+  {
+   "file": "Kaiyukan exhibitions (29654006796).jpg",
+   "caption": "海游馆馆内展示水槽"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://www.kaiyukan.com/info/hours/",
+   "note": "确认营业时间按季节变化，页面提供营业日期日历及休馆信息。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.kaiyukan.com/info/ticket/kaiyukan/",
+   "note": "确认入馆票价按日期浮动，页面说明日历显示当日成人价格。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://www.kaiyukan.com/about/exhibition/",
+   "note": "确认环太平洋展示路线、太平洋水槽的鲸鲨等生物，以及阿留申展区正在翻新关闭。",
+   "accessed": "2026-11-02"
+  },
+  {
+   "url": "https://osaka-info.jp/spot/tempozan-marketplace/",
+   "note": "确认天保山市场广场紧邻海游馆，设有餐饮、商店及なにわ食いしんぼ横丁。",
+   "accessed": "2026-11-02"
+  }
+ ]
+}
