@@ -216,23 +216,11 @@ a:focus-visible {
   gap: 8px;
 }
 
-.brand svg {
-  width: 28px;
-  height: 28px;
+.brand img {
+  width: 30px;
+  height: 30px;
   flex: none;
-}
-
-.logo-bg {
-  fill: var(--accent);
-}
-
-.logo-crab,
-.logo-fish {
-  fill: var(--accent-ink);
-  stroke: var(--accent-ink);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  border-radius: 8px;
 }
 
 .brand b {
@@ -1218,31 +1206,54 @@ body.idle .map-credit {
   padding: 0;
 }
 
+/* 京桥站（检索中心）：粉色螃蟹图钉，压在所有旅行点上面；地图放大后上方显示站名 */
 .home {
-  z-index: 2;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
   pointer-events: none;
 }
 
-.home span {
+.home-name {
+  display: none;
+  margin-bottom: 6px;
   padding: 3px 9px;
   border-radius: 99px;
   background: var(--ink);
   color: var(--paper);
   font-size: .72rem;
   font-weight: 600;
+  white-space: nowrap;
   box-shadow: var(--shadow);
 }
 
-.home i {
-  width: 14px;
-  height: 14px;
-  margin-top: 4px;
-  border-radius: 50%;
-  background: var(--ink);
-  border: 3px solid var(--card);
+.map-near .home-name {
+  display: block;
+}
+
+/* 方块去掉左下圆角再转-45°，尖角朝下；转过之后尖角比盒子低约6px，用下边距补齐，让尖角正好落在京桥站 */
+.home-pin {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 6px;
+  border: 2.5px solid #FFFFFF;
+  border-radius: 50% 50% 50% 0;
+  background: #F28CA8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+  transform: rotate(-45deg);
+}
+
+.home-pin .mini {
+  height: 13px;
+  color: #FFFFFF;
+  transform: rotate(45deg);
+}
+
+.home-pin .mini .eye {
+  fill: #F28CA8;
 }
 
 /* 时间圈：抽象的时间雷达，一屏看完，下面是比较栏 */
@@ -2192,18 +2203,15 @@ body.idle .map-credit {
   color: var(--b60);
 }
 
-.home span .mini,
 .radar-home .mini {
   height: 10px;
   margin: 0 3px;
 }
 
-.home span .mini.fish,
 .radar-home .mini.fish {
   color: var(--b120);
 }
 
-.home span .mini .eye,
 .radar-home .mini .eye {
   fill: var(--ink);
 }
@@ -2673,15 +2681,6 @@ body.idle .map-credit {
   margin: 0;
 }
 
-.dt-ways {
-  grid-template-columns: 1fr;
-  gap: 2px;
-}
-
-.dt-ways dd + dt {
-  margin-top: 8px;
-}
-
 .dt-list {
   margin: 0;
   padding: 0;
@@ -2961,30 +2960,24 @@ body.idle .map-credit {
   color: var(--muted);
 }
 
-/* 地图卡片带里的🍏近期动态 */
-.dkn-face {
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: 2px;
-  border-radius: 12px;
-  background: linear-gradient(160deg, var(--ga-soft), color-mix(in srgb, var(--ga) 35%, var(--ga-soft)));
-  font-size: 2rem;
-}
-
-.dkn-face small {
-  font-size: .66rem;
+/* 地图上只看绿苹果时的悬浮提示：点了去画册看动态 */
+.ga-hint {
+  position: absolute;
+  left: var(--gutter);
+  top: calc(var(--top-h) + 40px + env(safe-area-inset-top));
+  z-index: 4;
+  display: none;
+  border: 0;
+  border-radius: 99px;
+  padding: 8px 14px;
+  background: var(--ga);
+  color: var(--ga-on);
+  font-size: .8rem;
   font-weight: 700;
-  color: var(--ga-ink);
+  box-shadow: var(--shadow);
+  animation: fc-in .4s ease both;
 }
 
-.dkn-when {
-  font-size: .68rem;
-  font-weight: 700;
-  color: var(--ga-ink);
-}
-
-.dk-news .dk-foot a {
-  font-size: .72rem;
-  color: var(--ga-ink);
+body[data-mode="ga"] .ga-hint {
+  display: block;
 }

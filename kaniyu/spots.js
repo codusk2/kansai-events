@@ -218,15 +218,12 @@
   const li = arr => (arr?.length ? `<ul>${arr.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : '');
   function detailHtml(d) {
     const v = d.visit || {};
-    const a = d.access || {};
     const facts = [['开放时间', v.hours], ['门票', v.fee], ['建议停留', v.stay], ['最佳时段', v.bestTime], ['人流', v.crowd]].filter(x => x[1]);
-    const ways = [['🚃 公共交通', a.transit], ['🚗 自驾停车', a.car], ['🚶 到了怎么逛', a.local]].filter(x => x[1]);
     const sec = (title, body, open = true) => (body ? `<details class="dt-sec"${open ? ' open' : ''}><summary>${title}</summary>${body}</details>` : '');
     return `<div class="dt-head"><h3>详细攻略</h3>${d.sample ? '<span class="dt-sample">合成样例</span>' : ''}</div>
       <p class="dt-sum">${esc(d.summary)}</p>
       ${sec('看点', d.highlights?.length ? `<ol class="dt-hl">${d.highlights.map(h => `<li><b>${esc(h.title)}</b><span>${esc(h.text)}</span>${h.where ? `<small>${esc(h.where)}</small>` : ''}</li>`).join('')}</ol>` : '')}
       ${sec('实用信息', facts.length ? `<dl class="dt-facts">${facts.map(([k, x]) => `<dt>${k}</dt><dd>${esc(x)}</dd>`).join('')}</dl>` : '')}
-      ${sec('怎么去', ways.length ? `<dl class="dt-facts dt-ways">${ways.map(([k, x]) => `<dt>${k}</dt><dd>${esc(x)}</dd>`).join('')}</dl>` : '')}
       ${sec('附近吃什么', d.food?.length ? `<ul class="dt-list">${d.food.map(f => `<li><b>${esc(f.name)}</b>${f.what ? `<span>${esc(f.what)}${f.price ? ` · ${esc(f.price)}` : ''}</span>` : ''}${f.note ? `<small>${esc(f.note)}</small>` : ''}</li>`).join('')}</ul>` : '', false)}
       ${sec('顺路还能去', d.nearby?.length ? `<ul class="dt-list">${d.nearby.map(n => `<li>${n.placeId && byId[n.placeId] ? `<button type="button" class="dt-goto" data-goto="${esc(n.placeId)}">${esc(n.name)} ›</button>` : `<b>${esc(n.name)}</b>`}${n.how ? `<span>${esc(n.how)}</span>` : ''}${n.note ? `<small>${esc(n.note)}</small>` : ''}</li>`).join('')}</ul>` : '', false)}
       ${sec('各季节看什么', d.seasonal?.length ? `<dl class="dt-facts">${d.seasonal.map(s => `<dt>${esc(s.when)}</dt><dd>${esc(s.text)}</dd>`).join('')}</dl>` : '', false)}
@@ -621,7 +618,9 @@
 
   const homeEl = document.createElement('div');
   homeEl.className = 'home';
-  homeEl.innerHTML = `<span>${CRAB}${esc(ORIGIN.name)}${FISH}</span><i></i>`;
+  // 京桥站是检索中心：远看只有一枚螃蟹图钉，放大后才在上方写站名；永远压在旅行点上面
+  homeEl.innerHTML = `<span class="home-name">${esc(ORIGIN.name)} · 出发点</span><span class="home-pin">${CRAB}</span>`;
+  homeEl.setAttribute('aria-label', `${ORIGIN.name}（出发点）`);
   new maplibregl.Marker({ element: homeEl, anchor: 'bottom' }).setLngLat(ORIGIN.ll).addTo(map);
 
   function mapPadding(extra = 20) {
@@ -656,10 +655,14 @@
     if (state.ga && state.view === 'map') {
       setDeckMin(false);
       flyHome();
-      if (deckNews().length) scrollDeckTo(null, false, 0);
     }
   }
   $('ev-btn').addEventListener('click', toggleEvents);
+  // 地图上只看绿苹果时，动态不放在卡片带里，悬浮一条提示带去画册
+  $('ga-hint').addEventListener('click', () => {
+    showView('book');
+    $('view-book').scrollTop = 0;
+  });
   $('ga-btn').addEventListener('click', toggleGa);
 
   // 合并：只在地图停下后算一次，拖动过程中不重排
@@ -751,16 +754,6 @@
       <span class="dk-foot">${p.season.tone !== 'plain' ? `<span class="st tone-${p.season.tone}">${esc(p.season.text)}</span>` : '<span></span>'}<span class="dk-acts"><span class="nope" role="button" tabindex="0" data-nope="${p.id}" aria-label="不感兴趣">🚫</span>${heart(p)}</span></span>
     </span></button>`;
 
-  // 🍏打开时，卡片带最前面放几条近期动态（不对应地图上的点，点里面的链接看来源）
-  const DECK_NEWS = 4;
-  const deckNews = () => (mode() === 'ga' ? (GA_DATA.news || []).slice(0, DECK_NEWS) : []);
-  const newsCard = n => `<div class="dk dk-news"><span class="dkn-face" aria-hidden="true">${NEWS_EMO[n.kind] || '🍏'}<small>${esc(n.kind)}</small></span><span class="dk-txt">
-      <span class="dkn-when">🍏 近期动态 · ${ago(n.date)}${n.sample ? ' · 合成样例' : ''}</span>
-      <span class="dk-head"><b>${esc(n.title)}</b></span>
-      <span class="dk-blurb">${esc(n.summary)}</span>
-      <span class="dk-foot"><a href="${esc(n.sources[0].url)}" target="_blank" rel="noopener noreferrer">${esc(n.sources[0].note)} ↗</a></span>
-    </span></div>`;
-
   function renderDeck() {
     if (mode() === 'idle') {
       deckKey = '';
@@ -768,29 +761,27 @@
       return;
     }
     const items = deckItems();
-    const news = deckNews();
-    const key = mode() + state.measure + state.limit + [...state.tags].join() + news.length + items.map(p => p.id).join(',');
+    const key = mode() + state.measure + state.limit + [...state.tags].join() + items.map(p => p.id).join(',');
     if (key === deckKey) return;
     deckKey = key;
     $('deck-count').textContent = mode() === 'events'
       ? `🎟️ 还没结束的活动 · ${items.length} 个`
       : mode() === 'ga'
-        ? `🍏 只看绿苹果 · ${news.length ? `动态 ${news.length} 条 · ` : ''}活动 ${items.length} 个 · 核实于${fmtISO(GA_DATA.checkedAt)}`
+        ? `🍏 只看绿苹果 · 活动 ${items.length} 个 · 核实于${fmtISO(GA_DATA.checkedAt)}`
         : `${PLACES.filter(shown).length} 处 · 符合任一标签 · 按${MEASURE[state.measure]}由近到远`;
-    $('deck-list').innerHTML = news.map(newsCard).join('') + (items.length
+    $('deck-list').innerHTML = items.length
       ? items.map(p => (p.venue ? eventCard(p) : placeCard(p))).join('')
-      : news.length ? '' : '<p class="dk-empty">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>');
+      : '<p class="dk-empty">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>';
     if (!items.some(p => p.id === state.focus)) state.focus = items.find(p => p.ll)?.id || null;
     scrollDeckTo(state.focus, false);
     if (state.focus) focusItem(state.focus, { fly: mode() === 'places' });
   }
 
-  // left：直接给位置（比如回到最前面的动态），不按卡片找
-  function scrollDeckTo(id, smooth, left) {
+  function scrollDeckTo(id, smooth) {
     const card = id && $('deck-list').querySelector(`[data-id="${id}"]`);
-    if (!card && left === undefined) return;
+    if (!card) return;
     deckProgrammatic = true;
-    $('deck-list').scrollTo({ left: card ? card.offsetLeft - parseFloat(getComputedStyle($('deck-list')).paddingLeft) : left, behavior: smooth && !reduceMotion ? 'smooth' : 'auto' });
+    $('deck-list').scrollTo({ left: card.offsetLeft - parseFloat(getComputedStyle($('deck-list')).paddingLeft), behavior: smooth && !reduceMotion ? 'smooth' : 'auto' });
     clearTimeout(deckTimer);
     deckTimer = setTimeout(() => { deckProgrammatic = false; }, smooth ? 600 : 50);
   }
@@ -834,7 +825,7 @@
 
   $('deck-list').addEventListener('click', e => {
     const c = e.target.closest('.dk');
-    if (!c || !c.dataset.id) return;
+    if (!c) return;
     if (c.dataset.id !== state.focus) focusItem(c.dataset.id, { scroll: true, fly: true });
     else select(c.dataset.id);
   });

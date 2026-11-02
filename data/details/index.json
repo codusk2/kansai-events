@@ -3,7 +3,7 @@
  "schema": 1,
  "details": {
   "ishikiri": {
-   "revision": 1,
+   "revision": 2,
    "checkedAt": "2026-11-02",
    "images": [
     {
@@ -51,7 +51,7 @@
    ]
   },
   "minoh": {
-   "revision": 1,
+   "revision": 2,
    "checkedAt": "2026-11-02",
    "images": [
     {
@@ -99,7 +99,7 @@
    ]
   },
   "tsuruhashi": {
-   "revision": 1,
+   "revision": 2,
    "checkedAt": "2026-11-02",
    "images": [
     {
