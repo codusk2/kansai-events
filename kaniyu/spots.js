@@ -157,9 +157,8 @@
   const wishAt = store.get('kaniyu-wish-at-v1', {});
   const nowText = () => new Intl.DateTimeFormat('ja-JP', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date());
 
-  // 绿苹果和其他标签一样可以同时选：选上就把它的活动一起列出来
-  const mode = () => (state.events ? 'events' : state.tags.size || state.ga ? 'places' : 'idle');
-  const gaOn = () => state.ga;
+  // 🍏按下时只看绿苹果（动态和活动），旅行点先收起；再点🍏或点任一标签回到旅行点
+  const mode = () => (state.events ? 'events' : state.ga ? 'ga' : state.tags.size ? 'places' : 'idle');
   const placeTags = () => state.tags;
   const minsOf = (p, m = state.measure) => p[m].mins;
   const bandOf = (p, m = state.measure) => {
@@ -172,7 +171,7 @@
   const hidden = store.get('kaniyu-hidden-v1', {});
   const live = x => !hidden[x.id];
   const shown = p => mode() === 'places' && live(p) && minsOf(p) <= state.limit && anyTag(p, placeTags());
-  const eventShown = e => e.ll && live(e) && (mode() === 'events' || (mode() === 'places' && gaOn() && e.ga));
+  const eventShown = e => e.ll && live(e) && (mode() === 'events' || (mode() === 'ga' && e.ga));
   const timeBadge = p => `<span class="tb tb-${bandOf(p) || '180'}">${minsOf(p)}分</span>`;
   const photo = (p, cls = '') => (p.img
     ? `<img${cls ? ` class="${cls}"` : ''} src="${esc(p.img.thumb)}" alt="" loading="lazy" decoding="async">`
@@ -287,6 +286,7 @@
 
   function toggleTag(t) {
     state.events = false;
+    state.ga = false;
     state.tags.has(t) ? state.tags.delete(t) : state.tags.add(t);
     refresh();
   }
@@ -315,6 +315,7 @@
     }
     if (b.dataset.act === 'all') {
       state.events = false;
+      state.ga = false;
       state.tags = new Set(TAG_DEFS.filter(t => t.name !== GA).map(t => t.name));
       refresh();
     } else if (b.dataset.act === 'none') {
@@ -731,7 +732,8 @@
   let deckProgrammatic = false;
   const deckItems = () => {
     if (mode() === 'events') return EVENTS.filter(live);
-    return [...(gaOn() ? EVENTS.filter(e => e.ga && live(e)) : []), ...PLACES.filter(shown).sort((a, b) => minsOf(a) - minsOf(b))];
+    if (mode() === 'ga') return EVENTS.filter(e => e.ga && live(e));
+    return PLACES.filter(shown).sort((a, b) => minsOf(a) - minsOf(b));
   };
   const itemOf = id => byId[id] || evById[id];
 
@@ -751,7 +753,7 @@
 
   // 🍏打开时，卡片带最前面放几条近期动态（不对应地图上的点，点里面的链接看来源）
   const DECK_NEWS = 4;
-  const deckNews = () => (gaOn() && mode() === 'places' ? (GA_DATA.news || []).slice(0, DECK_NEWS) : []);
+  const deckNews = () => (mode() === 'ga' ? (GA_DATA.news || []).slice(0, DECK_NEWS) : []);
   const newsCard = n => `<div class="dk dk-news"><span class="dkn-face" aria-hidden="true">${NEWS_EMO[n.kind] || '🍏'}<small>${esc(n.kind)}</small></span><span class="dk-txt">
       <span class="dkn-when">🍏 近期动态 · ${ago(n.date)}${n.sample ? ' · 合成样例' : ''}</span>
       <span class="dk-head"><b>${esc(n.title)}</b></span>
@@ -772,12 +774,12 @@
     deckKey = key;
     $('deck-count').textContent = mode() === 'events'
       ? `🎟️ 还没结束的活动 · ${items.length} 个`
-      : !state.tags.size
-        ? `🍏 绿苹果 · ${news.length ? `动态 ${news.length} 条 · ` : ''}活动 ${items.length} 个 · 核实于${fmtISO(GA_DATA.checkedAt)}`
-        : `${PLACES.filter(shown).length} 处 · 符合任一标签 · 按${MEASURE[state.measure]}由近到远${gaOn() ? ` · 🍏在最前` : ''}`;
+      : mode() === 'ga'
+        ? `🍏 只看绿苹果 · ${news.length ? `动态 ${news.length} 条 · ` : ''}活动 ${items.length} 个 · 核实于${fmtISO(GA_DATA.checkedAt)}`
+        : `${PLACES.filter(shown).length} 处 · 符合任一标签 · 按${MEASURE[state.measure]}由近到远`;
     $('deck-list').innerHTML = news.map(newsCard).join('') + (items.length
       ? items.map(p => (p.venue ? eventCard(p) : placeCard(p))).join('')
-      : '<p class="dk-empty">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>');
+      : news.length ? '' : '<p class="dk-empty">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>');
     if (!items.some(p => p.id === state.focus)) state.focus = items.find(p => p.ll)?.id || null;
     scrollDeckTo(state.focus, false);
     if (state.focus) focusItem(state.focus, { fly: mode() === 'places' });
@@ -1141,6 +1143,7 @@
   // 绿苹果的活动放在画册顶部的专区里，瀑布流只放地点
   const flowItems = () => (mode() === 'events'
     ? EVENTS.filter(live)
+    : mode() === 'ga' ? []
     : PLACES.filter(shown).sort((x, y) => (y.season.hot - x.season.hot) || minsOf(x) - minsOf(y)));
 
   // ---------- 🍏 绿苹果专区：横幅、近期动态、关西活动 ----------
@@ -1188,9 +1191,9 @@
     const keep = key === flow.key ? Math.max(flow.count, FLOW_BATCH) : FLOW_BATCH;
     const top = key === flow.key ? view.scrollTop : 0;
     Object.assign(flow, { key, items, round: 0, count: 0 });
-    const zone = gaOn() && mode() === 'places' ? gaZone() : '';
+    const zone = mode() === 'ga' ? gaZone() : '';
     if (!items.length) {
-      view.innerHTML = bookToggles() + zone + (state.tags.size || !zone ? '<p class="book-empty book-none">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>' : '');
+      view.innerHTML = bookToggles() + (zone || '<p class="book-empty book-none">这个时间范围里没有这些标签的地方。放宽单程时间试试。</p>');
       if (top) view.scrollTop = top;
       return;
     }
@@ -1299,6 +1302,7 @@
     // 地图上要能看到它：没被当前标签选中时，临时加上它的第一个标签
     if (!shown(p)) {
       state.events = false;
+      state.ga = false;
       state.tags.add(p.tags[0]);
       if (minsOf(p) > state.limit) state.limit = LIMITS.find(l => minsOf(p) <= l) || 180;
       renderHeader();
