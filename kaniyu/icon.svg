@@ -1,37 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- 蟹鱼游：天空蓝底，粉色小螃蟹坐在浪里，右上一条小鱼跃出水面 -->
-  <defs>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#7CC0F0"/>
-      <stop offset="1" stop-color="#3A77B2"/>
-    </linearGradient>
-    <clipPath id="tile"><rect width="64" height="64" rx="16"/></clipPath>
-  </defs>
-  <g clip-path="url(#tile)">
-    <rect width="64" height="64" fill="url(#sky)"/>
-    <!-- 小鱼和水花 -->
-    <g transform="rotate(-24 50 15)">
-      <path d="M41 16c4-6.5 11.5-6.5 15.5 0-4 6.5-11.5 6.5-15.5 0z" fill="#FFFFFF"/>
-      <path d="M55.5 16l5.5-4.2v8.4z" fill="#FFFFFF"/>
-      <circle cx="45.4" cy="15" r="1.3" fill="#3A77B2"/>
-    </g>
-    <circle cx="40" cy="26" r="1.4" fill="#FFFFFF" opacity=".85"/>
-    <circle cx="44" cy="29.5" r="1" fill="#FFFFFF" opacity=".7"/>
-    <!-- 螃蟹：钳子、眼睛、身体 -->
-    <path d="M17.5 37L13 29M36.5 37L41 29" stroke="#F28CA8" stroke-width="4" stroke-linecap="round"/>
-    <path d="M12.5 26L14.4 20.6A5.6 5.6 0 1 1 10.6 20.6Z" fill="#F28CA8"/>
-    <path d="M41.5 26L43.4 20.6A5.6 5.6 0 1 1 39.6 20.6Z" fill="#F28CA8"/>
-    <path d="M23.5 34L22.5 28.5M30.5 34L31.5 28.5" stroke="#F28CA8" stroke-width="2.6" stroke-linecap="round"/>
-    <ellipse cx="27" cy="41" rx="13.5" ry="9.5" fill="#F28CA8"/>
-    <circle cx="22.3" cy="27.4" r="3.3" fill="#FFFFFF"/>
-    <circle cx="31.7" cy="27.4" r="3.3" fill="#FFFFFF"/>
-    <circle cx="22.9" cy="27.9" r="1.7" fill="#1F3347"/>
-    <circle cx="32.3" cy="27.9" r="1.7" fill="#1F3347"/>
-    <ellipse cx="19.5" cy="41" rx="2.4" ry="1.5" fill="#FFC2D2"/>
-    <ellipse cx="34.5" cy="41" rx="2.4" ry="1.5" fill="#FFC2D2"/>
-    <path d="M24 40.5q3 2.6 6 0" stroke="#1F3347" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <!-- 蟹鱼游：沉静的蓝底，白色随笔线条画一只小螃蟹和一条小鱼，左下一道浪 -->
+  <rect width="64" height="64" rx="15" fill="#5A8FC2"/>
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 螃蟹：半圆的壳、举起的两只钳子、眼柄、四条细腿 -->
+    <path d="M17 30c.4-5.8 4.6-9.6 10-9.6s9.6 3.8 10 9.6c-6.6.7-13.3.7-20 0z" fill="#FFFFFF" stroke-width="1.6"/>
+    <path d="M18.6 24.2l-4.1-5.2M35.4 24.2l4.1-5.2" stroke-width="2.2"/>
+    <path d="M14.5 19c-1.8-.6-2.8-2.2-2.7-4M14.5 19c.9-1.4 1.1-3 .6-4.6" stroke-width="2.2"/>
+    <path d="M39.5 19c1.8-.6 2.8-2.2 2.7-4M39.5 19c-.9-1.4-1.1-3-.6-4.6" stroke-width="2.2"/>
+    <path d="M24.2 21l-.7-3.4M29.8 21l.7-3.4" stroke-width="1.8"/>
+    <path d="M18.2 30.3l-2.7 2.9M21.4 30.8l-1.3 3.1M32.6 30.8l1.3 3.1M35.8 30.3l2.7 2.9" stroke-width="1.6"/>
     <!-- 浪 -->
-    <path d="M0 47C5 43 10 43 16 47S27 51 32 47 43 43 48 47 59 51 64 47V64H0Z" fill="#FFFFFF"/>
-    <path d="M0 55C5 52 10 52 16 55S27 58 32 55 43 52 48 55 59 58 64 55V64H0Z" fill="#D6ECFA"/>
+    <path d="M11 50c3-2.3 5.9-2.3 8.9 0s5.9 2.3 8.9 0" stroke-width="1.8" opacity=".7"/>
+    <!-- 小鱼和两个泡泡 -->
+    <path d="M33 45c3.4-4.4 10-5 14.4-.4-4.2 4.8-11 4.4-14.4.4z" stroke-width="2"/>
+    <path d="M47.4 44.8l5.2-3.4-.9 3.6 1 3.8z" stroke-width="2"/>
+    <circle cx="30.6" cy="40" r="1.1" stroke-width="1.2" opacity=".8"/>
+    <circle cx="28.6" cy="37.3" r=".7" stroke-width="1" opacity=".6"/>
+  </g>
+  <g fill="#FFFFFF">
+    <circle cx="23.4" cy="17.2" r="1.5"/>
+    <circle cx="30.6" cy="17.2" r="1.5"/>
+    <circle cx="37.6" cy="44.2" r=".95"/>
   </g>
 </svg>
