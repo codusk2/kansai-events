@@ -1,5 +1,136 @@
 {
  "about": "蟹鱼游地点详情清单，由 scripts/collect_details.py 生成，不要手改",
  "schema": 1,
- "details": {}
+ "details": {
+  "ishikiri": {
+   "revision": 1,
+   "checkedAt": "2026-11-02",
+   "images": [
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Ishikiritsurugiya-jinja_Higashiosaka_Osaka_pref_Japan01n.jpg/960px-Ishikiritsurugiya-jinja_Higashiosaka_Osaka_pref_Japan01n.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Ishikiritsurugiya-jinja_Higashiosaka_Osaka_pref_Japan01n.jpg",
+     "artist": "663highland",
+     "license": "CC BY 2.5",
+     "caption": "石切剑箭神社入口处的石造鸟居与庄严参道"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Ishikiri_Tsurugiya-Jinja_200703_001.jpg/960px-Ishikiri_Tsurugiya-Jinja_200703_001.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Ishikiri_Tsurugiya-Jinja_200703_001.jpg",
+     "artist": "Kansai explorer",
+     "license": "CC BY-SA 3.0",
+     "caption": "石切剑箭神社本殿与拜殿全景"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Neighborhood_of_Ishikiritsurugiya-jinja_Higashiosaka_Osaka_pref_Japan05n.jpg/960px-Neighborhood_of_Ishikiritsurugiya-jinja_Higashiosaka_Osaka_pref_Japan05n.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Neighborhood_of_Ishikiritsurugiya-jinja_Higashiosaka_Osaka_pref_Japan05n.jpg",
+     "artist": "663highland",
+     "license": "CC BY 2.5",
+     "caption": "石切参道商店街两旁林立的特色店铺与下坡石板路"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Neighborhood_of_Ishikiritsurugiya-jinja_Higashiosaka_Osaka_pref_Japan01n.jpg/960px-Neighborhood_of_Ishikiritsurugiya-jinja_Higashiosaka_Osaka_pref_Japan01n.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Neighborhood_of_Ishikiritsurugiya-jinja_Higashiosaka_Osaka_pref_Japan01n.jpg",
+     "artist": "663highland",
+     "license": "CC BY 2.5",
+     "caption": "石切参道充满昭和怀旧风貌的传统招牌与街景"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Ishikiri_Tsurugiya_Jinja%2C_Sacred_Turtles_01.jpg/960px-Ishikiri_Tsurugiya_Jinja%2C_Sacred_Turtles_01.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Ishikiri_Tsurugiya_Jinja,_Sacred_Turtles_01.jpg",
+     "artist": "Naokijp",
+     "license": "CC BY-SA 4.0",
+     "caption": "神社水池旁供奉祈愿纸条的陶制祈愿龟（祈り亀）"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Ishikiri_Tsurugiya-Jinja_kaminomiya1.jpg/960px-Ishikiri_Tsurugiya-Jinja_kaminomiya1.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Ishikiri_Tsurugiya-Jinja_kaminomiya1.jpg",
+     "artist": "KENPEI",
+     "license": "CC BY-SA 3.0",
+     "caption": "位于生驹山麓的石切剑箭神社上之宫清幽的林间参道"
+    }
+   ]
+  },
+  "minoh": {
+   "revision": 1,
+   "checkedAt": "2026-11-02",
+   "images": [
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/JP-Osaka-Minoo-Minootaki_-Over-View.JPG/960px-JP-Osaka-Minoo-Minootaki_-Over-View.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:JP-Osaka-Minoo-Minootaki_-Over-View.JPG",
+     "artist": "Kanchi1979",
+     "license": "CC BY-SA 4.0",
+     "caption": "深秋红叶与红色拱桥掩映下的箕面大瀑布全景"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/JP-Osaka-Minoo-Minootaki_-With-Rainbow.JPG/960px-JP-Osaka-Minoo-Minootaki_-With-Rainbow.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:JP-Osaka-Minoo-Minootaki_-With-Rainbow.JPG",
+     "artist": "Kanchi1979",
+     "license": "CC BY-SA 4.0",
+     "caption": "晴日阳光照耀下箕面大瀑布水雾中升起的彩虹"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Waterfall_in_Mino_Quasi-National_Park_during_early_autumn.jpg/960px-Waterfall_in_Mino_Quasi-National_Park_during_early_autumn.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Mino_Quasi-National_Park_during_early_autumn.jpg",
+     "artist": "Laitr Keiows",
+     "license": "CC BY-SA 3.0",
+     "caption": "初秋时节箕面溪谷步道与奔流而下的大瀑布"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Ryuuanji_Hondou.JPG/960px-Ryuuanji_Hondou.JPG",
+     "page": "https://commons.wikimedia.org/wiki/File:Ryuuanji_Hondou.JPG",
+     "artist": "user:Hiroyuki0904",
+     "license": "Public domain",
+     "caption": "滝道途中的修验道古刹泷安寺本堂与苍翠秋林"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Momiji_no_Tempura.jpg/960px-Momiji_no_Tempura.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Momiji_no_Tempura.jpg",
+     "artist": "Fred Cherrygarden",
+     "license": "CC BY-SA 4.0",
+     "caption": "箕面特产红叶天妇罗，用盐渍枫叶裹粉炸制的传统小吃"
+    },
+    {
+     "thumb": "https://upload.wikimedia.org/wikipedia/commons/1/19/%E7%AE%95%E9%9D%A2%E5%A4%A7%E7%80%A7%EF%BC%88%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%89%E3%83%AB%E3%83%AD%E3%83%BC%E3%83%89%EF%BC%89_-_panoramio.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:%E7%AE%95%E9%9D%A2%E5%A4%A7%E7%80%A7%EF%BC%88%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%89%E3%83%AB%E3%83%AD%E3%83%BC%E3%83%89%EF%BC%89_-_panoramio.jpg",
+     "artist": "KURATA TETSURO",
+     "license": "CC BY 3.0",
+     "caption": "夏夜活动“箕面蜡烛之路”中摇曳烛光映照的箕面大瀑布"
+    }
+   ]
+  },
+  "tsuruhashi": {
+   "revision": 1,
+   "checkedAt": "2026-11-02",
+   "images": [
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Ikuno_Korea_Town01.jpg/960px-Ikuno_Korea_Town01.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Ikuno_Korea_Town01.jpg",
+     "artist": "Oilstreet",
+     "license": "CC BY 2.5",
+     "caption": "生野韩国城御幸通中央商店街入口处的百济门与沿街店铺"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Ikuno_Korea_Town_%28Osaka_Ikuno-ku%29_Ward_hdsr_S5_04.jpg/960px-Ikuno_Korea_Town_%28Osaka_Ikuno-ku%29_Ward_hdsr_S5_04.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Ikuno_Korea_Town_(Osaka_Ikuno-ku)_Ward_hdsr_S5_04.jpg",
+     "artist": "Hyppolyte de Saint-Rambert",
+     "license": "CC BY 4.0",
+     "caption": "大阪コリアタウン御幸通商店街热闹的步行街景与特色小店"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/JR_Tsuruhashi_Station_central_entrance.jpg/960px-JR_Tsuruhashi_Station_central_entrance.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:JR_Tsuruhashi_Station_central_entrance.jpg",
+     "artist": "切干大根",
+     "license": "CC BY-SA 4.0",
+     "caption": "JR大阪环状线鹤桥站中央口，千日前通出站口与铁道高架"
+    },
+    {
+     "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Miyukimori_tenjingu_haiden_20070317.jpg/960px-Miyukimori_tenjingu_haiden_20070317.jpg",
+     "page": "https://commons.wikimedia.org/wiki/File:Miyukimori_tenjingu_haiden_20070317.jpg",
+     "artist": "NISHIGUCHI,Masahiro (Nisiguti (talk))",
+     "license": "CC BY-SA 3.0",
+     "caption": "毗邻生野韩国城入口的历史神社御幸森天神宫拜殿"
+    }
+   ]
+  }
+ }
 }
