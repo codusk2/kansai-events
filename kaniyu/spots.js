@@ -1409,6 +1409,26 @@
       if (d?.search) $('sh-search').outerHTML = searchRow(p, d);
     });
   }
+  // 往下读时展开成全屏；已在顶部时往下拉（触摸或滚轮）收回原来的高度
+  {
+    const sheet = $('sheet');
+    let startY = null;
+    sheet.addEventListener('scroll', () => {
+      if (sheet.scrollTop > 4) sheet.classList.add('full');
+    }, { passive: true });
+    sheet.addEventListener('touchstart', e => {
+      startY = sheet.scrollTop <= 0 ? e.touches[0].clientY : null;
+    }, { passive: true });
+    sheet.addEventListener('touchmove', e => {
+      if (startY !== null && e.touches[0].clientY - startY > 40) {
+        sheet.classList.remove('full');
+        startY = null;
+      }
+    }, { passive: true });
+    sheet.addEventListener('wheel', e => {
+      if (sheet.scrollTop <= 0 && e.deltaY < -10) sheet.classList.remove('full');
+    }, { passive: true });
+  }
   // 详细攻略里“顺路还能去”的站内地点
   $('sheet').addEventListener('click', e => {
     const g = e.target.closest('[data-goto]');
@@ -1422,6 +1442,7 @@
     state.sel = id;
     if (!fromHash && location.hash !== '#p=' + id) history.pushState(null, '', location.search + '#p=' + id);
     const sheet = $('sheet');
+    if (sheet.hidden) sheet.classList.remove('full');
     renderSheet();
     sheet.hidden = false;
     sheet.scrollTop = 0;

@@ -1447,6 +1447,18 @@ body.idle .map-credit {
   display: none;
 }
 
+/* 往下读时面板展开成全屏，照片固定在最上方；回到顶部再往下拉收回 */
+.sheet.full {
+  height: 100%;
+  border-radius: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sheet {
+    transition: height .32s cubic-bezier(.2, .9, .3, 1), border-radius .32s;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .sheet.open {
     animation: sheet-in .38s cubic-bezier(.2, .9, .3, 1);
@@ -1461,9 +1473,19 @@ body.idle .map-credit {
 }
 
 .sh-hero {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 3;
   height: 220px;
   background: var(--line);
+}
+
+.sheet.full .sh-hero {
+  height: calc(220px + env(safe-area-inset-top));
+}
+
+.sheet.full .sh-close {
+  top: calc(12px + env(safe-area-inset-top));
 }
 
 .sh-hero img,
